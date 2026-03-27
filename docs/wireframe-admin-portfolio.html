@@ -1,0 +1,1013 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>와이어프레임 | 관리자 포트폴리오 게시판</title>
+    <link
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --navy: #1d55a0;
+        --navy-light: #5a8bc7;
+        --navy-dark: #12396b;
+        --gold: #c4a265;
+        --bg: #f8f8f6;
+        --card: #fff;
+        --text: #3c3733;
+        --text-light: #8a8070;
+        --border: #e4ddd0;
+        --red: #dc3545;
+        --green: #28a745;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Pretendard Variable", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      /* Header */
+      .header {
+        background: linear-gradient(135deg, var(--navy-dark), var(--navy));
+        color: #fff;
+        padding: 1.5rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .header h1 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+      }
+      .header .badge {
+        background: var(--gold);
+        color: #fff;
+        font-size: 0.65rem;
+        padding: 0.2rem 0.6rem;
+        border-radius: 100px;
+        font-weight: 600;
+      }
+
+      /* Tab */
+      .tabs {
+        display: flex;
+        gap: 0;
+        background: #fff;
+        border-bottom: 2px solid var(--border);
+        padding: 0 2rem;
+      }
+      .tab {
+        padding: 0.9rem 1.5rem;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--text-light);
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+        margin-bottom: -2px;
+      }
+      .tab.active {
+        color: var(--navy);
+        border-bottom-color: var(--navy);
+      }
+
+      /* Container */
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      /* ===== 목록 뷰 ===== */
+      .list-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+      }
+      .list-header h2 {
+        font-size: 1.2rem;
+      }
+      .list-count {
+        color: var(--text-light);
+        font-size: 0.85rem;
+      }
+      .btn-new {
+        background: var(--navy);
+        color: #fff;
+        border: none;
+        padding: 0.6rem 1.2rem;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .btn-new:hover {
+        background: var(--navy-dark);
+      }
+
+      .filter-bar {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+      }
+      .filter-chip {
+        padding: 0.4rem 1rem;
+        border-radius: 100px;
+        border: 1px solid var(--border);
+        background: #fff;
+        font-size: 0.8rem;
+        cursor: pointer;
+        color: var(--text-light);
+      }
+      .filter-chip.active {
+        background: var(--navy);
+        color: #fff;
+        border-color: var(--navy);
+      }
+
+      .portfolio-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 1.25rem;
+      }
+      .portfolio-card {
+        background: var(--card);
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+        transition: box-shadow 0.2s;
+        cursor: pointer;
+        position: relative;
+      }
+      .portfolio-card:hover {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      }
+      .card-thumb {
+        width: 100%;
+        aspect-ratio: 4/3;
+        background: #e9e5de;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-light);
+        font-size: 0.8rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .card-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .card-visible {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+      }
+      .card-visible.on {
+        background: var(--green);
+      }
+      .card-visible.off {
+        background: var(--red);
+      }
+      .card-img-count {
+        position: absolute;
+        bottom: 8px;
+        right: 8px;
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        font-size: 0.7rem;
+        padding: 0.15rem 0.5rem;
+        border-radius: 4px;
+      }
+      .card-body {
+        padding: 0.75rem 1rem;
+      }
+      .card-title {
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-bottom: 0.3rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .card-meta {
+        font-size: 0.75rem;
+        color: var(--text-light);
+        display: flex;
+        gap: 0.5rem;
+      }
+      .card-cat {
+        font-size: 0.65rem;
+        background: var(--navy);
+        color: #fff;
+        padding: 0.1rem 0.4rem;
+        border-radius: 4px;
+        display: inline-block;
+      }
+
+      /* ===== 등록/수정 뷰 ===== */
+      .editor {
+        display: none;
+      }
+      .editor.active {
+        display: block;
+      }
+      .editor-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+      }
+      .editor-header h2 {
+        font-size: 1.2rem;
+      }
+      .btn-back {
+        background: none;
+        border: 1px solid var(--border);
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        font-size: 0.8rem;
+        cursor: pointer;
+        color: var(--text-light);
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.25rem;
+        margin-bottom: 2rem;
+      }
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+      .form-group.full {
+        grid-column: 1 / -1;
+      }
+      .form-label {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--text);
+      }
+      .form-label .required {
+        color: var(--red);
+      }
+      .form-input {
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.6rem 0.8rem;
+        font-size: 0.85rem;
+        font-family: inherit;
+        background: #fff;
+      }
+      .form-input:focus {
+        outline: none;
+        border-color: var(--navy);
+      }
+      .form-select {
+        appearance: none;
+        background: #fff
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M3 5l3 3 3-3' stroke='%238a8070' stroke-width='1.5' fill='none'/%3E%3C/svg%3E")
+          no-repeat right 0.8rem center;
+        padding-right: 2rem;
+      }
+      .form-textarea {
+        min-height: 120px;
+        resize: vertical;
+        line-height: 1.6;
+      }
+
+      /* 썸네일 */
+      .thumb-section {
+        margin-bottom: 2rem;
+      }
+      .thumb-section h3 {
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+      }
+      .thumb-upload {
+        width: 200px;
+        aspect-ratio: 4/3;
+        border: 2px dashed var(--border);
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        color: var(--text-light);
+        font-size: 0.8rem;
+        cursor: pointer;
+        background: #faf8f5;
+      }
+      .thumb-upload:hover {
+        border-color: var(--navy);
+        color: var(--navy);
+      }
+      .thumb-preview {
+        width: 200px;
+        aspect-ratio: 4/3;
+        border-radius: 12px;
+        overflow: hidden;
+        position: relative;
+      }
+      .thumb-preview img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .thumb-remove {
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        font-size: 0.7rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* 상세 이미지 갤러리 */
+      .gallery-section {
+        margin-bottom: 2rem;
+      }
+      .gallery-section h3 {
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+      .gallery-info {
+        font-size: 0.75rem;
+        color: var(--text-light);
+        margin-bottom: 0.75rem;
+      }
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 0.75rem;
+      }
+      .gallery-item {
+        aspect-ratio: 4/3;
+        border-radius: 8px;
+        overflow: hidden;
+        position: relative;
+        background: #e9e5de;
+      }
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .gallery-item .order-badge {
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        font-size: 0.65rem;
+        padding: 0.1rem 0.35rem;
+        border-radius: 4px;
+      }
+      .gallery-item .remove-btn {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: rgba(220, 53, 69, 0.8);
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        font-size: 0.6rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .gallery-add {
+        aspect-ratio: 4/3;
+        border: 2px dashed var(--border);
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.3rem;
+        color: var(--text-light);
+        font-size: 0.75rem;
+        cursor: pointer;
+      }
+      .gallery-add:hover {
+        border-color: var(--navy);
+        color: var(--navy);
+      }
+      .gallery-add .plus {
+        font-size: 1.5rem;
+        line-height: 1;
+      }
+
+      /* 본문 에디터 */
+      .content-section {
+        margin-bottom: 2rem;
+      }
+      .content-section h3 {
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+      }
+      .content-editor {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+        background: #fff;
+      }
+      .content-toolbar {
+        display: flex;
+        gap: 0.25rem;
+        padding: 0.5rem 0.75rem;
+        border-bottom: 1px solid var(--border);
+        background: #faf8f5;
+      }
+      .toolbar-btn {
+        width: 32px;
+        height: 32px;
+        border: none;
+        background: none;
+        cursor: pointer;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        color: var(--text-light);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .toolbar-btn:hover {
+        background: var(--border);
+        color: var(--text);
+      }
+      .toolbar-sep {
+        width: 1px;
+        background: var(--border);
+        margin: 0 0.25rem;
+      }
+      .content-body {
+        min-height: 200px;
+        padding: 1rem;
+        font-size: 0.9rem;
+        line-height: 1.8;
+        color: var(--text);
+      }
+      .content-body p {
+        margin-bottom: 0.75rem;
+      }
+
+      /* 공개/비공개 & 액션 */
+      .form-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border);
+      }
+      .toggle-group {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+      .toggle {
+        width: 44px;
+        height: 24px;
+        border-radius: 12px;
+        background: #ccc;
+        position: relative;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .toggle.on {
+        background: var(--green);
+      }
+      .toggle::after {
+        content: "";
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #fff;
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        transition: left 0.2s;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+      }
+      .toggle.on::after {
+        left: 22px;
+      }
+      .toggle-label {
+        font-size: 0.85rem;
+        font-weight: 500;
+      }
+      .action-btns {
+        display: flex;
+        gap: 0.75rem;
+      }
+      .btn-delete {
+        background: none;
+        border: 1px solid var(--red);
+        color: var(--red);
+        padding: 0.6rem 1.2rem;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        cursor: pointer;
+      }
+      .btn-save {
+        background: var(--navy);
+        color: #fff;
+        border: none;
+        padding: 0.6rem 1.5rem;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .btn-save:hover {
+        background: var(--navy-dark);
+      }
+
+      /* ===== 미리보기 비교 ===== */
+      .preview-section {
+        margin-top: 2rem;
+        padding-top: 2rem;
+        border-top: 2px solid var(--border);
+      }
+      .preview-section h3 {
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .preview-badge {
+        font-size: 0.65rem;
+        background: var(--gold);
+        color: #fff;
+        padding: 0.15rem 0.5rem;
+        border-radius: 4px;
+      }
+      .preview-frame {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+        background: #fff;
+        padding: 1.5rem;
+      }
+      .preview-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+      .preview-meta-row {
+        display: flex;
+        gap: 1rem;
+        font-size: 0.8rem;
+        color: var(--text-light);
+        margin-bottom: 1rem;
+      }
+      .preview-gallery {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+      }
+      .preview-img {
+        aspect-ratio: 4/3;
+        background: #e9e5de;
+        border-radius: 8px;
+      }
+      .preview-content {
+        font-size: 0.9rem;
+        line-height: 1.8;
+        color: var(--text);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <div class="header">
+      <div style="display: flex; align-items: center; gap: 1rem">
+        <h1>TOV HOUSE 관리자</h1>
+        <span class="badge">PORTFOLIO</span>
+      </div>
+      <div style="font-size: 0.8rem; opacity: 0.7">79건 등록됨</div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <div class="tab active" onclick="showView('list')">목록</div>
+      <div class="tab" onclick="showView('editor')">등록/수정</div>
+    </div>
+
+    <div class="container">
+      <!-- ===== 목록 뷰 ===== -->
+      <div id="list-view">
+        <div class="list-header">
+          <div>
+            <h2>포트폴리오 관리</h2>
+            <span class="list-count">총 79건 | 공개 76건 · 비공개 3건</span>
+          </div>
+          <button class="btn-new" onclick="showView('editor')">
+            + 새 게시글
+          </button>
+        </div>
+
+        <div class="filter-bar">
+          <div class="filter-chip active">전체 (79)</div>
+          <div class="filter-chip">주거공간 (65)</div>
+          <div class="filter-chip">상업공간 (14)</div>
+          <div class="filter-chip">종합건축</div>
+          <div class="filter-chip">맞춤가구</div>
+          <div
+            class="filter-chip"
+            style="
+              margin-left: auto;
+              border-color: var(--red);
+              color: var(--red);
+            "
+          >
+            비공개만
+          </div>
+        </div>
+
+        <div class="portfolio-grid">
+          <!-- Card 1 -->
+          <div class="portfolio-card" onclick="showView('editor')">
+            <div class="card-thumb">
+              <div class="card-visible on"></div>
+              <div style="color: #bbb">썸네일 이미지</div>
+              <div class="card-img-count">10장</div>
+            </div>
+            <div class="card-body">
+              <div class="card-title">서울 성북구 석관동 아파트 49평</div>
+              <div class="card-meta">
+                <span class="card-cat">주거공간</span>
+                <span>약 8주</span>
+                <span>1억 7000만원</span>
+              </div>
+            </div>
+          </div>
+          <!-- Card 2 -->
+          <div class="portfolio-card">
+            <div class="card-thumb">
+              <div class="card-visible on"></div>
+              <div style="color: #bbb">썸네일 이미지</div>
+              <div class="card-img-count">10장</div>
+            </div>
+            <div class="card-body">
+              <div class="card-title">서울 동대문구 전농동 아파트 33평</div>
+              <div class="card-meta">
+                <span class="card-cat">주거공간</span>
+                <span>약 3주</span>
+                <span>6400만원</span>
+              </div>
+            </div>
+          </div>
+          <!-- Card 3 -->
+          <div class="portfolio-card">
+            <div class="card-thumb">
+              <div class="card-visible off"></div>
+              <div style="color: #bbb">썸네일 이미지</div>
+              <div class="card-img-count">8장</div>
+            </div>
+            <div class="card-body">
+              <div class="card-title">강남구 역삼동 카페 인테리어</div>
+              <div class="card-meta">
+                <span class="card-cat" style="background: var(--green)"
+                  >상업공간</span
+                >
+                <span>약 4주</span>
+                <span>5200만원</span>
+              </div>
+            </div>
+          </div>
+          <!-- Card 4 placeholder -->
+          <div class="portfolio-card">
+            <div class="card-thumb">
+              <div style="color: #bbb">썸네일 이미지</div>
+              <div class="card-visible on"></div>
+              <div class="card-img-count">10장</div>
+            </div>
+            <div class="card-body">
+              <div class="card-title">고양시 도내동 아파트 34평</div>
+              <div class="card-meta">
+                <span class="card-cat">주거공간</span><span>약 4주</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== 등록/수정 에디터 뷰 ===== -->
+      <div id="editor-view" class="editor">
+        <div class="editor-header">
+          <h2>게시글 수정</h2>
+          <button class="btn-back" onclick="showView('list')">
+            ← 목록으로
+          </button>
+        </div>
+
+        <!-- 기본 정보 -->
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label"
+              >지역 <span class="required">*</span></label
+            >
+            <input
+              class="form-input"
+              value="서울 성북구 석관동"
+              placeholder="시/구/동"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label">건물유형</label>
+            <input
+              class="form-input"
+              value="아파트"
+              placeholder="아파트, 빌라, 오피스텔..."
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label">평수</label>
+            <input class="form-input" value="49평" placeholder="00평" />
+          </div>
+          <div class="form-group">
+            <label class="form-label"
+              >카테고리 <span class="required">*</span></label
+            >
+            <select class="form-input form-select">
+              <option selected>주거공간</option>
+              <option>상업공간</option>
+              <option>종합건축</option>
+              <option>맞춤가구</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">시공 기간</label>
+            <input class="form-input" value="약 8주" placeholder="약 0주" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">시공 비용</label>
+            <input
+              class="form-input"
+              value="1억 7000만원"
+              placeholder="0000만원"
+            />
+          </div>
+        </div>
+
+        <!-- 썸네일 -->
+        <div class="thumb-section">
+          <h3>대표 썸네일</h3>
+          <div class="thumb-preview">
+            <div
+              style="
+                width: 200px;
+                height: 150px;
+                background: #e9e5de;
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #bbb;
+                font-size: 0.8rem;
+              "
+            >
+              r001_thumb.webp
+            </div>
+            <button class="thumb-remove">✕</button>
+          </div>
+        </div>
+
+        <!-- 상세 이미지 갤러리 -->
+        <div class="gallery-section">
+          <h3>시공 상세 이미지</h3>
+          <div class="gallery-info">
+            드래그로 순서 변경 가능 · 최대 15장 · webp 자동 변환
+          </div>
+          <div class="gallery-grid">
+            <div class="gallery-item">
+              <div
+                style="
+                  width: 100%;
+                  height: 100%;
+                  background: #d5d0c8;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: #999;
+                  font-size: 0.7rem;
+                "
+              >
+                r001_01.webp
+              </div>
+              <span class="order-badge">1</span>
+              <button class="remove-btn">✕</button>
+            </div>
+            <div class="gallery-item">
+              <div
+                style="
+                  width: 100%;
+                  height: 100%;
+                  background: #d5d0c8;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: #999;
+                  font-size: 0.7rem;
+                "
+              >
+                r001_02.webp
+              </div>
+              <span class="order-badge">2</span>
+              <button class="remove-btn">✕</button>
+            </div>
+            <div class="gallery-item">
+              <div
+                style="
+                  width: 100%;
+                  height: 100%;
+                  background: #d5d0c8;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: #999;
+                  font-size: 0.7rem;
+                "
+              >
+                r001_03.webp
+              </div>
+              <span class="order-badge">3</span>
+              <button class="remove-btn">✕</button>
+            </div>
+            <div class="gallery-item">
+              <div
+                style="
+                  width: 100%;
+                  height: 100%;
+                  background: #d5d0c8;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: #999;
+                  font-size: 0.7rem;
+                "
+              >
+                r001_04.webp
+              </div>
+              <span class="order-badge">4</span>
+              <button class="remove-btn">✕</button>
+            </div>
+            <div class="gallery-item">
+              <div
+                style="
+                  width: 100%;
+                  height: 100%;
+                  background: #ccc;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: #999;
+                  font-size: 0.7rem;
+                "
+              >
+                ...+6
+              </div>
+              <span class="order-badge">5~10</span>
+            </div>
+            <div class="gallery-add">
+              <div class="plus">+</div>
+              <div>이미지 추가</div>
+              <div style="font-size: 0.65rem; color: var(--text-light)">
+                5/15장
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 본문 에디터 -->
+        <div class="content-section">
+          <h3>상세 설명 (블로그형)</h3>
+          <div class="content-editor">
+            <div class="content-toolbar">
+              <button class="toolbar-btn" title="굵게"><b>B</b></button>
+              <button class="toolbar-btn" title="기울임"><i>I</i></button>
+              <button class="toolbar-btn" title="밑줄"><u>U</u></button>
+              <div class="toolbar-sep"></div>
+              <button class="toolbar-btn" title="제목">H</button>
+              <button class="toolbar-btn" title="목록">☰</button>
+              <div class="toolbar-sep"></div>
+              <button class="toolbar-btn" title="이미지 삽입">🖼</button>
+              <button class="toolbar-btn" title="구분선">─</button>
+            </div>
+            <div class="content-body" contenteditable="true">
+              <p>
+                서울 성북구 석관동에 위치한 두산아파트 49평 리모델링
+                프로젝트입니다.
+              </p>
+              <p>
+                거실과 주방을 오픈 구조로 변경하여 넓은 공간감을 확보했으며,
+                화이트&그레이 톤으로 깔끔한 모던 스타일을 구현했습니다.
+              </p>
+              <p><strong>주요 시공 내역:</strong></p>
+              <p>
+                • 거실/주방 오픈 구조 변경<br />• 전체 바닥 원목 마루 시공<br />•
+                주방 상·하부장 맞춤 제작<br />• 전등/조명 LED 교체<br />• 욕실
+                2개소 전면 리모델링
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 공개설정 & 저장 -->
+        <div class="form-actions">
+          <div class="toggle-group">
+            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+            <span class="toggle-label">공개</span>
+          </div>
+          <div class="action-btns">
+            <button class="btn-delete">삭제</button>
+            <button class="btn-save">저장</button>
+          </div>
+        </div>
+
+        <!-- 미리보기 -->
+        <div class="preview-section">
+          <h3>
+            프론트엔드 미리보기 <span class="preview-badge">LIVE와 동일</span>
+          </h3>
+          <div class="preview-frame">
+            <div class="preview-title">서울 성북구 석관동 아파트 49평</div>
+            <div class="preview-meta-row">
+              <span>주거공간</span>
+              <span>두산아파트</span>
+              <span>약 8주</span>
+              <span>1억 7000만원</span>
+            </div>
+            <div class="preview-gallery">
+              <div class="preview-img"></div>
+              <div class="preview-img"></div>
+              <div class="preview-img"></div>
+              <div class="preview-img"></div>
+              <div class="preview-img"></div>
+              <div class="preview-img"></div>
+            </div>
+            <div class="preview-content">
+              <p>
+                서울 성북구 석관동에 위치한 두산아파트 49평 리모델링
+                프로젝트입니다.
+              </p>
+              <p>
+                거실과 주방을 오픈 구조로 변경하여 넓은 공간감을 확보했으며...
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function showView(view) {
+        document.getElementById("list-view").style.display =
+          view === "list" ? "block" : "none";
+        document.getElementById("editor-view").className =
+          view === "editor" ? "editor active" : "editor";
+        document.querySelectorAll(".tab").forEach((t, i) => {
+          t.className =
+            "tab" +
+            ((view === "list" && i === 0) || (view === "editor" && i === 1)
+              ? " active"
+              : "");
+        });
+      }
+    </script>
+  </body>
+</html>

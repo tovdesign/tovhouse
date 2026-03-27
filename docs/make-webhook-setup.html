@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Make HTTP 설정 가이드 | TOV HOUSE</title>
+    <link
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Pretendard Variable", sans-serif;
+        background: #f8fafc;
+        color: #1e293b;
+        line-height: 1.6;
+      }
+      .container {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 24px 20px;
+      }
+      h1 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #1d55a0;
+        margin-bottom: 4px;
+      }
+      .subtitle {
+        font-size: 0.85rem;
+        color: #64748b;
+        margin-bottom: 24px;
+      }
+      .section {
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 16px;
+      }
+      .section-title {
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: #1d55a0;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .section-title::before {
+        content: "";
+        width: 4px;
+        height: 16px;
+        background: #1d55a0;
+        border-radius: 2px;
+      }
+      .field {
+        margin-bottom: 12px;
+      }
+      .field:last-child {
+        margin-bottom: 0;
+      }
+      .field-label {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #64748b;
+        margin-bottom: 4px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .field-value {
+        position: relative;
+        background: #f1f5f9;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 10px 44px 10px 12px;
+        font-family: "Pretendard Variable", monospace;
+        font-size: 0.85rem;
+        color: #0f172a;
+        word-break: break-all;
+      }
+      .copy-btn {
+        position: absolute;
+        right: 6px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 32px;
+        height: 32px;
+        border: none;
+        background: #1d55a0;
+        color: #fff;
+        border-radius: 6px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.15s;
+      }
+      .copy-btn:hover {
+        background: #174785;
+        transform: translateY(-50%) scale(1.05);
+      }
+      .copy-btn.copied {
+        background: #10b981;
+      }
+      .copy-btn svg {
+        width: 16px;
+        height: 16px;
+      }
+      .badge {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 0.7rem;
+        font-weight: 600;
+      }
+      .badge-blue {
+        background: #eff6ff;
+        color: #1e40af;
+      }
+      .badge-green {
+        background: #ecfdf5;
+        color: #065f46;
+      }
+      .badge-yellow {
+        background: #fefce8;
+        color: #854d0e;
+      }
+      .divider {
+        height: 1px;
+        background: #e2e8f0;
+        margin: 16px 0;
+      }
+      .code-block {
+        background: #1e293b;
+        color: #e2e8f0;
+        border-radius: 10px;
+        padding: 16px;
+        font-family: monospace;
+        font-size: 0.8rem;
+        line-height: 1.8;
+        overflow-x: auto;
+        position: relative;
+        white-space: pre;
+      }
+      .code-block .copy-btn {
+        top: 8px;
+        right: 8px;
+        transform: none;
+      }
+      .code-block .copy-btn:hover {
+        transform: scale(1.05);
+      }
+      .note {
+        background: #fefce8;
+        border: 1px solid #fde68a;
+        border-radius: 8px;
+        padding: 12px 14px;
+        font-size: 0.8rem;
+        color: #854d0e;
+        margin-top: 12px;
+      }
+      .note strong {
+        color: #92400e;
+      }
+      .steps {
+        counter-reset: step;
+      }
+      .step {
+        counter-increment: step;
+        padding-left: 32px;
+        position: relative;
+        margin-bottom: 16px;
+      }
+      .step::before {
+        content: counter(step);
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 24px;
+        height: 24px;
+        background: #1d55a0;
+        color: #fff;
+        border-radius: 50%;
+        font-size: 0.75rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .step-title {
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-bottom: 4px;
+      }
+      .step-desc {
+        font-size: 0.8rem;
+        color: #64748b;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.8rem;
+      }
+      th {
+        background: #f8fafc;
+        text-align: left;
+        padding: 8px 10px;
+        font-weight: 600;
+        color: #64748b;
+        border-bottom: 2px solid #e2e8f0;
+      }
+      td {
+        padding: 8px 10px;
+        border-bottom: 1px solid #f1f5f9;
+      }
+      .check {
+        color: #10b981;
+        font-weight: 700;
+      }
+      .warn {
+        color: #f59e0b;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Make.com HTTP 설정 가이드</h1>
+      <p class="subtitle">Meta Lead Ads → TOV HOUSE Worker Webhook 설정</p>
+
+      <!-- URL -->
+      <div class="section">
+        <div class="section-title">Webhook URL</div>
+        <div class="field">
+          <div class="field-label">
+            URL <span class="badge badge-blue">POST</span>
+          </div>
+          <div class="field-value" id="v-url">
+            https://tovhouse.2343parksw.workers.dev/api/meta-webhook<button
+              class="copy-btn"
+              onclick="copyField('v-url')"
+            >
+              <svg
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <rect x="9" y="9" width="13" height="13" rx="2" />
+                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Method & Headers -->
+      <div class="section">
+        <div class="section-title">Method & Headers</div>
+        <div class="field">
+          <div class="field-label">Method</div>
+          <div class="field-value" id="v-method">
+            POST<button class="copy-btn" onclick="copyField('v-method')">
+              <svg
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <rect x="9" y="9" width="13" height="13" rx="2" />
+                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="field">
+          <div class="field-label">Headers — Name</div>
+          <div class="field-value" id="v-hname">
+            Content-Type<button class="copy-btn" onclick="copyField('v-hname')">
+              <svg
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <rect x="9" y="9" width="13" height="13" rx="2" />
+                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="field">
+          <div class="field-label">Headers — Value</div>
+          <div class="field-value" id="v-hval">
+            application/json<button
+              class="copy-btn"
+              onclick="copyField('v-hval')"
+            >
+              <svg
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <rect x="9" y="9" width="13" height="13" rx="2" />
+                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Query String -->
+      <div class="section">
+        <div class="section-title">Query String</div>
+        <div class="field">
+          <div class="field-label">Parameter (비워두기)</div>
+          <div class="field-value" style="color: #94a3b8; font-style: italic">
+            설정 없음 — 비워두세요
+          </div>
+        </div>
+      </div>
+
+      <!-- Body -->
+      <div class="section">
+        <div class="section-title">Body</div>
+        <div class="field">
+          <div class="field-label">Body type</div>
+          <div class="field-value" id="v-btype">
+            Raw<button class="copy-btn" onclick="copyField('v-btype')">
+              <svg
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <rect x="9" y="9" width="13" height="13" rx="2" />
+                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="field">
+          <div class="field-label">Content type</div>
+          <div class="field-value" id="v-ctype">
+            JSON (application/json)<button
+              class="copy-btn"
+              onclick="copyField('v-ctype')"
+            >
+              <svg
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <rect x="9" y="9" width="13" height="13" rx="2" />
+                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="field">
+          <div class="field-label">Body input method</div>
+          <div class="field-value" id="v-binput">
+            JSON string<button class="copy-btn" onclick="copyField('v-binput')">
+              <svg
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <rect x="9" y="9" width="13" height="13" rx="2" />
+                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="field">
+          <div class="field-label">
+            Body content <span class="badge badge-green">JSON</span>
+          </div>
+          <pre class="code-block" id="v-body">{
+  "name": "{{1.고객명}}",
+  "contact": "{{1.연락처}}",
+  "platform": "{{1.접수처}}",
+  "spaceType": "{{1.공간유형}}",
+  "budget": "{{1.희망예산}}",
+  "region": "{{1.지역}}",
+  "scheduledDate": "{{1.시공예정일}}"
+}<button class="copy-btn" onclick="copyField('v-body')"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></pre>
+        </div>
+        <div class="note">
+          <strong>참고:</strong> <code>{{1.xxx}}</code>는 Make 이전 모듈(Meta
+          Lead Ads 또는 Airtable)의 출력 필드입니다. 실제 필드명이 다를 경우
+          클릭하여 매핑하세요.
+        </div>
+      </div>
+
+      <!-- Advanced -->
+      <div class="section">
+        <div class="section-title">Advanced Settings</div>
+        <table>
+          <thead>
+            <tr>
+              <th>항목</th>
+              <th>값</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Parse response</td>
+              <td class="check">Yes</td>
+            </tr>
+            <tr>
+              <td>Timeout</td>
+              <td>30</td>
+            </tr>
+            <tr>
+              <td>Share cookies with other HTTP modules</td>
+              <td>No</td>
+            </tr>
+            <tr>
+              <td>Self-signed certificate</td>
+              <td style="color: #94a3b8">비워두기</td>
+            </tr>
+            <tr>
+              <td>Reject unverified certificates</td>
+              <td>No</td>
+            </tr>
+            <tr>
+              <td>Follow redirect</td>
+              <td class="check">Yes</td>
+            </tr>
+            <tr>
+              <td>Follow all redirects</td>
+              <td>No</td>
+            </tr>
+            <tr>
+              <td>
+                Disable serialization of multiple same query string keys as
+                arrays
+              </td>
+              <td>No</td>
+            </tr>
+            <tr>
+              <td>Request compressed content</td>
+              <td class="check">Yes</td>
+            </tr>
+            <tr>
+              <td>Use Mutual TLS</td>
+              <td>No</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Field Mapping -->
+      <div class="section">
+        <div class="section-title">필드 매핑 참조</div>
+        <table>
+          <thead>
+            <tr>
+              <th>JSON Key</th>
+              <th>설명</th>
+              <th>예시</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>name</code></td>
+              <td>고객명</td>
+              <td>김철수</td>
+            </tr>
+            <tr>
+              <td><code>contact</code></td>
+              <td>연락처</td>
+              <td>010-1234-5678</td>
+            </tr>
+            <tr>
+              <td><code>platform</code></td>
+              <td>접수처</td>
+              <td>ig / fb</td>
+            </tr>
+            <tr>
+              <td><code>spaceType</code></td>
+              <td>공간유형</td>
+              <td>아파트</td>
+            </tr>
+            <tr>
+              <td><code>budget</code></td>
+              <td>희망예산</td>
+              <td>3000-5000</td>
+            </tr>
+            <tr>
+              <td><code>region</code></td>
+              <td>지역</td>
+              <td>서울시 강남구</td>
+            </tr>
+            <tr>
+              <td><code>scheduledDate</code></td>
+              <td>시공예정일</td>
+              <td>가능한 빨리</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note">
+          <strong>platform 값:</strong> <code>ig</code> = Instagram (파란색),
+          <code>fb</code> = Facebook (파란색), <code>web</code> = 홈페이지
+          (녹색)
+        </div>
+      </div>
+
+      <!-- Scenario Flow -->
+      <div class="section">
+        <div class="section-title">Make 시나리오 흐름</div>
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            justify-content: center;
+            padding: 16px 0;
+          "
+        >
+          <div
+            style="
+              background: #3b82f6;
+              color: #fff;
+              padding: 8px 16px;
+              border-radius: 8px;
+              font-size: 0.8rem;
+              font-weight: 600;
+            "
+          >
+            Meta Lead Ads
+          </div>
+          <svg
+            width="24"
+            height="24"
+            fill="none"
+            stroke="#94a3b8"
+            stroke-width="2"
+          >
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+          <div
+            style="
+              background: #f59e0b;
+              color: #fff;
+              padding: 8px 16px;
+              border-radius: 8px;
+              font-size: 0.8rem;
+              font-weight: 600;
+            "
+          >
+            HTTP Request
+          </div>
+          <svg
+            width="24"
+            height="24"
+            fill="none"
+            stroke="#94a3b8"
+            stroke-width="2"
+          >
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+          <div
+            style="
+              background: #10b981;
+              color: #fff;
+              padding: 8px 16px;
+              border-radius: 8px;
+              font-size: 0.8rem;
+              font-weight: 600;
+              text-align: center;
+              line-height: 1.3;
+              font-size: 0.7rem;
+            "
+          >
+            Airtable 저장<br />+ 텔레그램 알림<br />(자동)
+          </div>
+        </div>
+      </div>
+
+      <!-- Checklist -->
+      <div class="section">
+        <div class="section-title">설정 체크리스트</div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-title">Meta Lead Ads 트리거 모듈 추가</div>
+            <div class="step-desc">Facebook/Instagram 리드 폼 선택</div>
+          </div>
+          <div class="step">
+            <div class="step-title">HTTP Make a Request 모듈 추가</div>
+            <div class="step-desc">위 설정값 그대로 입력</div>
+          </div>
+          <div class="step">
+            <div class="step-title">Body content 필드 매핑</div>
+            <div class="step-desc">
+              <code>{{1.xxx}}</code> 부분을 Meta 모듈 출력 필드로 교체
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-title">테스트 실행</div>
+            <div class="step-desc">
+              Run once → admin.tovdesign.net 접수관리에서 확인 + 텔레그램 알림
+              확인
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-title">시나리오 활성화</div>
+            <div class="step-desc">Scheduling ON → Immediately</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function copyField(id) {
+        const el = document.getElementById(id);
+        let text = el.innerText || el.textContent;
+        // Remove copy button text
+        const btn = el.querySelector(".copy-btn");
+        if (btn) text = text.replace(btn.textContent, "").trim();
+        navigator.clipboard.writeText(text).then(() => {
+          if (btn) {
+            btn.classList.add("copied");
+            btn.innerHTML =
+              '<svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" width="16" height="16"><path d="M20 6L9 17l-5-5"/></svg>';
+            setTimeout(() => {
+              btn.classList.remove("copied");
+              btn.innerHTML =
+                '<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>';
+            }, 1500);
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

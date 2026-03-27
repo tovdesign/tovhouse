@@ -1,0 +1,107 @@
+=== Migration Log Thu, Mar 26, 2026  7:18:26 PM ===
+r001 | OK | src:64 disk:64 fail:0 0byte:0 | 서울 성북구 석관동|아파트|49평
+r002 | OK | src:41 disk:41 fail:0 0byte:0 | 서울 동대문구 전농동|아파트|33평
+r003 | OK | src:45 disk:45 fail:0 0byte:0 | 경기도 고양시 덕양구 도내동|아파트|34평
+r004 | OK | src:51 disk:51 fail:0 0byte:0 | 경기도 고양시 덕양구 원흥동|아파트|34평
+r005 | OK | src:50 disk:50 fail:0 0byte:0 | 경기도 파주시 아동동(금촌)|아파트|32평
+r006 | OK | src:27 disk:27 fail:0 0byte:0 | 경기도 용인시 처인구 포곡읍|아파트|32평
+r007 | OK | src:26 disk:26 fail:0 0byte:0 | 서울 노원구 중계동|아파트|18평
+r008 | OK | src:30 disk:30 fail:0 0byte:0 | 경기도 고양시 덕양구 도내동(도래울)|아파트|32평
+r009 | OK | src:39 disk:39 fail:0 0byte:0 | 경기도 고양시 덕양구 도내동(도래울)|아파트|33평
+r010 | OK | src:27 disk:27 fail:0 0byte:0 | 경기도 의왕시 내손동|아파트|32평
+r011 | OK | src:30 disk:30 fail:0 0byte:0 | 경기도 양주시 백석읍|아파트|34평
+r012 | OK | src:39 disk:39 fail:0 0byte:0 | 서울 서초구 서초동|아파트|28평
+r013 | OK | src:43 disk:43 fail:0 0byte:0 | 경기도 용인시 수지구 성복동|아파트|54평
+r014 | OK | src:54 disk:54 fail:0 0byte:0 | 서울 중구 중림동|아파트|44평
+r015 | OK | src:33 disk:33 fail:0 0byte:0 | 경기도 고양시 덕양구 도내동|아파트|29평
+r016 | OK | src:52 disk:52 fail:0 0byte:0 | 경기도 고양시 덕양구 고양동|아파트|35평
+r017 | OK | src:44 disk:44 fail:0 0byte:0 | 서울 관악구 신림동|아파트|30평
+r018 | OK | src:40 disk:40 fail:0 0byte:0 | 서울 은평구 진관동|아파트|38평
+r019 | OK | src:34 disk:34 fail:0 0byte:0 | 서울 동대문구 답십리동|아파트|28평
+r020 | OK | src:37 disk:37 fail:0 0byte:0 | 경기도 고양시 일산서구 주엽동|아파트|31평
+r021 | OK | src:50 disk:50 fail:0 0byte:0 | 경기도 고양시 덕양구 오금동(삼송)|아파트|33평
+r022 | OK | src:40 disk:40 fail:0 0byte:0 | 서울특별시 성북구 돈암동|아파트|32평
+r023 | OK | src:48 disk:48 fail:0 0byte:0 | 경기도 부천시 원미구 중동|아파트|43평
+r024 | OK | src:43 disk:43 fail:0 0byte:0 | 서울특별시 도봉구 도봉동|아파트|화이트&우드&그레이
+r025 | OK | src:32 disk:32 fail:0 0byte:0 | 서울 노원구 상계동|아파트|화이트&우드&그레이
+r026 | OK | src:50 disk:50 fail:0 0byte:0 | 경기도 시흥시 장곡동|아파트|깔끔하고 모던한 인테리어, 아치형 구조
+r027 | OK | src:44 disk:44 fail:0 0byte:0 | 서울 동대문구 이문동|아파트|모던하고 고급스러운 인테리어
+r028 | OK | src:36 disk:36 fail:0 0byte:0 | 경기도 고양시 일산서구 일산동|아파트|모던하고 깔끔한 거실&주방 인테리어
+r029 | OK | src:44 disk:44 fail:0 0byte:0 | 인천 서구 청라동|아파트|대면형 주방&무몰딩&히든도어
+r030 | OK | src:46 disk:46 fail:0 0byte:0 | 서울 성동구 행당동|아파트|화이트&우드
+r031 | OK | src:53 disk:53 fail:0 0byte:0 | 경기도 용인시 수지구 성복동|아파트|화이트&그레이
+r032 | OK | src:40 disk:40 fail:0 0byte:0 | 경기도 양평군 서종면 수능리|단독주택|화이트&우드&그레이
+r033 | OK | src:57 disk:57 fail:0 0byte:0 | 서울 성북구 길음동|아파트|화이트&우드&그레이
+r034 | OK | src:30 disk:30 fail:0 0byte:0 | 인천 서구 가정동|아파트|유럽풍 욕실&블랙 포인트 컬러
+r035 | OK | src:40 disk:40 fail:0 0byte:0 | 서울 서대문구 홍제동|아파트|화이트&그레이
+r036 | OK | src:47 disk:47 fail:0 0byte:0 | 경기도 고양시 일산서구 탄현동|아파트|화이트&베이지&그레이
+r037 | OK | src:45 disk:45 fail:0 0byte:0 | 경기도 고양시 일산동구 마두동|단독주택|하나의 집을 2세대로! 화이트&그
+r038 | OK | src:42 disk:42 fail:0 0byte:0 | 경기도 파주시 금촌동|아파트|화이트&우드
+r039 | OK | src:43 disk:43 fail:0 0byte:0 | 서울 종로구 신영동|빌라|레이아웃 변경과 구조변경, 공간의 재탄생! | 
+r040 | OK | src:47 disk:47 fail:0 0byte:0 | 서울 양천구 신정동|아파트|포근한 내집 인테리어
+r041 | OK | src:37 disk:37 fail:0 0byte:0 | 서울 성북구 돈암동|아파트|브라운월넛&화이트
+r042 | OK | src:33 disk:33 fail:0 0byte:0 | 서울 은평구 구산동|아파트|화이트&그레이
+r043 | OK | src:24 disk:24 fail:0 0byte:0 | 서울 은평구 불광동|주택|화이트&그레이
+r044 | OK | src:14 disk:14 fail:0 0byte:0 | 경기도 성남시 분당구|단독주택|프라이빗한 나만의 여가공간
+r045 | OK | src:27 disk:27 fail:0 0byte:0 | 안성시|대우경남아파트|화이트&그레이&네이비
+r046 | OK | src:29 disk:29 fail:0 0byte:0 | 경기도 파주시|팜스프링 아파트|화이트&우드
+r047 | OK | src:23 disk:23 fail:0 0byte:0 | 경기도 의정부|풍림아파트|화이트&그레이
+r048 | OK | src:25 disk:25 fail:0 0byte:0 | 서울시 송파구|호반써밋아파트|화이트&그레이
+r049 | OK | src:16 disk:16 fail:0 0byte:0 | 서울시 성동구 하왕십리동|풍림아파트|그레이&화이트
+r050 | OK | src:16 disk:16 fail:0 0byte:0 | 파주시 금촌동|아파트|화이트우드
+r051 | OK | src:12 disk:12 fail:0 0byte:0 | 서울 금천구|아파트|화이트마블
+r052 | OK | src:18 disk:18 fail:0 0byte:0 | 고양시 덕양구|빌라|화이트오크
+r053 | OK | src:15 disk:15 fail:0 0byte:0 | 서울 송파구|아파트|화이트베이지
+r054 | OK | src:15 disk:15 fail:0 0byte:0 | 고양시 일산서구|아파트|뉴트럴
+r055 | OK | src:10 disk:10 fail:0 0byte:0 | 파주시 아동동|아파트|화이트베이지
+r056 | OK | src:11 disk:11 fail:0 0byte:0 | 고양시일산서구|아파트|화이트모던
+r057 | OK | src:15 disk:15 fail:0 0byte:0 | 고양시 일산서구|다세대주택|모던클래식
+r058 | OK | src:9 disk:9 fail:0 0byte:0 | 서울시 성동구|아파트|모던화이트
+r059 | OK | src:10 disk:10 fail:0 0byte:0 | 서울 강서구|아파트|바우하우스 인테리어
+r060 | OK | src:8 disk:8 fail:0 0byte:0 | 서울은평구|빌라|화이트베이지
+r061 | OK | src:20 disk:20 fail:0 0byte:0 | 경기 과천시|아파트|모던화이트
+r062 | OK | src:20 disk:20 fail:0 0byte:0 | 경기도 과천시 원문동|아파트|클래식
+r063 | OK | src:19 disk:19 fail:0 0byte:0 | 경기도 고양시 덕양구 고양동|아파트|화이트골드
+r064 | OK | src:17 disk:17 fail:0 0byte:0 | 서울시 강서구|아파트|화이트블루
+r065 | OK | src:15 disk:15 fail:0 0byte:0 | 경기도 수원시 권선구 | 아파트 | 심플모던
+r066 | OK | src:14 disk:14 fail:0 0byte:0 | 서울시송파구|파인타운아파트|모던
+r067 | OK | src:16 disk:16 fail:0 0byte:0 | 경기도 용인시 기흥구|죽전아리에띠캐슬|내추럴
+r068 | OK | src:15 disk:15 fail:0 0byte:0 | 경기도 용인시 기흥구|풍림 아파트|모던
+r069 | OK | src:22 disk:22 fail:0 0byte:0 | 서울시동대문구|아파트|모던
+r070 | OK | src:22 disk:22 fail:0 0byte:0 | 경기도 양주시|아파트|블랙&화이트
+r071 | OK | src:22 disk:22 fail:0 0byte:0 | 서울시 관악구 신림동|아파트|블랙&화이트
+r072 | OK | src:32 disk:32 fail:0 0byte:0 | 경기도 고양시 일산동구|단독주택|모던
+r073 | OK | src:12 disk:12 fail:0 0byte:0 | 서울시송파구|헬리오시티 아파트|그레이톤
+r074 | OK | src:18 disk:18 fail:0 0byte:0 | 은평뉴타운|아파트|심플모던
+r075 | OK | src:10 disk:10 fail:0 0byte:0 | 서울시 은평구불광동|빌라|블랙&화이트
+r076 | OK | src:15 disk:15 fail:0 0byte:0 | 서울시 강북구|미아동 경남아파트|화이트/그레이
+r077 | OK | src:12 disk:12 fail:0 0byte:0 | 서울시 노원구 공릉동|빌라|내추럴컨셉
+r078 | OK | src:12 disk:12 fail:0 0byte:0 | 경기도 고양시 덕양구 고양동 |아파트|모던
+r079 | OK | src:15 disk:15 fail:0 0byte:0 | 고양시 일산 서구|아파트|화이트톤
+r080 | OK | src:10 disk:10 fail:0 0byte:0 | 서울시 구로구|빌라|모던
+r081 | OK | src:10 disk:10 fail:0 0byte:0 | 서울시 서대문구|빌라|모던
+c001 | OK | src:45 disk:45 fail:0 0byte:0 | 서울 강서구 마곡동 | 상가_볼펜샵 | 23평
+c002 | OK | src:15 disk:15 fail:0 0byte:0 | 경기도 고양시 덕양구 도내동(도래울)|상가_치킨호프집|28평
+c003 | OK | src:23 disk:23 fail:0 0byte:0 | 경기도 김포시 구래동|상가_미용실|16평
+c004 | OK | src:24 disk:24 fail:0 0byte:0 | 경기도 파주시 광탄면 용미리|공장
+c005 | OK | src:27 disk:27 fail:0 0byte:0 | 서울 강서구 내발산동|상가_영어학원
+c006 | OK | src:32 disk:32 fail:0 0byte:0 | 경기도 광명시 일직동|상가_사무실
+c007 | OK | src:32 disk:32 fail:0 0byte:0 | 경기도 고양시 덕양구 원흥동(서삼릉)|상가_카페
+c008 | OK | src:26 disk:26 fail:0 0byte:0 | 경기도 광명시 철산동|상가, 이자카야
+c009 | OK | src:23 disk:23 fail:0 0byte:0 | 경기도 고양시 덕양구 도내동, 도래울|상가, 와인바
+c010 | OK | src:72 disk:72 fail:0 0byte:0 | 영종도, 대형카페|인천 중구 운남동|4층건물
+c011 | OK | src:30 disk:30 fail:0 0byte:0 | 경기도 고양시 덕양구 지축동|상가|피아노학원
+c012 | OK | src:12 disk:12 fail:0 0byte:0 | 
+c013 | OK | src:5 disk:5 fail:0 0byte:0 | 
+c014 | OK | src:9 disk:9 fail:0 0byte:0 | 
+c015 | OK | src:23 disk:23 fail:0 0byte:0 | 
+c016 | OK | src:12 disk:12 fail:0 0byte:0 | 
+c017 | OK | src:9 disk:9 fail:0 0byte:0 | 
+c018 | OK | src:12 disk:12 fail:0 0byte:0 | 
+c019 | OK | src:12 disk:12 fail:0 0byte:0 | 
+c020 | OK | src:6 disk:6 fail:0 0byte:0 | 
+c021 | OK | src:25 disk:25 fail:0 0byte:0 | 
+c022 | OK | src:12 disk:12 fail:0 0byte:0 | 서울 노원구 상계동|국어학원|화이트&오크
+c023 | OK | src:65 disk:65 fail:0 0byte:0 | 경기도 양평군 지평면|애견호텔 + 주거공간|4층건물_120평
+c024 | OK | src:30 disk:30 fail:0 0byte:0 | 서울 광진구 군자동|상가(반영구 뷰티샵)|깔끔하고 모던한 반양구 뷰티샵|
+c025 | OK | src:35 disk:35 fail:0 0byte:0 | 서울 강남구 도곡동|상가(사무실 공간)|깔끔한 사무실 인테리어!|화이트&

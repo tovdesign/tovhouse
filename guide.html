@@ -1,0 +1,1077 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>홈페이지 운영 가이드 - 토브하우스</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                dark: "#12396b",
+                accent: "#1d55a0",
+                "accent-hover": "#174785",
+                light: "#faf8f5",
+                cream: "#f1ede4",
+                border: "#e4ddd0",
+                gold: "#c4a265",
+              },
+              tg: {
+                bg: "#efeff4",
+                header: "#0088cc",
+                bubble: "#ffffff",
+                sub: "#8e8e93",
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap");
+      body {
+        font-family: "Noto Sans KR", sans-serif;
+      }
+      .phone-frame {
+        width: 300px;
+        height: 540px;
+        border: 3px solid #12396b;
+        border-radius: 36px;
+        overflow: hidden;
+        position: relative;
+        box-shadow:
+          0 20px 60px rgba(0, 0, 0, 0.15),
+          inset 0 0 0 2px #1d55a0;
+      }
+      .phone-frame::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 120px;
+        height: 28px;
+        background: #12396b;
+        border-radius: 0 0 16px 16px;
+        z-index: 10;
+      }
+      .tg-chat-scroll {
+        height: calc(100% - 50px);
+        overflow-y: auto;
+        padding: 40px 12px 12px;
+      }
+      .tg-bubble {
+        padding: 8px 12px;
+        border-radius: 16px;
+        font-size: 12px;
+        line-height: 1.5;
+        background: #fff;
+        color: #000;
+        border-bottom-left-radius: 4px;
+        margin-bottom: 8px;
+        max-width: 90%;
+      }
+      .step-card {
+        transition: all 0.3s ease;
+      }
+      .step-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+      }
+      .copy-btn {
+        transition: all 0.2s;
+      }
+      .copy-btn:hover {
+        background: #1d55a0;
+        color: white;
+      }
+      .copy-btn.copied {
+        background: #10b981;
+        color: white;
+      }
+      .checklist-item input[type="checkbox"] {
+        accent-color: #1d55a0;
+        width: 18px;
+        height: 18px;
+      }
+      .checklist-item.done label {
+        text-decoration: line-through;
+        color: #9ca3af;
+      }
+      .progress-bar {
+        transition: width 0.5s ease;
+      }
+      .section-divider {
+        position: relative;
+        text-align: center;
+        margin: 3rem 0;
+      }
+      .section-divider::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+          to right,
+          transparent,
+          #1d55a0,
+          transparent
+        );
+      }
+      .section-divider span {
+        position: relative;
+        background: #faf8f5;
+        padding: 0 1.5rem;
+        font-weight: 700;
+        color: #12396b;
+        font-size: 0.875rem;
+        letter-spacing: 0.1em;
+      }
+      .screen-mockup {
+        border: 2px solid #e5e7eb;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+      .screen-mockup .titlebar {
+        background: #f3f4f6;
+        padding: 8px 12px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        border-bottom: 1px solid #e5e7eb;
+      }
+      .screen-mockup .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+      }
+    </style>
+  </head>
+  <body class="bg-brand-light min-h-screen">
+    <!-- 헤더 -->
+    <header class="bg-brand-dark text-white sticky top-0 z-50 shadow-lg">
+      <div
+        class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between"
+      >
+        <div>
+          <h1 class="text-xl font-bold tracking-tight">
+            <span class="text-brand-gold">TOV</span>
+            <span class="text-white"> DESIGN</span>
+            <span class="text-white/70 font-normal ml-2"
+              >홈페이지 운영 가이드</span
+            >
+          </h1>
+          <p class="text-sm text-gray-400 mt-0.5">
+            텔레그램 알림 + 관리자 대시보드
+          </p>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="text-right hidden sm:block">
+            <p class="text-xs text-gray-400">진행률</p>
+            <p class="text-sm font-semibold text-brand-gold" id="progress-text">
+              0%
+            </p>
+          </div>
+          <div
+            class="w-24 h-2 bg-gray-700 rounded-full overflow-hidden hidden sm:block"
+          >
+            <div
+              class="progress-bar h-full bg-brand-accent rounded-full"
+              id="progress-bar"
+              style="width: 0%"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-6 py-10">
+      <!-- 인사 & 소개 -->
+      <section class="mb-10">
+        <div
+          class="bg-white rounded-2xl p-8 shadow-sm border border-brand-accent/20"
+        >
+          <p class="text-gray-500 text-sm mb-1">From. POLARAD</p>
+          <h2 class="text-2xl font-bold text-brand-dark mb-4">
+            안녕하세요, 대표님!
+          </h2>
+          <p class="text-gray-600 leading-relaxed mb-4">
+            토브하우스 홈페이지 운영에 필요한 두 가지를 안내드립니다. 아래
+            가이드를 순서대로 따라해주시면 됩니다.
+          </p>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <a
+              href="#part-telegram"
+              class="flex items-center gap-4 p-4 bg-brand-cream rounded-xl hover:bg-brand-accent/10 transition-colors"
+            >
+              <div
+                class="w-12 h-12 bg-tg-header rounded-xl flex items-center justify-center flex-shrink-0"
+              >
+                <svg
+                  class="w-6 h-6 text-white"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"
+                  />
+                </svg>
+              </div>
+              <div>
+                <p class="font-semibold text-brand-dark text-sm">
+                  PART 1. 텔레그램 알림
+                </p>
+                <p class="text-xs text-gray-500 mt-0.5">
+                  인테리어 상담 접수 실시간 알림 받기
+                </p>
+              </div>
+            </a>
+            <a
+              href="#part-admin"
+              class="flex items-center gap-4 p-4 bg-brand-cream rounded-xl hover:bg-brand-accent/10 transition-colors"
+            >
+              <div
+                class="w-12 h-12 bg-brand-dark rounded-xl flex items-center justify-center flex-shrink-0"
+              >
+                <svg
+                  class="w-6 h-6 text-brand-gold"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                  />
+                </svg>
+              </div>
+              <div>
+                <p class="font-semibold text-brand-dark text-sm">
+                  PART 2. 관리자 대시보드
+                </p>
+                <p class="text-xs text-gray-500 mt-0.5">
+                  상담 현황 확인 &amp; 포트폴리오 관리
+                </p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================ -->
+      <!-- PART 1: 텔레그램 알림 설정 -->
+      <!-- ============================================ -->
+      <div id="part-telegram" class="section-divider">
+        <span>PART 1 &mdash; 텔레그램 알림 설정</span>
+      </div>
+
+      <!-- 텔레그램 소개 -->
+      <section class="mb-8">
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+          <div class="flex flex-col md:flex-row items-start gap-8">
+            <div class="flex-1">
+              <h3 class="text-xl font-bold text-brand-dark mb-3">
+                상담 접수 알림
+              </h3>
+              <p class="text-gray-600 leading-relaxed mb-4">
+                홈페이지에서 인테리어 상담 신청이 들어오면 텔레그램 채팅방으로
+                실시간 알림이 전송됩니다. 스마트폰 알림으로 바로 확인할 수 있어
+                빠른 응대가 가능합니다.
+              </p>
+              <div class="bg-brand-cream rounded-xl p-4">
+                <p class="text-sm font-semibold text-brand-dark mb-2">
+                  알림에 포함되는 정보
+                </p>
+                <ul class="text-sm text-gray-600 space-y-1">
+                  <li>- 고객 이름, 연락처</li>
+                  <li>- 공간 유형 (아파트/빌라/상가/단독주택 등)</li>
+                  <li>- 희망 예산, 지역, 시공 예정일</li>
+                  <li>- 접수 시각 + 접수 플랫폼</li>
+                </ul>
+              </div>
+            </div>
+            <!-- 폰 목업 -->
+            <div class="phone-frame bg-tg-bg flex-shrink-0 mx-auto">
+              <div
+                class="bg-tg-header text-white px-4 py-3 flex items-center gap-3"
+                style="padding-top: 32px"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
+                  <path
+                    d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"
+                  />
+                </svg>
+                <div
+                  class="w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-bold"
+                  style="background: rgba(29, 85, 160, 0.3)"
+                >
+                  TOV
+                </div>
+                <div>
+                  <p class="text-sm font-semibold">토브 상담알림</p>
+                  <p class="text-xs opacity-70">bot</p>
+                </div>
+              </div>
+              <div class="tg-chat-scroll">
+                <div class="tg-bubble">
+                  <p
+                    class="font-semibold mb-1"
+                    style="font-size: 11px; color: #1d55a0"
+                  >
+                    🏠 새 인테리어 상담
+                  </p>
+                  <p><strong>고객명:</strong> 김미영</p>
+                  <p><strong>연락처:</strong> 010-8248-5708</p>
+                  <p><strong>공간:</strong> 아파트</p>
+                  <p><strong>예산:</strong> 주방·거실·욕실·장판</p>
+                  <p><strong>지역:</strong> 고양시 일산동구</p>
+                  <p class="text-xs text-tg-sub mt-2">2026-03-26 05:01</p>
+                </div>
+                <div class="tg-bubble">
+                  <p
+                    class="font-semibold mb-1"
+                    style="font-size: 11px; color: #1d55a0"
+                  >
+                    🏠 새 인테리어 상담
+                  </p>
+                  <p><strong>고객명:</strong> 전진욱</p>
+                  <p><strong>연락처:</strong> 010-2209-7499</p>
+                  <p><strong>공간:</strong> 아파트</p>
+                  <p><strong>예산:</strong> 1억~1억5천</p>
+                  <p><strong>지역:</strong> 경기도 용인시 수지구</p>
+                  <p class="text-xs text-tg-sub mt-2">2026-03-26 09:16</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 1: 텔레그램 설치 -->
+      <section class="mb-6 step-card">
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+          <div class="flex items-start gap-4 mb-6">
+            <div
+              class="w-10 h-10 bg-brand-accent text-white rounded-xl flex items-center justify-center font-bold text-lg flex-shrink-0"
+            >
+              1
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-brand-dark">
+                텔레그램 앱 설치
+              </h3>
+              <p class="text-gray-500 text-sm mt-1">
+                스마트폰에 텔레그램 앱을 설치합니다
+              </p>
+            </div>
+          </div>
+          <div class="grid md:grid-cols-2 gap-4">
+            <a
+              href="https://apps.apple.com/app/telegram-messenger/id686449807"
+              target="_blank"
+              rel="noopener"
+              class="flex items-center gap-4 p-5 bg-gray-50 rounded-xl hover:bg-brand-cream transition-colors"
+            >
+              <div
+                class="w-12 h-12 bg-black rounded-2xl flex items-center justify-center flex-shrink-0"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                  <path
+                    d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"
+                  />
+                </svg>
+              </div>
+              <div>
+                <p class="text-xs text-gray-400">iPhone</p>
+                <p class="font-semibold text-brand-dark text-sm">
+                  App Store에서 다운로드
+                </p>
+              </div>
+            </a>
+            <a
+              href="https://play.google.com/store/apps/details?id=org.telegram.messenger"
+              target="_blank"
+              rel="noopener"
+              class="flex items-center gap-4 p-5 bg-gray-50 rounded-xl hover:bg-brand-cream transition-colors"
+            >
+              <div
+                class="w-12 h-12 bg-green-600 rounded-2xl flex items-center justify-center flex-shrink-0"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                  <path
+                    d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"
+                  />
+                </svg>
+              </div>
+              <div>
+                <p class="text-xs text-gray-400">Android</p>
+                <p class="font-semibold text-brand-dark text-sm">
+                  Google Play에서 다운로드
+                </p>
+              </div>
+            </a>
+          </div>
+          <div
+            class="mt-4 checklist-item flex items-center gap-3 p-3 bg-gray-50 rounded-lg cursor-pointer"
+            onclick="toggleCheck(this)"
+          >
+            <input type="checkbox" class="cursor-pointer" />
+            <label class="cursor-pointer text-sm text-gray-700"
+              >텔레그램 앱 설치 &amp; 전화번호 가입 완료</label
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 2: 채팅방 참여 -->
+      <section class="mb-6 step-card">
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+          <div class="flex items-start gap-4 mb-6">
+            <div
+              class="w-10 h-10 bg-brand-accent text-white rounded-xl flex items-center justify-center font-bold text-lg flex-shrink-0"
+            >
+              2
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-brand-dark">
+                알림 채팅방 참여
+              </h3>
+              <p class="text-gray-500 text-sm mt-1">
+                아래 링크로 "토브 상담알림" 채팅방에 참여합니다
+              </p>
+            </div>
+          </div>
+          <div class="bg-brand-cream rounded-xl p-6 mb-4">
+            <p class="text-sm text-gray-600 mb-3">
+              아래 초대 링크를 클릭하면 텔레그램 앱에서 자동으로 열립니다.
+            </p>
+            <div
+              class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3"
+            >
+              <a
+                href="https://t.me/+GLs3A5r0WhpmNjk1"
+                target="_blank"
+                rel="noopener"
+                class="flex-1 bg-white rounded-lg px-4 py-3 font-mono text-sm text-tg-header border border-brand-accent/30 break-all hover:bg-blue-50 transition-colors text-center sm:text-left"
+                id="invite-link"
+              >
+                https://t.me/+GLs3A5r0WhpmNjk1
+              </a>
+              <button
+                class="copy-btn bg-gray-100 text-brand-dark px-4 py-3 rounded-lg text-sm font-medium flex items-center gap-2 justify-center"
+                onclick="copyText('invite-link', this)"
+              >
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                  />
+                </svg>
+                복사
+              </button>
+            </div>
+          </div>
+          <div class="bg-blue-50 rounded-xl p-4 flex items-start gap-3">
+            <svg
+              class="w-5 h-5 text-brand-accent mt-0.5 flex-shrink-0"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <div class="text-sm text-blue-800">
+              <p class="font-semibold mb-1">참여 후 확인</p>
+              <p>
+                채팅방에 입장하면 텔레그램 채팅 목록에 "토브 상담알림"이
+                나타납니다.
+              </p>
+            </div>
+          </div>
+          <div
+            class="mt-4 checklist-item flex items-center gap-3 p-3 bg-gray-50 rounded-lg cursor-pointer"
+            onclick="toggleCheck(this)"
+          >
+            <input type="checkbox" class="cursor-pointer" />
+            <label class="cursor-pointer text-sm text-gray-700"
+              >"토브 상담알림" 채팅방에 참여 완료</label
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 3: 알림 설정 -->
+      <section class="mb-6 step-card">
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+          <div class="flex items-start gap-4 mb-6">
+            <div
+              class="w-10 h-10 bg-brand-accent text-white rounded-xl flex items-center justify-center font-bold text-lg flex-shrink-0"
+            >
+              3
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-brand-dark">알림 설정 확인</h3>
+              <p class="text-gray-500 text-sm mt-1">
+                접수 알림을 놓치지 않도록 설정합니다
+              </p>
+            </div>
+          </div>
+          <div class="space-y-3">
+            <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
+              <div
+                class="w-8 h-8 bg-brand-accent/15 text-brand-dark rounded-lg flex items-center justify-center font-bold text-sm flex-shrink-0"
+              >
+                A
+              </div>
+              <div>
+                <p class="font-semibold text-brand-dark text-sm">
+                  채팅방 상단 고정
+                </p>
+                <p class="text-xs text-gray-500 mt-1">
+                  채팅방 이름을 길게 눌러 → "고정" 선택
+                </p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
+              <div
+                class="w-8 h-8 bg-brand-accent/15 text-brand-dark rounded-lg flex items-center justify-center font-bold text-sm flex-shrink-0"
+              >
+                B
+              </div>
+              <div>
+                <p class="font-semibold text-brand-dark text-sm">알림 켜기</p>
+                <p class="text-xs text-gray-500 mt-1">
+                  채팅방 → 우측 상단 ⋮ → "알림 켜기" 확인 (기본 켜짐)
+                </p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
+              <div
+                class="w-8 h-8 bg-brand-accent/15 text-brand-dark rounded-lg flex items-center justify-center font-bold text-sm flex-shrink-0"
+              >
+                C
+              </div>
+              <div>
+                <p class="font-semibold text-brand-dark text-sm">
+                  스마트폰 알림 허용
+                </p>
+                <p class="text-xs text-gray-500 mt-1">
+                  설정 → 텔레그램 → 알림 허용 (iOS: 배너+소리, Android: 우선순위
+                  높음)
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="mt-4 checklist-item flex items-center gap-3 p-3 bg-gray-50 rounded-lg cursor-pointer"
+            onclick="toggleCheck(this)"
+          >
+            <input type="checkbox" class="cursor-pointer" />
+            <label class="cursor-pointer text-sm text-gray-700"
+              >알림 설정 완료</label
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================ -->
+      <!-- PART 2: 관리자 대시보드 -->
+      <!-- ============================================ -->
+      <div id="part-admin" class="section-divider">
+        <span>PART 2 &mdash; 관리자 대시보드</span>
+      </div>
+
+      <!-- 관리자 소개 -->
+      <section class="mb-8">
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+          <h3 class="text-xl font-bold text-brand-dark mb-3">
+            관리자 대시보드
+          </h3>
+          <p class="text-gray-600 leading-relaxed mb-6">
+            접수된 인테리어 상담 내역을 확인하고, 포트폴리오와 콘텐츠를 관리할
+            수 있는 전용 관리 페이지입니다. 텔레그램 OTP 인증으로 안전하게
+            로그인합니다.
+          </p>
+          <!-- 브라우저 목업 -->
+          <div class="screen-mockup">
+            <div class="titlebar">
+              <div class="dot" style="background: #ff5f57"></div>
+              <div class="dot" style="background: #febc2e"></div>
+              <div class="dot" style="background: #28c840"></div>
+              <span class="text-xs text-gray-400 ml-3">admin.tovdesign.net</span>
+            </div>
+            <div class="bg-white p-6">
+              <div class="flex items-center gap-3 mb-4">
+                <span class="text-lg font-bold text-brand-dark"
+                  ><span class="text-brand-accent">TOV</span> DESIGN Admin</span
+                >
+              </div>
+              <div class="grid grid-cols-5 gap-3 mb-4">
+                <div class="p-3 bg-brand-cream rounded-lg text-center">
+                  <p class="text-lg font-bold text-brand-accent">111</p>
+                  <p class="text-[10px] text-gray-500">전체</p>
+                </div>
+                <div class="p-3 bg-yellow-50 rounded-lg text-center">
+                  <p class="text-lg font-bold text-yellow-600">85</p>
+                  <p class="text-[10px] text-gray-500">대기</p>
+                </div>
+                <div class="p-3 bg-blue-50 rounded-lg text-center">
+                  <p class="text-lg font-bold text-blue-600">12</p>
+                  <p class="text-[10px] text-gray-500">통화</p>
+                </div>
+                <div class="p-3 bg-green-50 rounded-lg text-center">
+                  <p class="text-lg font-bold text-green-600">9</p>
+                  <p class="text-[10px] text-gray-500">미팅</p>
+                </div>
+                <div class="p-3 bg-purple-50 rounded-lg text-center">
+                  <p class="text-lg font-bold text-purple-600">5</p>
+                  <p class="text-[10px] text-gray-500">계약</p>
+                </div>
+              </div>
+              <div class="space-y-2">
+                <div
+                  class="flex items-center justify-between p-2 bg-gray-50 rounded-lg text-xs"
+                >
+                  <div class="flex items-center gap-2">
+                    <span
+                      class="px-1.5 py-0.5 bg-brand-accent/10 text-brand-accent rounded text-[10px] font-semibold"
+                      >아파트</span
+                    >
+                    <span class="font-medium text-brand-dark"
+                      >김나현 · 서울</span
+                    >
+                  </div>
+                  <span class="text-gray-400">3분 전</span>
+                </div>
+                <div
+                  class="flex items-center justify-between p-2 bg-gray-50 rounded-lg text-xs"
+                >
+                  <div class="flex items-center gap-2">
+                    <span
+                      class="px-1.5 py-0.5 bg-brand-accent/10 text-brand-accent rounded text-[10px] font-semibold"
+                      >아파트</span
+                    >
+                    <span class="font-medium text-brand-dark"
+                      >정동섭 · 경기도 행신동</span
+                    >
+                  </div>
+                  <span class="text-gray-400">15분 전</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 4: 관리자 접속 -->
+      <section class="mb-6 step-card">
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+          <div class="flex items-start gap-4 mb-6">
+            <div
+              class="w-10 h-10 bg-brand-accent text-white rounded-xl flex items-center justify-center font-bold text-lg flex-shrink-0"
+            >
+              4
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-brand-dark">
+                관리자 페이지 접속
+              </h3>
+              <p class="text-gray-500 text-sm mt-1">
+                텔레그램 OTP로 로그인합니다
+              </p>
+            </div>
+          </div>
+          <div class="bg-brand-cream rounded-xl p-6 mb-4">
+            <p class="text-sm text-gray-600 mb-3">
+              아래 주소로 접속하면 관리자 로그인 화면이 나타납니다.
+            </p>
+            <div
+              class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3"
+            >
+              <a
+                href="https://admin.tovdesign.net"
+                target="_blank"
+                rel="noopener"
+                class="flex-1 bg-white rounded-lg px-4 py-3 font-mono text-sm text-brand-accent border border-brand-accent/30 break-all hover:bg-blue-50 transition-colors text-center sm:text-left"
+                id="admin-link"
+              >
+                https://admin.tovdesign.net
+              </a>
+              <button
+                class="copy-btn bg-gray-100 text-brand-dark px-4 py-3 rounded-lg text-sm font-medium flex items-center gap-2 justify-center"
+                onclick="copyText('admin-link', this)"
+              >
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                  />
+                </svg>
+                복사
+              </button>
+            </div>
+          </div>
+          <div class="space-y-3 mb-4">
+            <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl">
+              <span
+                class="w-6 h-6 bg-brand-accent text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0"
+                >1</span
+              >
+              <p class="text-sm text-gray-700">"인증코드 요청" 버튼 클릭</p>
+            </div>
+            <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl">
+              <span
+                class="w-6 h-6 bg-brand-accent text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0"
+                >2</span
+              >
+              <p class="text-sm text-gray-700">
+                텔레그램으로 6자리 인증코드가 전송됩니다
+              </p>
+            </div>
+            <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl">
+              <span
+                class="w-6 h-6 bg-brand-accent text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0"
+                >3</span
+              >
+              <p class="text-sm text-gray-700">
+                인증코드를 입력하면 관리자 대시보드에 접속됩니다
+              </p>
+            </div>
+          </div>
+          <div
+            class="checklist-item flex items-center gap-3 p-3 bg-gray-50 rounded-lg cursor-pointer"
+            onclick="toggleCheck(this)"
+          >
+            <input type="checkbox" class="cursor-pointer" />
+            <label class="cursor-pointer text-sm text-gray-700"
+              >관리자 대시보드 로그인 완료</label
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 5: 주요 기능 -->
+      <section class="mb-6 step-card">
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+          <div class="flex items-start gap-4 mb-6">
+            <div
+              class="w-10 h-10 bg-brand-accent text-white rounded-xl flex items-center justify-center font-bold text-lg flex-shrink-0"
+            >
+              5
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-brand-dark">주요 기능 확인</h3>
+              <p class="text-gray-500 text-sm mt-1">
+                관리자 대시보드에서 사용할 수 있는 기능들
+              </p>
+            </div>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="p-5 bg-brand-cream rounded-xl">
+              <div class="flex items-center gap-2 mb-2">
+                <svg
+                  class="w-5 h-5 text-brand-accent"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                  />
+                </svg>
+                <p class="font-semibold text-brand-dark text-sm">상담 관리</p>
+              </div>
+              <p class="text-xs text-gray-600 leading-relaxed">
+                접수 현황 확인, 상태 변경(대기→통화→미팅→계약), 메모 작성, 전화
+                바로걸기
+              </p>
+            </div>
+            <div class="p-5 bg-brand-cream rounded-xl">
+              <div class="flex items-center gap-2 mb-2">
+                <svg
+                  class="w-5 h-5 text-brand-accent"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  />
+                </svg>
+                <p class="font-semibold text-brand-dark text-sm">
+                  포트폴리오 관리
+                </p>
+              </div>
+              <p class="text-xs text-gray-600 leading-relaxed">
+                시공 사례 등록/수정, 사진 업로드, 카테고리별 분류 관리
+              </p>
+            </div>
+            <div class="p-5 bg-brand-cream rounded-xl">
+              <div class="flex items-center gap-2 mb-2">
+                <svg
+                  class="w-5 h-5 text-brand-accent"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M18 20V10M12 20V4M6 20v-6"
+                  />
+                </svg>
+                <p class="font-semibold text-brand-dark text-sm">전환율 분석</p>
+              </div>
+              <p class="text-xs text-gray-600 leading-relaxed">
+                대기→통화→미팅→계약 단계별 전환율, 플랫폼별(인스타/페이스북/웹)
+                접수 통계
+              </p>
+            </div>
+            <div class="p-5 bg-brand-cream rounded-xl">
+              <div class="flex items-center gap-2 mb-2">
+                <svg
+                  class="w-5 h-5 text-brand-accent"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                  />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                </svg>
+                <p class="font-semibold text-brand-dark text-sm">방문 통계</p>
+              </div>
+              <p class="text-xs text-gray-600 leading-relaxed">
+                GA4 연동 방문자 수, 페이지뷰, 지역별 통계, 유입 경로 분석
+              </p>
+            </div>
+          </div>
+          <div
+            class="mt-4 checklist-item flex items-center gap-3 p-3 bg-gray-50 rounded-lg cursor-pointer"
+            onclick="toggleCheck(this)"
+          >
+            <input type="checkbox" class="cursor-pointer" />
+            <label class="cursor-pointer text-sm text-gray-700"
+              >주요 기능 확인 완료</label
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- 상태 안내 -->
+      <section class="mb-6 step-card">
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+          <div class="flex items-start gap-4 mb-6">
+            <div
+              class="w-10 h-10 bg-brand-accent text-white rounded-xl flex items-center justify-center flex-shrink-0"
+            >
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-brand-dark">상담 상태 안내</h3>
+              <p class="text-gray-500 text-sm mt-1">
+                각 상태의 의미와 사용 방법
+              </p>
+            </div>
+          </div>
+          <div class="space-y-3">
+            <div class="flex items-start gap-4 p-4 bg-yellow-50 rounded-xl">
+              <span
+                class="px-2.5 py-1 bg-yellow-200 text-yellow-800 rounded-lg text-xs font-bold flex-shrink-0"
+                >대기</span
+              >
+              <div>
+                <p class="font-semibold text-brand-dark text-sm">
+                  접수 후 연락 대기
+                </p>
+                <p class="text-xs text-gray-500 mt-0.5">
+                  새로 접수된 상담. 아직 고객에게 연락하지 않은 상태
+                </p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4 p-4 bg-blue-50 rounded-xl">
+              <span
+                class="px-2.5 py-1 bg-blue-200 text-blue-800 rounded-lg text-xs font-bold flex-shrink-0"
+                >통화</span
+              >
+              <div>
+                <p class="font-semibold text-brand-dark text-sm">통화 완료</p>
+                <p class="text-xs text-gray-500 mt-0.5">
+                  고객과 전화 통화를 마친 상태. 상담 내용을 메모에 기록
+                </p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4 p-4 bg-gray-100 rounded-xl">
+              <span
+                class="px-2.5 py-1 bg-gray-300 text-gray-700 rounded-lg text-xs font-bold flex-shrink-0"
+                >보류</span
+              >
+              <div>
+                <p class="font-semibold text-brand-dark text-sm">연락 부재</p>
+                <p class="text-xs text-gray-500 mt-0.5">
+                  전화·문자가 불가한 경우 (부재중, 연락두절 등)
+                </p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4 p-4 bg-green-50 rounded-xl">
+              <span
+                class="px-2.5 py-1 bg-green-200 text-green-800 rounded-lg text-xs font-bold flex-shrink-0"
+                >미팅</span
+              >
+              <div>
+                <p class="font-semibold text-brand-dark text-sm">
+                  미팅 일정 확정
+                </p>
+                <p class="text-xs text-gray-500 mt-0.5">
+                  현장 방문 또는 미팅 일정이 잡힌 상태
+                </p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4 p-4 bg-purple-50 rounded-xl">
+              <span
+                class="px-2.5 py-1 bg-purple-200 text-purple-800 rounded-lg text-xs font-bold flex-shrink-0"
+                >계약</span
+              >
+              <div>
+                <p class="font-semibold text-brand-dark text-sm">계약 전환</p>
+                <p class="text-xs text-gray-500 mt-0.5">
+                  계약이 성사된 상태. 계약 기준 견적서를 첨부하여 기록
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 완료 -->
+      <section class="mt-10">
+        <div class="bg-brand-dark rounded-2xl p-8 text-center text-white">
+          <div
+            class="w-16 h-16 bg-brand-accent/30 rounded-full flex items-center justify-center mx-auto mb-4"
+          >
+            <svg
+              class="w-8 h-8 text-white"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-2">설정 완료!</h3>
+          <p class="text-gray-400 text-sm mb-6">
+            이제 홈페이지에서 인테리어 상담 신청이 들어오면<br />텔레그램 알림 +
+            관리자 대시보드에서 확인할 수 있습니다.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-3 justify-center">
+            <a
+              href="https://admin.tovdesign.net"
+              target="_blank"
+              class="bg-brand-accent hover:bg-brand-accent-hover text-white px-6 py-3 rounded-xl text-sm font-semibold transition-colors"
+            >
+              관리자 대시보드 접속
+            </a>
+            <a
+              href="https://tovdesign.net"
+              target="_blank"
+              class="bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-xl text-sm font-semibold transition-colors"
+            >
+              홈페이지 바로가기
+            </a>
+          </div>
+          <p class="text-xs text-gray-500 mt-6">
+            문의: POLARAD &middot; mkt@polarad.co.kr
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      function toggleCheck(el) {
+        const cb = el.querySelector('input[type="checkbox"]');
+        cb.checked = !cb.checked;
+        el.classList.toggle("done", cb.checked);
+        updateProgress();
+      }
+      function updateProgress() {
+        const total = document.querySelectorAll(".checklist-item").length;
+        const checked = document.querySelectorAll(
+          ".checklist-item.done",
+        ).length;
+        const pct = Math.round((checked / total) * 100);
+        document.getElementById("progress-bar").style.width = pct + "%";
+        document.getElementById("progress-text").textContent = pct + "%";
+      }
+      function copyText(id, btn) {
+        const text = document.getElementById(id).textContent.trim();
+        navigator.clipboard.writeText(text).then(() => {
+          btn.classList.add("copied");
+          btn.innerHTML =
+            '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> 복사됨';
+          setTimeout(() => {
+            btn.classList.remove("copied");
+            btn.innerHTML =
+              '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg> 복사';
+          }, 2000);
+        });
+      }
+    </script>
+  </body>
+</html>

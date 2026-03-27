@@ -1,0 +1,1051 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>포트폴리오 등록 가이드 | TOV HOUSE 관리자</title>
+    <link
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Pretendard Variable", sans-serif;
+        background: #f8fafc;
+        color: #1e293b;
+        line-height: 1.8;
+      }
+      .container {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 40px 24px 80px;
+      }
+      h1 {
+        font-size: 2.2rem;
+        font-weight: 800;
+        color: #12396b;
+        margin-bottom: 6px;
+      }
+      .subtitle {
+        font-size: 1.2rem;
+        color: #334155;
+        margin-bottom: 40px;
+      }
+      h2 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #1d55a0;
+        margin: 44px 0 16px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      h2::before {
+        content: "";
+        width: 5px;
+        height: 24px;
+        background: #1d55a0;
+        border-radius: 3px;
+        flex-shrink: 0;
+      }
+      h3 {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #334155;
+        margin: 28px 0 12px;
+      }
+      p,
+      li {
+        font-size: 1.2rem;
+        color: #1e293b;
+      }
+      ul,
+      ol {
+        padding-left: 24px;
+        margin-bottom: 16px;
+      }
+      li {
+        margin-bottom: 8px;
+      }
+      .card {
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+        padding: 24px;
+        margin-bottom: 20px;
+      }
+      .badge {
+        display: inline-block;
+        padding: 3px 10px;
+        border-radius: 5px;
+        font-size: 0.85rem;
+        font-weight: 600;
+      }
+      .badge-required {
+        background: #fef2f2;
+        color: #dc2626;
+      }
+      .badge-private {
+        background: #fefce8;
+        color: #a16207;
+      }
+      .tip {
+        background: #eff6ff;
+        border: 1px solid #bfdbfe;
+        border-radius: 12px;
+        padding: 18px 20px;
+        margin: 16px 0;
+        font-size: 1.1rem;
+        color: #1e40af;
+      }
+      .tip strong {
+        color: #1d4ed8;
+      }
+      .warn {
+        background: #fef2f2;
+        border: 1px solid #fecaca;
+        border-radius: 12px;
+        padding: 18px 20px;
+        margin: 16px 0;
+        font-size: 1.1rem;
+        color: #991b1b;
+      }
+      .warn strong {
+        color: #dc2626;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 1.1rem;
+        margin: 16px 0;
+      }
+      th {
+        background: #f8fafc;
+        text-align: left;
+        padding: 12px 14px;
+        font-weight: 600;
+        color: #334155;
+        border-bottom: 2px solid #e2e8f0;
+      }
+      td {
+        padding: 12px 14px;
+        border-bottom: 1px solid #f1f5f9;
+      }
+      .flow {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        padding: 20px 0;
+        justify-content: center;
+      }
+      .flow-item {
+        padding: 10px 18px;
+        border-radius: 10px;
+        font-size: 1rem;
+        font-weight: 600;
+        text-align: center;
+      }
+      .flow-arrow {
+        color: #64748b;
+        font-size: 1.4rem;
+      }
+      code {
+        background: #f1f5f9;
+        padding: 3px 8px;
+        border-radius: 5px;
+        font-size: 1rem;
+        color: #1d55a0;
+      }
+      .checklist {
+        list-style: none;
+        padding: 0;
+      }
+      .checklist li {
+        padding: 10px 0;
+        border-bottom: 1px solid #f1f5f9;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 1.2rem;
+      }
+      .checklist li::before {
+        content: "";
+        width: 20px;
+        height: 20px;
+        border: 2px solid #cbd5e1;
+        border-radius: 4px;
+        flex-shrink: 0;
+        margin-top: 3px;
+      }
+      .faq {
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+        overflow: hidden;
+        margin-bottom: 14px;
+      }
+      .faq-q {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 18px 24px;
+        background: #f8fafc;
+        border-bottom: 1px solid #f1f5f9;
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #1e293b;
+      }
+      .faq-q span {
+        width: 32px;
+        height: 32px;
+        background: #1d55a0;
+        color: #fff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.95rem;
+        font-weight: 700;
+        flex-shrink: 0;
+      }
+      .faq-a {
+        padding: 18px 24px;
+        font-size: 1.1rem;
+        color: #1e293b;
+      }
+      .footer-note {
+        margin-top: 48px;
+        padding-top: 24px;
+        border-top: 1px solid #e2e8f0;
+        font-size: 0.95rem;
+        color: #64748b;
+        text-align: center;
+      }
+
+      /* 빨간 점선 안내 */
+      .action-guide {
+        border: 2px dashed #ef4444;
+        border-radius: 10px;
+        padding: 3px;
+        position: relative;
+        margin-bottom: 6px;
+      }
+      .action-guide::after {
+        content: attr(data-guide);
+        position: absolute;
+        top: -10px;
+        right: 8px;
+        background: #ef4444;
+        color: #fff;
+        font-size: 1rem;
+        font-weight: 700;
+        padding: 4px 12px;
+        border-radius: 6px;
+        white-space: nowrap;
+      }
+
+      /* ===== MOCKUP ===== */
+      .mockup {
+        background: #fff;
+        border: 2px solid #e2e8f0;
+        border-radius: 16px;
+        overflow: hidden;
+        margin: 20px 0;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+      }
+      .mock-header {
+        background: linear-gradient(135deg, #12396b, #1d55a0);
+        color: #fff;
+        padding: 16px 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .mock-header h4 {
+        font-size: 1.15rem;
+        font-weight: 700;
+        margin: 0;
+      }
+      .mock-close {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 1rem;
+      }
+      .mock-body {
+        padding: 24px;
+      }
+      .mock-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        margin-bottom: 16px;
+      }
+      .mock-field {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .mock-label {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #334155;
+      }
+      .mock-input {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 10px 14px;
+        font-size: 1rem;
+        color: #64748b;
+      }
+      .mock-select {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 10px 14px;
+        font-size: 1rem;
+        color: #334155;
+      }
+      .mock-textarea {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 12px 14px;
+        font-size: 1rem;
+        color: #64748b;
+        min-height: 80px;
+      }
+      .mock-thumb {
+        width: 140px;
+        height: 100px;
+        background: #f1f5f9;
+        border: 1px dashed #cbd5e1;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #64748b;
+        font-size: 0.85rem;
+      }
+      .mock-block {
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 14px;
+        margin-bottom: 10px;
+        background: #fafafa;
+      }
+      .mock-block-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 10px;
+      }
+      .mock-block-input {
+        flex: 1;
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+        padding: 8px 12px;
+        font-size: 0.95rem;
+        color: #334155;
+      }
+      .mock-block-del {
+        width: 24px;
+        height: 24px;
+        background: #fef2f2;
+        border: 1px solid #fecaca;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #dc2626;
+        font-size: 0.85rem;
+      }
+      .mock-imgs {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .mock-img {
+        width: 70px;
+        height: 52px;
+        background: #e2e8f0;
+        border-radius: 6px;
+      }
+      .mock-img-add {
+        width: 70px;
+        height: 52px;
+        border: 1px dashed #cbd5e1;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #64748b;
+        font-size: 1.2rem;
+        background: #fff;
+      }
+      .mock-contract {
+        background: #fefce8;
+        border: 1px solid #fde68a;
+        border-radius: 10px;
+        padding: 16px;
+        margin-bottom: 16px;
+      }
+      .mock-contract-label {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #a16207;
+        margin-bottom: 10px;
+      }
+      .mock-toggle {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 16px;
+      }
+      .mock-switch {
+        width: 44px;
+        height: 24px;
+        background: #10b981;
+        border-radius: 12px;
+        position: relative;
+      }
+      .mock-switch::after {
+        content: "";
+        width: 20px;
+        height: 20px;
+        background: #fff;
+        border-radius: 50%;
+        position: absolute;
+        top: 2px;
+        left: 22px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+      }
+      .mock-footer {
+        display: flex;
+        justify-content: space-between;
+        padding: 16px 24px;
+        background: #fafafa;
+        border-top: 1px solid #e2e8f0;
+      }
+      .mock-btn {
+        padding: 10px 24px;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        border: none;
+      }
+      .mock-btn-del {
+        background: #fef2f2;
+        color: #dc2626;
+        border: 1px solid #fecaca;
+      }
+      .mock-btn-cancel {
+        background: #f1f5f9;
+        color: #334155;
+      }
+      .mock-btn-save {
+        background: #1d55a0;
+        color: #fff;
+      }
+      .mock-receipt {
+        border: 1px dashed #cbd5e1;
+        border-radius: 10px;
+        padding: 20px;
+        text-align: center;
+        color: #64748b;
+        font-size: 1rem;
+        margin-bottom: 16px;
+        background: #fafafa;
+      }
+      .mock-ocr {
+        background: #ecfdf5;
+        border: 1px solid #a7f3d0;
+        border-radius: 8px;
+        padding: 10px 14px;
+        font-size: 0.95rem;
+        color: #065f46;
+        margin-bottom: 12px;
+      }
+      .mock-ocr-row {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 6px;
+      }
+      .mock-ocr-item {
+        flex: 2;
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+        padding: 6px 10px;
+        font-size: 0.9rem;
+      }
+      .mock-ocr-amount {
+        flex: 1;
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+        padding: 6px 10px;
+        font-size: 0.9rem;
+        text-align: right;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>포트폴리오 등록 가이드</h1>
+      <p class="subtitle">
+        관리자 대시보드에서 시공 사례를 등록하고 관리하는 방법
+      </p>
+
+      <h2>관리자 접속</h2>
+      <div class="card">
+        <ol>
+          <li>
+            <a
+              href="https://admin.tovdesign.net"
+              target="_blank"
+              style="color: #1d55a0; font-weight: 600"
+              >admin.tovdesign.net</a
+            >
+            접속
+          </li>
+          <li>OTP 인증 (텔레그램으로 코드 수신)</li>
+          <li>좌측 메뉴에서 <strong>포트폴리오 관리</strong> 클릭</li>
+          <li><strong>새 프로젝트</strong> 버튼 클릭</li>
+        </ol>
+      </div>
+
+      <h2>등록 흐름</h2>
+      <div class="flow">
+        <div class="flow-item" style="background: #1d55a0; color: #fff">
+          새 프로젝트
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-item" style="background: #c4a265; color: #fff">
+          기본정보
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-item" style="background: #10b981; color: #fff">
+          이미지 블록
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-item" style="background: #8b5cf6; color: #fff">
+          내역서(선택)
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-item" style="background: #f59e0b; color: #fff">
+          계약자
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-item" style="background: #1d55a0; color: #fff">
+          저장
+        </div>
+      </div>
+
+      <!-- ===== MOCKUP ===== -->
+      <h2>편집 화면 (실제 모달)</h2>
+
+      <div class="mockup">
+        <div class="mock-header">
+          <h4>새 프로젝트 추가</h4>
+          <div class="mock-close">&times;</div>
+        </div>
+        <div class="mock-body">
+          <!-- 기본정보 -->
+          <div
+            style="
+              font-size: 0.9rem;
+              font-weight: 700;
+              color: #1d55a0;
+              letter-spacing: 1px;
+              margin-bottom: 10px;
+            "
+          >
+            1. 기본정보
+          </div>
+          <div class="mock-row">
+            <div class="mock-field action-guide" data-guide="직접 입력">
+              <div class="mock-label">
+                프로젝트 제목 *
+                <span class="badge badge-required" style="font-size: 0.7rem"
+                  >필수</span
+                >
+              </div>
+              <div class="mock-input">서울 성북구 석관동 아파트 49평</div>
+            </div>
+            <div class="mock-field action-guide" data-guide="선택">
+              <div class="mock-label">
+                카테고리 *
+                <span class="badge badge-required" style="font-size: 0.7rem"
+                  >필수</span
+                >
+              </div>
+              <div class="mock-select">주거공간 ▾</div>
+            </div>
+          </div>
+
+          <!-- 시공정보 -->
+          <div
+            style="
+              font-size: 0.9rem;
+              font-weight: 700;
+              color: #1d55a0;
+              letter-spacing: 1px;
+              margin: 16px 0 10px;
+            "
+          >
+            2. 시공정보 (홈페이지 사이드바에 표시)
+          </div>
+          <div
+            style="
+              display: grid;
+              grid-template-columns: 1fr 1fr 1fr;
+              gap: 10px;
+              margin-bottom: 10px;
+            "
+          >
+            <div class="mock-field action-guide" data-guide="직접 입력">
+              <div class="mock-label">지역</div>
+              <div class="mock-input">서울 성북구 석관동</div>
+            </div>
+            <div class="mock-field action-guide" data-guide="직접 입력">
+              <div class="mock-label">공간유형</div>
+              <div class="mock-input">아파트</div>
+            </div>
+            <div class="mock-field action-guide" data-guide="직접 입력">
+              <div class="mock-label">면적</div>
+              <div class="mock-input">49평</div>
+            </div>
+          </div>
+          <div
+            style="
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              gap: 10px;
+              margin-bottom: 16px;
+            "
+          >
+            <div class="mock-field action-guide" data-guide="직접 입력">
+              <div class="mock-label">시공기간</div>
+              <div class="mock-input">약 8주</div>
+            </div>
+            <div class="mock-field action-guide" data-guide="직접 입력">
+              <div class="mock-label">시공비용</div>
+              <div class="mock-input">1억 7000</div>
+            </div>
+          </div>
+          <div class="tip" style="font-size: 0.95rem">
+            이 정보가 홈페이지 상세페이지 좌측
+            <strong>Project Info 사이드바</strong>에 표시됩니다.
+          </div>
+
+          <!-- 썸네일 -->
+          <div
+            style="
+              font-size: 0.9rem;
+              font-weight: 700;
+              color: #1d55a0;
+              letter-spacing: 1px;
+              margin: 16px 0 10px;
+            "
+          >
+            3. 대표 썸네일
+          </div>
+          <div
+            style="
+              display: flex;
+              gap: 14px;
+              align-items: flex-start;
+              margin-bottom: 16px;
+            "
+          >
+            <div class="mock-thumb action-guide" data-guide="클릭하여 업로드">
+              클릭하여 변경
+            </div>
+            <div style="font-size: 0.85rem; color: #64748b">
+              webp 자동 변환<br />4:3 비율 권장
+            </div>
+          </div>
+
+          <!-- 프로젝트 소개 -->
+          <div
+            style="
+              font-size: 0.9rem;
+              font-weight: 700;
+              color: #1d55a0;
+              letter-spacing: 1px;
+              margin-bottom: 10px;
+            "
+          >
+            4. 프로젝트 소개
+          </div>
+          <div class="mock-textarea action-guide" data-guide="직접 입력">
+            이 프로젝트의 컨셉, 고객 요구사항, 디자인 방향 등을 서술하세요...
+          </div>
+          <div style="height: 16px"></div>
+
+          <!-- 공간 블록 -->
+          <div
+            style="
+              font-size: 0.9rem;
+              font-weight: 700;
+              color: #1d55a0;
+              letter-spacing: 1px;
+              margin-bottom: 10px;
+            "
+          >
+            5. 공간별 이미지 블록
+          </div>
+          <div
+            class="mock-block action-guide"
+            data-guide="블록 추가 후 이미지 업로드"
+          >
+            <div class="mock-block-header">
+              <span style="color: #cbd5e1; cursor: grab">⠿</span>
+              <div class="mock-block-input">시공 전 주방</div>
+              <div class="mock-block-del">&times;</div>
+            </div>
+            <div class="mock-imgs">
+              <div
+                class="mock-img"
+                style="background: linear-gradient(135deg, #64748b, #334155)"
+              ></div>
+              <div
+                class="mock-img"
+                style="background: linear-gradient(135deg, #64748b, #334155)"
+              ></div>
+              <div
+                class="mock-img"
+                style="background: linear-gradient(135deg, #64748b, #334155)"
+              ></div>
+              <div class="mock-img-add">+</div>
+            </div>
+          </div>
+          <div class="mock-block">
+            <div class="mock-block-header">
+              <span style="color: #cbd5e1; cursor: grab">⠿</span>
+              <div class="mock-block-input">시공 후 주방</div>
+              <div class="mock-block-del">&times;</div>
+            </div>
+            <div class="mock-imgs">
+              <div
+                class="mock-img"
+                style="background: linear-gradient(135deg, #10b981, #059669)"
+              ></div>
+              <div
+                class="mock-img"
+                style="background: linear-gradient(135deg, #10b981, #059669)"
+              ></div>
+              <div class="mock-img-add">+</div>
+            </div>
+          </div>
+          <div
+            style="
+              border: 1px dashed #cbd5e1;
+              border-radius: 8px;
+              padding: 12px;
+              text-align: center;
+              color: #64748b;
+              font-size: 0.95rem;
+              margin-bottom: 16px;
+              cursor: pointer;
+            "
+          >
+            + 공간 블록 추가
+          </div>
+
+          <!-- 실행내역서 -->
+          <div
+            style="
+              font-size: 0.9rem;
+              font-weight: 700;
+              color: #1d55a0;
+              letter-spacing: 1px;
+              margin-bottom: 10px;
+            "
+          >
+            6. 실행내역서 (선택)
+          </div>
+          <div
+            class="mock-receipt action-guide"
+            data-guide="선택 - 이미지 업로드 시 OCR 자동"
+          >
+            클릭하거나 이미지를 드래그 (JPG/PNG)<br /><span
+              style="font-size: 0.85rem"
+              >업로드 시 OCR 자동 실행</span
+            >
+          </div>
+          <div class="mock-ocr">
+            OCR 인식 완료 - 5개 항목 추출 (실패 시 수동입력 자동 전환)
+          </div>
+          <div class="mock-ocr-row">
+            <div class="mock-ocr-item">주방가구</div>
+            <div class="mock-ocr-amount">12,000,000원</div>
+          </div>
+          <div class="mock-ocr-row">
+            <div class="mock-ocr-item">붙박이장</div>
+            <div class="mock-ocr-amount">8,500,000원</div>
+          </div>
+          <div class="mock-ocr-row">
+            <div class="mock-ocr-item">바닥재</div>
+            <div class="mock-ocr-amount">5,200,000원</div>
+          </div>
+          <div style="height: 16px"></div>
+
+          <!-- 계약자 -->
+          <div
+            style="
+              font-size: 0.9rem;
+              font-weight: 700;
+              color: #1d55a0;
+              letter-spacing: 1px;
+              margin-bottom: 10px;
+            "
+          >
+            7. 계약자 정보
+          </div>
+          <div
+            class="mock-contract action-guide"
+            data-guide="필수 입력 - 외부 비공개"
+          >
+            <div class="mock-contract-label">
+              <span class="badge badge-private" style="font-size: 0.75rem"
+                >관리자 전용</span
+              >
+              외부 비공개
+            </div>
+            <div class="mock-row">
+              <div class="mock-field">
+                <div class="mock-label">계약자명 *</div>
+                <div class="mock-input">홍길동</div>
+              </div>
+              <div class="mock-field">
+                <div class="mock-label">계약자 연락처 *</div>
+                <div class="mock-input">010-1234-5678</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 공개/비공개 -->
+          <div class="mock-toggle">
+            <div style="font-size: 0.95rem; font-weight: 600; color: #334155">
+              공개 상태
+            </div>
+            <div class="mock-switch"></div>
+            <div style="font-size: 0.9rem; color: #10b981; font-weight: 600">
+              공개
+            </div>
+          </div>
+        </div>
+        <div class="mock-footer">
+          <div><div class="mock-btn mock-btn-del">삭제</div></div>
+          <div style="display: flex; gap: 10px">
+            <div class="mock-btn mock-btn-cancel">취소</div>
+            <div class="mock-btn mock-btn-save">저장</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 필드 설명 -->
+      <h2>입력 필드 상세</h2>
+
+      <h3>1. 프로젝트 제목 + 카테고리</h3>
+      <div class="card">
+        <p>제목은 관리 용도로 사용됩니다.</p>
+        <p>예: <code>서울 성북구 석관동 아파트 49평</code></p>
+        <p>카테고리: 주거공간 / 상업공간 / 종합건축 / 맞춤가구</p>
+      </div>
+
+      <h3>2. 시공정보 (사이드바)</h3>
+      <div class="card">
+        <p>
+          이 정보가 홈페이지 상세페이지 좌측
+          <strong>Project Info 사이드바</strong>에 표시됩니다.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>필드</th>
+              <th>예시</th>
+              <th>사이드바 표시</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>지역</strong></td>
+              <td>서울 성북구 석관동</td>
+              <td>지역</td>
+            </tr>
+            <tr>
+              <td><strong>공간유형</strong></td>
+              <td>아파트</td>
+              <td>공간 유형</td>
+            </tr>
+            <tr>
+              <td><strong>면적</strong></td>
+              <td>49평</td>
+              <td>면적 (하이라이트)</td>
+            </tr>
+            <tr>
+              <td><strong>시공기간</strong></td>
+              <td>약 8주</td>
+              <td>시공 기간</td>
+            </tr>
+            <tr>
+              <td><strong>시공비용</strong></td>
+              <td>1억 7000</td>
+              <td>시공 비용 (하이라이트, 큰 글씨) + "만원" 자동 추가</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>3. 공간별 이미지 블록</h3>
+      <div class="card">
+        <table>
+          <thead>
+            <tr>
+              <th>작업</th>
+              <th>방법</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>블록 추가</strong></td>
+              <td>"공간 블록 추가" 버튼</td>
+            </tr>
+            <tr>
+              <td><strong>블록명</strong></td>
+              <td>예: 시공 전 주방, 시공 후 거실, 욕실</td>
+            </tr>
+            <tr>
+              <td><strong>이미지 추가</strong></td>
+              <td>블록 내 + 버튼 (다중 선택 가능)</td>
+            </tr>
+            <tr>
+              <td><strong>삭제</strong></td>
+              <td>이미지 X / 블록 X</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="tip">
+          <strong>홈페이지 자동 레이아웃:</strong> 1~2장 넓게, 3장 가로, 4장 2x2
+          그리드. 세로 사진은 크롭 후 클릭 시 원본. 블록당 최대 15장, WebP 자동
+          변환.
+        </div>
+      </div>
+
+      <h3>4. 실행내역서 (OCR)</h3>
+      <div class="card">
+        <ol>
+          <li>내역서 이미지(JPG/PNG) 업로드</li>
+          <li>Google Vision OCR로 항목/금액 자동 추출</li>
+          <li>인식 결과를 수정 가능 (항목 추가/삭제도 가능)</li>
+          <li>홈페이지에서 테이블 + "원본 확인하기"로 표시</li>
+        </ol>
+        <div class="tip">
+          <strong>OCR 인식률 높이기:</strong> 선명한 이미지, 정면 촬영, 표 형태.
+          손글씨는 인식률 낮음.
+        </div>
+      </div>
+
+      <h3>5. 계약자 정보</h3>
+      <div class="card" style="background: #fefce8; border-color: #fde68a">
+        <p><span class="badge badge-private">관리자 전용</span> 외부 비공개</p>
+        <p style="margin-top: 10px">
+          계약자명과 연락처를 입력합니다. 접수 데이터의 연락처와 매칭되면
+          접수관리의 <strong>계약후기</strong> 통계에 자동 반영됩니다.
+        </p>
+        <div class="warn">
+          <strong>홈페이지에 절대 노출되지 않습니다.</strong>
+        </div>
+      </div>
+
+      <h2>수정 및 삭제</h2>
+      <div class="card">
+        <table>
+          <thead>
+            <tr>
+              <th>작업</th>
+              <th>방법</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>수정</strong></td>
+              <td>카드 클릭 → 편집 모달 → 저장</td>
+            </tr>
+            <tr>
+              <td><strong>삭제</strong></td>
+              <td>모달 좌측 하단 삭제 버튼</td>
+            </tr>
+            <tr>
+              <td><strong>순서 변경</strong></td>
+              <td>카드 드래그 또는 순번 배지 클릭</td>
+            </tr>
+            <tr>
+              <td><strong>공개/비공개</strong></td>
+              <td>모달 내 토글 스위치</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>등록 전 체크리스트</h2>
+      <div class="card">
+        <ul class="checklist">
+          <li>프로젝트 제목 입력</li>
+          <li>카테고리 선택</li>
+          <li>시공정보 입력 (지역, 공간유형, 면적, 시공기간, 시공비용)</li>
+          <li>대표 썸네일 (가로형 권장)</li>
+          <li>공간 블록 1개 이상 + 이미지 1장 이상</li>
+          <li>계약자명 / 계약자 연락처</li>
+          <li>공개 설정 확인</li>
+          <li>저장 후 홈페이지에서 확인</li>
+        </ul>
+      </div>
+
+      <h2>자주 묻는 질문</h2>
+      <div class="faq">
+        <div class="faq-q"><span>Q</span>이미지가 안 보여요</div>
+        <div class="faq-a">
+          저장을 눌렀는지 확인하세요. R2 업로드 중일 수 있으므로 잠시 후
+          새로고침.
+        </div>
+      </div>
+      <div class="faq">
+        <div class="faq-q"><span>Q</span>OCR 인식이 안 돼요</div>
+        <div class="faq-a">
+          선명한 정면 이미지를 사용하세요. 수동으로 항목 추가도 가능합니다.
+        </div>
+      </div>
+      <div class="faq">
+        <div class="faq-q"><span>Q</span>계약자 정보가 노출되나요?</div>
+        <div class="faq-a">
+          아닙니다. 관리자 대시보드에서만 확인 가능합니다.
+        </div>
+      </div>
+      <div class="faq">
+        <div class="faq-q"><span>Q</span>순서를 바꾸고 싶어요</div>
+        <div class="faq-a">카드 드래그 또는 순번 배지 클릭하여 직접 입력.</div>
+      </div>
+
+      <div class="footer-note">
+        TOV HOUSE 관리자 가이드 · 2026.03.26 · admin.tovdesign.net
+      </div>
+    </div>
+  </body>
+</html>

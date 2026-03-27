@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920">
+<title>토브하우스 영상 와이어프레임</title>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --green: #649a46;
+    --green-light: #7db85e;
+    --green-dark: #4a7a32;
+    --dark: #1a1a1a;
+    --white: #ffffff;
+  }
+
+  body {
+    font-family: 'Pretendard', -apple-system, system-ui, sans-serif;
+    background: #0a0a0a;
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ===== NAV ===== */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 40px;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .nav-title {
+    font-size: 14px;
+    color: #888;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .nav-scenes {
+    display: flex;
+    gap: 8px;
+  }
+
+  .nav-scenes a {
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    color: #888;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: all 0.2s;
+  }
+
+  .nav-scenes a:hover, .nav-scenes a.active {
+    background: var(--green);
+    color: white;
+    border-color: var(--green);
+  }
+
+  /* ===== SCENE COMMON ===== */
+  .scene {
+    width: 1920px;
+    height: 1080px;
+    margin: 80px auto 60px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+  }
+
+  .scene-label {
+    max-width: 1920px;
+    margin: 0 auto 12px;
+    padding: 0 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .scene-label h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--green);
+  }
+
+  .scene-label span {
+    font-size: 13px;
+    color: #555;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .scene-note {
+    max-width: 1920px;
+    margin: 12px auto 60px;
+    padding: 16px 20px;
+    background: rgba(100, 154, 70, 0.08);
+    border-left: 3px solid var(--green);
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+    color: #999;
+    line-height: 1.6;
+  }
+
+  /* ===== IMAGE BG + OVERLAY ===== */
+  .img-bg {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+  }
+
+  .scene-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px;
+  }
+
+  /* ===== S1: HOOK ===== */
+  #s1 .img-bg {
+    background-image: url('./img/s1-empty-room.png');
+  }
+  #s1 .overlay { background: rgba(0,0,0,0.65); }
+
+  .s1-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .s1-content .main {
+    font-size: 88px;
+    font-weight: 800;
+    line-height: 1.4;
+    letter-spacing: -1px;
+  }
+
+  .s1-content .main .green { color: var(--green-light); }
+
+  /* ===== S2: REALITY ===== */
+  #s2 .img-bg {
+    background-image: url('./img/s2-estimate.png');
+  }
+  #s2 .overlay { background: rgba(0,0,0,0.72); }
+
+  .s2-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 120px;
+  }
+
+  .s2-left {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 700px;
+  }
+
+  .s2-left .accent-bar {
+    width: 3px;
+    height: 100%;
+    background: var(--green);
+    position: absolute;
+    left: 100px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .s2-line {
+    font-size: 54px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: rgba(255,255,255,0.92);
+    padding-left: 32px;
+    border-left: 4px solid var(--green);
+  }
+
+  /* ===== S3: SOLUTION ===== */
+  #s3 .img-bg {
+    background-image: url('./img/s3-planning.png');
+  }
+  #s3 .overlay { background: rgba(0,0,0,0.55); }
+
+  .s3-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .s3-logo {
+    width: 160px;
+    height: auto;
+    filter: brightness(10);
+  }
+
+  .s3-main {
+    font-size: 70px;
+    font-weight: 800;
+    line-height: 1.4;
+    letter-spacing: -0.5px;
+  }
+
+  .s3-main .green { color: var(--green-light); }
+
+  .s3-sub {
+    font-size: 34px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.5;
+  }
+
+  /* ===== S4: PROOF SYSTEM ===== */
+  #s4 .img-bg {
+    background-image: url('./img/s4-estimate-detail.png');
+  }
+  #s4 .overlay { background: rgba(0,0,0,0.62); }
+
+  .s4-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 120px;
+  }
+
+  .s4-left h2 {
+    font-size: 64px;
+    font-weight: 800;
+    color: var(--green-light);
+    margin-bottom: 16px;
+  }
+
+  .s4-left p {
+    font-size: 30px;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .s4-right {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .s4-item {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(100, 154, 70, 0.25);
+    border-radius: 16px;
+    padding: 28px 36px;
+    min-width: 580px;
+  }
+
+  .s4-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--green), var(--green-light));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .s4-icon svg {
+    width: 30px;
+    height: 30px;
+    stroke: white;
+    stroke-width: 2;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .s4-text {
+    font-size: 34px;
+    font-weight: 600;
+    color: var(--white);
+  }
+
+  /* ===== S5: RESULTS ===== */
+  .s5-split {
+    width: 100%;
+    height: 100%;
+    display: flex;
+  }
+
+  .s5-half {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .s5-half .img-bg {
+    transition: transform 8s ease;
+    transform: scale(1.05);
+  }
+
+  .s5-half .overlay { background: rgba(0,0,0,0.40); }
+
+  .s5-half .label {
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    z-index: 2;
+    font-size: 28px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.7);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .s5-center-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    text-align: center;
+  }
+
+  .s5-center-text h2 {
+    font-size: 62px;
+    font-weight: 800;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.6);
+  }
+
+  .s5-divider {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 100%;
+    background: rgba(255,255,255,0.15);
+    z-index: 5;
+  }
+
+  /* ===== S6: CTA ===== */
+  #s6 .img-bg {
+    background-image: url('./img/s6-cta.png');
+  }
+  #s6 .overlay { background: rgba(0,0,0,0.62); }
+
+  .s6-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .s6-lead {
+    font-size: 32px;
+    color: rgba(255,255,255,0.75);
+    font-weight: 400;
+  }
+
+  .s6-main {
+    font-size: 68px;
+    font-weight: 800;
+  }
+
+  .s6-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--green);
+    color: white;
+    font-size: 32px;
+    font-weight: 700;
+    padding: 20px 56px;
+    border-radius: 60px;
+    margin-top: 12px;
+  }
+
+  .s6-btn svg {
+    width: 24px;
+    height: 24px;
+    stroke: white;
+    stroke-width: 2.5;
+    fill: none;
+  }
+
+  /* ===== S7: ENDING ===== */
+  #s7 {
+    background: var(--dark);
+  }
+
+  .s7-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .s7-logo {
+    width: 200px;
+    height: auto;
+  }
+
+  .s7-url {
+    font-size: 28px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 2px;
+  }
+
+  /* ===== PAGE FOOTER ===== */
+  .page-footer {
+    text-align: center;
+    padding: 60px 0;
+    color: #444;
+    font-size: 13px;
+    font-family: 'Montserrat', sans-serif;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <span class="nav-title">TOV HOUSE VIDEO WIREFRAME — 1920 x 1080</span>
+  <div class="nav-scenes">
+    <a href="#s1" class="active">S1 Hook</a>
+    <a href="#s2">S2 현실</a>
+    <a href="#s3">S3 해결</a>
+    <a href="#s4">S4 증빙</a>
+    <a href="#s5">S5 시공</a>
+    <a href="#s6">S6 CTA</a>
+    <a href="#s7">S7 엔딩</a>
+  </div>
+</nav>
+
+<!-- ============ SCENE 1: HOOK ============ -->
+<div class="scene-label" style="margin-top:100px">
+  <h2>Scene 1 — Hook / 문제 제기</h2>
+  <span>0:00 ~ 0:04 (4초)</span>
+</div>
+<div class="scene" id="s1">
+  <div class="img-bg"></div>
+  <div class="overlay"></div>
+  <div class="scene-content">
+    <div class="s1-content">
+      <div class="main">
+        인테리어 원가<br>
+        <span class="green">투명하게 모두공개</span>
+      </div>
+      <div style="font-size:36px;font-weight:500;color:rgba(255,255,255,0.75);margin-top:48px;line-height:1.6;text-align:center">
+        수천만원 더주면서 인테리어 리모델링<br>
+        하기 싫다면 <strong style="color:#fff">꼭 확인</strong>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="scene-note">
+  <strong>애니메이션:</strong> 배경 페이드인 → 텍스트 슬라이드업 + 페이드인 (0.8s ease-out)<br>
+  <strong>배경:</strong> 빈 방 + 줄자 이미지 / 오버레이 65%<br>
+  <strong>의도:</strong> "진짜 원가일까?"로 의심과 궁금증 유발, 스크롤 멈춤 유도
+</div>
+
+<!-- ============ SCENE 2: REALITY ============ -->
+<div class="scene-label">
+  <h2>Scene 2 — 업계 현실</h2>
+  <span>0:04 ~ 0:08 (4초)</span>
+</div>
+<div class="scene" id="s2">
+  <div class="img-bg"></div>
+  <div class="overlay"></div>
+  <div class="scene-content">
+    <div class="s2-left">
+      <div class="s2-line">견적서 금액 = 원가 + 마진</div>
+      <div class="s2-line">그런데</div>
+      <div class="s2-line">원가를 공개하는 업체, <span style="color:var(--green-light)">거의 없습니다</span></div>
+    </div>
+  </div>
+</div>
+<div class="scene-note">
+  <strong>애니메이션:</strong> 각 줄 순차 슬라이드인 (좌→우, 0.6s 간격)<br>
+  <strong>배경:</strong> 견적서 이미지 / 오버레이 72% (어둡게 = 부정적 분위기)<br>
+  <strong>좌측 그린 바:</strong> 텍스트 블록 좌측 3px 구분선
+</div>
+
+<!-- ============ SCENE 3: SOLUTION ============ -->
+<div class="scene-label">
+  <h2>Scene 3 — 해결책 / 토브하우스 등장</h2>
+  <span>0:08 ~ 0:13 (5초)</span>
+</div>
+<div class="scene" id="s3">
+  <div class="img-bg"></div>
+  <div class="overlay"></div>
+  <div class="scene-content">
+    <div class="s3-content">
+      <img src="./logo.png" alt="토브하우스" class="s3-logo">
+      <div class="s3-main">
+        시공자재 · 인건비 원가<br>
+        집행내역 <span class="green">전부 공개</span>합니다
+      </div>
+      <div class="s3-sub">
+        실행원가부터 집행내역까지, 투명하게 공개합니다
+      </div>
+    </div>
+  </div>
+</div>
+<div class="scene-note">
+  <strong>애니메이션:</strong> 로고 스케일인 → 메인카피 슬라이드업 → 서브카피 페이드인<br>
+  <strong>배경:</strong> 도면+컬러칩 테이블 / 오버레이 55% (밝게 = 긍정 전환)<br>
+  <strong>핵심:</strong> "시공자재·인건비 원가 + 집행내역 전부 공개" — 핵심 메시지 전달 (20% 수수료는 약하게 처리)
+</div>
+
+<!-- ============ SCENE 4: PROOF ============ -->
+<div class="scene-label">
+  <h2>Scene 4 — 시공북 / 증빙 시스템</h2>
+  <span>0:13 ~ 0:18 (5초)</span>
+</div>
+<div class="scene" id="s4">
+  <div class="img-bg"></div>
+  <div class="overlay"></div>
+  <div class="scene-content" style="padding:0">
+    <div class="s4-content">
+      <div class="s4-left">
+        <h2>시공북 제공</h2>
+        <p>모든 내역을 투명하게 증빙</p>
+      </div>
+      <div class="s4-right">
+        <!-- 체크리스트 항목 -->
+        <div class="s4-item">
+          <div class="s4-icon">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <div class="s4-text">영수증 · 입금증 · 항목별 지출 증빙</div>
+        </div>
+        <div class="s4-item">
+          <div class="s4-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          </div>
+          <div class="s4-text">양도소득세 필요경비 증빙 가능</div>
+        </div>
+        <div class="s4-item">
+          <div class="s4-icon">
+            <svg viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r="2.5"/><path d="M17 2H7a5 5 0 0 0-5 5v10a5 5 0 0 0 5 5h10a5 5 0 0 0 5-5V7a5 5 0 0 0-5-5z" fill="none"/><path d="M2 12h4l3 8 4-16 3 8h6"/></svg>
+          </div>
+          <div class="s4-text">모든 시공자재, 고객이 직접 선택</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="scene-note">
+  <strong>애니메이션:</strong> 좌측 타이틀 슬라이드인 → 우측 항목 순차 등장 (0.7s 간격) + 체크 아이콘 팝<br>
+  <strong>아이콘:</strong> Lucide SVG — file-text, shield-check, palette (Pencil에서 설계)<br>
+  <strong>의도:</strong> "말로만 투명"이 아닌 실제 시스템으로 신뢰감 극대화
+</div>
+
+<!-- ============ SCENE 5: RESULTS ============ -->
+<div class="scene-label">
+  <h2>Scene 5 — 시공 결과</h2>
+  <span>0:18 ~ 0:23 (5초)</span>
+</div>
+<div class="scene" id="s5">
+  <div class="s5-split">
+    <div class="s5-half">
+      <div class="img-bg" style="background-image: url('./img/s5-kitchen.png')"></div>
+      <div class="overlay"></div>
+      <div class="label">KITCHEN</div>
+    </div>
+    <div class="s5-divider"></div>
+    <div class="s5-half">
+      <div class="img-bg" style="background-image: url('./img/s5-bathroom.png')"></div>
+      <div class="overlay"></div>
+      <div class="label">BATHROOM</div>
+    </div>
+    <div class="s5-center-text">
+      <h2>투명한 견적, 확실한 시공</h2>
+    </div>
+  </div>
+</div>
+<div class="scene-note">
+  <strong>애니메이션:</strong> 좌→우 분할 등장 + Ken Burns 줌인 (scale 1→1.05, 5초)<br>
+  <strong>배경:</strong> 주방(좌) + 욕실(우) 분할 / 오버레이 40% (시공 결과물 강조)<br>
+  <strong>의도:</strong> "투명할 뿐 아니라 결과물도 좋다" — 감성 어필
+</div>
+
+<!-- ============ SCENE 6: CTA ============ -->
+<div class="scene-label">
+  <h2>Scene 6 — CTA / 행동 유도</h2>
+  <span>0:23 ~ 0:27 (4초)</span>
+</div>
+<div class="scene" id="s6">
+  <div class="img-bg"></div>
+  <div class="overlay"></div>
+  <div class="scene-content">
+    <div class="s6-content">
+      <div class="s6-lead">견적 비교, 더 이상 어렵지 않습니다</div>
+      <div class="s6-main">무료 견적 상담</div>
+      <div class="s6-btn">
+        지금 상담받기
+        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="scene-note">
+  <strong>애니메이션:</strong> 리드→메인카피 스케일인→CTA 버튼 바운스 등장 + 펄스 효과<br>
+  <strong>아이콘:</strong> Lucide SVG — arrow-right, message-circle<br>
+  <strong>의도:</strong> "무료"라는 낮은 진입장벽으로 행동 유도
+</div>
+
+<!-- ============ SCENE 7: ENDING ============ -->
+<div class="scene-label">
+  <h2>Scene 7 — 엔딩 / 브랜드 각인</h2>
+  <span>0:27 ~ 0:28.5 (1.5초)</span>
+</div>
+<div class="scene" id="s7">
+  <div class="scene-content">
+    <div class="s7-content">
+      <img src="./logo.png" alt="토브하우스" class="s7-logo">
+      <div class="s7-url">tovdesign.imweb.me</div>
+    </div>
+  </div>
+</div>
+<div class="scene-note">
+  <strong>애니메이션:</strong> 로고 페이드인 + 스케일인 → URL 페이드인<br>
+  <strong>배경:</strong> 단색 #1a1a1a (다크) — 로고에만 집중<br>
+  <strong>의도:</strong> 마지막 프레임 = 브랜드 각인
+</div>
+
+<div class="page-footer">
+  TOV HOUSE — VIDEO WIREFRAME v1.0 — 1920×1080 — 28.5s — 7 SCENES
+</div>
+
+</body>
+</html>

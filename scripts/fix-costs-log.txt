@@ -1,0 +1,83 @@
+Scraping listing pages for idx values...
+Got 79 idx values
+  r001... cost=1억 7000, duration=약 8주
+  r002... cost=6400, duration=약 3주
+  r003... cost=4060, duration=약 4주
+  r004... cost=4860, duration=약 6주
+  r005... cost=5230, duration=약 5주
+  r006... cost=4750, duration=4주
+  r007... cost=3270, duration=3주
+  r008... cost=3450, duration=3주
+  r009... cost=3700, duration=4주
+  r010... cost=2767, duration=3주
+  r011... cost=4250, duration=4주
+  r012... cost=4440, duration=3주
+  r013... cost=8230, duration=4주
+  r014... cost=6480, duration=3주
+  r015... cost=2460, duration=2주
+  r016... cost=5000, duration=4주
+  r017... cost=5350, duration=5주
+  r018... cost=7800, duration=5주
+  r019... cost=4250, duration=3주
+  r020... cost=5160, duration=4주
+  r021... cost=3870, duration=4주
+  r022... cost=4400, duration=3주
+  r023... cost=7500, duration=4주
+  r024... cost=8000, duration=4주
+  r025... cost=5600, duration=2주
+  r026... cost=, duration=
+  r027... cost=, duration=
+  r028... cost=, duration=
+  r029... cost=, duration=
+  r030... cost=, duration=
+  r031... cost=, duration=
+  r032... cost=, duration=
+  r033... cost=, duration=
+  r034... cost=, duration=
+  r035... cost=, duration=
+  r036... cost=, duration=
+  r037... cost=, duration=
+  r038... cost=, duration=
+  r039... cost=, duration=
+  r040... cost=, duration=
+  r041... cost=, duration=
+  r042... cost=, duration=
+  r043... cost=, duration=
+  r044... cost=, duration=
+  r045... cost=, duration=
+  r046... cost=, duration=
+  r047... cost=, duration=
+  r048... cost=, duration=
+  r049... cost=, duration=
+  r050... cost=, duration=
+  r051... cost=, duration=
+  r052... cost=, duration=
+  r053... cost=, duration=
+  r054... cost=, duration=
+  r055... cost=, duration=
+  r056... cost=, duration=
+  r057... cost=, duration=
+  r058... cost=, duration=
+  r059... cost=, duration=
+  r060... cost=, duration=
+  r061... cost=, duration=
+  r062... cost=, duration=
+  r063... cost=, duration=
+  r064... cost=, duration=
+  r065... cost=, duration=
+  c001... cost=40002, duration=4주
+  c002... cost=5250, duration=4주
+  c003... cost=1700, duration=2주
+  c004... cost=9000, duration=4주
+  c005... cost=2900, duration=약 2주
+  c006... cost=, duration=
+  c007... cost=, duration=
+  c008... cost=, duration=
+  c009... cost=, duration=
+  c010... cost=, duration=
+  c011... cost=, duration=
+  c012... cost=, duration=
+  c013... cost=, duration=
+  c014... cost=, duration=
+
+Updated 2 cost values. Saved to F:/tov2026/portfolio-data.json

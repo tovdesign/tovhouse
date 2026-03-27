@@ -1,0 +1,7 @@
+name = "tovhouse"
+main = "src/index.js"
+compatibility_date = "2024-12-01"
+
+[vars]
+AIRTABLE_BASE_ID = "appgpowtz5DSI391U"
+AIRTABLE_TABLE_ID = "tbl7PmkHDwQByqCdm"

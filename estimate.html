@@ -1,0 +1,2157 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>견적 상담 신청 | 토브하우스</title>
+    <meta
+      name="description"
+      content="토브하우스 무료 견적 상담 신청. 투명한 인테리어 리모델링."
+    />
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://tovdesign.net/estimate" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="토브하우스" />
+    <meta property="og:title" content="견적 상담 신청 | 토브하우스" />
+    <meta
+      property="og:description"
+      content="토브하우스 무료 견적 상담 신청. 투명한 인테리어 리모델링."
+    />
+    <meta property="og:url" content="https://tovdesign.net/estimate" />
+    <meta
+      property="og:image"
+      content="https://tovdesign.net/assets/site/og-image.png"
+    />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="견적 상담 신청 | 토브하우스" />
+    <meta
+      name="twitter:description"
+      content="토브하우스 무료 견적 상담 신청. 투명한 인테리어 리모델링."
+    />
+    <meta
+      name="twitter:image"
+      content="https://tovdesign.net/assets/site/og-image.png"
+    />
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-DSJZMGDTB3"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-DSJZMGDTB3");
+    </script>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        /* Primary - Fresh Green */
+        --green-50: #f2f9f4;
+        --green-100: #e0f2e5;
+        --green-200: #b8e4c4;
+        --green-300: #7ed09a;
+        --green-400: #4cb872;
+        --green-500: #3a9d5e;
+        --green-600: #2f8550;
+
+        /* White & Light */
+        --off-white: #fafcfa;
+        --light-green: #f5faf6;
+
+        /* Gold Accent */
+        --gold: #c9a96e;
+        --gold-light: #e8d9b8;
+        --gold-hover: #b8964f;
+        --gold-bg: #faf6ee;
+
+        /* Warm Neutral */
+        --warm-50: #faf9f7;
+        --warm-100: #f3f0ea;
+        --warm-200: #e6e0d5;
+        --warm-300: #c4baa8;
+        --warm-400: #9e9484;
+        --warm-500: #6b6358;
+        --warm-700: #3c3733;
+
+        /* Dark Green (Footer only) */
+        --dark-green: #1a3324;
+
+        --font-kr:
+          "Pretendard Variable", "Pretendard", -apple-system, sans-serif;
+        --font-en:
+          "Pretendard Variable", "Pretendard", -apple-system, sans-serif;
+        --radius: 16px;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: var(--font-kr);
+        color: var(--warm-500);
+        background: var(--warm-50);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        display: flex;
+        flex-direction: column;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      button {
+        font-family: inherit;
+        cursor: pointer;
+        border: none;
+      }
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      /* ===== NAV (minimal) ===== */
+      .nav {
+        position: relative;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--warm-200);
+        height: 64px;
+      }
+      .nav-inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 100%;
+      }
+      .nav-logo {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .nav-logo-mark {
+        width: 32px;
+        height: 32px;
+        background: var(--green-500);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-family: var(--font-en);
+        font-weight: 700;
+        font-size: 14px;
+      }
+      .nav-logo-text {
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: var(--warm-700);
+        letter-spacing: 2px;
+      }
+      .nav-logo-text span {
+        color: var(--green-500);
+      }
+      .nav-back {
+        font-size: 0.85rem;
+        color: var(--warm-500);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: color 0.3s;
+      }
+      .nav-back:hover {
+        color: var(--green-500);
+      }
+      .nav-toggle {
+        display: none;
+        background: none;
+        border: none;
+        padding: 0.5rem;
+        cursor: pointer;
+      }
+      .nav-toggle span {
+        display: block;
+        width: 20px;
+        height: 2px;
+        background: var(--warm-700);
+        margin: 4px 0;
+        transition: 0.3s;
+      }
+      .nav-toggle.open span:nth-child(1) {
+        transform: rotate(45deg) translate(4px, 4px);
+      }
+      .nav-toggle.open span:nth-child(2) {
+        opacity: 0;
+      }
+      .nav-toggle.open span:nth-child(3) {
+        transform: rotate(-45deg) translate(4px, -4px);
+      }
+      .nav-mobile-menu {
+        z-index: 999;
+        display: none;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--warm-200);
+        padding: 1rem 1.5rem;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      }
+      .nav-mobile-menu.show {
+        display: block;
+      }
+      .nav-mobile-menu a {
+        display: block;
+        padding: 0.75rem 0;
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: var(--warm-500);
+        border-bottom: 1px solid var(--warm-100);
+        transition: color 0.2s;
+      }
+      .nav-mobile-menu a:last-child {
+        border-bottom: none;
+      }
+      .nav-mobile-menu a:hover,
+      .nav-mobile-menu a.active {
+        color: var(--green-500);
+      }
+
+      /* ===== WIZARD CONTAINER ===== */
+      .wizard-page {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 3rem 2rem;
+      }
+      .wizard-wrapper {
+        width: 100%;
+        max-width: 720px;
+      }
+      /* PC: 우측 실시간 요약 패널 */
+      .wizard-layout {
+        display: flex;
+        gap: 2rem;
+        max-width: 1080px;
+        width: 100%;
+        align-items: flex-start;
+      }
+      .wizard-layout .wizard-wrapper {
+        flex: 1;
+        max-width: 720px;
+      }
+      .wizard-sidebar {
+        display: none;
+        flex-shrink: 0;
+        width: 280px;
+        position: sticky;
+        top: 88px;
+        background: #fff;
+        border: 1px solid var(--warm-200);
+        border-radius: 16px;
+        overflow: hidden;
+        font-size: 13px;
+      }
+      .ws-header {
+        background: var(--green-500);
+        color: #fff;
+        padding: 14px 18px;
+      }
+      .ws-header-label {
+        font-size: 10px;
+        letter-spacing: 2px;
+        opacity: 0.6;
+        font-weight: 600;
+      }
+      .ws-header-title {
+        font-size: 14px;
+        font-weight: 700;
+        margin-top: 2px;
+      }
+      .ws-body {
+        padding: 16px 18px;
+      }
+      .ws-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 6px 0;
+        border-bottom: 1px solid var(--warm-100);
+      }
+      .ws-row:last-child {
+        border-bottom: none;
+      }
+      .ws-label {
+        color: var(--warm-300);
+        font-size: 11px;
+        font-weight: 600;
+      }
+      .ws-value {
+        font-weight: 600;
+        color: var(--warm-700);
+        text-align: right;
+        max-width: 160px;
+        word-break: break-all;
+      }
+      .ws-value.empty {
+        color: var(--warm-200);
+        font-weight: 400;
+      }
+      .ws-footer {
+        padding: 12px 18px;
+        background: var(--warm-50);
+        border-top: 1px solid var(--warm-200);
+        text-align: center;
+      }
+      .ws-footer a {
+        color: var(--green-500);
+        font-size: 12px;
+        font-weight: 600;
+        text-decoration: none;
+      }
+      @media (min-width: 1024px) {
+        .wizard-sidebar {
+          display: block;
+        }
+      }
+
+      /* Progress Bar */
+      .wizard-progress {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+        margin-bottom: 2.5rem;
+      }
+      .progress-step {
+        display: flex;
+        align-items: center;
+        gap: 0;
+      }
+      .progress-dot {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: white;
+        border: 2px solid var(--warm-200);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--warm-300);
+        transition: all 0.4s;
+        position: relative;
+      }
+      .progress-dot.active {
+        background: var(--green-500);
+        border-color: var(--green-500);
+        color: white;
+        box-shadow: 0 0 0 4px rgba(76, 184, 114, 0.15);
+      }
+      .progress-dot.done {
+        background: var(--green-500);
+        border-color: var(--green-500);
+        color: white;
+      }
+      .progress-label {
+        position: absolute;
+        top: 44px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.7rem;
+        color: var(--warm-300);
+        white-space: nowrap;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        transition: color 0.3s;
+      }
+      .progress-dot.active .progress-label,
+      .progress-dot.done .progress-label {
+        color: var(--green-500);
+        font-weight: 600;
+      }
+      .progress-line {
+        width: 80px;
+        height: 2px;
+        background: var(--warm-200);
+        transition: background 0.4s;
+      }
+      .progress-line.active {
+        background: var(--green-500);
+      }
+
+      /* Steps */
+      .wizard-step {
+        display: none;
+        background: white;
+        border: 1px solid var(--warm-200);
+        border-radius: 24px;
+        padding: 2.5rem;
+        animation: fadeSlideIn 0.4s ease;
+      }
+      .wizard-step.active {
+        display: block;
+      }
+      @keyframes fadeSlideIn {
+        from {
+          opacity: 0;
+          transform: translateY(16px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .step-header {
+        margin-bottom: 2rem;
+      }
+      .step-number {
+        font-family: var(--font-en);
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--green-400);
+        letter-spacing: 3px;
+        margin-bottom: 0.5rem;
+      }
+      .step-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--warm-700);
+        letter-spacing: 0.5px;
+      }
+      .step-subtitle {
+        font-size: 0.85rem;
+        color: var(--warm-300);
+        margin-top: 0.25rem;
+      }
+
+      /* Form Fields */
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+      .form-label {
+        display: block;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--warm-700);
+        margin-bottom: 0.5rem;
+      }
+      .form-label .required {
+        color: var(--green-500);
+        margin-left: 2px;
+      }
+      .form-input {
+        width: 100%;
+        padding: 0.875rem 1rem;
+        background: white;
+        border: 1px solid var(--warm-200);
+        border-radius: 12px;
+        font-size: 0.9rem;
+        font-family: var(--font-kr);
+        color: var(--warm-700);
+        outline: none;
+        transition: all 0.3s;
+      }
+      .form-input:focus {
+        border-color: var(--green-400);
+        box-shadow: 0 0 0 3px rgba(76, 184, 114, 0.08);
+        background: white;
+      }
+      .form-input::placeholder {
+        color: #8a8070;
+      }
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+      .form-row-3 {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 1rem;
+      }
+      select.form-input {
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23c9bfad' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        padding-right: 2.5rem;
+      }
+
+      /* Space Type Cards */
+      .space-type-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+      }
+      .space-type-card {
+        padding: 1.25rem 1rem;
+        background: var(--warm-50);
+        border: 2px solid var(--warm-200);
+        border-radius: 14px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      .space-type-card:hover {
+        border-color: var(--green-200);
+        background: white;
+      }
+      .space-type-card.selected {
+        border-color: var(--green-500);
+        background: var(--green-50);
+        box-shadow: 0 0 0 3px rgba(76, 184, 114, 0.1);
+      }
+      .space-type-icon {
+        font-size: 1.75rem;
+        margin-bottom: 0.5rem;
+      }
+      .space-type-name {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--warm-700);
+      }
+      .space-type-card.selected .space-type-name {
+        color: var(--green-500);
+      }
+
+      /* Budget Slider */
+      .budget-slider-wrap {
+        margin-bottom: 1.5rem;
+      }
+      .budget-display {
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+      .budget-value {
+        font-family: var(--font-en);
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--green-500);
+      }
+      .budget-unit {
+        font-size: 0.9rem;
+        color: var(--warm-500);
+        margin-left: 0.25rem;
+      }
+      .budget-slider {
+        width: 100%;
+        height: 6px;
+        -webkit-appearance: none;
+        appearance: none;
+        background: var(--warm-200);
+        border-radius: 3px;
+        outline: none;
+      }
+      .budget-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 24px;
+        height: 24px;
+        background: var(--green-500);
+        border-radius: 50%;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(76, 184, 114, 0.3);
+      }
+      .budget-slider::-moz-range-thumb {
+        width: 24px;
+        height: 24px;
+        background: var(--green-500);
+        border-radius: 50%;
+        cursor: pointer;
+        border: none;
+      }
+      .budget-labels {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.7rem;
+        color: var(--warm-300);
+        margin-top: 0.5rem;
+      }
+      .budget-direct {
+        text-align: center;
+        margin-top: 0.75rem;
+      }
+      .budget-direct-link {
+        font-size: 0.8rem;
+        color: var(--green-400);
+        cursor: pointer;
+        transition: color 0.3s;
+      }
+      .budget-direct-link:hover {
+        color: var(--green-500);
+      }
+      .budget-direct-input {
+        display: none;
+        margin-top: 0.5rem;
+      }
+      .budget-direct-input.show {
+        display: block;
+      }
+
+      /* Date picker */
+      .date-options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+      }
+      .date-chip {
+        padding: 0.5rem 1rem;
+        border-radius: 100px;
+        background: var(--warm-50);
+        border: 1px solid var(--warm-200);
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: var(--warm-500);
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      .date-chip:hover {
+        border-color: var(--green-200);
+      }
+      .date-chip.selected {
+        background: var(--green-500);
+        color: white;
+        border-color: var(--green-500);
+      }
+
+      /* Textarea */
+      textarea.form-input {
+        min-height: 100px;
+        resize: vertical;
+      }
+
+      /* Navigation Buttons */
+      .wizard-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--warm-100);
+      }
+      .btn-prev {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        border-radius: 12px;
+        background: transparent;
+        color: var(--warm-500);
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: all 0.3s;
+      }
+      .btn-prev:hover {
+        background: var(--warm-50);
+        color: var(--warm-700);
+      }
+      .btn-next {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 2rem;
+        border-radius: 12px;
+        background: var(--green-500);
+        color: white;
+        font-size: 0.9rem;
+        font-weight: 600;
+        transition: all 0.3s;
+      }
+      .btn-next:hover {
+        background: var(--green-600);
+        transform: translateY(-1px);
+      }
+      .btn-submit {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.875rem 2.5rem;
+        border-radius: 12px;
+        background: var(--gold);
+        color: white;
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        transition: all 0.3s;
+      }
+      .btn-submit:hover {
+        background: var(--gold-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(196, 162, 101, 0.3);
+      }
+
+      /* Review Step */
+      .review-section {
+        margin-bottom: 1.5rem;
+      }
+      .review-label {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--warm-300);
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 0.5rem;
+      }
+      .review-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+      }
+      .review-item {
+        padding: 1rem;
+        background: var(--warm-50);
+        border-radius: 12px;
+        border: 1px solid var(--warm-200);
+      }
+      .review-item-label {
+        font-size: 0.75rem;
+        color: var(--warm-300);
+        margin-bottom: 0.25rem;
+      }
+      .review-item-value {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--warm-700);
+      }
+      .review-full {
+        grid-column: 1 / -1;
+      }
+
+      /* Trust indicators */
+      .trust-bar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        padding: 1rem;
+        margin-top: 1.5rem;
+        background: var(--green-50);
+        border-radius: 12px;
+        font-size: 0.8rem;
+        color: var(--green-500);
+      }
+      .trust-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .trust-item svg {
+        flex-shrink: 0;
+      }
+
+      /* Success */
+      .wizard-success {
+        display: none;
+        text-align: center;
+        background: white;
+        border: 1px solid var(--warm-200);
+        border-radius: 24px;
+        padding: 3rem 2rem;
+      }
+      .wizard-success.show {
+        display: block;
+        animation: fadeSlideIn 0.5s ease;
+      }
+      .success-icon {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        background: var(--green-50);
+        margin: 0 auto 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .success-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--warm-700);
+        margin-bottom: 0.5rem;
+      }
+      .success-desc {
+        font-size: 0.95rem;
+        color: var(--warm-500);
+        line-height: 1.7;
+        margin-bottom: 2rem;
+      }
+      .success-phone {
+        font-family: var(--font-en);
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--green-500);
+        letter-spacing: 1px;
+      }
+      .success-home {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 1.5rem;
+        padding: 0.75rem 2rem;
+        border-radius: 12px;
+        background: var(--warm-50);
+        color: var(--warm-500);
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: all 0.3s;
+      }
+      .success-home:hover {
+        background: var(--warm-100);
+        color: var(--warm-700);
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .nav-back {
+          display: none;
+        }
+        .nav-toggle {
+          display: block;
+        }
+        .wizard-page {
+          padding: 1rem;
+          align-items: flex-start;
+          padding-top: 1.5rem;
+        }
+        .wizard-step {
+          padding: 1.5rem;
+        }
+        .form-row,
+        .form-row-3 {
+          grid-template-columns: 1fr;
+        }
+        .space-type-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .review-grid {
+          grid-template-columns: 1fr;
+        }
+        .trust-bar {
+          flex-direction: column;
+          gap: 0.75rem;
+        }
+        .step-title {
+          font-size: 1.25rem;
+        }
+      }
+      @media (max-width: 480px) {
+        .space-type-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .progress-line {
+          width: 40px;
+        }
+      }
+
+      /* ========== CONTAINER ========== */
+      .container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      /* ========== FOOTER ========== */
+      .footer {
+        background: var(--warm-700);
+        color: rgba(255, 255, 255, 0.6);
+        padding: 3rem 0;
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr 1fr;
+        gap: 3rem;
+      }
+      .footer-brand {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .footer-logo {
+        font-family: var(--font-en);
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: white;
+        letter-spacing: 3px;
+      }
+      .footer-desc {
+        font-size: 0.85rem;
+        line-height: 1.7;
+        color: rgba(255, 255, 255, 0.55);
+      }
+      .footer-heading {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.7);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+      }
+      .footer-info {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        font-size: 0.85rem;
+      }
+      .footer-info a {
+        transition: color 0.3s;
+      }
+      .footer-info a:hover {
+        color: white;
+      }
+      .footer-phone {
+        font-family: var(--font-en);
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: white;
+        letter-spacing: 1px;
+      }
+      .footer-bottom {
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+        font-size: 0.75rem;
+        opacity: 0.7;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      .footer-links a {
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+      .footer-links a:hover {
+        color: rgba(255, 255, 255, 1);
+      }
+
+      /* ========== MOBILE BOTTOM NAV ========== */
+      .mobile-nav {
+        display: none;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 9990;
+        background: rgba(255, 255, 255, 0.97);
+        backdrop-filter: blur(12px);
+        border-top: 1px solid var(--warm-200);
+        padding: 0.375rem 0 calc(0.375rem + env(safe-area-inset-bottom, 0px));
+        transform: none !important;
+      }
+      .mobile-nav-inner {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        max-width: 480px;
+        margin: 0 auto;
+      }
+      .mobile-nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+        padding: 0.375rem 0.5rem;
+        color: var(--warm-500);
+        font-size: 0.625rem;
+        font-weight: 500;
+        letter-spacing: 0.3px;
+        transition: color 0.2s;
+        text-decoration: none;
+      }
+      .mobile-nav-item.active {
+        color: var(--green-500);
+      }
+      .mobile-nav-item svg {
+        width: 22px;
+        height: 22px;
+      }
+
+      @media (max-width: 768px) {
+        .footer-grid {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+        .footer-bottom {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+        .mobile-nav {
+          display: block;
+        }
+        body {
+          padding-bottom: 64px;
+        }
+      }
+    </style>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  </head>
+  <body>
+    <!-- Nav -->
+    <nav class="nav">
+      <div class="nav-inner">
+        <a href="index.html" class="nav-logo">
+          <img
+            src="assets/tov-logo.png"
+            alt="토브하우스 로고"
+            style="height: 36px; width: auto"
+          />
+        </a>
+        <a href="index.html" class="nav-back">
+          <svg
+            width="16"
+            height="16"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          >
+            <path d="M10 4L6 8l4 4" />
+          </svg>
+          메인으로
+        </a>
+        <button
+          class="nav-toggle"
+          aria-label="메뉴"
+          onclick="
+            this.classList.toggle('open');
+            document.getElementById('mobileMenu').classList.toggle('show');
+          "
+        >
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <div class="nav-mobile-menu" id="mobileMenu">
+        <a href="index.html">홈</a>
+        <a href="about.html">회사소개</a>
+        <a href="portfolio.html">시공사례</a>
+        <a href="estimate.html" class="active">견적문의</a>
+        <a href="news.html">소식</a>
+      </div>
+    </nav>
+
+    <!-- Wizard -->
+    <main class="wizard-page">
+      <div class="wizard-layout">
+        <div class="wizard-wrapper">
+          <!-- Progress -->
+          <div class="wizard-progress">
+            <div class="progress-step">
+              <div class="progress-dot active" id="prog-1">
+                1<span class="progress-label">고객정보</span>
+              </div>
+            </div>
+            <div class="progress-line" id="line-1"></div>
+            <div class="progress-step">
+              <div class="progress-dot" id="prog-2">
+                2<span class="progress-label">시공정보</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 1: 고객 정보 -->
+          <div class="wizard-step active" id="step-1">
+            <div class="step-header">
+              <div class="step-number">STEP 01</div>
+              <div class="step-title">고객 정보를 알려주세요</div>
+              <div class="step-subtitle">
+                빠른 상담을 위해 기본 정보를 입력해 주세요
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label"
+                >이름 <span class="required">*</span></label
+              >
+              <input
+                type="text"
+                class="form-input"
+                id="f-name"
+                placeholder="홍길동"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label"
+                >연락처 <span class="required">*</span></label
+              >
+              <input
+                type="tel"
+                class="form-input"
+                id="f-phone"
+                placeholder="010-0000-0000"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label"
+                >이메일 <span class="required">*</span></label
+              >
+              <input
+                type="email"
+                class="form-input"
+                id="f-email"
+                placeholder="example@email.com"
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label"
+                >지역 <span class="required">*</span></label
+              >
+              <div style="display: flex; gap: 8px">
+                <input
+                  type="text"
+                  class="form-input"
+                  id="f-region1"
+                  placeholder="주소 검색을 클릭하세요"
+                  readonly
+                  style="flex: 1; cursor: pointer; background: var(--warm-50)"
+                  onclick="openDaumPostcode()"
+                />
+                <button
+                  type="button"
+                  class="btn-next"
+                  style="
+                    flex-shrink: 0;
+                    padding: 0 16px;
+                    font-size: 13px;
+                    white-space: nowrap;
+                  "
+                  onclick="openDaumPostcode()"
+                >
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    style="margin-right: 4px"
+                  >
+                    <circle cx="11" cy="11" r="8" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                  </svg>
+                  주소 검색
+                </button>
+              </div>
+              <input
+                type="text"
+                class="form-input"
+                id="f-region2"
+                placeholder="상세주소 (동/호수)"
+                style="margin-top: 8px"
+              />
+              <input type="hidden" id="f-region3" />
+            </div>
+
+            <div class="wizard-nav">
+              <div></div>
+              <button class="btn-next" onclick="goStep(2)">
+                다음
+                <svg
+                  width="16"
+                  height="16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                >
+                  <path d="M6 4l4 4-4 4" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- STEP 2: 시공 정보 -->
+          <div class="wizard-step" id="step-2">
+            <div class="step-header">
+              <div class="step-number">STEP 02</div>
+              <div class="step-title">시공 정보를 알려주세요</div>
+              <div class="step-subtitle">맞춤 견적을 위한 상세 정보입니다</div>
+            </div>
+
+            <!-- Space Type -->
+            <div class="form-group">
+              <label class="form-label"
+                >공간 유형 <span class="required">*</span></label
+              >
+              <div class="space-type-grid">
+                <div
+                  class="space-type-card"
+                  data-value="아파트"
+                  onclick="selectType(this)"
+                >
+                  <div class="space-type-icon">
+                    <svg
+                      width="32"
+                      height="32"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                    >
+                      <rect x="3" y="3" width="18" height="18" rx="2" />
+                      <path d="M3 9h18M3 15h18M9 3v18" />
+                    </svg>
+                  </div>
+                  <div class="space-type-name">아파트</div>
+                </div>
+                <div
+                  class="space-type-card"
+                  data-value="빌라/연립"
+                  onclick="selectType(this)"
+                >
+                  <div class="space-type-icon">
+                    <svg
+                      width="32"
+                      height="32"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                    >
+                      <path d="M3 21V8l9-5 9 5v13" />
+                      <path d="M9 21V12h6v9" />
+                    </svg>
+                  </div>
+                  <div class="space-type-name">빌라/연립</div>
+                </div>
+                <div
+                  class="space-type-card"
+                  data-value="단독주택"
+                  onclick="selectType(this)"
+                >
+                  <div class="space-type-icon">
+                    <svg
+                      width="32"
+                      height="32"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                    >
+                      <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                      <polyline points="9 22 9 12 15 12 15 22" />
+                    </svg>
+                  </div>
+                  <div class="space-type-name">단독주택</div>
+                </div>
+                <div
+                  class="space-type-card"
+                  data-value="오피스텔"
+                  onclick="selectType(this)"
+                >
+                  <div class="space-type-icon">
+                    <svg
+                      width="32"
+                      height="32"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                    >
+                      <rect x="4" y="2" width="16" height="20" rx="2" />
+                      <path d="M9 22V18h6v4" />
+                      <line x1="8" y1="6" x2="8" y2="6.01" />
+                      <line x1="12" y1="6" x2="12" y2="6.01" />
+                      <line x1="16" y1="6" x2="16" y2="6.01" />
+                      <line x1="8" y1="10" x2="8" y2="10.01" />
+                      <line x1="12" y1="10" x2="12" y2="10.01" />
+                      <line x1="16" y1="10" x2="16" y2="10.01" />
+                      <line x1="8" y1="14" x2="8" y2="14.01" />
+                      <line x1="12" y1="14" x2="12" y2="14.01" />
+                      <line x1="16" y1="14" x2="16" y2="14.01" />
+                    </svg>
+                  </div>
+                  <div class="space-type-name">오피스텔</div>
+                </div>
+                <div
+                  class="space-type-card"
+                  data-value="상업공간"
+                  onclick="selectType(this)"
+                >
+                  <div class="space-type-icon">
+                    <svg
+                      width="32"
+                      height="32"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                    >
+                      <path
+                        d="M6 2L3 7v13a2 2 0 002 2h14a2 2 0 002-2V7l-3-5z"
+                      />
+                      <line x1="3" y1="7" x2="21" y2="7" />
+                      <path d="M16 11a4 4 0 01-8 0" />
+                    </svg>
+                  </div>
+                  <div class="space-type-name">상업공간</div>
+                </div>
+                <div
+                  class="space-type-card"
+                  data-value="기타"
+                  onclick="selectType(this)"
+                >
+                  <div class="space-type-icon">
+                    <svg
+                      width="32"
+                      height="32"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                    >
+                      <circle cx="12" cy="12" r="3" />
+                      <path
+                        d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"
+                      />
+                    </svg>
+                  </div>
+                  <div class="space-type-name">기타</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Budget -->
+            <div class="form-group">
+              <label class="form-label">희망 예산</label>
+              <div class="budget-slider-wrap">
+                <div class="budget-display">
+                  <span class="budget-value" id="budget-val">1,500</span>
+                  <span class="budget-unit">만원</span>
+                </div>
+                <input
+                  type="range"
+                  class="budget-slider"
+                  id="budget-slider"
+                  min="500"
+                  max="10000"
+                  step="100"
+                  value="1500"
+                  oninput="updateBudget(this.value)"
+                />
+                <div class="budget-labels">
+                  <span>500만</span>
+                  <span>3,000만</span>
+                  <span>5,000만</span>
+                  <span>1억+</span>
+                </div>
+                <div class="budget-direct">
+                  <span
+                    class="budget-direct-link"
+                    onclick="toggleDirectBudget()"
+                    >직접 입력하기</span
+                  >
+                  <div class="budget-direct-input" id="budget-direct">
+                    <input
+                      type="text"
+                      class="form-input"
+                      id="f-budget-direct"
+                      placeholder="예: 1000~1500 / 부분시공 원해요"
+                      style="margin-top: 0.5rem"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Schedule -->
+            <div class="form-group">
+              <label class="form-label"
+                >시공 예정일 <span class="required">*</span></label
+              >
+              <div class="date-options">
+                <div
+                  class="date-chip"
+                  onclick="selectDate(this)"
+                  data-value="가능한 빨리"
+                >
+                  가능한 빨리
+                </div>
+                <div
+                  class="date-chip"
+                  onclick="selectDate(this)"
+                  data-value="1개월 이내"
+                >
+                  1개월 이내
+                </div>
+                <div
+                  class="date-chip"
+                  onclick="selectDate(this)"
+                  data-value="2~3개월 내"
+                >
+                  2~3개월 내
+                </div>
+                <div
+                  class="date-chip"
+                  onclick="selectDate(this)"
+                  data-value="3개월 이후"
+                >
+                  3개월 이후
+                </div>
+                <div
+                  class="date-chip"
+                  onclick="selectDate(this)"
+                  data-value="미정"
+                >
+                  미정 (상담 후 결정)
+                </div>
+              </div>
+              <input
+                type="text"
+                class="form-input"
+                id="f-date-detail"
+                placeholder="구체적인 날짜가 있다면 입력해 주세요 (예: 6월 말)"
+              />
+            </div>
+
+            <!-- Additional notes -->
+            <div class="form-group">
+              <label class="form-label">추가 요청사항</label>
+              <textarea
+                class="form-input"
+                id="f-note"
+                placeholder="부분 시공, 특별 요구사항 등 자유롭게 적어주세요"
+              ></textarea>
+            </div>
+
+            <div class="wizard-nav">
+              <button class="btn-prev" onclick="goStep(1)">
+                <svg
+                  width="16"
+                  height="16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                >
+                  <path d="M10 4L6 8l4 4" />
+                </svg>
+                이전
+              </button>
+              <button
+                class="btn-submit"
+                onclick="submitForm()"
+                id="btn-submit-main"
+              >
+                <svg
+                  width="18"
+                  height="18"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                >
+                  <path d="M5 9l2 2 4-4" />
+                  <circle cx="9" cy="9" r="7" />
+                </svg>
+                견적 상담 신청
+              </button>
+            </div>
+            <!-- 개인정보 수집 동의 -->
+            <div
+              style="
+                margin-top: 12px;
+                padding: 12px 14px;
+                background: var(--warm-50);
+                border: 1px solid var(--warm-200);
+                border-radius: 10px;
+              "
+            >
+              <label
+                style="
+                  display: flex;
+                  align-items: flex-start;
+                  gap: 8px;
+                  cursor: pointer;
+                  font-size: 12px;
+                  color: var(--warm-500);
+                  line-height: 1.5;
+                "
+              >
+                <input
+                  type="checkbox"
+                  id="f-privacy"
+                  style="
+                    margin-top: 2px;
+                    flex-shrink: 0;
+                    width: 16px;
+                    height: 16px;
+                    accent-color: var(--green-500);
+                  "
+                />
+                <span
+                  style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    width: 100%;
+                  "
+                  ><strong style="color: var(--warm-700)"
+                    >[필수] 개인정보 수집 및 이용 동의</strong
+                  ><a
+                    href="privacy.html"
+                    target="_blank"
+                    style="
+                      color: var(--green-500);
+                      text-decoration: underline;
+                      font-size: 11px;
+                      white-space: nowrap;
+                      margin-left: 8px;
+                    "
+                    >전문보기</a
+                  ></span
+                >
+              </label>
+            </div>
+          </div>
+
+          <!-- Success -->
+          <div class="wizard-success" id="wizard-success">
+            <div class="success-icon">
+              <svg
+                width="36"
+                height="36"
+                fill="none"
+                stroke="var(--green-500)"
+                stroke-width="2"
+                stroke-linecap="round"
+              >
+                <path d="M12 18l4 4 8-8" />
+                <circle cx="18" cy="18" r="15" />
+              </svg>
+            </div>
+            <div class="success-title">견적 상담 신청 완료!</div>
+            <p class="success-desc">
+              빠른 시간 내에 연락드리겠습니다.<br />
+              급하신 경우 아래 번호로 직접 연락 주세요.
+            </p>
+            <a href="tel:03196822224" class="success-phone">031-968-2224</a>
+            <br />
+            <a href="index.html" class="success-home">
+              <svg
+                width="16"
+                height="16"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              >
+                <path d="M3 9l5-5 5 5" />
+                <path d="M4 8v6a1 1 0 001 1h6a1 1 0 001-1V8" />
+              </svg>
+              메인으로 돌아가기
+            </a>
+          </div>
+        </div>
+        <!-- PC 우측 실시간 요약 -->
+        <aside class="wizard-sidebar" id="wizard-sidebar">
+          <div class="ws-header">
+            <div class="ws-header-label">SUMMARY</div>
+            <div class="ws-header-title">입력 내용 요약</div>
+          </div>
+          <div class="ws-body">
+            <div class="ws-row">
+              <span class="ws-label">이름</span
+              ><span class="ws-value empty" id="ws-name">-</span>
+            </div>
+            <div class="ws-row">
+              <span class="ws-label">연락처</span
+              ><span class="ws-value empty" id="ws-phone">-</span>
+            </div>
+            <div class="ws-row">
+              <span class="ws-label">이메일</span
+              ><span class="ws-value empty" id="ws-email">-</span>
+            </div>
+            <div class="ws-row">
+              <span class="ws-label">지역</span
+              ><span class="ws-value empty" id="ws-region">-</span>
+            </div>
+            <div class="ws-row">
+              <span class="ws-label">공간 유형</span
+              ><span class="ws-value empty" id="ws-type">-</span>
+            </div>
+            <div class="ws-row">
+              <span class="ws-label">희망 예산</span
+              ><span class="ws-value empty" id="ws-budget">-</span>
+            </div>
+            <div class="ws-row">
+              <span class="ws-label">시공 예정</span
+              ><span class="ws-value empty" id="ws-date">-</span>
+            </div>
+            <div class="ws-row">
+              <span class="ws-label">요청사항</span
+              ><span class="ws-value empty" id="ws-note">-</span>
+            </div>
+          </div>
+          <div class="ws-footer">
+            <a href="tel:031-968-2224">전화 상담 031-968-2224</a>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <!-- Hidden: auto-detected platform -->
+    <input type="hidden" id="f-platform" value="" />
+
+    <script>
+      // ===== STATE =====
+      let currentStep = 1;
+      let selectedType = "";
+      let selectedDate = "";
+
+      // ===== AUTO DETECT PLATFORM =====
+      (function detectPlatform() {
+        const params = new URLSearchParams(window.location.search);
+        const utm = params.get("utm_source") || params.get("ref") || "";
+        const ref = document.referrer || "";
+        let platform = "웹사이트 직접 방문";
+
+        if (utm) {
+          const map = {
+            ig: "Instagram",
+            instagram: "Instagram",
+            fb: "Facebook",
+            facebook: "Facebook",
+            naver: "네이버",
+            kakao: "카카오",
+            google: "Google",
+            blog: "블로그",
+            youtube: "YouTube",
+          };
+          platform = map[utm.toLowerCase()] || utm;
+        } else if (ref.includes("instagram")) platform = "Instagram";
+        else if (ref.includes("facebook") || ref.includes("fb."))
+          platform = "Facebook";
+        else if (ref.includes("naver")) platform = "네이버";
+        else if (ref.includes("google")) platform = "Google";
+        else if (ref.includes("kakao")) platform = "카카오";
+
+        document.getElementById("f-platform").value = platform;
+      })();
+
+      // ===== PHONE AUTO HYPHEN =====
+      document
+        .getElementById("f-phone")
+        .addEventListener("input", function (e) {
+          let v = e.target.value.replace(/\D/g, "");
+          if (v.length > 11) v = v.slice(0, 11);
+          if (v.length > 7)
+            v = v.slice(0, 3) + "-" + v.slice(3, 7) + "-" + v.slice(7);
+          else if (v.length > 3) v = v.slice(0, 3) + "-" + v.slice(3);
+          e.target.value = v;
+        });
+
+      // ===== STEP NAVIGATION =====
+      function goStep(n) {
+        // Validate current step
+        if (n > currentStep) {
+          if (!validateStep(currentStep)) return;
+        }
+
+        // Hide current
+        document
+          .getElementById("step-" + currentStep)
+          .classList.remove("active");
+        // Show next
+        document.getElementById("step-" + n).classList.add("active");
+
+        // Update progress
+        for (let i = 1; i <= 2; i++) {
+          const dot = document.getElementById("prog-" + i);
+          const line = document.getElementById("line-" + (i - 1));
+          if (dot) {
+            dot.classList.remove("active", "done");
+            if (i < n) dot.classList.add("done");
+            else if (i === n) dot.classList.add("active");
+          }
+          if (line) line.classList.toggle("active", i <= n);
+        }
+
+        currentStep = n;
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      // ===== PC SIDEBAR LIVE UPDATE =====
+      function updateSidebar() {
+        const set = (id, val) => {
+          const el = document.getElementById(id);
+          if (!el) return;
+          const v = (val || "").trim();
+          el.textContent = v || "-";
+          el.classList.toggle("empty", !v);
+        };
+        set("ws-name", document.getElementById("f-name")?.value);
+        set("ws-phone", document.getElementById("f-phone")?.value);
+        set("ws-email", document.getElementById("f-email")?.value);
+        set(
+          "ws-region",
+          [
+            document.getElementById("f-region1")?.value,
+            document.getElementById("f-region2")?.value,
+          ]
+            .filter(Boolean)
+            .join(" "),
+        );
+        set("ws-type", selectedType);
+        set(
+          "ws-budget",
+          document.getElementById("f-budget-direct")?.value.trim() ||
+            document.getElementById("budget-val")?.textContent + "만원",
+        );
+        set(
+          "ws-date",
+          document.getElementById("f-date-detail")?.value.trim() ||
+            selectedDate,
+        );
+        set("ws-note", document.getElementById("f-note")?.value);
+      }
+      // Listen to all inputs
+      document.addEventListener("input", (e) => {
+        if (e.target.closest(".wizard-wrapper")) updateSidebar();
+      });
+      document.addEventListener("change", (e) => {
+        if (e.target.closest(".wizard-wrapper")) updateSidebar();
+      });
+      // Also update on step change and type/date selection
+      const origSelectType = selectType;
+      selectType = function (card) {
+        origSelectType(card);
+        updateSidebar();
+      };
+      const origSelectDate = selectDate;
+      selectDate = function (chip) {
+        origSelectDate(chip);
+        updateSidebar();
+      };
+
+      function validateStep(step) {
+        if (step === 1) {
+          const name = document.getElementById("f-name").value.trim();
+          const phone = document.getElementById("f-phone").value.trim();
+          const r1 = document.getElementById("f-region1").value;
+          if (!name) {
+            shake("f-name");
+            return false;
+          }
+          if (!phone || phone.replace(/\D/g, "").length < 10) {
+            shake("f-phone");
+            return false;
+          }
+          const email = document.getElementById("f-email").value.trim();
+          if (!email || !email.includes("@")) {
+            shake("f-email");
+            return false;
+          }
+          if (!r1) {
+            shake("f-region1");
+            return false;
+          }
+          return true;
+        }
+        if (step === 2) {
+          if (!selectedType) {
+            document.querySelector(".space-type-grid").style.animation =
+              "headShake 0.5s";
+            setTimeout(
+              () =>
+                (document.querySelector(".space-type-grid").style.animation =
+                  ""),
+              500,
+            );
+            return false;
+          }
+          if (
+            !selectedDate &&
+            !document.getElementById("f-date-detail").value.trim()
+          ) {
+            shake("f-date-detail");
+            return false;
+          }
+          return true;
+        }
+        return true;
+      }
+
+      function shake(id) {
+        const el = document.getElementById(id);
+        el.style.borderColor = "#e53e3e";
+        el.style.animation = "headShake 0.4s";
+        el.focus();
+        setTimeout(() => {
+          el.style.borderColor = "";
+          el.style.animation = "";
+        }, 600);
+      }
+
+      // ===== SPACE TYPE SELECT =====
+      function selectType(card) {
+        document
+          .querySelectorAll(".space-type-card")
+          .forEach((c) => c.classList.remove("selected"));
+        card.classList.add("selected");
+        selectedType = card.dataset.value;
+      }
+
+      // ===== BUDGET =====
+      function updateBudget(val) {
+        const num = parseInt(val);
+        document.getElementById("budget-val").textContent =
+          num.toLocaleString();
+      }
+      function toggleDirectBudget() {
+        document.getElementById("budget-direct").classList.toggle("show");
+      }
+
+      // ===== DATE SELECT =====
+      function selectDate(chip) {
+        document
+          .querySelectorAll(".date-chip")
+          .forEach((c) => c.classList.remove("selected"));
+        chip.classList.add("selected");
+        selectedDate = chip.dataset.value;
+      }
+
+      // ===== REVIEW =====
+      function populateReview() {
+        document.getElementById("r-name").textContent =
+          document.getElementById("f-name").value;
+        document.getElementById("r-phone").textContent =
+          document.getElementById("f-phone").value;
+        document.getElementById("r-email").textContent =
+          document.getElementById("f-email").value || "-";
+
+        const r1 = document.getElementById("f-region1").value;
+        const r2 = document.getElementById("f-region2").value;
+        const r3 = document.getElementById("f-region3").value;
+        document.getElementById("r-region").textContent = [r1, r2]
+          .filter(Boolean)
+          .join(" ");
+
+        document.getElementById("r-type").textContent = selectedType || "-";
+
+        const directBudget = document
+          .getElementById("f-budget-direct")
+          .value.trim();
+        if (directBudget) {
+          document.getElementById("r-budget").textContent = directBudget;
+        } else {
+          document.getElementById("r-budget").textContent =
+            document.getElementById("budget-val").textContent + "만원";
+        }
+
+        const dateDetail = document
+          .getElementById("f-date-detail")
+          .value.trim();
+        document.getElementById("r-date").textContent =
+          dateDetail || selectedDate || "-";
+
+        // platform removed from review
+
+        const note = document.getElementById("f-note").value.trim();
+        if (note) {
+          document.getElementById("r-note-wrap").style.display = "";
+          document.getElementById("r-note").textContent = note;
+        } else {
+          document.getElementById("r-note-wrap").style.display = "none";
+        }
+      }
+
+      // ===== DAUM POSTCODE =====
+      function openDaumPostcode() {
+        new daum.Postcode({
+          oncomplete: function (data) {
+            // data.sido + data.sigungu + data.bname
+            const addr = data.roadAddress || data.jibunAddress;
+            document.getElementById("f-region1").value = addr;
+            document.getElementById("f-region3").value =
+              data.sido + " " + data.sigungu;
+            document.getElementById("f-region2").focus();
+          },
+        }).open();
+      }
+
+      // ===== SUBMIT =====
+      async function submitForm() {
+        // 개인정보 동의 확인
+        const privacyCheck = document.getElementById("f-privacy");
+        if (privacyCheck && !privacyCheck.checked) {
+          alert("개인정보 수집 및 이용에 동의해 주세요.");
+          privacyCheck.focus();
+          return;
+        }
+
+        // Step 2 validation
+        if (!validateStep(2)) return;
+
+        const payload = {
+          name: document.getElementById("f-name").value,
+          phone: document.getElementById("f-phone").value,
+          email: document.getElementById("f-email")?.value || "",
+          address: [
+            document.getElementById("f-region1").value,
+            document.getElementById("f-region2").value,
+          ]
+            .filter(Boolean)
+            .join(" "),
+          interiorType: selectedType,
+          budget:
+            document.getElementById("f-budget-direct").value.trim() ||
+            document.getElementById("budget-val").textContent + "만원",
+          schedule:
+            document.getElementById("f-date-detail").value.trim() ||
+            selectedDate,
+          message: document.getElementById("f-note").value,
+          area: "",
+          privacyConsent: true,
+        };
+
+        // 즉시 성공 화면 표시
+        document.getElementById("step-2").classList.remove("active");
+        document.getElementById("wizard-success").classList.add("show");
+        document.querySelector(".wizard-progress").style.display = "none";
+        if (document.getElementById("wizard-sidebar"))
+          document.getElementById("wizard-sidebar").style.display = "none";
+
+        // 백그라운드 API 발송
+        fetch("https://admin.tovdesign.net/api/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }).catch((err) => console.error("Submit error:", err));
+      }
+    </script>
+
+    <style>
+      @keyframes headShake {
+        0% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(-6px);
+        }
+        50% {
+          transform: translateX(6px);
+        }
+        75% {
+          transform: translateX(-3px);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+    </style>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <div class="footer-logo">TOV HOUSE</div>
+            <p class="footer-desc">
+              보기 좋은 공간이 편한 공간이 됩니다.<br />
+              토브하우스는 투명한 견적과 꼼꼼한 시공으로<br />
+              더 나은 공간을 만듭니다.
+            </p>
+          </div>
+          <div>
+            <div class="footer-heading">Contact</div>
+            <ul class="footer-info">
+              <li>
+                <a href="tel:03196822224" class="footer-phone">Tel. 031-968-2224</a>
+              </li>
+              <li style="margin-top: 0.5rem">(주)코이노니아 | 대표이사: 이재호</li>
+              <li>사업자등록번호: 198-87-01821</li>
+            </ul>
+          </div>
+          <div>
+            <div class="footer-heading">Location</div>
+            <ul class="footer-info">
+              <li>경기도 고양시 덕양구<br />삼원안길 12, 1층</li>
+              <li style="margin-top: 0.75rem">평일 09:00 - 18:00</li>
+              <li>토요일 10:00 - 15:00</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>&copy; 2026 토브하우스 All rights reserved.</span>
+          <span>청정종합건영(주) 건설업 면허 보유 기업</span>
+          <span class="footer-links"
+            ><a href="privacy.html">개인정보처리방침</a> ·
+            <a href="terms.html">이용약관</a></span
+          >
+          <span
+            >Designed by
+            <a
+              href="https://polarad.co.kr"
+              target="_blank"
+              rel="noopener"
+              style="
+                color: rgba(255, 255, 255, 0.5);
+                transition: color 0.3s;
+                text-decoration: underline;
+              "
+              onmouseover="this.style.color = 'rgba(255,255,255,0.8)'"
+              onmouseout="this.style.color = 'rgba(255,255,255,0.5)'"
+              >POLARAD</a
+            ></span
+          >
+        </div>
+      </div>
+    </footer>
+
+    <!-- ===== MOBILE BOTTOM NAV ===== -->
+    <nav class="mobile-nav">
+      <div class="mobile-nav-inner">
+        <a href="index.html" class="mobile-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+            <polyline points="9 22 9 12 15 12 15 22" />
+          </svg>
+          <span>홈</span>
+        </a>
+        <a href="portfolio.html" class="mobile-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="3" y="3" width="7" height="7" />
+            <rect x="14" y="3" width="7" height="7" />
+            <rect x="14" y="14" width="7" height="7" />
+            <rect x="3" y="14" width="7" height="7" />
+          </svg>
+          <span>시공사례</span>
+        </a>
+        <a href="estimate.html" class="mobile-nav-item active">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+            <polyline points="14 2 14 8 20 8" />
+            <line x1="16" y1="13" x2="8" y2="13" />
+            <line x1="16" y1="17" x2="8" y2="17" />
+          </svg>
+          <span>견적문의</span>
+        </a>
+        <a href="about.html" class="mobile-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="16" x2="12" y2="12" />
+            <line x1="12" y1="8" x2="12.01" y2="8" />
+          </svg>
+          <span>회사소개</span>
+        </a>
+        <a href="tel:03196822224" class="mobile-nav-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"
+            />
+          </svg>
+          <span>전화</span>
+        </a>
+      </div>
+    </nav>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ContactPage",
+        "name": "견적 상담 신청",
+        "url": "https://tovdesign.net/estimate",
+        "description": "토브하우스 무료 견적 상담 신청. 투명한 인테리어 리모델링.",
+        "mainEntity": {
+          "@type": "Organization",
+          "name": "토브하우스",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "031-968-2224",
+            "contactType": "customer service",
+            "availableLanguage": "Korean"
+          }
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "홈",
+            "item": "https://tovdesign.net/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "견적상담",
+            "item": "https://tovdesign.net/estimate"
+          }
+        ]
+      }
+    </script>
+  </body>
+</html>

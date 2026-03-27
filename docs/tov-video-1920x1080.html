@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920, height=1080">
+<title>토브하우스 - 시공원가 공개 인테리어</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&display=swap');
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --green: #649a46;
+    --green-light: #7db85e;
+    --green-dark: #4a7a32;
+    --dark: #1a1a1a;
+    --dark2: #2a2a2a;
+    --white: #ffffff;
+    --gray: #f5f5f5;
+    --gray2: #e0e0e0;
+    --gold: #c4a35a;
+  }
+
+  body {
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    background: var(--dark);
+    font-family: 'Pretendard', 'Montserrat', sans-serif;
+    position: relative;
+  }
+
+  /* ===== SCENE CONTAINER ===== */
+  .scene {
+    position: absolute;
+    top: 0; left: 0;
+    width: 1920px;
+    height: 1080px;
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .scene.active {
+    opacity: 1;
+  }
+
+  /* ===== SCENE 1: LOGO REVEAL ===== */
+  .scene-1 {
+    background: var(--white);
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .scene-1 .logo-house {
+    width: 200px;
+    height: 200px;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .scene-1.active .logo-house {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .scene-1 .brand-name {
+    font-size: 72px;
+    font-weight: 800;
+    color: var(--green);
+    letter-spacing: -2px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .scene-1.active .brand-name {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .scene-1 .tagline {
+    font-size: 28px;
+    color: var(--dark2);
+    font-weight: 400;
+    letter-spacing: 8px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1s;
+  }
+
+  .scene-1.active .tagline {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .scene-1 .accent-line {
+    width: 0;
+    height: 3px;
+    background: var(--green);
+    transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s;
+  }
+
+  .scene-1.active .accent-line {
+    width: 120px;
+  }
+
+  /* ===== SCENE 2: PROBLEM ===== */
+  .scene-2 {
+    background: var(--dark);
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .scene-2 .problem-text {
+    font-size: 68px;
+    font-weight: 700;
+    color: var(--white);
+    text-align: center;
+    line-height: 1.5;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .scene-2.active .problem-text {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .scene-2 .sub-text {
+    font-size: 36px;
+    color: #888;
+    text-align: center;
+    line-height: 1.6;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s;
+  }
+
+  .scene-2.active .sub-text {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .scene-2 .question-mark {
+    position: absolute;
+    font-size: 400px;
+    font-weight: 900;
+    color: rgba(100, 154, 70, 0.06);
+    right: 80px;
+    bottom: -40px;
+    font-family: 'Montserrat', sans-serif;
+    opacity: 0;
+    transition: opacity 1.5s ease 0.3s;
+  }
+
+  .scene-2.active .question-mark {
+    opacity: 1;
+  }
+
+  /* ===== SCENE 3: SOLUTION ===== */
+  .scene-3 {
+    background: var(--white);
+    flex-direction: column;
+    gap: 50px;
+  }
+
+  .scene-3 .green-badge {
+    background: var(--green);
+    color: var(--white);
+    font-size: 22px;
+    font-weight: 600;
+    padding: 12px 40px;
+    border-radius: 50px;
+    letter-spacing: 3px;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .scene-3.active .green-badge {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .scene-3 .main-msg {
+    font-size: 76px;
+    font-weight: 800;
+    color: var(--dark);
+    text-align: center;
+    line-height: 1.4;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+  }
+
+  .scene-3.active .main-msg {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .scene-3 .main-msg .highlight {
+    color: var(--green);
+    position: relative;
+  }
+
+  .scene-3 .main-msg .highlight::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 0;
+    width: 0;
+    height: 6px;
+    background: rgba(100, 154, 70, 0.25);
+    border-radius: 3px;
+    transition: width 0.8s ease 1s;
+  }
+
+  .scene-3.active .main-msg .highlight::after {
+    width: 100%;
+  }
+
+  .scene-3 .formula {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.7s;
+  }
+
+  .scene-3.active .formula {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .scene-3 .formula-item {
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--dark2);
+    background: var(--gray);
+    padding: 20px 40px;
+    border-radius: 16px;
+  }
+
+  .scene-3 .formula-sign {
+    font-size: 40px;
+    font-weight: 300;
+    color: var(--green);
+  }
+
+  .scene-3 .formula-equal {
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--green);
+  }
+
+  /* ===== SCENE 4: PRICING ===== */
+  .scene-4 {
+    background: linear-gradient(135deg, #f8faf6 0%, #edf5e8 100%);
+    flex-direction: row;
+    padding: 0 120px;
+    gap: 80px;
+  }
+
+  .scene-4 .left-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+  }
+
+  .scene-4 .pricing-label {
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--green);
+    letter-spacing: 3px;
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .scene-4.active .pricing-label {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .scene-4 .pricing-title {
+    font-size: 64px;
+    font-weight: 800;
+    color: var(--dark);
+    line-height: 1.3;
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+  }
+
+  .scene-4.active .pricing-title {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .scene-4 .pricing-title .num {
+    color: var(--green);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 80px;
+  }
+
+  .scene-4 .pricing-desc {
+    font-size: 28px;
+    color: #666;
+    line-height: 1.6;
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s;
+  }
+
+  .scene-4.active .pricing-desc {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .scene-4 .right-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 24px;
+  }
+
+  .scene-4 .price-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 36px 48px;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    opacity: 0;
+    transform: translateX(40px);
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .scene-4 .price-card:nth-child(1) { transition-delay: 0.3s; }
+  .scene-4 .price-card:nth-child(2) { transition-delay: 0.5s; }
+  .scene-4 .price-card:nth-child(3) { transition-delay: 0.7s; }
+
+  .scene-4.active .price-card {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .scene-4 .price-card.total {
+    background: var(--green);
+    color: var(--white);
+  }
+
+  .scene-4 .pc-label {
+    font-size: 24px;
+    font-weight: 500;
+    color: #666;
+  }
+
+  .scene-4 .price-card.total .pc-label {
+    color: rgba(255,255,255,0.8);
+  }
+
+  .scene-4 .pc-value {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--dark);
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .scene-4 .price-card.total .pc-value {
+    color: var(--white);
+    font-size: 42px;
+  }
+
+  /* ===== SCENE 5: BENEFITS ===== */
+  .scene-5 {
+    background: var(--dark);
+    flex-direction: column;
+    gap: 60px;
+  }
+
+  .scene-5 .benefits-title {
+    font-size: 52px;
+    font-weight: 700;
+    color: var(--white);
+    text-align: center;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .scene-5.active .benefits-title {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .scene-5 .benefits-grid {
+    display: flex;
+    gap: 40px;
+    padding: 0 120px;
+  }
+
+  .scene-5 .benefit-item {
+    flex: 1;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(100, 154, 70, 0.3);
+    border-radius: 24px;
+    padding: 50px 40px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .scene-5 .benefit-item:nth-child(1) { transition-delay: 0.2s; }
+  .scene-5 .benefit-item:nth-child(2) { transition-delay: 0.4s; }
+  .scene-5 .benefit-item:nth-child(3) { transition-delay: 0.6s; }
+  .scene-5 .benefit-item:nth-child(4) { transition-delay: 0.8s; }
+
+  .scene-5.active .benefit-item {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .scene-5 .benefit-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 28px;
+    background: rgba(100, 154, 70, 0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .scene-5 .benefit-icon svg {
+    width: 40px;
+    height: 40px;
+    fill: none;
+    stroke: var(--green-light);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .scene-5 .benefit-name {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 14px;
+  }
+
+  .scene-5 .benefit-desc {
+    font-size: 18px;
+    color: #999;
+    line-height: 1.6;
+  }
+
+  /* ===== SCENE 6: CTA ===== */
+  .scene-6 {
+    background: var(--green);
+    flex-direction: column;
+    gap: 40px;
+    position: relative;
+  }
+
+  .scene-6::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.1) 0%, transparent 60%);
+  }
+
+  .scene-6 .cta-logo {
+    width: 140px;
+    height: 140px;
+    opacity: 0;
+    transform: scale(0.7);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .scene-6.active .cta-logo {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .scene-6 .cta-msg {
+    font-size: 60px;
+    font-weight: 800;
+    color: var(--white);
+    text-align: center;
+    line-height: 1.4;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+    z-index: 1;
+  }
+
+  .scene-6.active .cta-msg {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .scene-6 .cta-sub {
+    font-size: 30px;
+    color: rgba(255,255,255,0.85);
+    font-weight: 400;
+    letter-spacing: 2px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s;
+    z-index: 1;
+  }
+
+  .scene-6.active .cta-sub {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .scene-6 .cta-btn {
+    background: var(--white);
+    color: var(--green);
+    font-size: 28px;
+    font-weight: 700;
+    padding: 22px 70px;
+    border-radius: 60px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.9s;
+    z-index: 1;
+  }
+
+  .scene-6.active .cta-btn {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ===== TRANSITIONS ===== */
+  .scene {
+    transition: opacity 0.6s ease;
+  }
+
+  /* ===== PROGRESS BAR ===== */
+  .progress-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    background: var(--green);
+    z-index: 999;
+    transition: width 0.3s linear;
+  }
+
+  /* ===== CONTROLS ===== */
+  .controls {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1000;
+    display: flex;
+    gap: 12px;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+
+  .controls:hover {
+    opacity: 1;
+  }
+
+  .controls button {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.3);
+    background: rgba(0,0,0,0.5);
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+  }
+
+  .controls button:hover {
+    background: rgba(100, 154, 70, 0.7);
+    border-color: var(--green);
+  }
+
+  /* ===== SCENE DOTS ===== */
+  .scene-dots {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 1000;
+  }
+
+  .scene-dots .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+
+  .scene-dots .dot.active {
+    background: var(--green);
+    width: 30px;
+    border-radius: 5px;
+  }
+
+  /* Geometric decorations */
+  .geo-circle {
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid rgba(100, 154, 70, 0.15);
+  }
+
+  .geo-line {
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(100,154,70,0.2), transparent);
+  }
+</style>
+</head>
+<body>
+
+<!-- SCENE 1: Logo Reveal -->
+<div class="scene scene-1" id="scene-1">
+  <div class="accent-line"></div>
+  <svg class="logo-house" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <!-- House shape -->
+    <path d="M100 20 L180 85 L180 180 L20 180 L20 85 Z" fill="none" stroke="#649a46" stroke-width="6" stroke-linejoin="round"/>
+    <!-- Roof detail -->
+    <path d="M100 20 L10 90" fill="none" stroke="#649a46" stroke-width="6" stroke-linecap="round"/>
+    <path d="M100 20 L190 90" fill="none" stroke="#649a46" stroke-width="6" stroke-linecap="round"/>
+    <!-- Chimney -->
+    <rect x="140" y="35" width="20" height="35" rx="3" fill="none" stroke="#649a46" stroke-width="4"/>
+    <!-- Window grid -->
+    <rect x="55" y="95" width="35" height="35" rx="4" fill="none" stroke="#649a46" stroke-width="3.5"/>
+    <line x1="72.5" y1="95" x2="72.5" y2="130" stroke="#649a46" stroke-width="2.5"/>
+    <line x1="55" y1="112.5" x2="90" y2="112.5" stroke="#649a46" stroke-width="2.5"/>
+    <rect x="110" y="95" width="35" height="35" rx="4" fill="none" stroke="#649a46" stroke-width="3.5"/>
+    <line x1="127.5" y1="95" x2="127.5" y2="130" stroke="#649a46" stroke-width="2.5"/>
+    <line x1="110" y1="112.5" x2="145" y2="112.5" stroke="#649a46" stroke-width="2.5"/>
+    <!-- Door -->
+    <rect x="80" y="140" width="40" height="40" rx="4" fill="none" stroke="#649a46" stroke-width="3.5"/>
+    <circle cx="112" cy="162" r="3" fill="#649a46"/>
+    <!-- t o v letters -->
+    <text x="58" y="78" font-family="Montserrat, sans-serif" font-weight="700" font-size="28" fill="#649a46">t</text>
+    <text x="90" y="78" font-family="Montserrat, sans-serif" font-weight="700" font-size="28" fill="#649a46">o</text>
+    <text x="120" y="78" font-family="Montserrat, sans-serif" font-weight="700" font-size="28" fill="#649a46">v</text>
+  </svg>
+  <div class="brand-name">토브하우스</div>
+  <div class="tagline">INTERIOR REMODELING</div>
+</div>
+
+<!-- SCENE 2: Problem -->
+<div class="scene scene-2" id="scene-2">
+  <div class="question-mark">?</div>
+  <div class="geo-circle" style="width:300px;height:300px;top:-50px;left:-80px;"></div>
+  <div class="geo-circle" style="width:150px;height:150px;bottom:100px;left:200px;"></div>
+  <div class="problem-text">
+    인테리어 견적,<br>
+    <span style="color: var(--green-light);">믿을 수 있을까?</span>
+  </div>
+  <div class="sub-text">
+    비교견적 받을 곳은 많은데<br>
+    믿고 선뜻 맡기기 어려운 현실
+  </div>
+</div>
+
+<!-- SCENE 3: Solution -->
+<div class="scene scene-3" id="scene-3">
+  <div class="green-badge">TOV HOUSE</div>
+  <div class="main-msg">
+    리모델링 비용<br>
+    <span class="highlight">자재비 + 인건비</span><br>
+    모두 공개합니다.
+  </div>
+  <div class="formula">
+    <div class="formula-item">자재비</div>
+    <div class="formula-sign">+</div>
+    <div class="formula-item">인건비</div>
+    <div class="formula-equal">=</div>
+    <div class="formula-item" style="background:var(--green);color:white;">시공원가 100% 공개</div>
+  </div>
+</div>
+
+<!-- SCENE 4: Pricing -->
+<div class="scene scene-4" id="scene-4">
+  <div class="left-side">
+    <div class="pricing-label">TRANSPARENT PRICING</div>
+    <div class="pricing-title">
+      실행원가 공개 후<br>
+      <span class="num">20%</span> 수수료
+    </div>
+    <div class="pricing-desc">
+      토브는 리모델링비용에<br>
+      20% 수수료만 청구합니다.
+    </div>
+  </div>
+  <div class="right-side">
+    <div class="price-card">
+      <span class="pc-label">리모델링 비용</span>
+      <span class="pc-value">2,000만원</span>
+    </div>
+    <div class="price-card">
+      <span class="pc-label">진행 수수료 (20%)</span>
+      <span class="pc-value">400만원</span>
+    </div>
+    <div class="price-card total">
+      <span class="pc-label">총 비용</span>
+      <span class="pc-value">2,400만원</span>
+    </div>
+  </div>
+</div>
+
+<!-- SCENE 5: Benefits -->
+<div class="scene scene-5" id="scene-5">
+  <div class="benefits-title">토브하우스만의 차별화</div>
+  <div class="benefits-grid">
+    <div class="benefit-item">
+      <div class="benefit-icon">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      </div>
+      <div class="benefit-name">시공북 제공</div>
+      <div class="benefit-desc">영수증, 입금증<br>항목별 지출증빙 자료</div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="benefit-name">양도세 증빙</div>
+      <div class="benefit-desc">주택 매매 시<br>필요경비 증빙 가능</div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+      </div>
+      <div class="benefit-name">고객 맞춤형</div>
+      <div class="benefit-desc">모든 자재<br>고객이 직접 선택</div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <div class="benefit-name">시간 절약</div>
+      <div class="benefit-desc">견적비교 소요시간<br>최소화</div>
+    </div>
+  </div>
+</div>
+
+<!-- SCENE 6: CTA -->
+<div class="scene scene-6" id="scene-6">
+  <svg class="cta-logo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <path d="M100 20 L180 85 L180 180 L20 180 L20 85 Z" fill="none" stroke="white" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M100 20 L10 90" fill="none" stroke="white" stroke-width="5" stroke-linecap="round"/>
+    <path d="M100 20 L190 90" fill="none" stroke="white" stroke-width="5" stroke-linecap="round"/>
+    <text x="58" y="78" font-family="Montserrat, sans-serif" font-weight="700" font-size="28" fill="white">t</text>
+    <text x="90" y="78" font-family="Montserrat, sans-serif" font-weight="700" font-size="28" fill="white">o</text>
+    <text x="120" y="78" font-family="Montserrat, sans-serif" font-weight="700" font-size="28" fill="white">v</text>
+    <rect x="55" y="95" width="35" height="35" rx="4" fill="none" stroke="white" stroke-width="3"/>
+    <rect x="110" y="95" width="35" height="35" rx="4" fill="none" stroke="white" stroke-width="3"/>
+    <rect x="80" y="140" width="40" height="40" rx="4" fill="none" stroke="white" stroke-width="3"/>
+  </svg>
+  <div class="cta-msg">
+    시공원가를 공개하는<br>
+    투명한 인테리어
+  </div>
+  <div class="cta-sub">tovdesign.imweb.me</div>
+  <div class="cta-btn">무료 견적 상담</div>
+</div>
+
+<!-- Progress Bar -->
+<div class="progress-bar" id="progress-bar"></div>
+
+<!-- Scene Dots -->
+<div class="scene-dots" id="scene-dots">
+  <div class="dot active" data-scene="0"></div>
+  <div class="dot" data-scene="1"></div>
+  <div class="dot" data-scene="2"></div>
+  <div class="dot" data-scene="3"></div>
+  <div class="dot" data-scene="4"></div>
+  <div class="dot" data-scene="5"></div>
+</div>
+
+<!-- Controls -->
+<div class="controls" id="controls">
+  <button id="btn-prev" title="이전">&#9664;</button>
+  <button id="btn-play" title="재생/일시정지">&#9654;</button>
+  <button id="btn-next" title="다음">&#9654;</button>
+  <button id="btn-restart" title="처음부터">&#8634;</button>
+</div>
+
+<script>
+  const scenes = document.querySelectorAll('.scene');
+  const dots = document.querySelectorAll('.dot');
+  const progressBar = document.getElementById('progress-bar');
+  const totalScenes = scenes.length;
+  let currentScene = 0;
+  let isPlaying = true;
+  let timer = null;
+
+  // Scene durations in milliseconds
+  const durations = [3500, 4000, 4500, 5000, 5000, 4000];
+
+  function showScene(index) {
+    scenes.forEach(s => s.classList.remove('active'));
+    dots.forEach(d => d.classList.remove('active'));
+
+    currentScene = index;
+    scenes[currentScene].classList.add('active');
+    dots[currentScene].classList.add('active');
+
+    // Update progress bar
+    const progress = ((currentScene + 1) / totalScenes) * 100;
+    progressBar.style.width = progress + '%';
+  }
+
+  function nextScene() {
+    if (currentScene < totalScenes - 1) {
+      showScene(currentScene + 1);
+      if (isPlaying) scheduleNext();
+    } else {
+      // End - stop playing
+      isPlaying = false;
+      updatePlayBtn();
+    }
+  }
+
+  function prevScene() {
+    if (currentScene > 0) {
+      showScene(currentScene - 1);
+    }
+  }
+
+  function scheduleNext() {
+    clearTimeout(timer);
+    timer = setTimeout(nextScene, durations[currentScene]);
+  }
+
+  function startAutoPlay() {
+    isPlaying = true;
+    updatePlayBtn();
+    scheduleNext();
+  }
+
+  function stopAutoPlay() {
+    isPlaying = false;
+    clearTimeout(timer);
+    updatePlayBtn();
+  }
+
+  function updatePlayBtn() {
+    document.getElementById('btn-play').innerHTML = isPlaying ? '&#10074;&#10074;' : '&#9654;';
+  }
+
+  // Event listeners
+  document.getElementById('btn-play').addEventListener('click', () => {
+    if (isPlaying) {
+      stopAutoPlay();
+    } else {
+      if (currentScene >= totalScenes - 1) {
+        showScene(0);
+      }
+      startAutoPlay();
+    }
+  });
+
+  document.getElementById('btn-next').addEventListener('click', () => {
+    stopAutoPlay();
+    nextScene();
+  });
+
+  document.getElementById('btn-prev').addEventListener('click', () => {
+    stopAutoPlay();
+    prevScene();
+  });
+
+  document.getElementById('btn-restart').addEventListener('click', () => {
+    showScene(0);
+    startAutoPlay();
+  });
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      stopAutoPlay();
+      showScene(parseInt(dot.dataset.scene));
+    });
+  });
+
+  // Keyboard controls
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') {
+      e.preventDefault();
+      if (isPlaying) stopAutoPlay();
+      nextScene();
+    } else if (e.key === 'ArrowLeft') {
+      if (isPlaying) stopAutoPlay();
+      prevScene();
+    } else if (e.key === 'r' || e.key === 'R') {
+      showScene(0);
+      startAutoPlay();
+    }
+  });
+
+  // Start
+  showScene(0);
+  scheduleNext();
+</script>
+
+</body>
+</html>

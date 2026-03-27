@@ -1,0 +1,1286 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>와이어프레임 | 포트폴리오 게시판 (프론트 + 관리자)</title>
+    <link
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --navy: #1d55a0;
+        --navy-light: #5a8bc7;
+        --navy-dark: #12396b;
+        --navy-700: #12396b;
+        --gold: #c4a265;
+        --gold-hover: #b3914f;
+        --bg: #faf8f5;
+        --card: #fff;
+        --text: #3c3733;
+        --text-light: #8a8070;
+        --border: #e4ddd0;
+        --red: #dc3545;
+        --green: #28a745;
+        --warm-100: #f1ede4;
+        --warm-200: #e4ddd0;
+        --warm-50: #faf8f5;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Pretendard Variable", sans-serif;
+        background: #e8e5de;
+        color: var(--text);
+      }
+
+      /* View Switcher */
+      .view-switch {
+        display: flex;
+        justify-content: center;
+        gap: 0;
+        padding: 1.5rem 2rem 0;
+      }
+      .view-btn {
+        padding: 0.8rem 2rem;
+        font-size: 0.9rem;
+        font-weight: 700;
+        border: 2px solid var(--border);
+        background: #fff;
+        cursor: pointer;
+        color: var(--text-light);
+        font-family: inherit;
+      }
+      .view-btn:first-child {
+        border-radius: 12px 0 0 12px;
+      }
+      .view-btn:last-child {
+        border-radius: 0 12px 12px 0;
+      }
+      .view-btn.active {
+        background: var(--navy);
+        color: #fff;
+        border-color: var(--navy);
+      }
+      .view-panel {
+        display: none;
+      }
+      .view-panel.active {
+        display: block;
+      }
+
+      /* ====== FRONTEND ====== */
+      .front {
+        max-width: 960px;
+        margin: 2rem auto;
+        background: var(--bg);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+      }
+      .front-hero {
+        height: 300px;
+        background: linear-gradient(135deg, #7a8fa3, #4a6580);
+        position: relative;
+        display: flex;
+        align-items: flex-end;
+      }
+      .front-hero-overlay {
+        padding: 2rem;
+        color: #fff;
+        width: 100%;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.5));
+      }
+      .front-hero h1 {
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin-bottom: 0.4rem;
+      }
+      .front-hero-tags {
+        display: flex;
+        gap: 0.4rem;
+      }
+      .front-hero-tags span {
+        font-size: 0.7rem;
+        padding: 0.15rem 0.5rem;
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      .front-body {
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        gap: 2rem;
+        padding: 2rem;
+      }
+
+      /* -- 좌측 Project Info 사이드바 (현재 디자인 그대로) -- */
+      .project-info {
+        background: var(--card);
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+        position: sticky;
+        top: 80px;
+        align-self: start;
+      }
+      .info-header {
+        background: linear-gradient(135deg, var(--navy-dark), var(--navy));
+        padding: 1.25rem 1.5rem;
+        color: #fff;
+      }
+      .info-header-label {
+        font-size: 0.65rem;
+        letter-spacing: 2px;
+        opacity: 0.7;
+        margin-bottom: 0.3rem;
+        text-transform: uppercase;
+      }
+      .info-header-title {
+        font-size: 1rem;
+        font-weight: 700;
+      }
+      .info-grid {
+        padding: 1rem 1.25rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+      }
+      .info-item {
+        padding: 0.6rem 0.75rem;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+      }
+      .info-item.full {
+        grid-column: 1/-1;
+      }
+      .info-label {
+        font-size: 0.65rem;
+        color: var(--text-light);
+        margin-bottom: 0.2rem;
+      }
+      .info-value {
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+      .info-value.highlight {
+        color: var(--navy);
+        font-weight: 700;
+      }
+      .info-value.big {
+        font-size: 1.15rem;
+      }
+      .info-divider {
+        height: 1px;
+        background: var(--border);
+        margin: 0 1.25rem;
+      }
+      .info-cta {
+        padding: 1.25rem;
+      }
+      .info-cta-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        background: var(--gold);
+        color: #fff;
+        border-radius: 10px;
+        padding: 0.75rem;
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-decoration: none;
+        transition: all 0.3s;
+      }
+      .info-cta-btn:hover {
+        background: var(--gold-hover);
+        transform: translateY(-1px);
+      }
+      .info-cta-btn svg {
+        flex-shrink: 0;
+      }
+      .info-phone {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4rem;
+        margin-top: 0.75rem;
+        font-size: 0.85rem;
+        color: var(--text-light);
+        text-decoration: none;
+      }
+      .info-phone svg {
+        flex-shrink: 0;
+      }
+
+      /* -- 우측 본문 -- */
+      .front-content {
+        min-width: 0;
+      }
+      .front-desc {
+        margin-bottom: 2rem;
+      }
+      .front-desc h3 {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--navy);
+        margin-bottom: 0.6rem;
+      }
+      .front-desc p {
+        font-size: 0.88rem;
+        line-height: 1.8;
+      }
+
+      /* 공간 블록 */
+      .space-block {
+        margin-bottom: 2rem;
+      }
+      .space-title {
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--navy);
+        letter-spacing: 0.5px;
+        margin-bottom: 0.6rem;
+        padding-bottom: 0.4rem;
+        border-bottom: 2px solid var(--navy);
+        display: inline-block;
+      }
+      .img-grid {
+        display: grid;
+        gap: 0.4rem;
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .img-grid.c1 {
+        grid-template-columns: 1fr;
+      }
+      .img-grid.c2 {
+        grid-template-columns: 1fr 1fr;
+      }
+      .img-grid.c3 {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+      .img-grid.c4 {
+        grid-template-columns: 1fr 1fr;
+      }
+      .img-item {
+        aspect-ratio: 16/10;
+        background: #d0ccc4;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.7rem;
+        color: #999;
+      }
+      .img-item:hover {
+        opacity: 0.9;
+      }
+      .img-item.vert::after {
+        content: "세로 원본 보기";
+        position: absolute;
+        bottom: 4px;
+        right: 4px;
+        font-size: 0.55rem;
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        padding: 0.1rem 0.35rem;
+        border-radius: 3px;
+      }
+
+      /* 실행내역서 (프론트) */
+      .receipt-section {
+        margin-bottom: 2rem;
+        background: var(--card);
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        overflow: hidden;
+      }
+      .receipt-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 1.25rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .receipt-header h3 {
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: var(--navy);
+      }
+      .receipt-view-btn {
+        font-size: 0.75rem;
+        color: var(--navy);
+        text-decoration: underline;
+        cursor: pointer;
+        background: none;
+        border: none;
+        font-family: inherit;
+      }
+      .receipt-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.8rem;
+      }
+      .receipt-table th {
+        background: var(--warm-100);
+        padding: 0.5rem 0.75rem;
+        text-align: left;
+        font-weight: 600;
+        font-size: 0.7rem;
+        color: var(--text-light);
+      }
+      .receipt-table td {
+        padding: 0.5rem 0.75rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .receipt-table td:last-child {
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+        font-weight: 600;
+      }
+      .receipt-total {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.75rem 1.25rem;
+        background: var(--navy);
+        color: #fff;
+        font-weight: 700;
+        font-size: 0.9rem;
+      }
+
+      /* ====== ADMIN ====== */
+      .admin {
+        max-width: 900px;
+        margin: 2rem auto;
+        background: var(--bg);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+      }
+      .admin-hdr {
+        background: linear-gradient(135deg, var(--navy-dark), var(--navy));
+        color: #fff;
+        padding: 1.5rem 2rem;
+      }
+      .admin-hdr h2 {
+        font-size: 1.1rem;
+        font-weight: 700;
+      }
+      .admin-body {
+        padding: 2rem;
+      }
+
+      .admin-meta {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+      .f {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+      .f label {
+        font-size: 0.72rem;
+        font-weight: 600;
+        color: var(--text-light);
+      }
+      .f input,
+      .f select,
+      .f textarea {
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.5rem 0.7rem;
+        font-size: 0.83rem;
+        font-family: inherit;
+        background: #fff;
+      }
+      .f input:focus,
+      .f textarea:focus {
+        outline: none;
+        border-color: var(--navy);
+      }
+
+      .section-title {
+        font-size: 0.9rem;
+        font-weight: 700;
+        margin-bottom: 0.6rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .hint {
+        font-size: 0.68rem;
+        color: var(--text-light);
+        font-weight: 400;
+      }
+
+      /* 프로젝트 소개 에디터 */
+      .desc-editor {
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 2rem;
+      }
+      .desc-editor textarea {
+        width: 100%;
+        border: none;
+        padding: 1rem;
+        font-size: 0.83rem;
+        line-height: 1.8;
+        font-family: inherit;
+        min-height: 90px;
+        resize: vertical;
+      }
+
+      /* 이미지 레이아웃 규칙 */
+      .rules {
+        background: var(--warm-100);
+        border-radius: 8px;
+        padding: 0.7rem 1rem;
+        font-size: 0.72rem;
+        color: var(--text-light);
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+      }
+      .rules strong {
+        color: var(--text);
+      }
+
+      /* 공간 블록 카드 */
+      .blk {
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1.1rem;
+        margin-bottom: 0.75rem;
+      }
+      .blk:hover {
+        border-color: var(--navy-light);
+      }
+      .blk-head {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        margin-bottom: 0.75rem;
+      }
+      .blk-drag {
+        cursor: grab;
+        color: var(--text-light);
+        font-size: 1rem;
+        user-select: none;
+      }
+      .blk-input {
+        flex: 1;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 0.35rem 0.6rem;
+        font-size: 0.83rem;
+        font-weight: 600;
+        font-family: inherit;
+      }
+      .blk-del {
+        background: none;
+        border: none;
+        color: var(--red);
+        font-size: 0.78rem;
+        cursor: pointer;
+        padding: 0.25rem 0.5rem;
+        border-radius: 6px;
+      }
+      .blk-del:hover {
+        background: rgba(220, 53, 69, 0.08);
+      }
+      .blk-imgs {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+        gap: 0.4rem;
+      }
+      .blk-img {
+        aspect-ratio: 16/10;
+        background: #e9e5de;
+        border-radius: 6px;
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.65rem;
+        color: #999;
+      }
+      .blk-img .num {
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        font-size: 0.55rem;
+        padding: 0.05rem 0.25rem;
+        border-radius: 3px;
+      }
+      .blk-img .x {
+        position: absolute;
+        top: 3px;
+        right: 3px;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: rgba(220, 53, 69, 0.8);
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        font-size: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .blk-add {
+        border: 2px dashed var(--border);
+        cursor: pointer;
+        color: var(--text-light);
+        font-size: 0.7rem;
+        flex-direction: column;
+        gap: 0.15rem;
+      }
+      .blk-add:hover {
+        border-color: var(--navy);
+        color: var(--navy);
+      }
+      .blk-add .plus {
+        font-size: 1.1rem;
+      }
+      .add-block {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4rem;
+        padding: 0.85rem;
+        border: 2px dashed var(--border);
+        border-radius: 12px;
+        cursor: pointer;
+        color: var(--text-light);
+        font-size: 0.83rem;
+        font-weight: 600;
+        background: transparent;
+        width: 100%;
+        margin-bottom: 2rem;
+        font-family: inherit;
+      }
+      .add-block:hover {
+        border-color: var(--navy);
+        color: var(--navy);
+      }
+
+      /* 실행내역서 업로드 (관리자) */
+      .receipt-upload {
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1.25rem;
+        margin-bottom: 2rem;
+      }
+      .receipt-upload h3 {
+        font-size: 0.9rem;
+        font-weight: 700;
+        margin-bottom: 0.3rem;
+      }
+      .receipt-upload .sub {
+        font-size: 0.72rem;
+        color: var(--text-light);
+        margin-bottom: 1rem;
+      }
+      .upload-zone {
+        border: 2px dashed var(--border);
+        border-radius: 10px;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        cursor: pointer;
+        color: var(--text-light);
+        transition: all 0.2s;
+        margin-bottom: 1rem;
+      }
+      .upload-zone:hover {
+        border-color: var(--navy);
+        color: var(--navy);
+        background: rgba(29, 85, 160, 0.02);
+      }
+      .upload-zone .icon {
+        font-size: 2rem;
+      }
+      .upload-zone .main-text {
+        font-size: 0.85rem;
+        font-weight: 600;
+      }
+      .upload-zone .sub-text {
+        font-size: 0.7rem;
+      }
+      .ocr-preview {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+      .ocr-img {
+        background: #e9e5de;
+        border-radius: 8px;
+        aspect-ratio: 3/4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        color: #999;
+        position: relative;
+      }
+      .ocr-img .badge {
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        background: var(--green);
+        color: #fff;
+        font-size: 0.6rem;
+        padding: 0.1rem 0.4rem;
+        border-radius: 4px;
+        font-weight: 600;
+      }
+      .ocr-table {
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      .ocr-table-header {
+        background: var(--navy);
+        color: #fff;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        display: flex;
+        justify-content: space-between;
+      }
+      .ocr-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.4rem 0.75rem;
+        border-bottom: 1px solid var(--border);
+        font-size: 0.75rem;
+      }
+      .ocr-row:last-child {
+        border-bottom: none;
+      }
+      .ocr-row .val {
+        font-weight: 600;
+        font-variant-numeric: tabular-nums;
+      }
+      .ocr-total {
+        background: var(--warm-100);
+        padding: 0.5rem 0.75rem;
+        font-size: 0.8rem;
+        font-weight: 700;
+        display: flex;
+        justify-content: space-between;
+        color: var(--navy);
+      }
+      .ocr-status {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.72rem;
+        color: var(--green);
+        font-weight: 600;
+        margin-top: 0.5rem;
+      }
+      .ocr-edit-hint {
+        font-size: 0.68rem;
+        color: var(--text-light);
+        margin-top: 0.4rem;
+      }
+
+      /* 하단 액션 */
+      .admin-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 1.25rem;
+        border-top: 1px solid var(--border);
+      }
+      .toggle-row {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+      }
+      .toggle {
+        width: 40px;
+        height: 22px;
+        border-radius: 11px;
+        background: var(--green);
+        position: relative;
+        cursor: pointer;
+      }
+      .toggle::after {
+        content: "";
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #fff;
+        position: absolute;
+        top: 2px;
+        left: 20px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+      }
+      .btn-grp {
+        display: flex;
+        gap: 0.5rem;
+      }
+      .btn-d {
+        background: none;
+        border: 1px solid var(--red);
+        color: var(--red);
+        padding: 0.45rem 0.9rem;
+        border-radius: 8px;
+        font-size: 0.78rem;
+        cursor: pointer;
+        font-family: inherit;
+      }
+      .btn-s {
+        background: var(--navy);
+        color: #fff;
+        border: none;
+        padding: 0.45rem 1.1rem;
+        border-radius: 8px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: inherit;
+      }
+
+      @media (max-width: 768px) {
+        .front-body {
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+        }
+        .project-info {
+          position: static;
+        }
+        .ocr-preview {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="view-switch">
+      <button class="view-btn active" onclick="sw('front')">
+        프론트엔드 (방문자)
+      </button>
+      <button class="view-btn" onclick="sw('admin')">관리자 에디터</button>
+    </div>
+
+    <!-- ============ FRONTEND ============ -->
+    <div id="front-view" class="view-panel active">
+      <div class="front">
+        <div class="front-hero">
+          <div class="front-hero-overlay">
+            <h1>서울 성북구 석관동 아파트 49평</h1>
+            <div class="front-hero-tags">
+              <span>주거공간</span><span>아파트</span><span>49평</span
+              ><span>약 8주</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="front-body">
+          <!-- 좌측: Project Info 사이드바 (현재 디자인 그대로) -->
+          <aside class="project-info">
+            <div class="info-header">
+              <div class="info-header-label">Project Info</div>
+              <div class="info-header-title">서울 성북구 석관동 리모델링</div>
+            </div>
+            <div class="info-grid">
+              <div class="info-item">
+                <div class="info-label">지역</div>
+                <div class="info-value">서울 성북구 석관동</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">공간 유형</div>
+                <div class="info-value">아파트</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">면적</div>
+                <div class="info-value highlight">49평</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">시공 기간</div>
+                <div class="info-value">약 8주</div>
+              </div>
+              <div class="info-item full">
+                <div class="info-label">시공 비용</div>
+                <div class="info-value highlight big">1억 7000만원</div>
+              </div>
+            </div>
+            <div class="info-divider"></div>
+            <div class="info-cta">
+              <a href="#" class="info-cta-btn">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"
+                  />
+                  <polyline points="14 2 14 8 20 8" />
+                </svg>
+                유사 견적 요청하기
+              </a>
+              <a href="tel:01062023618" class="info-phone">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"
+                  />
+                </svg>
+                010-6202-3618
+              </a>
+            </div>
+          </aside>
+
+          <!-- 우측: 본문 콘텐츠 -->
+          <div class="front-content">
+            <div class="front-desc">
+              <h3>프로젝트 소개</h3>
+              <p>
+                서울 성북구 석관동에 위치한 두산아파트 49평 리모델링
+                프로젝트입니다. 거실과 주방을 오픈 구조로 변경하여 넓은 공간감을
+                확보하고, 화이트&그레이 톤으로 모던한 스타일을 완성했습니다.
+              </p>
+            </div>
+
+            <!-- 공간 블록: 시공전 주방 (3장) -->
+            <div class="space-block">
+              <div class="space-title">시공 전 주방</div>
+              <div class="img-grid c3">
+                <div class="img-item">주방 시공전 1</div>
+                <div class="img-item">주방 시공전 2</div>
+                <div class="img-item">주방 시공전 3</div>
+              </div>
+            </div>
+
+            <!-- 시공후 주방 (3장) -->
+            <div class="space-block">
+              <div class="space-title">시공 후 주방</div>
+              <div class="img-grid c3">
+                <div class="img-item">주방 시공후 1</div>
+                <div class="img-item">주방 시공후 2</div>
+                <div class="img-item">주방 시공후 3</div>
+              </div>
+            </div>
+
+            <!-- 거실 (2장) -->
+            <div class="space-block">
+              <div class="space-title">거실 리모델링</div>
+              <div class="img-grid c2">
+                <div class="img-item">거실 1</div>
+                <div class="img-item">거실 2</div>
+              </div>
+            </div>
+
+            <!-- 욕실 (4장 → 2x2) -->
+            <div class="space-block">
+              <div class="space-title">욕실 전면 리모델링</div>
+              <div class="img-grid c4">
+                <div class="img-item">욕실 1</div>
+                <div class="img-item">욕실 2</div>
+                <div class="img-item vert">세로 사진</div>
+                <div class="img-item">욕실 4</div>
+              </div>
+              <div
+                style="
+                  font-size: 0.65rem;
+                  color: var(--text-light);
+                  margin-top: 0.3rem;
+                  text-align: right;
+                "
+              >
+                * 세로 사진은 클릭 시 원본 비율로 확인
+              </div>
+            </div>
+
+            <!-- 현관 (1장) -->
+            <div class="space-block">
+              <div class="space-title">현관 & 복도</div>
+              <div class="img-grid c1">
+                <div class="img-item" style="aspect-ratio: 16/7">
+                  현관 파노라마
+                </div>
+              </div>
+            </div>
+
+            <!-- 실행내역서 (OCR 결과 테이블 + 원본보기) -->
+            <div class="receipt-section">
+              <div class="receipt-header">
+                <h3>투명한 실비 내역서</h3>
+                <button class="receipt-view-btn">
+                  실행내역서 원본 확인하기 →
+                </button>
+              </div>
+              <table class="receipt-table">
+                <thead>
+                  <tr>
+                    <th>항목</th>
+                    <th style="text-align: right">금액 (원)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>주방가구</td>
+                    <td>6,800,000</td>
+                  </tr>
+                  <tr>
+                    <td>붙박이장</td>
+                    <td>4,200,000</td>
+                  </tr>
+                  <tr>
+                    <td>위생도기</td>
+                    <td>1,850,000</td>
+                  </tr>
+                  <tr>
+                    <td>바닥재(원목)</td>
+                    <td>7,204,400</td>
+                  </tr>
+                  <tr>
+                    <td>조명자재</td>
+                    <td>3,265,900</td>
+                  </tr>
+                  <tr>
+                    <td>도어/창호</td>
+                    <td>1,300,000</td>
+                  </tr>
+                  <tr>
+                    <td>인건비</td>
+                    <td>32,000,000</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="receipt-total">
+                <span>합계</span><span>60,000,000원</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ ADMIN ============ -->
+    <div id="admin-view" class="view-panel">
+      <div class="admin">
+        <div class="admin-hdr">
+          <h2>게시글 수정 — 서울 성북구 석관동 아파트 49평</h2>
+        </div>
+        <div class="admin-body">
+          <!-- 기본정보 -->
+          <div class="admin-meta">
+            <div class="f">
+              <label>지역 *</label><input value="서울 성북구 석관동" />
+            </div>
+            <div class="f"><label>건물유형</label><input value="아파트" /></div>
+            <div class="f"><label>평수</label><input value="49평" /></div>
+            <div class="f">
+              <label>카테고리 *</label
+              ><select>
+                <option selected>주거공간</option>
+                <option>상업공간</option>
+                <option>종합건축</option>
+                <option>맞춤가구</option>
+              </select>
+            </div>
+            <div class="f">
+              <label>시공 기간</label><input value="약 8주" />
+            </div>
+            <div class="f">
+              <label>시공 비용</label><input value="1억 7000만원" />
+            </div>
+          </div>
+
+          <!-- 대표 썸네일 -->
+          <div class="f" style="margin-bottom: 1.5rem">
+            <label>대표 썸네일</label>
+            <div
+              style="
+                display: flex;
+                gap: 1rem;
+                align-items: center;
+                margin-top: 0.4rem;
+              "
+            >
+              <div
+                style="
+                  width: 140px;
+                  aspect-ratio: 4/3;
+                  background: #d5d0c8;
+                  border-radius: 8px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  font-size: 0.7rem;
+                  color: #999;
+                "
+              >
+                thumb.webp
+              </div>
+              <div style="font-size: 0.7rem; color: var(--text-light)">
+                클릭하여 변경<br />webp 자동 변환
+              </div>
+            </div>
+          </div>
+
+          <!-- 프로젝트 소개 -->
+          <div class="section-title">프로젝트 소개</div>
+          <div class="desc-editor">
+            <textarea>
+서울 성북구 석관동에 위치한 두산아파트 49평 리모델링 프로젝트입니다. 거실과 주방을 오픈 구조로 변경하여 넓은 공간감을 확보하고, 화이트&그레이 톤으로 모던한 스타일을 완성했습니다.</textarea
+            >
+          </div>
+
+          <!-- 이미지 레이아웃 규칙 -->
+          <div class="rules">
+            <strong>레이아웃 규칙:</strong> 1~3장 → 가로 나란히 | 4장 → 2×2 |
+            가로 기준 비율 | 세로 사진 크롭(클릭 시 원본) | 최대 15장 | webp
+            자동 변환
+          </div>
+
+          <!-- 공간 블록 관리 -->
+          <div class="section-title">
+            공간별 이미지 블록
+            <span class="hint">드래그로 순서 변경 · 블록 추가/삭제 자유</span>
+          </div>
+
+          <div class="blk">
+            <div class="blk-head">
+              <span class="blk-drag">⠿</span
+              ><input
+                class="blk-input"
+                value="시공 전 주방"
+                placeholder="공간명 (예: 시공전 거실)"
+              /><button class="blk-del">삭제</button>
+            </div>
+            <div class="blk-imgs">
+              <div class="blk-img">
+                1<span class="num">1</span><button class="x">✕</button>
+              </div>
+              <div class="blk-img">
+                2<span class="num">2</span><button class="x">✕</button>
+              </div>
+              <div class="blk-img">
+                3<span class="num">3</span><button class="x">✕</button>
+              </div>
+              <div class="blk-img blk-add">
+                <span class="plus">+</span><span>추가</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="blk">
+            <div class="blk-head">
+              <span class="blk-drag">⠿</span
+              ><input class="blk-input" value="시공 후 주방" /><button
+                class="blk-del"
+              >
+                삭제
+              </button>
+            </div>
+            <div class="blk-imgs">
+              <div class="blk-img">
+                1<span class="num">1</span><button class="x">✕</button>
+              </div>
+              <div class="blk-img">
+                2<span class="num">2</span><button class="x">✕</button>
+              </div>
+              <div class="blk-img">
+                3<span class="num">3</span><button class="x">✕</button>
+              </div>
+              <div class="blk-img blk-add">
+                <span class="plus">+</span><span>추가</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="blk">
+            <div class="blk-head">
+              <span class="blk-drag">⠿</span
+              ><input class="blk-input" value="거실 리모델링" /><button
+                class="blk-del"
+              >
+                삭제
+              </button>
+            </div>
+            <div class="blk-imgs">
+              <div class="blk-img">
+                1<span class="num">1</span><button class="x">✕</button>
+              </div>
+              <div class="blk-img">
+                2<span class="num">2</span><button class="x">✕</button>
+              </div>
+              <div class="blk-img blk-add">
+                <span class="plus">+</span><span>추가</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="blk">
+            <div class="blk-head">
+              <span class="blk-drag">⠿</span
+              ><input class="blk-input" value="욕실 전면 리모델링" /><button
+                class="blk-del"
+              >
+                삭제
+              </button>
+            </div>
+            <div class="blk-imgs">
+              <div class="blk-img">
+                1<span class="num">1</span><button class="x">✕</button>
+              </div>
+              <div class="blk-img">
+                2<span class="num">2</span><button class="x">✕</button>
+              </div>
+              <div class="blk-img" style="background: #c5c0b8">
+                세로<span class="num">3</span><button class="x">✕</button>
+              </div>
+              <div class="blk-img">
+                4<span class="num">4</span><button class="x">✕</button>
+              </div>
+              <div class="blk-img blk-add">
+                <span class="plus">+</span><span>추가</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="blk">
+            <div class="blk-head">
+              <span class="blk-drag">⠿</span
+              ><input class="blk-input" value="현관 & 복도" /><button
+                class="blk-del"
+              >
+                삭제
+              </button>
+            </div>
+            <div class="blk-imgs">
+              <div class="blk-img">
+                1<span class="num">1</span><button class="x">✕</button>
+              </div>
+              <div class="blk-img blk-add">
+                <span class="plus">+</span><span>추가</span>
+              </div>
+            </div>
+          </div>
+
+          <button class="add-block">+ 공간 블록 추가</button>
+
+          <!-- 실행내역서 OCR 업로드 -->
+          <div class="receipt-upload">
+            <h3>실행내역서 업로드</h3>
+            <div class="sub">
+              이미지를 업로드하면 Google Vision OCR이 자동으로 항목과 금액을
+              추출합니다
+            </div>
+
+            <!-- 업로드 전 -->
+            <div class="upload-zone" id="upload-before">
+              <div class="icon">📄</div>
+              <div class="main-text">실행내역서 이미지 업로드</div>
+              <div class="sub-text">JPG, PNG, PDF · 자동 OCR 인식</div>
+            </div>
+
+            <!-- 업로드 후: OCR 결과 미리보기 -->
+            <div class="ocr-preview" id="upload-after">
+              <div class="ocr-img">
+                실행내역서 원본
+                <div class="badge">✓ 업로드됨</div>
+              </div>
+              <div>
+                <div class="ocr-table">
+                  <div class="ocr-table-header">
+                    <span>OCR 추출 결과</span><span>자동 인식</span>
+                  </div>
+                  <div class="ocr-row">
+                    <span>주방가구</span><span class="val">6,800,000</span>
+                  </div>
+                  <div class="ocr-row">
+                    <span>붙박이장</span><span class="val">4,200,000</span>
+                  </div>
+                  <div class="ocr-row">
+                    <span>위생도기</span><span class="val">1,850,000</span>
+                  </div>
+                  <div class="ocr-row">
+                    <span>바닥재(원목)</span><span class="val">7,204,400</span>
+                  </div>
+                  <div class="ocr-row">
+                    <span>조명자재</span><span class="val">3,265,900</span>
+                  </div>
+                  <div class="ocr-row">
+                    <span>인건비</span><span class="val">32,000,000</span>
+                  </div>
+                  <div class="ocr-total">
+                    <span>합계</span><span>60,000,000원</span>
+                  </div>
+                </div>
+                <div class="ocr-status">✓ OCR 인식 완료 · 7개 항목 추출</div>
+                <div class="ocr-edit-hint">
+                  * 인식 결과가 정확하지 않으면 직접 수정 가능
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 하단 액션 -->
+          <div class="admin-actions">
+            <div class="toggle-row">
+              <div class="toggle"></div>
+              <span style="font-size: 0.83rem; font-weight: 500">공개</span>
+            </div>
+            <div class="btn-grp">
+              <button class="btn-d">삭제</button>
+              <button class="btn-s">저장</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function sw(v) {
+        document
+          .querySelectorAll(".view-panel")
+          .forEach((p) => p.classList.remove("active"));
+        document
+          .querySelectorAll(".view-btn")
+          .forEach((b) => b.classList.remove("active"));
+        document.getElementById(v + "-view").classList.add("active");
+        event.target.classList.add("active");
+      }
+    </script>
+  </body>
+</html>

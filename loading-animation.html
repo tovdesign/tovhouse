@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TOV 2026 - 로딩 애니메이션 와이어프레임</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family:
+          "Pretendard Variable",
+          -apple-system,
+          sans-serif;
+        background: #f5f3ef;
+        color: #3c3733;
+      }
+      .page-header {
+        background: #1d55a0;
+        color: #fff;
+        padding: 24px 40px;
+        text-align: center;
+      }
+      .page-header h1 {
+        font-size: 20px;
+        font-weight: 700;
+      }
+      .page-header h1 span {
+        color: #c4a265;
+      }
+      .page-header p {
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.6);
+        margin-top: 4px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 32px;
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 0 20px;
+      }
+      .concept {
+        background: #fff;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+      }
+      .concept-header {
+        padding: 20px 24px;
+        border-bottom: 1px solid #e4ddd0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .concept-header h2 {
+        font-size: 16px;
+        font-weight: 700;
+        color: #3c3733;
+      }
+      .concept-header .badge {
+        background: #1d55a0;
+        color: #fff;
+        font-size: 11px;
+        padding: 3px 10px;
+        border-radius: 20px;
+        font-weight: 600;
+      }
+      .concept-desc {
+        padding: 16px 24px;
+        font-size: 13px;
+        color: #5a5448;
+        line-height: 1.6;
+        border-bottom: 1px solid #e4ddd0;
+      }
+      .preview {
+        background: #faf8f5;
+        height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .preview.dark {
+        background: #12396b;
+      }
+      .replay-btn {
+        position: absolute;
+        bottom: 16px;
+        right: 16px;
+        background: rgba(29, 85, 160, 0.15);
+        border: none;
+        color: #1d55a0;
+        font-size: 12px;
+        padding: 6px 14px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-family: inherit;
+        z-index: 10;
+      }
+      .replay-btn:hover {
+        background: rgba(29, 85, 160, 0.25);
+      }
+      .preview.dark .replay-btn {
+        background: rgba(255, 255, 255, 0.15);
+        color: #fff;
+      }
+      .preview.dark .replay-btn:hover {
+        background: rgba(255, 255, 255, 0.25);
+      }
+
+      /* ========== CONCEPT A: 게이지바 + 퍼센트 (라이트) ========== */
+      .ca-wrap {
+        text-align: center;
+        width: 320px;
+      }
+      .ca-logo {
+        font-size: 28px;
+        font-weight: 700;
+        letter-spacing: 6px;
+        color: #1d55a0;
+      }
+      .ca-logo span {
+        color: #c4a265;
+        font-weight: 300;
+      }
+      .ca-sub-text {
+        font-size: 11px;
+        letter-spacing: 4px;
+        color: #c9bfad;
+        margin-top: 4px;
+        text-transform: uppercase;
+      }
+      .ca-track {
+        width: 100%;
+        height: 3px;
+        background: #e4ddd0;
+        margin-top: 32px;
+        border-radius: 2px;
+        overflow: hidden;
+      }
+      .ca-bar {
+        height: 100%;
+        width: 0;
+        background: linear-gradient(90deg, #1d55a0, #5a8bc7);
+        border-radius: 2px;
+        animation: caProgress 2.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+      .ca-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 12px;
+      }
+      .ca-label {
+        font-size: 12px;
+        color: #c9bfad;
+        letter-spacing: 1px;
+      }
+      .ca-pct {
+        font-size: 14px;
+        font-weight: 600;
+        color: #1d55a0;
+        font-variant-numeric: tabular-nums;
+      }
+      @keyframes caProgress {
+        0% {
+          width: 0;
+        }
+        15% {
+          width: 12%;
+        }
+        40% {
+          width: 45%;
+        }
+        65% {
+          width: 68%;
+        }
+        85% {
+          width: 88%;
+        }
+        100% {
+          width: 100%;
+        }
+      }
+
+      /* ========== CONCEPT B: 게이지바 + 공간변환 (다크) ========== */
+      .cb-wrap {
+        text-align: center;
+        width: 300px;
+      }
+      .cb-frame {
+        width: 300px;
+        height: 200px;
+        border: 1.5px solid rgba(196, 162, 101, 0.3);
+        border-radius: 12px;
+        position: relative;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .cb-fill {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 0;
+        background: linear-gradient(
+          180deg,
+          rgba(196, 162, 101, 0.15) 0%,
+          rgba(196, 162, 101, 0.05) 100%
+        );
+        animation: cbFill 3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+      .cb-label-area {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 2;
+      }
+      .cb-logo {
+        font-size: 24px;
+        font-weight: 700;
+        letter-spacing: 5px;
+        color: #fff;
+      }
+      .cb-logo span {
+        color: #c4a265;
+        font-weight: 300;
+      }
+      .cb-pct-big {
+        font-size: 40px;
+        font-weight: 200;
+        color: #c4a265;
+        margin-top: 8px;
+        font-variant-numeric: tabular-nums;
+      }
+      .cb-track {
+        width: 100%;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.1);
+        margin-top: 20px;
+        border-radius: 1px;
+        overflow: hidden;
+      }
+      .cb-bar {
+        height: 100%;
+        width: 0;
+        background: linear-gradient(90deg, #c4a265, #dfc48b);
+        border-radius: 1px;
+        animation: cbProgress 3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+      .cb-sub {
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.4);
+        margin-top: 12px;
+        letter-spacing: 2px;
+      }
+      @keyframes cbFill {
+        0% {
+          height: 0;
+        }
+        100% {
+          height: 100%;
+        }
+      }
+      @keyframes cbProgress {
+        0% {
+          width: 0;
+        }
+        15% {
+          width: 12%;
+        }
+        40% {
+          width: 45%;
+        }
+        65% {
+          width: 68%;
+        }
+        85% {
+          width: 88%;
+        }
+        100% {
+          width: 100%;
+        }
+      }
+
+      /* ========== CONCEPT C: 미니멀 골드라인 (라이트) ========== */
+      .cc-wrap {
+        text-align: center;
+        width: 280px;
+      }
+      .cc-logo {
+        font-size: 32px;
+        font-weight: 700;
+        letter-spacing: 8px;
+        color: #1d55a0;
+      }
+      .cc-tagline {
+        font-size: 10px;
+        letter-spacing: 6px;
+        color: #c4a265;
+        margin-top: 6px;
+        text-transform: uppercase;
+      }
+      .cc-track {
+        width: 100%;
+        height: 1.5px;
+        background: #e4ddd0;
+        margin-top: 40px;
+        border-radius: 1px;
+        overflow: hidden;
+        position: relative;
+      }
+      .cc-bar {
+        height: 100%;
+        width: 0;
+        background: #c4a265;
+        border-radius: 1px;
+        animation: ccProgress 3s ease forwards;
+      }
+      .cc-glow {
+        position: absolute;
+        top: -3px;
+        right: 0;
+        width: 20px;
+        height: 8px;
+        background: radial-gradient(
+          ellipse,
+          rgba(196, 162, 101, 0.6),
+          transparent
+        );
+        animation: ccGlow 3s ease forwards;
+        opacity: 0;
+      }
+      .cc-status {
+        font-size: 11px;
+        color: #c9bfad;
+        margin-top: 16px;
+        letter-spacing: 1px;
+      }
+      .cc-dots span {
+        animation: ccDot 1.4s infinite;
+      }
+      .cc-dots span:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .cc-dots span:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+      @keyframes ccProgress {
+        0% {
+          width: 0;
+        }
+        100% {
+          width: 100%;
+        }
+      }
+      @keyframes ccGlow {
+        0% {
+          opacity: 0;
+          left: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        95% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+          left: calc(100% - 20px);
+        }
+      }
+      @keyframes ccDot {
+        0%,
+        60%,
+        100% {
+          opacity: 0.3;
+        }
+        30% {
+          opacity: 1;
+        }
+      }
+
+      .footer {
+        text-align: center;
+        padding: 20px 0 60px;
+        color: #c9bfad;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-header">
+      <h1>TOV <span>2026</span> 로딩 애니메이션</h1>
+      <p>인덱스 페이지 게이지바 로딩 컨셉 3종</p>
+    </div>
+    <div class="grid">
+      <!-- A: 게이지바 + 퍼센트 (라이트) -->
+      <div class="concept" id="cA">
+        <div class="concept-header">
+          <h2>A. 네이비 게이지 + 퍼센트</h2>
+          <span class="badge">라이트</span>
+        </div>
+        <div class="concept-desc">
+          크림 배경 위에 네이비 게이지바가 차오르며 퍼센트가 올라감. 좌측 상태
+          텍스트 + 우측 숫자로 미니멀 구성.
+        </div>
+        <div class="preview" id="cA-preview">
+          <div class="ca-wrap">
+            <div class="ca-logo">TOV<span>.</span></div>
+            <div class="ca-sub-text">premium interior</div>
+            <div class="ca-track"><div class="ca-bar"></div></div>
+            <div class="ca-info">
+              <div class="ca-label">공간을 준비하고 있습니다</div>
+              <div class="ca-pct" id="caPct">0%</div>
+            </div>
+          </div>
+          <button class="replay-btn" onclick="replay('cA')">다시 보기</button>
+        </div>
+      </div>
+
+      <!-- B: 게이지바 + 공간변환 (다크) -->
+      <div class="concept" id="cB">
+        <div class="concept-header">
+          <h2>B. 골드 게이지 + 공간변환</h2>
+          <span class="badge">다크</span>
+        </div>
+        <div class="concept-desc">
+          다크 네이비 배경에 골드 게이지가 차오르며 프레임 내부가 골드빛으로
+          채워짐. 큰 퍼센트 숫자가 중앙에 표시.
+        </div>
+        <div class="preview dark" id="cB-preview">
+          <div class="cb-wrap">
+            <div class="cb-frame">
+              <div class="cb-fill"></div>
+              <div class="cb-label-area">
+                <div class="cb-logo">TOV<span>.</span></div>
+                <div class="cb-pct-big" id="cbPct">0%</div>
+              </div>
+            </div>
+            <div class="cb-track"><div class="cb-bar"></div></div>
+            <div class="cb-sub">공간에 가치를 더합니다</div>
+          </div>
+          <button class="replay-btn" onclick="replay('cB')">다시 보기</button>
+        </div>
+      </div>
+
+      <!-- C: 미니멀 골드라인 (라이트) -->
+      <div class="concept" id="cC">
+        <div class="concept-header">
+          <h2>C. 미니멀 골드 라인</h2>
+          <span class="badge">프리미엄</span>
+        </div>
+        <div class="concept-desc">
+          극도로 절제된 구성. 로고 아래 골드 라인 하나가 좌에서 우로 은은하게
+          차오름. 글로우 이펙트 포함.
+        </div>
+        <div class="preview" id="cC-preview">
+          <div class="cc-wrap">
+            <div class="cc-logo">TOV.</div>
+            <div class="cc-tagline">premium interior</div>
+            <div class="cc-track">
+              <div class="cc-bar"></div>
+              <div class="cc-glow"></div>
+            </div>
+            <div class="cc-status">
+              공간을 준비하고 있습니다<span class="cc-dots"
+                ><span>.</span><span>.</span><span>.</span></span
+              >
+            </div>
+          </div>
+          <button class="replay-btn" onclick="replay('cC')">다시 보기</button>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      번호를 선택해주세요. 선택한 컨셉을 인덱스 페이지에 적용합니다.
+    </div>
+
+    <script>
+      /* 퍼센트 카운터 */
+      let caTimer, cbTimer;
+      function startCounter(id, duration) {
+        let v = 0;
+        const el = document.getElementById(id);
+        if (!el) return;
+        const step = duration / 100;
+        const timer = setInterval(() => {
+          v++;
+          if (v > 100) {
+            clearInterval(timer);
+            return;
+          }
+          el.textContent = v + "%";
+        }, step);
+        return timer;
+      }
+      function initCounters() {
+        clearInterval(caTimer);
+        clearInterval(cbTimer);
+        caTimer = startCounter("caPct", 2800);
+        cbTimer = startCounter("cbPct", 3000);
+      }
+      initCounters();
+
+      function replay(id) {
+        const el = document.getElementById(id);
+        const preview = el.querySelector(".preview");
+        const html = preview.innerHTML;
+        preview.innerHTML = "";
+        requestAnimationFrame(() => {
+          preview.innerHTML = html;
+          if (id === "cA") {
+            caTimer = startCounter("caPct", 2800);
+          }
+          if (id === "cB") {
+            cbTimer = startCounter("cbPct", 3000);
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

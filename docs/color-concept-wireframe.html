@@ -1,0 +1,1477 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TOV HOUSE | 컬러 컨셉 와이어프레임 v2</title>
+    <link
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* ============================
+   TOV HOUSE COLOR CONCEPT v2
+   Green + White + Gold
+
+   원칙: 밝고 경쾌한 녹색 + 깨끗한 화이트 + 포인트 골드
+   어두운 녹색은 Footer에만 사용
+   CTA는 밝은 녹색으로 생동감 유지
+   ============================ */
+
+      :root {
+        /* ── Primary: Fresh Green ── */
+        --green-50: #f2f9f4;
+        --green-100: #e0f2e5;
+        --green-200: #b8e4c4;
+        --green-300: #7ed09a;
+        --green-400: #4cb872; /* CTA / 주요 액션 */
+        --green-500: #3a9d5e; /* 메인 Primary */
+        --green-600: #2f8550;
+
+        /* ── White & Light ── */
+        --white: #ffffff;
+        --off-white: #fafcfa;
+        --light-green: #f5faf6;
+
+        /* ── Gold Accent ── */
+        --gold: #c9a96e;
+        --gold-light: #e8d9b8;
+        --gold-hover: #b8964f;
+        --gold-bg: #faf6ee;
+
+        /* ── Warm Neutral ── */
+        --warm-50: #faf9f7;
+        --warm-100: #f3f0ea;
+        --warm-200: #e6e0d5;
+        --warm-300: #c4baa8;
+        --warm-400: #9e9484;
+        --warm-500: #6b6358;
+        --warm-700: #3c3733;
+
+        /* ── Dark Green (Footer ONLY) ── */
+        --dark-green: #1a3324;
+
+        /* ── Spacing ── */
+        --gap: 1.5rem;
+        --section-py: 5rem;
+        --radius-card: 16px;
+        --radius-section: 24px;
+
+        /* ── Typography ── */
+        --font:
+          "Pretendard Variable", "Pretendard", -apple-system,
+          BlinkMacSystemFont, sans-serif;
+      }
+
+      /* ========== RESET ========== */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: var(--font);
+        color: var(--warm-500);
+        background: var(--white);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+      img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      button {
+        font-family: inherit;
+        cursor: pointer;
+        border: none;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      /* ========== CONCEPT HEADER ========== */
+      .concept-header {
+        background: var(--light-green);
+        border-bottom: 1px solid var(--green-100);
+        padding: 3rem 0;
+        text-align: center;
+      }
+      .concept-header h1 {
+        font-size: 1.5rem;
+        font-weight: 300;
+        letter-spacing: 6px;
+        color: var(--green-500);
+      }
+      .concept-header p {
+        font-size: 0.8rem;
+        color: var(--warm-400);
+        letter-spacing: 2px;
+        margin-top: 0.5rem;
+      }
+
+      /* ========== PALETTE ========== */
+      .palette-section {
+        padding: 4rem 0;
+        background: var(--white);
+      }
+      .palette-section h2 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--warm-700);
+        margin-bottom: 2rem;
+        text-align: center;
+        letter-spacing: 3px;
+      }
+      .palette-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2.5rem;
+        margin-bottom: 3rem;
+      }
+      .palette-group h3 {
+        font-size: 0.65rem;
+        letter-spacing: 3px;
+        color: var(--warm-400);
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+      }
+      .palette-row {
+        display: flex;
+        gap: 4px;
+        border-radius: 12px;
+        overflow: hidden;
+      }
+      .palette-chip {
+        flex: 1;
+        height: 64px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 6px 4px;
+        font-size: 0.55rem;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        gap: 2px;
+      }
+      .palette-chip .hex {
+        opacity: 0.7;
+        font-family: monospace;
+        font-size: 0.5rem;
+      }
+      .chip-light {
+        color: var(--warm-700);
+      }
+      .chip-dark {
+        color: rgba(255, 255, 255, 0.85);
+      }
+
+      /* Before/After */
+      .comparison-box {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        margin: 2rem 0 3rem;
+      }
+      .comp-card {
+        border-radius: 16px;
+        padding: 2rem;
+      }
+      .comp-card h4 {
+        font-size: 0.65rem;
+        letter-spacing: 3px;
+        margin-bottom: 1.25rem;
+        text-transform: uppercase;
+      }
+      .comp-before {
+        background: #f0f4fa;
+        border: 1px solid #dce5f3;
+      }
+      .comp-before h4 {
+        color: #1d55a0;
+      }
+      .comp-after {
+        background: var(--green-50);
+        border: 1px solid var(--green-200);
+      }
+      .comp-after h4 {
+        color: var(--green-500);
+      }
+      .token-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+      .token-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 0.8rem;
+      }
+      .token-swatch {
+        width: 28px;
+        height: 28px;
+        border-radius: 6px;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+      }
+      .token-hex {
+        color: var(--warm-400);
+        font-size: 0.7rem;
+        font-family: monospace;
+      }
+
+      /* Mapping table */
+      .map-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.8rem;
+      }
+      .map-table th {
+        padding: 0.75rem 1rem;
+        text-align: left;
+        color: var(--warm-400);
+        font-weight: 500;
+        letter-spacing: 1px;
+        border-bottom: 2px solid var(--warm-200);
+        font-size: 0.7rem;
+      }
+      .map-table td {
+        padding: 0.6rem 1rem;
+        border-bottom: 1px solid var(--warm-100);
+        color: var(--warm-500);
+      }
+      .map-table .swatch {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border-radius: 3px;
+        vertical-align: middle;
+        margin-right: 6px;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+      }
+
+      /* ========== NAV ========== */
+      .wf-nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(255, 255, 255, 0.96);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--green-100);
+        height: 64px;
+      }
+      .wf-nav .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 100%;
+      }
+      .wf-nav-logo {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--green-500);
+        letter-spacing: 1px;
+      }
+      .wf-nav-links {
+        display: flex;
+        gap: 2.5rem;
+        list-style: none;
+      }
+      .wf-nav-links a {
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--warm-400);
+        letter-spacing: 1px;
+        transition: color 0.3s;
+        cursor: pointer;
+      }
+      .wf-nav-links a:hover,
+      .wf-nav-links a.active {
+        color: var(--green-500);
+      }
+      .wf-nav-cta {
+        display: inline-block;
+        background: var(--green-400);
+        color: var(--white);
+        padding: 0.5rem 1.25rem;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        transition:
+          background 0.3s,
+          transform 0.2s;
+        cursor: pointer;
+      }
+      .wf-nav-cta:hover {
+        background: var(--green-500);
+        transform: translateY(-1px);
+      }
+
+      /* ========== HERO ========== */
+      .wf-hero {
+        padding: 2rem 0;
+      }
+      .wf-hero-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
+        gap: var(--gap);
+        min-height: 520px;
+      }
+      .wf-hero-image {
+        grid-row: 1 / 3;
+        background: linear-gradient(
+          135deg,
+          var(--green-100) 0%,
+          var(--green-200) 100%
+        );
+        border-radius: var(--radius-section);
+        display: flex;
+        align-items: flex-end;
+        padding: 2rem;
+        position: relative;
+        overflow: hidden;
+        min-height: 520px;
+      }
+      .wf-hero-image::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          180deg,
+          transparent 50%,
+          rgba(26, 51, 36, 0.6) 100%
+        );
+      }
+      .wf-hero-placeholder {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--green-300);
+        font-size: 0.75rem;
+        letter-spacing: 3px;
+      }
+      .wf-hero-overlay {
+        position: relative;
+        z-index: 1;
+        color: var(--white);
+      }
+      .wf-hero-tag {
+        display: inline-block;
+        font-size: 0.6rem;
+        letter-spacing: 3px;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(8px);
+        padding: 0.25rem 0.7rem;
+        border-radius: 4px;
+        margin-bottom: 0.4rem;
+      }
+
+      /* Hero Content - WHITE background, bright */
+      .wf-hero-content {
+        background: var(--white);
+        border: 1px solid var(--green-100);
+        border-radius: var(--radius-section);
+        padding: 3rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .wf-hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.65rem;
+        letter-spacing: 3px;
+        color: var(--gold);
+        margin-bottom: 1.5rem;
+      }
+      .wf-hero-badge::before {
+        content: "";
+        width: 24px;
+        height: 1px;
+        background: var(--gold);
+      }
+      .wf-hero-title {
+        font-size: 3.5rem;
+        font-weight: 700;
+        line-height: 1.1;
+        letter-spacing: -1px;
+        color: var(--green-500);
+        margin-bottom: 0.25rem;
+      }
+      .wf-hero-title-kr {
+        font-size: 0.95rem;
+        font-weight: 400;
+        color: var(--warm-400);
+        margin-bottom: 1.5rem;
+        letter-spacing: 4px;
+      }
+      .wf-hero-desc {
+        font-size: 0.9rem;
+        color: var(--warm-400);
+        line-height: 1.9;
+      }
+
+      /* Hero Stats - Gold accent */
+      .wf-hero-stats {
+        background: var(--gold-bg);
+        border: 1px solid var(--gold-light);
+        border-radius: var(--radius-section);
+        padding: 2rem;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+      }
+      .wf-stat {
+        text-align: center;
+      }
+      .wf-stat-num {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--gold);
+        line-height: 1;
+      }
+      .wf-stat-unit {
+        font-size: 0.85rem;
+        color: var(--gold-hover);
+      }
+      .wf-stat-label {
+        font-size: 0.7rem;
+        color: var(--warm-400);
+        margin-top: 0.25rem;
+      }
+
+      /* ========== VALUES ========== */
+      .wf-values {
+        padding: var(--section-py) 0;
+        background: var(--light-green);
+      }
+      .wf-section-header {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+      .wf-section-eyebrow {
+        font-size: 0.65rem;
+        letter-spacing: 4px;
+        color: var(--green-400);
+        margin-bottom: 0.75rem;
+      }
+      .wf-section-title {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--warm-700);
+        line-height: 1.3;
+      }
+      .wf-section-subtitle {
+        font-size: 0.85rem;
+        color: var(--warm-400);
+        margin-top: 0.5rem;
+      }
+
+      .wf-value-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--gap);
+      }
+      .wf-value-card {
+        background: var(--white);
+        border: 1px solid var(--green-100);
+        border-radius: var(--radius-card);
+        padding: 2.5rem 2rem;
+        text-align: center;
+        transition:
+          border-color 0.3s,
+          box-shadow 0.3s;
+      }
+      .wf-value-card:hover {
+        border-color: var(--green-300);
+        box-shadow: 0 8px 32px rgba(76, 184, 114, 0.1);
+      }
+      .wf-value-icon {
+        width: 64px;
+        height: 64px;
+        margin: 0 auto 1.5rem;
+        background: var(--green-50);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .wf-value-icon svg {
+        width: 28px;
+        height: 28px;
+        stroke: var(--green-400);
+        fill: none;
+        stroke-width: 1.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .wf-value-title {
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--warm-700);
+        margin-bottom: 0.75rem;
+      }
+      .wf-value-desc {
+        font-size: 0.85rem;
+        color: var(--warm-400);
+        line-height: 1.7;
+      }
+
+      /* ========== PILLARS ========== */
+      .wf-pillars {
+        padding: var(--section-py) 0;
+      }
+      .wf-pillar-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--gap);
+      }
+      .wf-pillar-card {
+        background: var(--white);
+        border: 1px solid var(--green-100);
+        border-radius: var(--radius-section);
+        padding: 2.5rem;
+        position: relative;
+        overflow: hidden;
+        transition: box-shadow 0.3s;
+      }
+      .wf-pillar-card:hover {
+        box-shadow: 0 8px 32px rgba(76, 184, 114, 0.1);
+      }
+      .wf-pillar-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--green-300), var(--gold-light));
+      }
+      .wf-pillar-num {
+        font-size: 3rem;
+        font-weight: 800;
+        color: var(--green-200);
+        line-height: 1;
+        margin-bottom: 1rem;
+      }
+      .wf-pillar-title {
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: var(--green-500);
+        margin-bottom: 0.75rem;
+      }
+      .wf-pillar-desc {
+        font-size: 0.85rem;
+        color: var(--warm-400);
+        line-height: 1.7;
+      }
+
+      /* ========== PORTFOLIO ========== */
+      .wf-portfolio {
+        padding: var(--section-py) 0;
+        background: var(--off-white);
+      }
+      .wf-portfolio-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--gap);
+      }
+      .wf-portfolio-card {
+        border-radius: var(--radius-card);
+        overflow: hidden;
+        background: var(--white);
+        border: 1px solid var(--green-100);
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
+      }
+      .wf-portfolio-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 40px rgba(76, 184, 114, 0.12);
+      }
+      .wf-portfolio-thumb {
+        aspect-ratio: 4/3;
+        background: linear-gradient(135deg, var(--green-50), var(--green-100));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--green-300);
+        font-size: 0.7rem;
+        letter-spacing: 2px;
+      }
+      .wf-portfolio-info {
+        padding: 1.25rem;
+      }
+      .wf-portfolio-type {
+        font-size: 0.6rem;
+        letter-spacing: 2px;
+        color: var(--gold);
+        margin-bottom: 0.35rem;
+        font-weight: 600;
+      }
+      .wf-portfolio-name {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--warm-700);
+        margin-bottom: 0.25rem;
+      }
+      .wf-portfolio-meta {
+        font-size: 0.75rem;
+        color: var(--warm-300);
+      }
+      .wf-portfolio-more {
+        display: flex;
+        justify-content: center;
+        margin-top: 2.5rem;
+      }
+      .wf-btn-outline {
+        padding: 0.75rem 2rem;
+        border: 1.5px solid var(--green-400);
+        color: var(--green-500);
+        border-radius: 8px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        background: transparent;
+        transition: all 0.3s;
+        cursor: pointer;
+      }
+      .wf-btn-outline:hover {
+        background: var(--green-400);
+        color: var(--white);
+      }
+
+      /* ========== PROCESS + CTA ========== */
+      .wf-process {
+        padding: var(--section-py) 0;
+      }
+      .wf-process-steps {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--gap);
+        margin-bottom: 3rem;
+      }
+      .wf-step {
+        text-align: center;
+        position: relative;
+      }
+      .wf-step:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        top: 28px;
+        right: -12px;
+        width: 24px;
+        height: 1px;
+        background: var(--green-200);
+      }
+      .wf-step-circle {
+        width: 56px;
+        height: 56px;
+        margin: 0 auto 1rem;
+        background: var(--green-50);
+        border: 2px solid var(--green-200);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--green-400);
+      }
+      .wf-step-title {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--warm-700);
+        margin-bottom: 0.25rem;
+      }
+      .wf-step-desc {
+        font-size: 0.75rem;
+        color: var(--warm-400);
+      }
+
+      /* CTA - BRIGHT green, not dark */
+      .wf-cta-banner {
+        background: linear-gradient(
+          135deg,
+          var(--green-400) 0%,
+          var(--green-300) 100%
+        );
+        border-radius: var(--radius-section);
+        padding: 4rem;
+        text-align: center;
+        color: var(--white);
+        position: relative;
+        overflow: hidden;
+      }
+      .wf-cta-banner::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -20%;
+        width: 400px;
+        height: 400px;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 50%;
+      }
+      .wf-cta-banner::after {
+        content: "";
+        position: absolute;
+        bottom: -30%;
+        left: -10%;
+        width: 300px;
+        height: 300px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+      }
+      .wf-cta-title {
+        font-size: 1.75rem;
+        font-weight: 700;
+        margin-bottom: 0.75rem;
+        position: relative;
+        z-index: 1;
+      }
+      .wf-cta-desc {
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.85);
+        margin-bottom: 2rem;
+        position: relative;
+        z-index: 1;
+      }
+      .wf-cta-btn {
+        display: inline-block;
+        background: var(--white);
+        color: var(--green-500);
+        padding: 0.85rem 2.5rem;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        transition:
+          transform 0.2s,
+          box-shadow 0.3s;
+        position: relative;
+        z-index: 1;
+        cursor: pointer;
+      }
+      .wf-cta-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      }
+
+      /* Gold accent CTA variant */
+      .wf-cta-gold {
+        display: inline-block;
+        background: var(--gold);
+        color: var(--white);
+        padding: 0.75rem 2rem;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        transition:
+          background 0.3s,
+          transform 0.2s;
+        cursor: pointer;
+        margin-left: 1rem;
+      }
+      .wf-cta-gold:hover {
+        background: var(--gold-hover);
+        transform: translateY(-1px);
+      }
+
+      /* ========== FOOTER (ONLY dark section) ========== */
+      .wf-footer {
+        background: var(--dark-green);
+        color: rgba(255, 255, 255, 0.6);
+        padding: 3rem 0 2rem;
+      }
+      .wf-footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 2rem;
+        margin-bottom: 2rem;
+      }
+      .wf-footer-brand {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--white);
+        margin-bottom: 0.75rem;
+      }
+      .wf-footer-info {
+        font-size: 0.8rem;
+        line-height: 1.8;
+      }
+      .wf-footer-title {
+        font-size: 0.65rem;
+        letter-spacing: 2px;
+        color: var(--gold-light);
+        margin-bottom: 1rem;
+      }
+      .wf-footer-links {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .wf-footer-links a {
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.5);
+        transition: color 0.3s;
+        cursor: pointer;
+      }
+      .wf-footer-links a:hover {
+        color: var(--white);
+      }
+      .wf-footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        padding-top: 1.5rem;
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.25);
+        text-align: center;
+      }
+
+      /* ========== RESPONSIVE ========== */
+      @media (max-width: 768px) {
+        .wf-hero-grid {
+          grid-template-columns: 1fr;
+        }
+        .wf-hero-image {
+          min-height: 300px;
+        }
+        .wf-value-grid,
+        .wf-pillar-grid,
+        .wf-portfolio-grid {
+          grid-template-columns: 1fr;
+        }
+        .wf-process-steps {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .wf-step:not(:last-child)::after {
+          display: none;
+        }
+        .wf-footer-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .palette-grid {
+          grid-template-columns: 1fr;
+        }
+        .comparison-box {
+          grid-template-columns: 1fr;
+        }
+        .wf-hero-title {
+          font-size: 2.5rem;
+        }
+        .wf-cta-banner {
+          padding: 3rem 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ===== CONCEPT HEADER ===== -->
+    <div class="concept-header">
+      <h1>TOV HOUSE</h1>
+      <p>COLOR CONCEPT v2 &mdash; GREEN + WHITE + GOLD</p>
+    </div>
+
+    <!-- ===== PALETTE ===== -->
+    <section class="palette-section">
+      <div class="container">
+        <h2>COLOR PALETTE</h2>
+        <div class="palette-grid">
+          <div class="palette-group">
+            <h3>Primary &mdash; Fresh Green</h3>
+            <div class="palette-row">
+              <div
+                class="palette-chip chip-light"
+                style="background: var(--green-50)"
+              >
+                <span>50</span><span class="hex">#f2f9f4</span>
+              </div>
+              <div
+                class="palette-chip chip-light"
+                style="background: var(--green-100)"
+              >
+                <span>100</span><span class="hex">#e0f2e5</span>
+              </div>
+              <div
+                class="palette-chip chip-light"
+                style="background: var(--green-200)"
+              >
+                <span>200</span><span class="hex">#b8e4c4</span>
+              </div>
+              <div
+                class="palette-chip chip-dark"
+                style="background: var(--green-300)"
+              >
+                <span>300</span><span class="hex">#7ed09a</span>
+              </div>
+              <div
+                class="palette-chip chip-dark"
+                style="background: var(--green-400)"
+              >
+                <span>400</span><span class="hex">#4cb872</span>
+              </div>
+              <div
+                class="palette-chip chip-dark"
+                style="background: var(--green-500)"
+              >
+                <span>500</span><span class="hex">#3a9d5e</span>
+              </div>
+              <div
+                class="palette-chip chip-dark"
+                style="background: var(--green-600)"
+              >
+                <span>600</span><span class="hex">#2f8550</span>
+              </div>
+            </div>
+          </div>
+          <div class="palette-group">
+            <h3>Accent &mdash; Gold</h3>
+            <div class="palette-row">
+              <div
+                class="palette-chip chip-light"
+                style="background: var(--gold-bg)"
+              >
+                <span>BG</span><span class="hex">#faf6ee</span>
+              </div>
+              <div
+                class="palette-chip chip-light"
+                style="background: var(--gold-light)"
+              >
+                <span>Light</span><span class="hex">#e8d9b8</span>
+              </div>
+              <div
+                class="palette-chip chip-dark"
+                style="background: var(--gold)"
+              >
+                <span>Gold</span><span class="hex">#c9a96e</span>
+              </div>
+              <div
+                class="palette-chip chip-dark"
+                style="background: var(--gold-hover)"
+              >
+                <span>Hover</span><span class="hex">#b8964f</span>
+              </div>
+            </div>
+          </div>
+          <div class="palette-group">
+            <h3>Neutral &mdash; Warm</h3>
+            <div class="palette-row">
+              <div
+                class="palette-chip chip-light"
+                style="background: var(--warm-50)"
+              >
+                <span>50</span>
+              </div>
+              <div
+                class="palette-chip chip-light"
+                style="background: var(--warm-100)"
+              >
+                <span>100</span>
+              </div>
+              <div
+                class="palette-chip chip-light"
+                style="background: var(--warm-200)"
+              >
+                <span>200</span>
+              </div>
+              <div
+                class="palette-chip chip-light"
+                style="background: var(--warm-300)"
+              >
+                <span>300</span>
+              </div>
+              <div
+                class="palette-chip chip-dark"
+                style="background: var(--warm-500)"
+              >
+                <span>500</span>
+              </div>
+              <div
+                class="palette-chip chip-dark"
+                style="background: var(--warm-700)"
+              >
+                <span>700</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Before / After -->
+        <h2>BEFORE vs AFTER</h2>
+        <div class="comparison-box">
+          <div class="comp-card comp-before">
+            <h4>Before &mdash; Navy + Gold</h4>
+            <div class="token-list">
+              <div class="token-item">
+                <div class="token-swatch" style="background: #1d55a0"></div>
+                <span>Primary</span><span class="token-hex">#1d55a0</span>
+              </div>
+              <div class="token-item">
+                <div class="token-swatch" style="background: #c4a265"></div>
+                <span>Accent</span><span class="token-hex">#c4a265</span>
+              </div>
+              <div class="token-item">
+                <div class="token-swatch" style="background: #12202e"></div>
+                <span>Dark BG</span><span class="token-hex">#12202e</span>
+              </div>
+            </div>
+          </div>
+          <div class="comp-card comp-after">
+            <h4>After &mdash; Green + White + Gold</h4>
+            <div class="token-list">
+              <div class="token-item">
+                <div
+                  class="token-swatch"
+                  style="background: var(--green-400)"
+                ></div>
+                <span>CTA / Action</span><span class="token-hex">#4cb872</span>
+              </div>
+              <div class="token-item">
+                <div
+                  class="token-swatch"
+                  style="background: var(--green-500)"
+                ></div>
+                <span>Primary</span><span class="token-hex">#3a9d5e</span>
+              </div>
+              <div class="token-item">
+                <div class="token-swatch" style="background: var(--gold)"></div>
+                <span>Gold Accent</span><span class="token-hex">#c9a96e</span>
+              </div>
+              <div class="token-item">
+                <div
+                  class="token-swatch"
+                  style="background: var(--white); border: 1px solid #eee"
+                ></div>
+                <span>Base BG</span><span class="token-hex">#ffffff</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mapping -->
+        <h2>CSS VARIABLE MAPPING</h2>
+        <table class="map-table" style="margin-top: 1.5rem">
+          <thead>
+            <tr>
+              <th>USAGE</th>
+              <th>BEFORE</th>
+              <th>AFTER</th>
+              <th>NOTE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CTA 버튼</td>
+              <td>
+                <span class="swatch" style="background: #1d55a0"></span>navy-500
+              </td>
+              <td>
+                <span class="swatch" style="background: var(--green-400)"></span
+                >green-400
+              </td>
+              <td style="color: var(--warm-300)">밝은 녹색, 생동감</td>
+            </tr>
+            <tr>
+              <td>버튼 호버</td>
+              <td>
+                <span class="swatch" style="background: #174785"></span>navy-600
+              </td>
+              <td>
+                <span class="swatch" style="background: var(--green-500)"></span
+                >green-500
+              </td>
+              <td style="color: var(--warm-300)">한 톤 진하게</td>
+            </tr>
+            <tr>
+              <td>Eyebrow 텍스트</td>
+              <td>
+                <span class="swatch" style="background: #5a8bc7"></span>navy-400
+              </td>
+              <td>
+                <span class="swatch" style="background: var(--green-400)"></span
+                >green-400
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Hero 배경</td>
+              <td>
+                <span class="swatch" style="background: #12202e"></span>#12202e
+                (어두운)
+              </td>
+              <td>
+                <span
+                  class="swatch"
+                  style="background: var(--white); border: 1px solid #ddd"
+                ></span
+                >white + border
+              </td>
+              <td style="color: var(--warm-300)">밝게 전환</td>
+            </tr>
+            <tr>
+              <td>CTA 배너</td>
+              <td>
+                <span class="swatch" style="background: #12202e"></span>dark
+                navy
+              </td>
+              <td>
+                <span class="swatch" style="background: var(--green-400)"></span
+                >green gradient
+              </td>
+              <td style="color: var(--warm-300)">밝은 그린 그라디언트</td>
+            </tr>
+            <tr>
+              <td>Stats 영역</td>
+              <td>
+                <span class="swatch" style="background: #f0f4fa"></span>navy-50
+              </td>
+              <td>
+                <span class="swatch" style="background: var(--gold-bg)"></span
+                >gold-bg
+              </td>
+              <td style="color: var(--warm-300)">골드 포인트</td>
+            </tr>
+            <tr>
+              <td>로고 텍스트</td>
+              <td>
+                <span class="swatch" style="background: #6b8e23"></span>#6b8e23
+              </td>
+              <td>
+                <span class="swatch" style="background: var(--green-500)"></span
+                >green-500
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Footer</td>
+              <td>
+                <span class="swatch" style="background: #12202e"></span>dark
+                navy
+              </td>
+              <td>
+                <span
+                  class="swatch"
+                  style="background: var(--dark-green)"
+                ></span
+                >dark-green
+              </td>
+              <td style="color: var(--warm-300)">유일한 다크 영역</td>
+            </tr>
+            <tr>
+              <td>Portfolio 라벨</td>
+              <td>
+                <span class="swatch" style="background: #5a8bc7"></span>navy-400
+              </td>
+              <td>
+                <span class="swatch" style="background: var(--gold)"></span>gold
+              </td>
+              <td style="color: var(--warm-300)">골드 악센트</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===== WIREFRAME PREVIEW ===== -->
+    <div
+      style="background: var(--warm-100); padding: 2rem 0; text-align: center"
+    >
+      <div
+        style="font-size: 0.7rem; letter-spacing: 4px; color: var(--warm-400)"
+      >
+        WIREFRAME PREVIEW
+      </div>
+    </div>
+
+    <!-- NAV -->
+    <nav class="wf-nav">
+      <div class="container">
+        <div class="wf-nav-logo">TOV HOUSE</div>
+        <ul class="wf-nav-links">
+          <li><a class="active">HOME</a></li>
+          <li><a>ABOUT</a></li>
+          <li><a>PORTFOLIO</a></li>
+          <li><a>NEWS</a></li>
+        </ul>
+        <a class="wf-nav-cta">ESTIMATE</a>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="wf-hero">
+      <div class="container">
+        <div class="wf-hero-grid">
+          <div class="wf-hero-image">
+            <div class="wf-hero-placeholder">PORTFOLIO IMAGE</div>
+            <div class="wf-hero-overlay">
+              <span class="wf-hero-tag">PORTFOLIO</span>
+              <span style="font-size: 1rem; font-weight: 500"
+                >Portfolio Title</span
+              >
+            </div>
+          </div>
+          <div class="wf-hero-content">
+            <div class="wf-hero-badge">TRANSPARENT INTERIOR</div>
+            <h1 class="wf-hero-title">TOV<br />HOUSE</h1>
+            <p class="wf-hero-title-kr">TOV HOUSE</p>
+            <p class="wf-hero-desc">
+              투명한 견적과 맞춤형 디자인 제안으로<br />주거 공간의 가치를
+              높이는 인테리어
+            </p>
+          </div>
+          <div class="wf-hero-stats">
+            <div class="wf-stat">
+              <span class="wf-stat-num">106</span
+              ><span class="wf-stat-unit">+</span>
+              <div class="wf-stat-label">완공 프로젝트</div>
+            </div>
+            <div class="wf-stat">
+              <span class="wf-stat-num">98</span
+              ><span class="wf-stat-unit">%</span>
+              <div class="wf-stat-label">고객 만족도</div>
+            </div>
+            <div class="wf-stat">
+              <span class="wf-stat-num">12</span
+              ><span class="wf-stat-unit">yr</span>
+              <div class="wf-stat-label">업력</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VALUES -->
+    <section class="wf-values">
+      <div class="container">
+        <div class="wf-section-header">
+          <div class="wf-section-eyebrow">WHY TOV HOUSE</div>
+          <h2 class="wf-section-title">투명한 견적, 전문적인 시공</h2>
+          <p class="wf-section-subtitle">토브하우스가 선택받는 이유</p>
+        </div>
+        <div class="wf-value-grid">
+          <div class="wf-value-card">
+            <div class="wf-value-icon">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"
+                />
+                <rect x="9" y="3" width="6" height="4" rx="1" />
+                <path d="M9 14l2 2 4-4" />
+              </svg>
+            </div>
+            <div class="wf-value-title">투명한 견적</div>
+            <div class="wf-value-desc">
+              항목별 상세 견적 공개로<br />불필요한 비용 걱정 없이
+            </div>
+          </div>
+          <div class="wf-value-card">
+            <div class="wf-value-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                <path d="M2 17l10 5 10-5" />
+                <path d="M2 12l10 5 10-5" />
+              </svg>
+            </div>
+            <div class="wf-value-title">맞춤형 디자인</div>
+            <div class="wf-value-desc">
+              공간과 라이프스타일에 맞춘<br />1:1 맞춤 설계
+            </div>
+          </div>
+          <div class="wf-value-card">
+            <div class="wf-value-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                <polyline points="22 4 12 14.01 9 11.01" />
+              </svg>
+            </div>
+            <div class="wf-value-title">책임 시공</div>
+            <div class="wf-value-desc">
+              자체 시공팀 운영으로<br />품질과 일정을 직접 관리
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PILLARS -->
+    <section class="wf-pillars">
+      <div class="container">
+        <div class="wf-section-header">
+          <div class="wf-section-eyebrow">THREE PILLARS</div>
+          <h2 class="wf-section-title">토브하우스의 3가지 약속</h2>
+        </div>
+        <div class="wf-pillar-grid">
+          <div class="wf-pillar-card">
+            <div class="wf-pillar-num">01</div>
+            <div class="wf-pillar-title">정직한 견적</div>
+            <div class="wf-pillar-desc">
+              모든 항목을 투명하게 공개하여 신뢰를 드립니다
+            </div>
+          </div>
+          <div class="wf-pillar-card">
+            <div class="wf-pillar-num">02</div>
+            <div class="wf-pillar-title">맞춤 설계</div>
+            <div class="wf-pillar-desc">
+              고객의 라이프스타일을 분석한 1:1 맞춤 디자인
+            </div>
+          </div>
+          <div class="wf-pillar-card">
+            <div class="wf-pillar-num">03</div>
+            <div class="wf-pillar-title">품질 보증</div>
+            <div class="wf-pillar-desc">
+              자체 시공팀의 직접 관리로 완성도를 보장합니다
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section class="wf-portfolio">
+      <div class="container">
+        <div class="wf-section-header">
+          <div class="wf-section-eyebrow">PORTFOLIO</div>
+          <h2 class="wf-section-title">106개의 완공 프로젝트</h2>
+          <p class="wf-section-subtitle">주거 81 + 상업 25</p>
+        </div>
+        <div class="wf-portfolio-grid">
+          <div class="wf-portfolio-card">
+            <div class="wf-portfolio-thumb">THUMBNAIL</div>
+            <div class="wf-portfolio-info">
+              <div class="wf-portfolio-type">RESIDENTIAL</div>
+              <div class="wf-portfolio-name">Portfolio Item 01</div>
+              <div class="wf-portfolio-meta">49PY</div>
+            </div>
+          </div>
+          <div class="wf-portfolio-card">
+            <div class="wf-portfolio-thumb">THUMBNAIL</div>
+            <div class="wf-portfolio-info">
+              <div class="wf-portfolio-type">RESIDENTIAL</div>
+              <div class="wf-portfolio-name">Portfolio Item 02</div>
+              <div class="wf-portfolio-meta">33PY</div>
+            </div>
+          </div>
+          <div class="wf-portfolio-card">
+            <div class="wf-portfolio-thumb">THUMBNAIL</div>
+            <div class="wf-portfolio-info">
+              <div class="wf-portfolio-type">COMMERCIAL</div>
+              <div class="wf-portfolio-name">Portfolio Item 03</div>
+              <div class="wf-portfolio-meta">23PY</div>
+            </div>
+          </div>
+        </div>
+        <div class="wf-portfolio-more">
+          <button class="wf-btn-outline">VIEW ALL PORTFOLIO</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS + CTA -->
+    <section class="wf-process">
+      <div class="container">
+        <div class="wf-section-header">
+          <div class="wf-section-eyebrow">PROCESS</div>
+          <h2 class="wf-section-title">진행 프로세스</h2>
+        </div>
+        <div class="wf-process-steps">
+          <div class="wf-step">
+            <div class="wf-step-circle">1</div>
+            <div class="wf-step-title">상담 신청</div>
+            <div class="wf-step-desc">온라인 견적 문의</div>
+          </div>
+          <div class="wf-step">
+            <div class="wf-step-circle">2</div>
+            <div class="wf-step-title">현장 방문</div>
+            <div class="wf-step-desc">실측 및 상담</div>
+          </div>
+          <div class="wf-step">
+            <div class="wf-step-circle">3</div>
+            <div class="wf-step-title">디자인 제안</div>
+            <div class="wf-step-desc">맞춤 설계 및 견적</div>
+          </div>
+          <div class="wf-step">
+            <div class="wf-step-circle">4</div>
+            <div class="wf-step-title">시공 완료</div>
+            <div class="wf-step-desc">품질 검수 및 인도</div>
+          </div>
+        </div>
+        <div class="wf-cta-banner">
+          <div class="wf-cta-title">무료 견적 상담 받기</div>
+          <div class="wf-cta-desc">투명한 견적으로 시작하는 나만의 공간</div>
+          <a class="wf-cta-btn">ESTIMATE NOW</a>
+          <a class="wf-cta-gold">CALL NOW</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER (유일한 다크 영역) -->
+    <footer class="wf-footer">
+      <div class="container">
+        <div class="wf-footer-grid">
+          <div>
+            <div class="wf-footer-brand">TOV HOUSE</div>
+            <div class="wf-footer-info">
+              (주)코이노니아 | 대표이사: 이재호<br />
+              사업자등록번호: 198-87-01821<br />
+              경기도 고양시 덕양구 삼원안길 12, 1층<br />
+              <span
+                style="
+                  color: var(--gold-light);
+                  font-size: 0.7rem;
+                  margin-top: 0.25rem;
+                  display: inline-block;
+                "
+                >청정종합건영(주) 건설업 면허 보유 기업</span
+              >
+            </div>
+          </div>
+          <div>
+            <div class="wf-footer-title">MENU</div>
+            <ul class="wf-footer-links">
+              <li><a>About</a></li>
+              <li><a>Portfolio</a></li>
+              <li><a>News</a></li>
+            </ul>
+          </div>
+          <div>
+            <div class="wf-footer-title">SUPPORT</div>
+            <ul class="wf-footer-links">
+              <li><a>Estimate</a></li>
+              <li><a>Privacy</a></li>
+              <li><a>Terms</a></li>
+            </ul>
+          </div>
+          <div>
+            <div class="wf-footer-title">CONTACT</div>
+            <ul class="wf-footer-links">
+              <li><a>Tel. 031-968-2224</a></li>
+              <li><a>info@tovdesign.net</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="wf-footer-bottom">
+          &copy; 2026 TOV HOUSE. All rights reserved.
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

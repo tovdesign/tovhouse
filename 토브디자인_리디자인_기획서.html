@@ -1,0 +1,1505 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      토브하우스 리디자인 기획서 | TOV Interior Design Redesign Plan
+    </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              navy: {
+                50: "#f0f4fa",
+                100: "#dce5f3",
+                200: "#b8cce7",
+                400: "#5a8bc7",
+                500: "#1d55a0",
+                600: "#174785",
+                700: "#12396b",
+              },
+              warm: {
+                50: "#faf8f5",
+                100: "#f1ede4",
+                200: "#e4ddd0",
+                300: "#c9bfad",
+                500: "#5a5448",
+                700: "#3c3733",
+              },
+              accent: { gold: "#c4a265", bronze: "#a0845c" },
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap");
+      body {
+        font-family: "Noto Sans KR", sans-serif;
+      }
+      .checklist input:checked + span {
+        text-decoration: line-through;
+        opacity: 0.5;
+      }
+      .section-card {
+        transition: all 0.2s;
+      }
+      .section-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+      }
+      .copy-btn {
+        cursor: pointer;
+        transition: all 0.15s;
+      }
+      .copy-btn:hover {
+        background: #1d55a0;
+        color: white;
+      }
+      .copy-btn:active {
+        transform: scale(0.95);
+      }
+      .tag {
+        display: inline-block;
+        padding: 2px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 500;
+      }
+      .comparison-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1px;
+        background: #e5e7eb;
+      }
+      .comparison-grid > div {
+        background: white;
+        padding: 16px;
+      }
+      details summary {
+        cursor: pointer;
+      }
+      details summary::-webkit-details-marker {
+        display: none;
+      }
+    </style>
+  </head>
+  <body class="bg-warm-50 text-warm-700">
+    <!-- Header -->
+    <header class="bg-navy-500 text-white sticky top-0 z-50">
+      <div
+        class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between"
+      >
+        <div>
+          <h1 class="text-xl font-bold tracking-wide">
+            TOV HOUSE REDESIGN PLAN
+          </h1>
+          <p class="text-navy-200 text-sm">
+            토브하우스 웹사이트 리디자인 기획서 v1.0
+          </p>
+        </div>
+        <div class="text-right text-sm text-navy-200">
+          <div>2026.03.15</div>
+          <div>
+            Status:
+            <span class="tag bg-yellow-400 text-yellow-900">기획 단계</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="bg-white border-b border-warm-200 sticky top-[72px] z-40">
+      <div
+        class="max-w-6xl mx-auto px-6 py-3 flex gap-6 text-sm overflow-x-auto"
+      >
+        <a
+          href="#overview"
+          class="text-navy-500 font-medium whitespace-nowrap hover:underline"
+          >Overview</a
+        >
+        <a
+          href="#current"
+          class="text-warm-500 whitespace-nowrap hover:text-navy-500"
+          >현재 분석</a
+        >
+        <a
+          href="#direction"
+          class="text-warm-500 whitespace-nowrap hover:text-navy-500"
+          >디자인 방향</a
+        >
+        <a
+          href="#palette"
+          class="text-warm-500 whitespace-nowrap hover:text-navy-500"
+          >컬러 시스템</a
+        >
+        <a
+          href="#layout"
+          class="text-warm-500 whitespace-nowrap hover:text-navy-500"
+          >레이아웃</a
+        >
+        <a
+          href="#pages"
+          class="text-warm-500 whitespace-nowrap hover:text-navy-500"
+          >페이지 설계</a
+        >
+        <a
+          href="#migration"
+          class="text-warm-500 whitespace-nowrap hover:text-navy-500"
+          >마이그레이션</a
+        >
+        <a
+          href="#checklist"
+          class="text-warm-500 whitespace-nowrap hover:text-navy-500"
+          >체크리스트</a
+        >
+      </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-6 py-10 space-y-12">
+      <!-- ===== SECTION 1: OVERVIEW ===== -->
+      <section id="overview" class="space-y-6">
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-warm-100">
+          <h2 class="text-2xl font-bold text-navy-500 mb-4">
+            Project Overview
+          </h2>
+          <div class="grid md:grid-cols-3 gap-6">
+            <div class="bg-navy-50 rounded-xl p-5">
+              <div class="text-sm text-navy-400 font-medium mb-1">프로젝트</div>
+              <div class="font-bold text-lg">토브하우스 웹사이트 리디자인</div>
+              <div class="text-sm text-warm-500 mt-2">
+                인테리어 리모델링 전문 기업
+              </div>
+            </div>
+            <div class="bg-navy-50 rounded-xl p-5">
+              <div class="text-sm text-navy-400 font-medium mb-1">
+                핵심 목표
+              </div>
+              <div class="font-bold text-lg">세련된 프리미엄 이미지</div>
+              <div class="text-sm text-warm-500 mt-2">
+                촌스러운 디자인 → 고급스러운 인테리어 회사
+              </div>
+            </div>
+            <div class="bg-navy-50 rounded-xl p-5">
+              <div class="text-sm text-navy-400 font-medium mb-1">
+                디자인 레퍼런스
+              </div>
+              <div class="font-bold text-lg">데이원디자인 스타일</div>
+              <div class="text-sm text-warm-500 mt-2">
+                압축 구조 + 블루톤 메인컬러 유지
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 p-4 bg-warm-50 rounded-xl border border-warm-200">
+            <h3 class="font-bold text-sm text-warm-700 mb-2">
+              핵심 설계 원칙 3가지
+            </h3>
+            <div class="grid md:grid-cols-3 gap-4 text-sm">
+              <div class="flex gap-2">
+                <span class="text-navy-500 font-bold">01</span> 압축 레이아웃 —
+                세로 스크롤 최소화, 벤토 그리드 기반 정보 밀도 극대화
+              </div>
+              <div class="flex gap-2">
+                <span class="text-navy-500 font-bold">02</span> 블루톤 세련화 —
+                기존 #1d55a0 유지하되 웜 뉴트럴 조합으로 고급감 확보
+              </div>
+              <div class="flex gap-2">
+                <span class="text-navy-500 font-bold">03</span> 포트폴리오 중심
+                — 시공사례가 곧 신뢰, 이미지 품질과 레이아웃에 집중
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== SECTION 2: CURRENT ANALYSIS ===== -->
+      <section id="current" class="space-y-6">
+        <h2 class="text-2xl font-bold text-navy-500">현재 사이트 분석</h2>
+
+        <!-- Site Map -->
+        <div
+          class="bg-white rounded-2xl p-8 shadow-sm border border-warm-100 section-card"
+        >
+          <h3 class="font-bold text-lg mb-4">사이트 구조 (5 Pages)</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b-2 border-navy-500 text-left">
+                  <th class="py-2 px-3">페이지</th>
+                  <th class="py-2 px-3">URL</th>
+                  <th class="py-2 px-3">콘텐츠</th>
+                  <th class="py-2 px-3">문제점</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-warm-100">
+                <tr>
+                  <td class="py-3 px-3 font-medium">MAIN</td>
+                  <td class="py-3 px-3 text-warm-500"><code>/</code></td>
+                  <td class="py-3 px-3">히어로 배너 + 슬로건 + CTA 전화번호</td>
+                  <td class="py-3 px-3">
+                    <span class="tag bg-red-100 text-red-700">과대 타이포</span>
+                    <span class="tag bg-red-100 text-red-700">여백 과다</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-3 font-medium">토브하우스 소개</td>
+                  <td class="py-3 px-3 text-warm-500"><code>/about</code></td>
+                  <td class="py-3 px-3">로고 + 회사 소개문 + 시공 장점 Q&A</td>
+                  <td class="py-3 px-3">
+                    <span class="tag bg-red-100 text-red-700">텍스트 과다</span>
+                    <span class="tag bg-red-100 text-red-700">구조 평면적</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-3 font-medium">리모델링사례</td>
+                  <td class="py-3 px-3 text-warm-500"><code>/house</code></td>
+                  <td class="py-3 px-3">주거/상업 탭, 4열 그리드 포트폴리오</td>
+                  <td class="py-3 px-3">
+                    <span class="tag bg-red-100 text-red-700"
+                      >녹색 워터마크</span
+                    >
+                    <span class="tag bg-yellow-100 text-yellow-700"
+                      >카드 디자인 부재</span
+                    >
+                  </td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-3 font-medium">견적신청</td>
+                  <td class="py-3 px-3 text-warm-500"><code>/request</code></td>
+                  <td class="py-3 px-3">8필드 폼 (이름~파일첨부)</td>
+                  <td class="py-3 px-3">
+                    <span class="tag bg-yellow-100 text-yellow-700"
+                      >폼 스타일 미흡</span
+                    >
+                  </td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-3 font-medium">공지사항</td>
+                  <td class="py-3 px-3 text-warm-500"><code>/news</code></td>
+                  <td class="py-3 px-3">빈 페이지 (게시물 0)</td>
+                  <td class="py-3 px-3">
+                    <span class="tag bg-red-100 text-red-700">관리 부재감</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Problems -->
+        <div
+          class="bg-white rounded-2xl p-8 shadow-sm border border-warm-100 section-card"
+        >
+          <h3 class="font-bold text-lg mb-4">디자인 문제점 상세</h3>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="space-y-4">
+              <h4
+                class="text-sm font-bold text-red-600 uppercase tracking-wider"
+              >
+                Critical Issues
+              </h4>
+              <div class="space-y-3">
+                <div class="flex gap-3 p-3 bg-red-50 rounded-lg">
+                  <span class="text-red-500 font-bold text-sm mt-0.5">C1</span>
+                  <div>
+                    <div class="font-medium text-sm">
+                      블루 컬러 조합 촌스러움
+                    </div>
+                    <div class="text-xs text-warm-500">
+                      #7aa7e3 헤더 + #1d55a0 네비 + 흰 배경의 조합이 2010년대
+                      기업 사이트 느낌. 웜 뉴트럴 보조색 부재
+                    </div>
+                  </div>
+                </div>
+                <div class="flex gap-3 p-3 bg-red-50 rounded-lg">
+                  <span class="text-red-500 font-bold text-sm mt-0.5">C2</span>
+                  <div>
+                    <div class="font-medium text-sm">
+                      과도한 세로 길이 + 여백
+                    </div>
+                    <div class="text-xs text-warm-500">
+                      메인 페이지가 히어로 + 간단 텍스트뿐인데 2-3스크롤. 정보
+                      밀도 극히 낮음
+                    </div>
+                  </div>
+                </div>
+                <div class="flex gap-3 p-3 bg-red-50 rounded-lg">
+                  <span class="text-red-500 font-bold text-sm mt-0.5">C3</span>
+                  <div>
+                    <div class="font-medium text-sm">
+                      포트폴리오 이미지 녹색 워터마크
+                    </div>
+                    <div class="text-xs text-warm-500">
+                      시공사례 이미지 하단에 연두색 "ToV 인테리어" 배너가 작품
+                      품질을 저해
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="space-y-4">
+              <h4
+                class="text-sm font-bold text-yellow-600 uppercase tracking-wider"
+              >
+                Improvement Areas
+              </h4>
+              <div class="space-y-3">
+                <div class="flex gap-3 p-3 bg-yellow-50 rounded-lg">
+                  <span class="text-yellow-600 font-bold text-sm mt-0.5"
+                    >I1</span
+                  >
+                  <div>
+                    <div class="font-medium text-sm">
+                      히어로 타이포그래피 비례
+                    </div>
+                    <div class="text-xs text-warm-500">
+                      "토브하우스" 한글이 과도하게 크고 볼드. 영문 "TOV
+                      INTERIOR"와 크기 밸런스 부재
+                    </div>
+                  </div>
+                </div>
+                <div class="flex gap-3 p-3 bg-yellow-50 rounded-lg">
+                  <span class="text-yellow-600 font-bold text-sm mt-0.5"
+                    >I2</span
+                  >
+                  <div>
+                    <div class="font-medium text-sm">
+                      "인테리어 자재 원가 공개" 배너
+                    </div>
+                    <div class="text-xs text-warm-500">
+                      파란 배경 + 큰 따옴표 + 아이콘 조합이 신뢰감보다 촌스러운
+                      인상
+                    </div>
+                  </div>
+                </div>
+                <div class="flex gap-3 p-3 bg-yellow-50 rounded-lg">
+                  <span class="text-yellow-600 font-bold text-sm mt-0.5"
+                    >I3</span
+                  >
+                  <div>
+                    <div class="font-medium text-sm">
+                      네비게이션 + 푸터 구조
+                    </div>
+                    <div class="text-xs text-warm-500">
+                      상단 파란 바 + 국기 아이콘 불필요. 푸터 "시공문의상담"
+                      배너가 과도하게 큼
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== SECTION 3: DESIGN DIRECTION ===== -->
+      <section id="direction" class="space-y-6">
+        <h2 class="text-2xl font-bold text-navy-500">디자인 방향</h2>
+
+        <div
+          class="bg-white rounded-2xl p-8 shadow-sm border border-warm-100 section-card"
+        >
+          <h3 class="font-bold text-lg mb-4">Before → After 디자인 키워드</h3>
+          <div
+            class="comparison-grid rounded-xl overflow-hidden border border-warm-200"
+          >
+            <div class="bg-red-50">
+              <h4 class="text-sm font-bold text-red-600 mb-3">현재 (Before)</h4>
+              <ul class="space-y-2 text-sm">
+                <li>투박한 블루 (#7aa7e3)</li>
+                <li>과도한 여백, 낮은 정보밀도</li>
+                <li>2010년대 기업 사이트 분위기</li>
+                <li>텍스트 중심, 이미지 활용 미흡</li>
+                <li>모든 요소가 크고 과장됨</li>
+              </ul>
+            </div>
+            <div class="bg-green-50">
+              <h4 class="text-sm font-bold text-green-700 mb-3">
+                목표 (After)
+              </h4>
+              <ul class="space-y-2 text-sm">
+                <li>세련된 네이비 + 웜 뉴트럴 조합</li>
+                <li>벤토 그리드 압축 레이아웃</li>
+                <li>2026 모던 인테리어 회사 느낌</li>
+                <li>포트폴리오 이미지 중심 구성</li>
+                <li>절제된 타이포그래피 + 적절한 여백</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reference: Day One Design -->
+        <div
+          class="bg-white rounded-2xl p-8 shadow-sm border border-warm-100 section-card"
+        >
+          <h3 class="font-bold text-lg mb-4">
+            레퍼런스: 데이원디자인 스타일 분석
+          </h3>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-medium text-sm text-navy-500 mb-3">
+                차용할 요소
+              </h4>
+              <ul class="space-y-2 text-sm">
+                <li class="flex gap-2">
+                  <span class="text-green-500">&#10003;</span> 웜 뉴트럴 보조
+                  팔레트 (크림, 토프, 차콜)
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-green-500">&#10003;</span> 넉넉하지만 통제된
+                  letter-spacing (3-6px 헤더)
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-green-500">&#10003;</span> 투명도 기반
+                  오버레이 (flat color 대신)
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-green-500">&#10003;</span> 0.3s 미세
+                  트랜지션, 절제된 모션
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-green-500">&#10003;</span> 포트폴리오 중심
+                  풀블리드 히어로
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-green-500">&#10003;</span> 높은 이미지 품질
+                  + 클린 레이아웃
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-medium text-sm text-navy-500 mb-3">
+                차별화 포인트 (토브하우스만의)
+              </h4>
+              <ul class="space-y-2 text-sm">
+                <li class="flex gap-2">
+                  <span class="text-navy-500">&#9679;</span> 블루톤 메인컬러
+                  유지 (#1d55a0 기반 발전)
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-navy-500">&#9679;</span> "투명한 견적"
+                  차별화 포인트 강조
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-navy-500">&#9679;</span> 벤토 그리드로 압축
+                  레이아웃 (데이원은 전통적 섹션)
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-navy-500">&#9679;</span> 견적 CTA를 모든
+                  섹션에 자연스럽게 배치
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-navy-500">&#9679;</span> 인터랙티브
+                  포트폴리오 필터링
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== SECTION 4: COLOR SYSTEM ===== -->
+      <section id="palette" class="space-y-6">
+        <h2 class="text-2xl font-bold text-navy-500">컬러 시스템</h2>
+
+        <div
+          class="bg-white rounded-2xl p-8 shadow-sm border border-warm-100 section-card"
+        >
+          <h3 class="font-bold text-lg mb-6">New Color Palette</h3>
+
+          <!-- Primary -->
+          <div class="mb-8">
+            <h4
+              class="text-sm font-bold text-warm-500 uppercase tracking-wider mb-3"
+            >
+              Primary — Navy Blue (기존 유지 + 세련화)
+            </h4>
+            <div class="flex gap-3">
+              <div class="text-center">
+                <div
+                  class="w-20 h-20 rounded-xl shadow-inner"
+                  style="background: #f0f4fa"
+                ></div>
+                <div class="text-xs mt-1 font-mono">#f0f4fa</div>
+                <div class="text-xs text-warm-500">50</div>
+              </div>
+              <div class="text-center">
+                <div
+                  class="w-20 h-20 rounded-xl shadow-inner"
+                  style="background: #dce5f3"
+                ></div>
+                <div class="text-xs mt-1 font-mono">#dce5f3</div>
+                <div class="text-xs text-warm-500">100</div>
+              </div>
+              <div class="text-center">
+                <div
+                  class="w-20 h-20 rounded-xl shadow-inner"
+                  style="background: #b8cce7"
+                ></div>
+                <div class="text-xs mt-1 font-mono">#b8cce7</div>
+                <div class="text-xs text-warm-500">200</div>
+              </div>
+              <div class="text-center">
+                <div
+                  class="w-20 h-20 rounded-xl shadow-inner"
+                  style="background: #5a8bc7"
+                ></div>
+                <div class="text-xs mt-1 font-mono">#5a8bc7</div>
+                <div class="text-xs text-warm-500">400</div>
+              </div>
+              <div class="text-center">
+                <div
+                  class="w-20 h-20 rounded-xl shadow-inner ring-2 ring-navy-500 ring-offset-2"
+                  style="background: #1d55a0"
+                ></div>
+                <div class="text-xs mt-1 font-mono font-bold">#1d55a0</div>
+                <div class="text-xs text-navy-500 font-medium">500 Main</div>
+              </div>
+              <div class="text-center">
+                <div
+                  class="w-20 h-20 rounded-xl shadow-inner"
+                  style="background: #174785"
+                ></div>
+                <div class="text-xs mt-1 font-mono">#174785</div>
+                <div class="text-xs text-warm-500">600</div>
+              </div>
+              <div class="text-center">
+                <div
+                  class="w-20 h-20 rounded-xl shadow-inner"
+                  style="background: #12396b"
+                ></div>
+                <div class="text-xs mt-1 font-mono">#12396b</div>
+                <div class="text-xs text-warm-500">700</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Warm Neutral -->
+          <div class="mb-8">
+            <h4
+              class="text-sm font-bold text-warm-500 uppercase tracking-wider mb-3"
+            >
+              Secondary — Warm Neutral (신규 추가)
+            </h4>
+            <div class="flex gap-3">
+              <div class="text-center">
+                <div
+                  class="w-20 h-20 rounded-xl shadow-inner"
+                  style="background: #faf8f5"
+                ></div>
+                <div class="text-xs mt-1 font-mono">#faf8f5</div>
+                <div class="text-xs text-warm-500">배경</div>
+              </div>
+              <div class="text-center">
+                <div
+                  class="w-20 h-20 rounded-xl shadow-inner"
+                  style="background: #f1ede4"
+                ></div>
+                <div class="text-xs mt-1 font-mono">#f1ede4</div>
+                <div class="text-xs text-warm-500">섹션 배경</div>
+              </div>
+              <div class="text-center">
+                <div
+                  class="w-20 h-20 rounded-xl shadow-inner"
+                  style="background: #e4ddd0"
+                ></div>
+                <div class="text-xs mt-1 font-mono">#e4ddd0</div>
+                <div class="text-xs text-warm-500">보더</div>
+              </div>
+              <div class="text-center">
+                <div
+                  class="w-20 h-20 rounded-xl shadow-inner"
+                  style="background: #c9bfad"
+                ></div>
+                <div class="text-xs mt-1 font-mono">#c9bfad</div>
+                <div class="text-xs text-warm-500">서브텍스트</div>
+              </div>
+              <div class="text-center">
+                <div
+                  class="w-20 h-20 rounded-xl shadow-inner"
+                  style="background: #5a5448"
+                ></div>
+                <div class="text-xs mt-1 font-mono">#5a5448</div>
+                <div class="text-xs text-warm-500">본문</div>
+              </div>
+              <div class="text-center">
+                <div
+                  class="w-20 h-20 rounded-xl shadow-inner"
+                  style="background: #3c3733"
+                ></div>
+                <div class="text-xs mt-1 font-mono">#3c3733</div>
+                <div class="text-xs text-warm-500">헤딩</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Accent -->
+          <div>
+            <h4
+              class="text-sm font-bold text-warm-500 uppercase tracking-wider mb-3"
+            >
+              Accent — Gold (CTA 전용)
+            </h4>
+            <div class="flex gap-3">
+              <div class="text-center">
+                <div
+                  class="w-20 h-20 rounded-xl shadow-inner"
+                  style="background: #c4a265"
+                ></div>
+                <div class="text-xs mt-1 font-mono">#c4a265</div>
+                <div class="text-xs text-warm-500">Gold</div>
+              </div>
+              <div class="text-center">
+                <div
+                  class="w-20 h-20 rounded-xl shadow-inner"
+                  style="background: #a0845c"
+                ></div>
+                <div class="text-xs mt-1 font-mono">#a0845c</div>
+                <div class="text-xs text-warm-500">Bronze</div>
+              </div>
+            </div>
+            <p class="text-xs text-warm-500 mt-3">
+              * 골드 액센트는 견적 CTA 버튼, 핵심 강조에만 사용. 남용 금지
+            </p>
+          </div>
+
+          <!-- Usage Rules -->
+          <div class="mt-8 p-5 bg-navy-50 rounded-xl">
+            <h4 class="font-medium text-sm mb-3">컬러 사용 규칙</h4>
+            <div class="grid md:grid-cols-2 gap-4 text-sm">
+              <div>
+                <div class="font-medium">배경 계층</div>
+                <div class="text-warm-500">
+                  페이지: #faf8f5 → 카드: #fff → 강조 섹션: #f1ede4 → 네이비
+                  섹션: #1d55a0
+                </div>
+              </div>
+              <div>
+                <div class="font-medium">텍스트 계층</div>
+                <div class="text-warm-500">
+                  헤딩: #3c3733 → 본문: #5a5448 → 서브: #c9bfad → 네이비 위
+                  흰색: #fff
+                </div>
+              </div>
+              <div>
+                <div class="font-medium">보더/구분선</div>
+                <div class="text-warm-500">
+                  #e4ddd0 (1px) 또는 rgba(0,0,0,0.06) — 하드한 #dadada 사용 금지
+                </div>
+              </div>
+              <div>
+                <div class="font-medium">제거하는 색상</div>
+                <div class="text-warm-500">
+                  #7aa7e3 (촌스러운 라이트블루), #00B8FF (시안 액센트), 연두
+                  워터마크 전부
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== SECTION 5: LAYOUT SYSTEM ===== -->
+      <section id="layout" class="space-y-6">
+        <h2 class="text-2xl font-bold text-navy-500">레이아웃 시스템</h2>
+
+        <div
+          class="bg-white rounded-2xl p-8 shadow-sm border border-warm-100 section-card"
+        >
+          <h3 class="font-bold text-lg mb-4">Compressed Bento Grid 구조</h3>
+
+          <div class="grid md:grid-cols-2 gap-6 mb-6">
+            <div>
+              <h4 class="font-medium text-sm text-navy-500 mb-3">Grid 규격</h4>
+              <table class="w-full text-sm">
+                <tbody class="divide-y divide-warm-100">
+                  <tr>
+                    <td class="py-2 text-warm-500">Max-width</td>
+                    <td class="py-2 font-mono">1280px</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 text-warm-500">Grid Columns</td>
+                    <td class="py-2 font-mono">12 columns</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 text-warm-500">Gap</td>
+                    <td class="py-2 font-mono">1.5rem (24px)</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 text-warm-500">Corner Radius</td>
+                    <td class="py-2 font-mono">16px (카드), 24px (섹션)</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 text-warm-500">Section Padding</td>
+                    <td class="py-2 font-mono">64px top/bottom</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 text-warm-500">Mobile Padding</td>
+                    <td class="py-2 font-mono">20px lateral</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div>
+              <h4 class="font-medium text-sm text-navy-500 mb-3">
+                Typography 시스템
+              </h4>
+              <table class="w-full text-sm">
+                <tbody class="divide-y divide-warm-100">
+                  <tr>
+                    <td class="py-2 text-warm-500">Font (KR)</td>
+                    <td class="py-2 font-mono">Pretendard</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 text-warm-500">Font (EN)</td>
+                    <td class="py-2 font-mono">Inter / Playfair Display</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 text-warm-500">Hero Heading</td>
+                    <td class="py-2 font-mono">42-56px / 700</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 text-warm-500">Section Heading</td>
+                    <td class="py-2 font-mono">28-32px / 700</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 text-warm-500">Body</td>
+                    <td class="py-2 font-mono">15-16px / 400</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 text-warm-500">Caption</td>
+                    <td class="py-2 font-mono">13px / 400</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 text-warm-500">Header Letter-spacing</td>
+                    <td class="py-2 font-mono">3-6px</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- ASCII Layout Wireframe -->
+          <div
+            class="bg-warm-50 rounded-xl p-6 font-mono text-xs leading-relaxed overflow-x-auto"
+          >
+            <h4
+              class="font-sans font-medium text-sm text-navy-500 mb-3 font-mono"
+            >
+              메인 페이지 벤토 그리드 와이어프레임
+            </h4>
+            <pre class="text-warm-700">
+┌─────────────────────────────────────────────────────────────┐
+│  [Logo]  TOV HOUSE     ABOUT  PORTFOLIO  ESTIMATE  NEWS   │  ← Sticky Nav (60px)
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│   ┌──────────────────────────┐ ┌─────────────────────────┐  │
+│   │                          │ │  투명한 인테리어          │  │
+│   │    HERO IMAGE            │ │  리모델링                 │  │
+│   │    (풀블리드 시공사례)     │ │                         │  │
+│   │    2 cols × 2 rows       │ │  '보기 좋은 공간'이       │  │
+│   │                          │ │   편한 공간이 됩니다      │  │
+│   │                          │ │                         │  │
+│   │                          │ │  [무료 견적 상담 →]       │  │
+│   └──────────────────────────┘ └─────────────────────────┘  │
+│                                                             │
+│   ┌────────┐ ┌────────┐ ┌────────┐ ┌──────────────────────┐ │
+│   │ 시공    │ │ 투명한  │ │ 맞춤형  │ │                      │ │
+│   │ 실적    │ │ 견적    │ │ 디자인  │ │   최근 시공 사례      │ │
+│   │ 200+   │ │ 시스템  │ │ 제안    │ │   (자동 슬라이드)     │ │
+│   │        │ │        │ │        │ │                      │ │
+│   └────────┘ └────────┘ └────────┘ └──────────────────────┘ │
+│                                                             │
+│   ┌──────────────────────────────────────────────────────┐  │
+│   │  PORTFOLIO PREVIEW (주거공간 | 상업공간) 필터          │  │
+│   │  ┌──────┐ ┌──────┐ ┌──────┐ ┌──────┐ ┌──────┐       │  │
+│   │  │ img  │ │ img  │ │ img  │ │ img  │ │ img  │ → MORE │  │
+│   │  └──────┘ └──────┘ └──────┘ └──────┘ └──────┘       │  │
+│   └──────────────────────────────────────────────────────┘  │
+│                                                             │
+│   ┌──────────────────────┐ ┌──────────────────────────────┐ │
+│   │  시공 프로세스         │ │  견적 신청 CTA               │ │
+│   │  01 상담 → 02 설계    │ │  이름 / 연락처 / 지역         │ │
+│   │  → 03 시공 → 04 완공  │ │  [간편 견적 요청 →]          │ │
+│   └──────────────────────┘ └──────────────────────────────┘ │
+│                                                             │
+│   ┌──────────────────────────────────────────────────────┐  │
+│   │  FOOTER: 연락처 / 주소 / 영업시간 / SNS               │  │
+│   └──────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────┘
+</pre
+            >
+          </div>
+
+          <!-- Interaction -->
+          <div class="mt-6 grid md:grid-cols-3 gap-4">
+            <div class="p-4 bg-warm-50 rounded-xl">
+              <h4 class="font-medium text-sm mb-2">Hover Effect</h4>
+              <div class="text-xs text-warm-500">
+                카드: scale(1.02) + shadow 증가<br />이미지: brightness(1.05)<br />전환:
+                0.3s ease
+              </div>
+            </div>
+            <div class="p-4 bg-warm-50 rounded-xl">
+              <h4 class="font-medium text-sm mb-2">Scroll Animation</h4>
+              <div class="text-xs text-warm-500">
+                fade-up 진입 (IntersectionObserver)<br />stagger: 100ms 간격<br />히어로만
+                parallax 효과
+              </div>
+            </div>
+            <div class="p-4 bg-warm-50 rounded-xl">
+              <h4 class="font-medium text-sm mb-2">Performance</h4>
+              <div class="text-xs text-warm-500">
+                LCP &lt; 2.5s 목표<br />AVIF/WebP 이미지<br />Below-fold 전부
+                lazy-load
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== SECTION 6: PAGE DESIGN ===== -->
+      <section id="pages" class="space-y-6">
+        <h2 class="text-2xl font-bold text-navy-500">페이지별 설계</h2>
+
+        <!-- Main Page -->
+        <details
+          open
+          class="bg-white rounded-2xl shadow-sm border border-warm-100 section-card"
+        >
+          <summary class="p-6 font-bold text-lg flex items-center gap-3">
+            <span
+              class="w-8 h-8 bg-navy-500 text-white rounded-lg flex items-center justify-center text-sm"
+              >01</span
+            >
+            메인 페이지 (One-Page Compressed)
+          </summary>
+          <div class="px-6 pb-6 space-y-4">
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <h4 class="font-medium text-sm text-navy-500 mb-2">
+                  섹션 구성 (위→아래)
+                </h4>
+                <ol class="space-y-2 text-sm list-decimal list-inside">
+                  <li>
+                    <strong>Sticky Navigation</strong> — 로고 + 4개 메뉴 + 견적
+                    CTA 버튼
+                  </li>
+                  <li>
+                    <strong>Hero Bento</strong> — 좌: 풀블리드 시공사례 이미지 /
+                    우: 슬로건 + CTA
+                  </li>
+                  <li>
+                    <strong>Value Props</strong> — 3+1 벤토 (시공실적, 투명견적,
+                    맞춤디자인 + 최근사례 슬라이더)
+                  </li>
+                  <li>
+                    <strong>Portfolio Preview</strong> — 필터 탭(주거/상업) +
+                    5개 썸네일 + "더보기"
+                  </li>
+                  <li>
+                    <strong>Process + CTA</strong> — 좌: 4단계 시공 프로세스 /
+                    우: 간편 견적 폼
+                  </li>
+                  <li>
+                    <strong>Footer</strong> — 2컬럼 (연락처+주소 /
+                    영업시간+소셜)
+                  </li>
+                </ol>
+              </div>
+              <div>
+                <h4 class="font-medium text-sm text-navy-500 mb-2">
+                  핵심 변화
+                </h4>
+                <ul class="space-y-2 text-sm">
+                  <li>
+                    기존 메인은 히어로+텍스트 2개 섹션 →
+                    <strong>6개 밀도 높은 섹션으로 압축</strong>
+                  </li>
+                  <li>
+                    세로 길이: 약 3000px → <strong>약 1800px 목표</strong>
+                  </li>
+                  <li>
+                    견적 CTA가 히어로, 프로세스 섹션, 모바일 플로팅 등
+                    <strong>3곳에 배치</strong>
+                  </li>
+                  <li>
+                    모든 섹션 사이 구분선 대신
+                    <strong>배경색 교차로 자연스러운 분리</strong>
+                  </li>
+                  <li>
+                    포트폴리오 프리뷰로
+                    <strong>리모델링사례 페이지 진입 유도</strong>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- About Page -->
+        <details
+          class="bg-white rounded-2xl shadow-sm border border-warm-100 section-card"
+        >
+          <summary class="p-6 font-bold text-lg flex items-center gap-3">
+            <span
+              class="w-8 h-8 bg-navy-500 text-white rounded-lg flex items-center justify-center text-sm"
+              >02</span
+            >
+            토브하우스 소개 페이지
+          </summary>
+          <div class="px-6 pb-6 space-y-4">
+            <div class="grid md:grid-cols-2 gap-4 text-sm">
+              <div>
+                <h4 class="font-medium text-navy-500 mb-2">현재 → 개선</h4>
+                <ul class="space-y-1">
+                  <li>
+                    로고 이미지 + 장문 소개 텍스트 →
+                    <strong>히어로 이미지 + 간결한 브랜드 스토리</strong>
+                  </li>
+                  <li>
+                    Q&A 형식 장점 설명 →
+                    <strong>아이콘 + 숫자 기반 비주얼 카드</strong>
+                  </li>
+                  <li>
+                    대표 정보 없음 →
+                    <strong>대표 인사말 + 팀 소개 (선택)</strong>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-medium text-navy-500 mb-2">섹션 구성</h4>
+                <ol class="space-y-1 list-decimal list-inside">
+                  <li>브랜드 히어로 (시공 현장 이미지 + 미션 스테이트먼트)</li>
+                  <li>핵심 가치 3가지 (투명, 맞춤, 소통) — 아이콘 카드</li>
+                  <li>시공 프로세스 타임라인 (4단계 비주얼)</li>
+                  <li>실적 수치 (시공 건수, 만족도, 경력 등)</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- Portfolio Page -->
+        <details
+          class="bg-white rounded-2xl shadow-sm border border-warm-100 section-card"
+        >
+          <summary class="p-6 font-bold text-lg flex items-center gap-3">
+            <span
+              class="w-8 h-8 bg-navy-500 text-white rounded-lg flex items-center justify-center text-sm"
+              >03</span
+            >
+            리모델링사례 (포트폴리오)
+          </summary>
+          <div class="px-6 pb-6 space-y-4">
+            <div class="grid md:grid-cols-2 gap-4 text-sm">
+              <div>
+                <h4 class="font-medium text-navy-500 mb-2">현재 → 개선</h4>
+                <ul class="space-y-1">
+                  <li>
+                    4열 단순 그리드 →
+                    <strong>Masonry/Bento 그리드 + 호버 상세</strong>
+                  </li>
+                  <li>
+                    녹색 워터마크 →
+                    <strong>미니멀 로고 오버레이 (우하단, 반투명)</strong>
+                  </li>
+                  <li>
+                    주거/상업 2탭 →
+                    <strong>지역, 평수, 공간 타입 필터 추가</strong>
+                  </li>
+                  <li>
+                    텍스트만 있는 제목 →
+                    <strong>지역 + 평수 + 타입 태그 시스템</strong>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-medium text-navy-500 mb-2">
+                  포트폴리오 카드 구성
+                </h4>
+                <ul class="space-y-1">
+                  <li>이미지 (aspect-ratio: 4/3)</li>
+                  <li>호버 시: 다크 오버레이 + 프로젝트명 + "자세히 보기"</li>
+                  <li>하단: 지역 태그 + 평수 + 공간 타입 배지</li>
+                  <li>클릭 시: 라이트박스 갤러리 (Before/After 슬라이더)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- Estimate Page -->
+        <details
+          class="bg-white rounded-2xl shadow-sm border border-warm-100 section-card"
+        >
+          <summary class="p-6 font-bold text-lg flex items-center gap-3">
+            <span
+              class="w-8 h-8 bg-navy-500 text-white rounded-lg flex items-center justify-center text-sm"
+              >04</span
+            >
+            견적신청 페이지
+          </summary>
+          <div class="px-6 pb-6 space-y-4">
+            <div class="grid md:grid-cols-2 gap-4 text-sm">
+              <div>
+                <h4 class="font-medium text-navy-500 mb-2">현재 → 개선</h4>
+                <ul class="space-y-1">
+                  <li>
+                    단순 폼 나열 →
+                    <strong>2컬럼 레이아웃 (좌: 폼 / 우: 신뢰 요소)</strong>
+                  </li>
+                  <li>
+                    텍스트 입력만 →
+                    <strong>드롭다운, 라디오, 레인지 슬라이더 혼합</strong>
+                  </li>
+                  <li>
+                    개인정보 안내만 →
+                    <strong>예상 소요 시간 + 응답률 표시</strong>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-medium text-navy-500 mb-2">폼 필드 재설계</h4>
+                <ol class="space-y-1 list-decimal list-inside">
+                  <li>이름 (텍스트)</li>
+                  <li>연락처 (통합 입력, 자동 하이픈)</li>
+                  <li>지역 (드롭다운: 시/군/구)</li>
+                  <li>공간 종류 (라디오: 주거/상업/기타)</li>
+                  <li>평수 (레인지 슬라이더 + 직접입력)</li>
+                  <li>예산 범위 (드롭다운: 구간별)</li>
+                  <li>희망 일정 (날짜 피커)</li>
+                  <li>상세 문의 (텍스트에어리어)</li>
+                  <li>참고 자료 (드래그앤드롭 파일 업로드)</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- News Page -->
+        <details
+          class="bg-white rounded-2xl shadow-sm border border-warm-100 section-card"
+        >
+          <summary class="p-6 font-bold text-lg flex items-center gap-3">
+            <span
+              class="w-8 h-8 bg-navy-500 text-white rounded-lg flex items-center justify-center text-sm"
+              >05</span
+            >
+            공지사항/커뮤니티
+          </summary>
+          <div class="px-6 pb-6 space-y-4 text-sm">
+            <div class="p-4 bg-yellow-50 rounded-xl border border-yellow-200">
+              <strong>의사결정 필요:</strong> 현재 빈 페이지. 아래 2가지 방향 중
+              선택 필요
+            </div>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div class="p-4 bg-warm-50 rounded-xl">
+                <h4 class="font-medium text-navy-500 mb-2">
+                  Option A: 유지 (공지사항)
+                </h4>
+                <ul class="space-y-1">
+                  <li>시공 진행 공지, 휴무 안내 등 최소한의 게시판</li>
+                  <li>콘텐츠 관리 부담 최소화</li>
+                  <li>빈 상태 방지를 위한 초기 게시물 3-5개 필요</li>
+                </ul>
+              </div>
+              <div class="p-4 bg-navy-50 rounded-xl">
+                <h4 class="font-medium text-navy-500 mb-2">
+                  Option B: 전환 (인테리어 팁/매거진)
+                </h4>
+                <ul class="space-y-1">
+                  <li>SEO 유입 + 전문성 어필 (인테리어 트렌드, 자재 가이드)</li>
+                  <li>콘텐츠 생산 부담 있음 (월 2-4건)</li>
+                  <li>장기적 가치 높음</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <!-- ===== SECTION 7: MIGRATION PLAN ===== -->
+      <section id="migration" class="space-y-6">
+        <h2 class="text-2xl font-bold text-navy-500">
+          콘텐츠 마이그레이션 계획
+        </h2>
+
+        <div
+          class="bg-white rounded-2xl p-8 shadow-sm border border-warm-100 section-card"
+        >
+          <h3 class="font-bold text-lg mb-4">기존 콘텐츠 → 신규 사이트 매핑</h3>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b-2 border-navy-500 text-left">
+                  <th class="py-2 px-3">콘텐츠 유형</th>
+                  <th class="py-2 px-3">현재 위치</th>
+                  <th class="py-2 px-3">신규 위치</th>
+                  <th class="py-2 px-3">처리 방법</th>
+                  <th class="py-2 px-3">우선순위</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-warm-100">
+                <tr>
+                  <td class="py-3 px-3 font-medium">포트폴리오 이미지</td>
+                  <td class="py-3 px-3 text-warm-500">
+                    /house (주거 8+건, 상업 TBD)
+                  </td>
+                  <td class="py-3 px-3">/portfolio + 메인 프리뷰</td>
+                  <td class="py-3 px-3">
+                    워터마크 제거 후 재업로드. 원본 고해상도 확보 필요
+                  </td>
+                  <td class="py-3 px-3">
+                    <span class="tag bg-red-100 text-red-700">P0</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-3 font-medium">포트폴리오 메타데이터</td>
+                  <td class="py-3 px-3">이미지 제목 텍스트</td>
+                  <td class="py-3 px-3">구조화 데이터 (지역/평수/타입)</td>
+                  <td class="py-3 px-3">
+                    기존 제목에서 파싱: "서울 성북구 석관동 49평" → 태그 분리
+                  </td>
+                  <td class="py-3 px-3">
+                    <span class="tag bg-red-100 text-red-700">P0</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-3 font-medium">회사 소개 텍스트</td>
+                  <td class="py-3 px-3">/about</td>
+                  <td class="py-3 px-3">/about + 메인 히어로</td>
+                  <td class="py-3 px-3">
+                    핵심 메시지 리라이팅 (간결화). 원문 보존 후 편집
+                  </td>
+                  <td class="py-3 px-3">
+                    <span class="tag bg-yellow-100 text-yellow-700">P1</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-3 font-medium">견적 폼 필드</td>
+                  <td class="py-3 px-3">/request (8필드)</td>
+                  <td class="py-3 px-3">/estimate + 메인 간편폼</td>
+                  <td class="py-3 px-3">
+                    필드 유지 + UI 개선. 메인에는 3필드 간편 버전
+                  </td>
+                  <td class="py-3 px-3">
+                    <span class="tag bg-yellow-100 text-yellow-700">P1</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-3 font-medium">시공 장점 Q&A</td>
+                  <td class="py-3 px-3">/about 하단</td>
+                  <td class="py-3 px-3">
+                    /about 비주얼 카드 + 메인 Value Props
+                  </td>
+                  <td class="py-3 px-3">
+                    텍스트 → 아이콘+숫자 기반 카드로 재구성
+                  </td>
+                  <td class="py-3 px-3">
+                    <span class="tag bg-blue-100 text-blue-700">P2</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-3 font-medium">연락처/주소 정보</td>
+                  <td class="py-3 px-3">푸터 (대표전화, 주소)</td>
+                  <td class="py-3 px-3">모든 페이지 푸터 + 견적 페이지</td>
+                  <td class="py-3 px-3">
+                    그대로 이전. 카카오맵 임베드 추가 고려
+                  </td>
+                  <td class="py-3 px-3">
+                    <span class="tag bg-blue-100 text-blue-700">P2</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-3 font-medium">상단 프로모 배너</td>
+                  <td class="py-3 px-3">
+                    전 페이지 상단 "실행원가 공개 후 20%"
+                  </td>
+                  <td class="py-3 px-3">메인 Value Props 카드 또는 제거</td>
+                  <td class="py-3 px-3">
+                    별도 배너 대신 본문에 자연스럽게 녹여내기
+                  </td>
+                  <td class="py-3 px-3">
+                    <span class="tag bg-blue-100 text-blue-700">P2</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div
+            class="mt-6 p-4 bg-yellow-50 rounded-xl border border-yellow-200"
+          >
+            <h4 class="font-medium text-sm mb-2">이미지 처리 주의사항</h4>
+            <ul class="text-sm space-y-1 text-warm-700">
+              <li>
+                &#x26A0; 기존 이미지에 녹색 "ToV 인테리어" 워터마크가 포함됨 →
+                원본 확보 필수
+              </li>
+              <li>
+                &#x26A0; 임웹(imweb) 호스팅 이미지 URL은 마이그레이션 후 접근
+                불가 → 사전 다운로드
+              </li>
+              <li>
+                &#x26A0; 이미지 포맷: 원본 → WebP/AVIF 변환 필요 (품질 85-90%)
+              </li>
+              <li>
+                &#x26A0; 썸네일 생성: 400px, 800px, 1200px 3단계 responsive
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== SECTION 8: IMPLEMENTATION CHECKLIST ===== -->
+      <section id="checklist" class="space-y-6">
+        <h2 class="text-2xl font-bold text-navy-500">구현 체크리스트</h2>
+
+        <div
+          class="bg-white rounded-2xl p-8 shadow-sm border border-warm-100 section-card"
+        >
+          <div class="grid md:grid-cols-2 gap-8 checklist">
+            <div>
+              <h3 class="font-bold mb-4 text-navy-500">
+                Phase 1: 디자인 시스템 구축
+              </h3>
+              <div class="space-y-2 text-sm">
+                <label class="flex gap-2 items-start"
+                  ><input type="checkbox" /><span
+                    >컬러 토큰 정의 (CSS Variables)</span
+                  ></label
+                >
+                <label class="flex gap-2 items-start"
+                  ><input type="checkbox" /><span
+                    >타이포그래피 스케일 정의</span
+                  ></label
+                >
+                <label class="flex gap-2 items-start"
+                  ><input type="checkbox" /><span
+                    >그리드 시스템 (12col + gap)</span
+                  ></label
+                >
+                <label class="flex gap-2 items-start"
+                  ><input type="checkbox" /><span
+                    >카드 컴포넌트 (포트폴리오, Value Prop)</span
+                  ></label
+                >
+                <label class="flex gap-2 items-start"
+                  ><input type="checkbox" /><span
+                    >버튼 컴포넌트 (Primary, Secondary, Ghost)</span
+                  ></label
+                >
+                <label class="flex gap-2 items-start"
+                  ><input type="checkbox" /><span
+                    >폼 컴포넌트 (Input, Select, Textarea)</span
+                  ></label
+                >
+                <label class="flex gap-2 items-start"
+                  ><input type="checkbox" /><span
+                    >네비게이션 컴포넌트 (Desktop + Mobile)</span
+                  ></label
+                >
+                <label class="flex gap-2 items-start"
+                  ><input type="checkbox" /><span>푸터 컴포넌트</span></label
+                >
+              </div>
+
+              <h3 class="font-bold mb-4 mt-8 text-navy-500">
+                Phase 2: 페이지 구현
+              </h3>
+              <div class="space-y-2 text-sm">
+                <label class="flex gap-2 items-start"
+                  ><input type="checkbox" /><span
+                    >메인 페이지 (Bento Hero + 6 섹션)</span
+                  ></label
+                >
+                <label class="flex gap-2 items-start"
+                  ><input type="checkbox" /><span
+                    >소개 페이지 (브랜드 스토리 + 프로세스)</span
+                  ></label
+                >
+                <label class="flex gap-2 items-start"
+                  ><input type="checkbox" /><span
+                    >포트폴리오 페이지 (필터 + Masonry)</span
+                  ></label
+                >
+                <label class="flex gap-2 items-start"
+                  ><input type="checkbox" /><span
+                    >견적 페이지 (2컬럼 폼 + 신뢰 요소)</span
+                  ></label
+                >
+                <label class="flex gap-2 items-start"
+                  ><input type="checkbox" /><span
+                    >공지사항 페이지 (TBD)</span
+                  ></label
+                >
+              </div>
+            </div>
+            <div>
+              <h3 class="font-bold mb-4 text-navy-500">
+                Phase 3: 콘텐츠 & 인터랙션
+              </h3>
+              <div class="space-y-2 text-sm">
+                <label class="flex gap-2 items-start"
+                  ><input type="checkbox" /><span
+                    >포트폴리오 이미지 원본 확보 + WebP 변환</span
+                  ></label
+                >
+                <label class="flex gap-2 items-start"
+                  ><input type="checkbox" /><span
+                    >포트폴리오 메타데이터 구조화</span
+                  ></label
+                >
+                <label class="flex gap-2 items-start"
+                  ><input type="checkbox" /><span
+                    >소개 텍스트 리라이팅</span
+                  ></label
+                >
+                <label class="flex gap-2 items-start"
+                  ><input type="checkbox" /><span
+                    >스크롤 애니메이션 (fade-up)</span
+                  ></label
+                >
+                <label class="flex gap-2 items-start"
+                  ><input type="checkbox" /><span
+                    >포트폴리오 필터링 인터랙션</span
+                  ></label
+                >
+                <label class="flex gap-2 items-start"
+                  ><input type="checkbox" /><span
+                    >라이트박스 갤러리</span
+                  ></label
+                >
+                <label class="flex gap-2 items-start"
+                  ><input type="checkbox" /><span
+                    >모바일 플로팅 CTA 버튼</span
+                  ></label
+                >
+              </div>
+
+              <h3 class="font-bold mb-4 mt-8 text-navy-500">
+                Phase 4: QA & 최적화
+              </h3>
+              <div class="space-y-2 text-sm">
+                <label class="flex gap-2 items-start"
+                  ><input type="checkbox" /><span
+                    >반응형 테스트 (Mobile / Tablet / Desktop)</span
+                  ></label
+                >
+                <label class="flex gap-2 items-start"
+                  ><input type="checkbox" /><span
+                    >Lighthouse 성능 점수 90+</span
+                  ></label
+                >
+                <label class="flex gap-2 items-start"
+                  ><input type="checkbox" /><span
+                    >SEO 메타태그 + OG 이미지</span
+                  ></label
+                >
+                <label class="flex gap-2 items-start"
+                  ><input type="checkbox" /><span>폼 제출 테스트</span></label
+                >
+                <label class="flex gap-2 items-start"
+                  ><input type="checkbox" /><span
+                    >크로스 브라우저 (Chrome, Safari, Edge)</span
+                  ></label
+                >
+                <label class="flex gap-2 items-start"
+                  ><input type="checkbox" /><span
+                    >접근성 (WCAG 2.1 AA)</span
+                  ></label
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== DECISION LOG ===== -->
+      <section class="space-y-6">
+        <h2 class="text-2xl font-bold text-navy-500">의사결정 필요 사항</h2>
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-warm-100">
+          <div class="space-y-4">
+            <div
+              class="flex gap-4 p-4 bg-yellow-50 rounded-xl border border-yellow-200"
+            >
+              <span class="tag bg-yellow-400 text-yellow-900 h-fit">D1</span>
+              <div>
+                <div class="font-medium text-sm">기술 스택 선택</div>
+                <div class="text-xs text-warm-500">
+                  Next.js + Tailwind (추천) vs 임웹(imweb) 유지 커스텀 vs 기타
+                  빌더
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex gap-4 p-4 bg-yellow-50 rounded-xl border border-yellow-200"
+            >
+              <span class="tag bg-yellow-400 text-yellow-900 h-fit">D2</span>
+              <div>
+                <div class="font-medium text-sm">공지사항 페이지 방향</div>
+                <div class="text-xs text-warm-500">
+                  단순 공지 유지 vs 인테리어 매거진/팁 전환 (SEO 가치)
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex gap-4 p-4 bg-yellow-50 rounded-xl border border-yellow-200"
+            >
+              <span class="tag bg-yellow-400 text-yellow-900 h-fit">D3</span>
+              <div>
+                <div class="font-medium text-sm">
+                  포트폴리오 이미지 원본 확보
+                </div>
+                <div class="text-xs text-warm-500">
+                  워터마크 제거 가능 여부. 원본 고해상도 파일 보유 확인 필요
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex gap-4 p-4 bg-yellow-50 rounded-xl border border-yellow-200"
+            >
+              <span class="tag bg-yellow-400 text-yellow-900 h-fit">D4</span>
+              <div>
+                <div class="font-medium text-sm">도메인/호스팅</div>
+                <div class="text-xs text-warm-500">
+                  tov2024.imweb.me → 커스텀 도메인 (tovdesign.co.kr 등) 이전
+                  여부
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-navy-700 text-navy-200 py-8 mt-12">
+      <div class="max-w-6xl mx-auto px-6 text-center text-sm">
+        <p>토브하우스 리디자인 기획서 v1.0 | Generated 2026.03.15</p>
+        <p class="text-navy-400 mt-1">
+          Prepared by Claude Code + Design Research Agents
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // Copy button functionality
+      document.querySelectorAll(".copy-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const text = btn.dataset.copy;
+          navigator.clipboard.writeText(text);
+          const orig = btn.textContent;
+          btn.textContent = "Copied!";
+          setTimeout(() => (btn.textContent = orig), 1500);
+        });
+      });
+    </script>
+  </body>
+</html>

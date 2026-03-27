@@ -1,0 +1,3183 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>토브하우스 | 투명한 인테리어 리모델링</title>
+    <meta
+      name="description"
+      content="토브하우스 - 투명한 견적, 맞춤형 디자인 제안. 주거·상업 공간 인테리어 리모델링 전문"
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://tovdesign.net/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="토브하우스" />
+    <meta property="og:title" content="토브하우스 | 투명한 인테리어 리모델링" />
+    <meta property="og:description" content="토브하우스 - 투명한 견적, 맞춤형 디자인 제안. 주거·상업 공간 인테리어 리모델링 전문" />
+    <meta property="og:url" content="https://tovdesign.net/" />
+    <meta property="og:image" content="https://tovdesign.net/assets/site/og-image.png" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="토브하우스 | 투명한 인테리어 리모델링" />
+    <meta name="twitter:description" content="투명한 견적, 맞춤형 디자인 제안. 주거·상업 공간 인테리어 리모델링 전문" />
+    <meta name="twitter:image" content="https://tovdesign.net/assets/site/og-image.png" />
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+      rel="stylesheet"
+    />
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DSJZMGDTB3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-DSJZMGDTB3');
+    </script>
+    <style>
+      /* ========== DESIGN TOKENS ========== */
+      :root {
+        /* Primary - Fresh Green */
+        --green-50: #f2f9f4;
+        --green-100: #e0f2e5;
+        --green-200: #b8e4c4;
+        --green-300: #7ed09a;
+        --green-400: #4cb872;
+        --green-500: #3a9d5e;
+        --green-600: #2f8550;
+
+        /* White & Light */
+        --off-white: #fafcfa;
+        --light-green: #f5faf6;
+
+        /* Gold Accent */
+        --gold: #c9a96e;
+        --gold-light: #e8d9b8;
+        --gold-hover: #b8964f;
+        --gold-bg: #faf6ee;
+
+        /* Warm Neutral */
+        --warm-50: #faf9f7;
+        --warm-100: #f3f0ea;
+        --warm-200: #e6e0d5;
+        --warm-300: #c4baa8;
+        --warm-400: #9e9484;
+        --warm-500: #6b6358;
+        --warm-700: #3c3733;
+
+        /* Dark Green (Footer only) */
+        --dark-green: #1a3324;
+
+        /* Spacing */
+        --gap: 1.5rem;
+        --section-py: 5rem;
+        --radius-card: 16px;
+        --radius-section: 24px;
+
+        /* Typography */
+        --font-kr:
+          "Pretendard Variable", "Pretendard", -apple-system,
+          BlinkMacSystemFont, sans-serif;
+        --font-en:
+          "Pretendard Variable", "Pretendard", -apple-system,
+          BlinkMacSystemFont, sans-serif;
+      }
+
+      /* ========== RESET & BASE ========== */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: var(--font-kr);
+        color: var(--warm-500);
+        background: var(--warm-50);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+      img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      button {
+        font-family: inherit;
+        cursor: pointer;
+        border: none;
+      }
+
+      /* ========== UTILITIES ========== */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      /* ========== SIDEBAR ========== */
+      .sidebar {
+        position: fixed;
+        top: calc(64px + 2rem);
+        left: calc(50% + 600px + 12px);
+        width: 340px;
+        height: 520px;
+        z-index: 50;
+        background: #1a3324;
+        overflow: hidden;
+        border-radius: 16px;
+      }
+      .sidebar .mg-viewport {
+        width: 100%;
+        height: 100%;
+        max-width: 100%;
+        max-height: 100%;
+        min-height: auto;
+      }
+      .sidebar .mg-intro-title {
+        font-size: 1.8rem;
+        letter-spacing: 1px;
+      }
+      .sidebar .mg-intro-eyebrow {
+        font-size: 0.55rem;
+        letter-spacing: 2px;
+      }
+      .sidebar .mg-step-num {
+        font-size: 2.5rem;
+        top: 1rem;
+        left: 1rem;
+      }
+      .sidebar .mg-step-icon {
+        width: 56px;
+        height: 56px;
+        margin-bottom: 1rem;
+      }
+      .sidebar .mg-step-title {
+        font-size: 1.1rem;
+        margin-bottom: 0.4rem;
+      }
+      .sidebar .mg-step-desc {
+        font-size: 0.75rem;
+        max-width: 300px;
+        line-height: 1.5;
+        word-break: keep-all;
+      }
+      .sidebar .mg-step-tags {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.3rem;
+        margin-top: 0.6rem;
+      }
+      .sidebar .mg-step-tags span {
+        font-size: 0.6rem;
+        padding: 0.2rem 0.5rem;
+      }
+      .sidebar .mg-receipt {
+        padding: 1.2rem;
+        width: 240px;
+        border-radius: 16px;
+      }
+      .sidebar .mg-receipt-logo,
+      .sidebar .mg-receipt-title {
+        font-size: 0.8rem;
+      }
+      .sidebar .mg-receipt-row {
+        font-size: 0.75rem;
+        padding: 0.35rem 0;
+      }
+      .sidebar .mg-receipt-total {
+        font-size: 0.85rem;
+      }
+      .sidebar .mg-receipt-scroll {
+        max-height: 120px;
+      }
+      .sidebar .mg-finale-badge {
+        font-size: 0.75rem;
+        padding: 0.4rem 1.2rem;
+        margin-bottom: 1rem;
+      }
+      .sidebar .mg-finale-text {
+        font-size: 0.95rem;
+      }
+      .sidebar .mg-finale-sub {
+        font-size: 0.7rem;
+      }
+      .sidebar .mg-timeline {
+        width: 120px;
+        bottom: 1rem;
+      }
+      .sidebar .mg-replay {
+        top: 0.75rem;
+        right: 0.75rem;
+        width: 28px;
+        height: 28px;
+      }
+      .sidebar .mg-replay svg {
+        width: 12px;
+        height: 12px;
+      }
+      .sidebar .mg-scene {
+        padding: 1rem;
+      }
+
+      @media (max-width: 1024px) {
+        .sidebar {
+          display: none;
+        }
+      }
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+      }
+      .text-en {
+        font-family: var(--font-en);
+      }
+      .text-navy {
+        color: var(--green-500);
+      }
+      .text-warm-300 {
+        color: var(--warm-500);
+      }
+      .text-warm-700 {
+        color: var(--warm-700);
+      }
+      .bg-warm-100 {
+        background: var(--warm-100);
+      }
+      .bg-navy {
+        background: var(--green-500);
+      }
+
+      /* ========== NAVIGATION ========== */
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--warm-200);
+        height: 64px;
+      }
+      .nav .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 100%;
+      }
+      .nav-logo {
+        display: flex;
+        align-items: center;
+      }
+      .nav-logo-img {
+        height: 36px;
+        width: auto;
+      }
+      .nav-logo-text {
+        font-size: 1rem;
+        font-weight: 700;
+        color: #3a9d5e;
+        margin-left: 0.5rem;
+        letter-spacing: 0.5px;
+      }
+      .nav-links {
+        display: flex;
+        gap: 2.5rem;
+        list-style: none;
+      }
+      .nav-links a {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--warm-500);
+        letter-spacing: 1px;
+        transition: color 0.3s;
+        position: relative;
+      }
+      .nav-links a:hover,
+      .nav-links a.active {
+        color: var(--green-500);
+      }
+      .nav-links a.active::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--green-500);
+        border-radius: 1px;
+      }
+      .nav-cta {
+        background: var(--green-500);
+        color: white;
+        padding: 0.5rem 1.25rem;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        transition:
+          background 0.3s,
+          transform 0.2s;
+      }
+      .nav-cta:hover {
+        background: var(--green-600);
+        transform: translateY(-1px);
+      }
+
+      /* Mobile Nav Toggle */
+      .nav-toggle {
+        display: none;
+        background: none;
+        border: none;
+        padding: 0.5rem;
+        cursor: pointer;
+      }
+      .nav-toggle span {
+        display: block;
+        width: 20px;
+        height: 2px;
+        background: var(--warm-700);
+        margin: 4px 0;
+        transition: 0.3s;
+      }
+      .nav-toggle.open span:nth-child(1) {
+        transform: rotate(45deg) translate(4px, 4px);
+      }
+      .nav-toggle.open span:nth-child(2) {
+        opacity: 0;
+      }
+      .nav-toggle.open span:nth-child(3) {
+        transform: rotate(-45deg) translate(4px, -4px);
+      }
+      .nav-mobile-menu {
+        display: none;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        z-index: 999;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--warm-200);
+        padding: 1rem 1.5rem;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      }
+      .nav-mobile-menu.show {
+        display: block;
+      }
+      .nav-mobile-menu a {
+        display: block;
+        padding: 0.75rem 0;
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: var(--warm-500);
+        border-bottom: 1px solid var(--warm-100);
+        transition: color 0.2s;
+      }
+      .nav-mobile-menu a:last-child {
+        border-bottom: none;
+      }
+      .nav-mobile-menu a:hover,
+      .nav-mobile-menu a.active {
+        color: var(--green-500);
+      }
+
+      /* ========== HERO BENTO ========== */
+      .hero {
+        padding: 2rem 0 0;
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr;
+        gap: var(--gap);
+        min-height: 520px;
+      }
+      .hero-image {
+        border-radius: var(--radius-section);
+        overflow: hidden;
+        position: relative;
+        display: block;
+        cursor: pointer;
+      }
+      .hero-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 30%;
+        transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .hero-image:hover img {
+        transform: scale(1.03);
+      }
+      /* Bottom overlay bar covering the watermark area — 14% of image height */
+      .hero-case-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 22%;
+        min-height: 72px;
+        background: linear-gradient(
+          135deg,
+          var(--green-600) 0%,
+          var(--green-600) 100%
+        );
+        display: flex;
+        align-items: center;
+        padding: 0 1.5rem;
+        gap: 0.75rem;
+        z-index: 3;
+        transition: background 0.3s;
+      }
+      .hero-image:hover .hero-case-overlay {
+        background: linear-gradient(
+          135deg,
+          var(--green-500) 0%,
+          var(--green-600) 100%
+        );
+      }
+      .hero-case-tag {
+        font-size: 0.6rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        color: var(--gold);
+        padding: 0.2rem 0.5rem;
+        border: 1px solid rgba(196, 162, 101, 0.3);
+        border-radius: 4px;
+        flex-shrink: 0;
+      }
+      .hero-case-title {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: white;
+        flex: 1;
+        letter-spacing: 0.5px;
+      }
+      .hero-case-arrow {
+        color: rgba(255, 255, 255, 0.5);
+        flex-shrink: 0;
+        transition:
+          transform 0.3s,
+          color 0.3s;
+      }
+      .hero-image:hover .hero-case-arrow {
+        transform: translateX(3px);
+        color: white;
+      }
+      .hero-image::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(76, 184, 114, 0.08) 0%,
+          rgba(0, 0, 0, 0.04) 100%
+        );
+      }
+      .hero-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 3rem;
+        background: white;
+        border-radius: var(--radius-section);
+        border: 1px solid var(--warm-200);
+      }
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: var(--green-50);
+        color: var(--green-500);
+        padding: 0.375rem 1rem;
+        border-radius: 100px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        width: fit-content;
+        margin-bottom: 1.5rem;
+      }
+      .hero-badge::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        background: var(--green-500);
+        border-radius: 50%;
+      }
+      .hero-title {
+        font-family: var(--font-en);
+        font-size: 2.8rem;
+        font-weight: 600;
+        color: var(--warm-700);
+        letter-spacing: 4px;
+        line-height: 1.2;
+        margin-bottom: 0.75rem;
+      }
+      .hero-title-kr {
+        font-size: 1.1rem;
+        font-weight: 400;
+        color: var(--warm-500);
+        letter-spacing: 6px;
+        margin-bottom: 2rem;
+      }
+      .hero-desc {
+        font-size: 1.05rem;
+        line-height: 1.8;
+        color: var(--warm-500);
+        margin-bottom: 2.5rem;
+      }
+      .hero-desc strong {
+        color: var(--green-500);
+        font-weight: 600;
+      }
+      .hero-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: var(--green-500);
+        color: white;
+        padding: 0.875rem 2rem;
+        border-radius: 12px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        transition: all 0.3s;
+        width: fit-content;
+      }
+      .hero-cta:hover {
+        background: var(--green-600);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(76, 184, 114, 0.25);
+      }
+      .hero-cta svg {
+        transition: transform 0.3s;
+      }
+      .hero-cta:hover svg {
+        transform: translateX(4px);
+      }
+
+      /* ========== VALUE PROPS (Bento) ========== */
+      .values {
+        padding: var(--gap) 0;
+      }
+      .values-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr) 1.5fr;
+        gap: var(--gap);
+      }
+      .value-card {
+        background: white;
+        border: 1px solid var(--warm-200);
+        border-radius: var(--radius-card);
+        padding: 2rem 1.5rem;
+        transition: all 0.3s;
+        position: relative;
+        overflow: hidden;
+      }
+      .value-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+        border-color: var(--green-200);
+      }
+      .value-icon {
+        width: 48px;
+        height: 48px;
+        background: var(--green-50);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.25rem;
+        color: var(--green-500);
+      }
+      .value-number {
+        font-family: var(--font-en);
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--green-500);
+        line-height: 1;
+        margin-bottom: 0.25rem;
+      }
+      .value-label {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--warm-700);
+        margin-bottom: 0.5rem;
+      }
+      .value-desc {
+        font-size: 0.8rem;
+        color: var(--warm-400);
+        line-height: 1.5;
+      }
+
+      /* Recent Works Slider Card */
+      .recent-works {
+        background: var(--green-500);
+        border-radius: var(--radius-card);
+        padding: 2rem;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+      }
+      .recent-works::before {
+        content: "";
+        position: absolute;
+        top: -40px;
+        right: -40px;
+        width: 160px;
+        height: 160px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+      }
+      .recent-works-title {
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 2px;
+        opacity: 0.7;
+        margin-bottom: 0.75rem;
+        text-transform: uppercase;
+      }
+      .recent-works-slider {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.75rem;
+      }
+      .recent-work-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.75rem;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+        transition: background 0.3s;
+        cursor: pointer;
+      }
+      .recent-work-item:hover {
+        background: rgba(255, 255, 255, 0.15);
+      }
+      .recent-work-thumb {
+        width: 56px;
+        height: 42px;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.15);
+        overflow: hidden;
+        flex-shrink: 0;
+      }
+      .recent-work-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .recent-work-info {
+        flex: 1;
+        min-width: 0;
+      }
+      .recent-work-name {
+        font-size: 0.8rem;
+        font-weight: 500;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .recent-work-meta {
+        font-size: 0.7rem;
+        opacity: 0.6;
+      }
+
+      /* ========== 3 PILLARS ========== */
+      .pillars {
+        padding: var(--section-py) 0;
+      }
+      .section-header {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+      .section-eyebrow {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--green-500);
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 0.75rem;
+      }
+      .section-title {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--warm-700);
+        letter-spacing: 1px;
+      }
+      .section-subtitle {
+        font-size: 0.95rem;
+        color: var(--warm-400);
+        margin-top: 0.5rem;
+      }
+      .pillars-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--gap);
+      }
+      .pillar-card {
+        background: white;
+        border: 1px solid var(--warm-200);
+        border-radius: var(--radius-card);
+        overflow: hidden;
+        transition: all 0.3s;
+      }
+      .pillar-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+      }
+      .pillar-image {
+        height: 200px;
+        overflow: hidden;
+        position: relative;
+      }
+      .pillar-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s;
+      }
+      .pillar-card:hover .pillar-image img {
+        transform: scale(1.05);
+      }
+      .pillar-body {
+        padding: 1.5rem;
+      }
+      .pillar-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--warm-700);
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .pillar-title::before {
+        content: "";
+        width: 4px;
+        height: 20px;
+        background: var(--green-500);
+        border-radius: 2px;
+        flex-shrink: 0;
+      }
+      .pillar-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .pillar-list li {
+        font-size: 0.85rem;
+        color: var(--warm-500);
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        line-height: 1.5;
+      }
+      .pillar-list li::before {
+        content: "";
+        width: 5px;
+        height: 5px;
+        background: var(--green-200);
+        border-radius: 50%;
+        flex-shrink: 0;
+        margin-top: 7px;
+      }
+
+      /* ========== PORTFOLIO PREVIEW ========== */
+      .portfolio {
+        padding: var(--section-py) 0;
+        background: var(--warm-100);
+      }
+      .portfolio-inner {
+        padding: var(--section-py) 0;
+      }
+      .portfolio-tabs {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: center;
+        margin-bottom: 2.5rem;
+      }
+      .portfolio-tab {
+        padding: 0.5rem 1.5rem;
+        border-radius: 100px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        background: white;
+        color: var(--warm-500);
+        border: 1px solid var(--warm-200);
+        transition: all 0.3s;
+      }
+      .portfolio-tab:hover {
+        border-color: var(--green-200);
+        color: var(--green-500);
+      }
+      .portfolio-tab.active {
+        background: var(--green-500);
+        color: white;
+        border-color: var(--green-500);
+      }
+      .portfolio-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--gap);
+        margin-bottom: 2rem;
+      }
+      .portfolio-card {
+        border-radius: var(--radius-card);
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+        aspect-ratio: 16/9;
+        background: var(--warm-200);
+      }
+      .portfolio-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 30%;
+        transition: transform 0.5s;
+      }
+      .portfolio-card:hover img {
+        transform: scale(1.08);
+      }
+      .portfolio-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to top,
+          rgba(18, 57, 107, 0.85) 0%,
+          rgba(18, 57, 107, 0) 60%
+        );
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 1.25rem;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .portfolio-card:hover .portfolio-overlay {
+        opacity: 1;
+      }
+      .portfolio-card-title {
+        color: white;
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+      }
+      .portfolio-card-meta {
+        display: flex;
+        gap: 0.5rem;
+      }
+      .portfolio-tag {
+        font-size: 0.65rem;
+        padding: 0.15rem 0.5rem;
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.2);
+        color: rgba(255, 255, 255, 0.9);
+        font-weight: 500;
+      }
+      .portfolio-more {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        color: var(--green-500);
+        font-size: 0.9rem;
+        font-weight: 600;
+        padding: 0.75rem;
+        transition: color 0.3s;
+      }
+      .portfolio-more:hover {
+        color: var(--green-600);
+      }
+      .portfolio-more svg {
+        transition: transform 0.3s;
+      }
+      .portfolio-more:hover svg {
+        transform: translateX(4px);
+      }
+
+      /* ========== PROCESS + CTA ========== */
+      .process-cta {
+        padding: var(--section-py) 0;
+      }
+      .process-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--gap);
+      }
+
+      /* Process */
+      .process-card {
+        background: white;
+        border: 1px solid var(--warm-200);
+        border-radius: var(--radius-section);
+        padding: 2.5rem;
+      }
+      .process-steps {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+      .process-step {
+        padding: 1.25rem;
+        background: var(--warm-50);
+        border-radius: 12px;
+        border: 1px solid var(--warm-200);
+        transition: all 0.3s;
+      }
+      .process-step:hover {
+        border-color: var(--green-200);
+        background: var(--green-50);
+      }
+      .step-number {
+        font-family: var(--font-en);
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--green-200);
+        margin-bottom: 0.5rem;
+      }
+      .process-step:hover .step-number {
+        color: var(--green-500);
+      }
+      .step-title {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--warm-700);
+        margin-bottom: 0.25rem;
+      }
+      .step-desc {
+        font-size: 0.8rem;
+        color: var(--warm-500);
+      }
+
+      /* CTA Form */
+      .cta-card {
+        background: var(--green-500);
+        border-radius: var(--radius-section);
+        padding: 2.5rem;
+        color: white;
+        position: relative;
+        overflow: hidden;
+      }
+      .cta-card::before {
+        content: "";
+        position: absolute;
+        top: -80px;
+        right: -80px;
+        width: 240px;
+        height: 240px;
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 50%;
+      }
+      .cta-card::after {
+        content: "";
+        position: absolute;
+        bottom: -60px;
+        left: -60px;
+        width: 180px;
+        height: 180px;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 50%;
+      }
+      .cta-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        position: relative;
+      }
+      .cta-subtitle {
+        font-size: 0.85rem;
+        opacity: 0.7;
+        margin-bottom: 2rem;
+        position: relative;
+      }
+      .cta-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        position: relative;
+      }
+      .cta-input {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 10px;
+        padding: 0.875rem 1rem;
+        color: white;
+        font-size: 0.9rem;
+        font-family: var(--font-kr);
+        transition: all 0.3s;
+        outline: none;
+      }
+      .cta-input::placeholder {
+        color: rgba(255, 255, 255, 0.55);
+      }
+      .cta-input:focus {
+        border-color: rgba(255, 255, 255, 0.4);
+        background: rgba(255, 255, 255, 0.15);
+      }
+      .cta-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+      .cta-submit {
+        background: var(--gold);
+        color: white;
+        padding: 1rem;
+        border-radius: 10px;
+        font-size: 0.95rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        transition: all 0.3s;
+        margin-top: 0.5rem;
+      }
+      .cta-submit:hover {
+        background: var(--gold-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(196, 162, 101, 0.3);
+      }
+      .cta-note {
+        font-size: 0.75rem;
+        opacity: 0.5;
+        text-align: center;
+        margin-top: 0.5rem;
+        position: relative;
+      }
+
+      /* ========== FOOTER ========== */
+      .footer {
+        background: var(--warm-700);
+        color: rgba(255, 255, 255, 0.6);
+        padding: 3rem 0;
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr 1fr;
+        gap: 3rem;
+      }
+      .footer-brand {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .footer-logo {
+        font-family: var(--font-en);
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: white;
+        letter-spacing: 3px;
+      }
+      .footer-desc {
+        font-size: 0.85rem;
+        line-height: 1.7;
+        color: rgba(255, 255, 255, 0.55);
+      }
+      .footer-heading {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.7);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+      }
+      .footer-info {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        font-size: 0.85rem;
+      }
+      .footer-info a {
+        transition: color 0.3s;
+      }
+      .footer-info a:hover {
+        color: white;
+      }
+      .footer-phone {
+        font-family: var(--font-en);
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: white;
+        letter-spacing: 1px;
+      }
+      .footer-bottom {
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+        font-size: 0.75rem;
+        opacity: 0.7;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      .footer-links a {
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+      .footer-links a:hover {
+        color: rgba(255, 255, 255, 1);
+      }
+
+      /* ========== SCROLL ANIMATION ========== */
+      .fade-up {
+        opacity: 0;
+        transform: translateY(32px);
+        transition:
+          opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+          transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .fade-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .fade-left {
+        opacity: 0;
+        transform: translateX(-40px);
+        transition:
+          opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+          transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .fade-left.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      .fade-right {
+        opacity: 0;
+        transform: translateX(40px);
+        transition:
+          opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+          transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .fade-right.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      .scale-in {
+        opacity: 0;
+        transform: scale(0.85);
+        transition:
+          opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+          transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .scale-in.visible {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      /* ========== TRANSPARENT PROCESS TIMELINE ========== */
+      .timeline-section {
+        padding: var(--section-py) 0;
+        background: var(--warm-700);
+        color: white;
+        position: relative;
+        overflow: hidden;
+      }
+      .timeline-section::before {
+        content: "";
+        position: absolute;
+        top: -200px;
+        right: -200px;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(
+          circle,
+          rgba(76, 184, 114, 0.15) 0%,
+          transparent 70%
+        );
+        border-radius: 50%;
+      }
+      .timeline-section::after {
+        content: "";
+        position: absolute;
+        bottom: -150px;
+        left: -150px;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(
+          circle,
+          rgba(196, 162, 101, 0.08) 0%,
+          transparent 70%
+        );
+        border-radius: 50%;
+      }
+      .timeline-header {
+        text-align: center;
+        margin-bottom: 3.5rem;
+        position: relative;
+      }
+      .timeline-header .section-eyebrow {
+        color: var(--gold);
+      }
+      .timeline-header .section-title {
+        color: white;
+        font-size: 2rem;
+      }
+      .timeline-header .section-subtitle {
+        color: rgba(255, 255, 255, 0.5);
+      }
+      .timeline-track {
+        position: relative;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      /* Vertical line */
+      .timeline-track::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          rgba(255, 255, 255, 0.15) 10%,
+          rgba(255, 255, 255, 0.15) 90%,
+          transparent
+        );
+        transform: translateX(-1px);
+      }
+      .timeline-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 2rem;
+        position: relative;
+      }
+      .timeline-item:last-child {
+        margin-bottom: 0;
+      }
+      .timeline-item:nth-child(odd) {
+        flex-direction: row;
+        text-align: right;
+      }
+      .timeline-item:nth-child(even) {
+        flex-direction: row-reverse;
+        text-align: left;
+      }
+      .timeline-content {
+        flex: 1;
+        padding: 1.5rem;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        backdrop-filter: blur(4px);
+        transition: all 0.4s;
+      }
+      .timeline-content:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(196, 162, 101, 0.3);
+        transform: translateY(-2px);
+      }
+      .timeline-dot-wrap {
+        flex: 0 0 60px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        padding-top: 1.25rem;
+        position: relative;
+        z-index: 2;
+      }
+      .timeline-dot {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--green-500);
+        border: 3px solid var(--warm-700);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-en);
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: white;
+        box-shadow: 0 0 0 4px rgba(76, 184, 114, 0.2);
+        transition: all 0.4s;
+      }
+      .timeline-item:hover .timeline-dot {
+        background: var(--gold);
+        box-shadow: 0 0 0 6px rgba(196, 162, 101, 0.2);
+        transform: scale(1.15);
+      }
+      .timeline-spacer {
+        flex: 1;
+      }
+      .timeline-step-num {
+        font-family: var(--font-en);
+        font-size: 0.7rem;
+        font-weight: 600;
+        color: var(--gold);
+        letter-spacing: 2px;
+        margin-bottom: 0.25rem;
+      }
+      .timeline-step-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 0.25rem;
+      }
+      .timeline-step-desc {
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.5);
+        line-height: 1.5;
+      }
+      /* Bottom statement */
+      .timeline-statement {
+        text-align: center;
+        margin-top: 3.5rem;
+        position: relative;
+      }
+      .timeline-statement-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: rgba(196, 162, 101, 0.15);
+        border: 1px solid rgba(196, 162, 101, 0.3);
+        border-radius: 100px;
+        padding: 0.75rem 2rem;
+        margin-bottom: 1rem;
+      }
+      .timeline-statement-badge svg {
+        color: var(--gold);
+      }
+      .timeline-statement-badge span {
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: var(--gold);
+        letter-spacing: 1px;
+      }
+      .timeline-statement-text {
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.6);
+        line-height: 1.7;
+      }
+      .timeline-statement-text strong {
+        color: white;
+        font-weight: 600;
+      }
+
+      @media (max-width: 768px) {
+        .timeline-track::before {
+          left: 20px;
+        }
+        .timeline-item,
+        .timeline-item:nth-child(odd),
+        .timeline-item:nth-child(even) {
+          flex-direction: row !important;
+          text-align: left !important;
+        }
+        .timeline-spacer {
+          display: none;
+        }
+        .timeline-dot-wrap {
+          flex: 0 0 40px;
+        }
+        .timeline-dot {
+          width: 32px;
+          height: 32px;
+          font-size: 0.65rem;
+        }
+        .timeline-content {
+          padding: 1rem;
+        }
+      }
+
+      /* ========== MOBILE FLOATING CTA ========== */
+      .mobile-nav {
+        display: none;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 9990;
+        background: rgba(255, 255, 255, 0.97);
+        backdrop-filter: blur(12px);
+        border-top: 1px solid var(--warm-200);
+        padding: 0.375rem 0 calc(0.375rem + env(safe-area-inset-bottom, 0px));
+        transform: none !important;
+      }
+      .mobile-nav-inner {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        max-width: 480px;
+        margin: 0 auto;
+      }
+      .mobile-nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+        padding: 0.375rem 0.5rem;
+        color: var(--warm-500);
+        font-size: 0.625rem;
+        font-weight: 500;
+        letter-spacing: 0.3px;
+        transition: color 0.2s;
+        text-decoration: none;
+      }
+      .mobile-nav-item.active {
+        color: var(--green-500);
+      }
+      .mobile-nav-item svg {
+        width: 22px;
+        height: 22px;
+      }
+
+      /* ========== RESPONSIVE ========== */
+      @media (max-width: 1024px) {
+        .hero-grid {
+          grid-template-columns: 1fr;
+          min-height: auto;
+        }
+        .hero-image {
+          height: 320px;
+        }
+        .values-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .portfolio-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .process-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 768px) {
+        :root {
+          --gap: 1rem;
+          --section-py: 3rem;
+        }
+        .container {
+          padding: 0 1.25rem;
+        }
+        .nav-links {
+          display: none;
+        }
+        .nav-toggle {
+          display: block;
+        }
+        .nav-cta {
+          display: none;
+        }
+        .hero-content {
+          padding: 2rem 1.5rem;
+        }
+        .hero-title {
+          font-size: 2rem;
+          letter-spacing: 2px;
+        }
+        .values-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .pillars-grid {
+          grid-template-columns: 1fr;
+        }
+        .portfolio-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .process-steps {
+          grid-template-columns: 1fr;
+        }
+        .cta-row {
+          grid-template-columns: 1fr;
+        }
+        .footer-grid {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+        .footer-bottom {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+        .mobile-nav {
+          display: block;
+        }
+        body {
+          padding-bottom: 64px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero-title {
+          font-size: 1.6rem;
+        }
+        .values-grid {
+          grid-template-columns: 1fr;
+        }
+        .portfolio-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      /* ========== LOADING SCREEN ========== */
+      .loading-screen {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: var(--warm-50);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.6s ease, visibility 0.6s ease;
+      }
+      .loading-screen.hide {
+        opacity: 0;
+        visibility: hidden;
+      }
+      .loading-inner {
+        text-align: center;
+        width: 280px;
+      }
+      .loading-logo {
+        font-size: 32px;
+        font-weight: 700;
+        letter-spacing: 8px;
+        color: var(--green-500);
+      }
+      .loading-tagline {
+        font-size: 10px;
+        letter-spacing: 6px;
+        color: var(--gold);
+        margin-top: 6px;
+        text-transform: uppercase;
+      }
+      .loading-track {
+        width: 100%;
+        height: 1.5px;
+        background: var(--warm-200);
+        margin-top: 40px;
+        border-radius: 1px;
+        overflow: visible;
+        position: relative;
+      }
+      .loading-bar {
+        height: 100%;
+        width: 0;
+        background: var(--gold);
+        border-radius: 1px;
+        animation: loadProgress 2.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+      .loading-glow {
+        position: absolute;
+        top: -3px;
+        width: 20px;
+        height: 8px;
+        background: radial-gradient(ellipse, rgba(196, 162, 101, 0.6), transparent);
+        animation: loadGlow 2.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        opacity: 0;
+      }
+      .loading-status {
+        font-size: 11px;
+        color: var(--warm-300);
+        margin-top: 16px;
+        letter-spacing: 1px;
+      }
+      .loading-dots span {
+        animation: loadDot 1.4s infinite;
+      }
+      .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+      .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+      @keyframes loadProgress {
+        0% { width: 0; }
+        100% { width: 100%; }
+      }
+      @keyframes loadGlow {
+        0% { opacity: 0; left: 0; }
+        8% { opacity: 1; }
+        92% { opacity: 1; }
+        100% { opacity: 0; left: calc(100% - 20px); }
+      }
+      @keyframes loadDot {
+        0%, 60%, 100% { opacity: 0.3; }
+        30% { opacity: 1; }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ===== LOADING SCREEN ===== -->
+    <div class="loading-screen" id="loadingScreen">
+      <div class="loading-inner">
+        <div class="loading-logo">TOV.</div>
+        <div class="loading-tagline">premium interior</div>
+        <div class="loading-track">
+          <div class="loading-bar"></div>
+          <div class="loading-glow"></div>
+        </div>
+        <div class="loading-status">
+          공간을 준비하고 있습니다<span class="loading-dots"><span>.</span><span>.</span><span>.</span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav class="nav">
+      <div class="container">
+        <a href="index.html" class="nav-logo">
+          <img
+            src="assets/tov-logo.png"
+            alt="토브하우스 로고"
+            class="nav-logo-img"
+          />
+          <span class="nav-logo-text">토브하우스</span>
+        </a>
+        <ul class="nav-links">
+          <li><a href="index.html" class="active">홈</a></li>
+          <li><a href="about.html">회사소개</a></li>
+          <li><a href="portfolio.html">시공사례</a></li>
+          <li><a href="estimate.html">견적문의</a></li>
+          <li><a href="news.html">소식</a></li>
+        </ul>
+        <a href="estimate.html" class="nav-cta">무료 견적 상담</a>
+        <button class="nav-toggle" aria-label="메뉴" onclick="this.classList.toggle('open');document.getElementById('mobileMenu').classList.toggle('show')">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <div class="nav-mobile-menu" id="mobileMenu">
+        <a href="index.html" class="active">홈</a>
+        <a href="about.html">회사소개</a>
+        <a href="portfolio.html">시공사례</a>
+        <a href="estimate.html">견적문의</a>
+        <a href="news.html">소식</a>
+      </div>
+    </nav>
+
+    <!-- ===== SIDEBAR: MOTION GRAPHIC ===== -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <aside class="sidebar" id="mg-section">
+      <div class="mg-viewport" id="mg-viewport">
+        <!-- Replay button -->
+        <button class="mg-replay" id="mg-replay" title="다시 재생">
+          <svg
+            width="16"
+            height="16"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          >
+            <path d="M1 4v5h5" />
+            <path d="M3.51 14a8 8 0 1 0-.82-8.7L1 9" />
+          </svg>
+        </button>
+
+        <!-- Scene 1: Intro -->
+        <div class="mg-scene" id="sc-intro">
+          <div class="mg-intro-eyebrow">TRANSPARENT PROCESS</div>
+          <div class="mg-intro-title">투명한<br />시공 프로세스</div>
+          <div class="mg-intro-line"></div>
+        </div>
+
+        <!-- Scene 2-7: Steps -->
+        <div class="mg-scene mg-step-scene" id="sc-step1">
+          <div class="mg-step-num">01</div>
+          <div class="mg-step-icon">
+            <svg
+              viewBox="0 0 64 64"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            >
+              <path d="M32 6L6 24v32h52V24L32 6z" />
+              <path d="M22 56V38h20v18" />
+              <circle cx="32" cy="28" r="5" />
+            </svg>
+          </div>
+          <div class="mg-step-title">인테리어 공간 분석</div>
+          <div class="mg-step-desc">
+            현장 방문 후 공간 구조, 동선, 채광 등 종합 분석
+          </div>
+          <div class="mg-step-tags">
+            <span>현장 실측</span><span>동선 분석</span><span>채광 체크</span>
+          </div>
+        </div>
+
+        <div class="mg-scene mg-step-scene" id="sc-step2">
+          <div class="mg-step-num">02</div>
+          <div class="mg-step-icon">
+            <svg
+              viewBox="0 0 64 64"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            >
+              <circle cx="24" cy="22" r="9" />
+              <path d="M12 56v-5a12 12 0 0124 0v5" />
+              <circle cx="44" cy="22" r="6" />
+              <path d="M38 56v-3a8 8 0 0112 0v3" />
+            </svg>
+          </div>
+          <div class="mg-step-title">고객 의견 상담</div>
+          <div class="mg-step-desc">
+            원하는 스타일, 예산, 일정 등 꼼꼼한 요구사항 파악
+          </div>
+          <div class="mg-step-tags">
+            <span>스타일 상담</span><span>예산 협의</span><span>일정 조율</span>
+          </div>
+        </div>
+
+        <div class="mg-scene mg-step-scene" id="sc-step3">
+          <div class="mg-step-num">03</div>
+          <div class="mg-step-icon">
+            <svg
+              viewBox="0 0 64 64"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            >
+              <rect x="12" y="6" width="40" height="52" rx="3" />
+              <path d="M40 6v16l6-3" />
+              <line x1="22" y1="32" x2="42" y2="32" />
+              <line x1="22" y1="40" x2="36" y2="40" />
+              <line x1="22" y1="48" x2="40" y2="48" />
+            </svg>
+          </div>
+          <div class="mg-step-title">인테리어 견적 제안</div>
+          <div class="mg-step-desc">
+            자재 원가를 기반으로 투명한 견적서 제공
+          </div>
+          <div class="mg-step-tags">
+            <span>원가 공개</span><span>투명 견적</span><span>비교 가능</span>
+          </div>
+        </div>
+
+        <div class="mg-scene mg-step-scene" id="sc-step4">
+          <div class="mg-step-num">04</div>
+          <div class="mg-step-icon">
+            <svg
+              viewBox="0 0 64 64"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            >
+              <rect x="6" y="16" width="36" height="28" rx="3" />
+              <path d="M42 26h10l6 6v12a2 2 0 01-2 2H42" />
+              <circle cx="18" cy="48" r="6" />
+              <circle cx="50" cy="48" r="6" />
+            </svg>
+          </div>
+          <div class="mg-step-title">자유로운 자재 선택</div>
+          <div class="mg-step-desc">
+            자재 선택이 어렵다면 토브에서 맞춤 제안해 드립니다
+          </div>
+          <div class="mg-step-tags">
+            <span>자재 샘플</span><span>맞춤 제안</span><span>도매가 매입</span>
+          </div>
+        </div>
+
+        <div class="mg-scene mg-step-scene" id="sc-step5">
+          <div class="mg-step-num">05</div>
+          <div class="mg-step-icon">
+            <svg
+              viewBox="0 0 64 64"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            >
+              <circle cx="32" cy="32" r="24" />
+              <path d="M20 32l8 8 16-16" stroke-width="3" />
+            </svg>
+          </div>
+          <div class="mg-step-title">시공 완료</div>
+          <div class="mg-step-desc">
+            실시간 진행 상황 공유, 1:1 현장 관리로 꼼꼼한 마감
+          </div>
+          <div class="mg-step-tags">
+            <span>실시간 공유</span><span>1:1 관리</span><span>꼼꼼 마감</span>
+          </div>
+        </div>
+
+        <div class="mg-scene mg-step-scene" id="sc-step6">
+          <div class="mg-step-num">06</div>
+          <div class="mg-step-icon mg-icon-final">
+            <svg
+              viewBox="0 0 64 64"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            >
+              <rect x="8" y="8" width="48" height="48" rx="4" />
+              <line x1="8" y1="22" x2="56" y2="22" />
+              <line x1="8" y1="36" x2="56" y2="36" />
+              <path d="M18 46l6 6 14-14" stroke="#c4a265" stroke-width="2.5" />
+            </svg>
+          </div>
+          <div class="mg-step-title">실비 내역서 전달</div>
+          <div class="mg-step-desc">
+            전체 공정 진행 실비 내역서를 투명하게 전달합니다
+          </div>
+        </div>
+
+        <!-- Scene 8: Receipt (big, scrolling list) -->
+        <div class="mg-scene" id="sc-receipt">
+          <div class="mg-receipt">
+            <div class="mg-receipt-header">
+              <div class="mg-receipt-logo">toV</div>
+              <div class="mg-receipt-title">실비 내역서</div>
+            </div>
+            <div class="mg-receipt-divider"></div>
+            <div class="mg-receipt-scroll" id="mg-receipt-scroll">
+              <div class="mg-receipt-items" id="mg-receipt-items">
+                <div class="mg-receipt-row">
+                  <span>철거공사</span
+                  ><span class="mg-receipt-val">3,500,000</span>
+                </div>
+                <div class="mg-receipt-row">
+                  <span>목공사</span
+                  ><span class="mg-receipt-val">8,200,000</span>
+                </div>
+                <div class="mg-receipt-row">
+                  <span>전기공사</span
+                  ><span class="mg-receipt-val">3,020,000</span>
+                </div>
+                <div class="mg-receipt-row">
+                  <span>설비공사</span
+                  ><span class="mg-receipt-val">7,531,500</span>
+                </div>
+                <div class="mg-receipt-row">
+                  <span>타일시공</span
+                  ><span class="mg-receipt-val">4,800,000</span>
+                </div>
+                <div class="mg-receipt-row">
+                  <span>도배/장판</span
+                  ><span class="mg-receipt-val">2,400,000</span>
+                </div>
+                <div class="mg-receipt-row">
+                  <span>바닥재(원목)</span
+                  ><span class="mg-receipt-val">7,204,400</span>
+                </div>
+                <div class="mg-receipt-row">
+                  <span>조명자재</span
+                  ><span class="mg-receipt-val">3,265,900</span>
+                </div>
+                <div class="mg-receipt-row">
+                  <span>도어/창호</span
+                  ><span class="mg-receipt-val">1,300,000</span>
+                </div>
+                <div class="mg-receipt-row">
+                  <span>주방가구</span
+                  ><span class="mg-receipt-val">6,800,000</span>
+                </div>
+                <div class="mg-receipt-row">
+                  <span>붙박이장</span
+                  ><span class="mg-receipt-val">4,200,000</span>
+                </div>
+                <div class="mg-receipt-row">
+                  <span>위생도기</span
+                  ><span class="mg-receipt-val">1,850,000</span>
+                </div>
+                <div class="mg-receipt-row">
+                  <span>수전/액세서리</span
+                  ><span class="mg-receipt-val">980,000</span>
+                </div>
+                <div class="mg-receipt-row">
+                  <span>샤시공사</span
+                  ><span class="mg-receipt-val">2,100,000</span>
+                </div>
+                <div class="mg-receipt-row">
+                  <span>필름시공</span
+                  ><span class="mg-receipt-val">450,000</span>
+                </div>
+                <div class="mg-receipt-row">
+                  <span>기타자재</span
+                  ><span class="mg-receipt-val">398,200</span>
+                </div>
+              </div>
+            </div>
+            <div class="mg-receipt-fade"></div>
+            <div class="mg-receipt-divider mg-receipt-divider-gold"></div>
+            <div class="mg-receipt-row mg-receipt-total">
+              <span>합계</span><span>60,000,000원</span>
+            </div>
+            <div class="mg-receipt-stamp">
+              <svg
+                width="48"
+                height="48"
+                fill="none"
+                stroke="#c4a265"
+                stroke-width="2.5"
+                stroke-linecap="round"
+              >
+                <circle cx="24" cy="24" r="20" />
+                <path d="M14 24l6 6 14-14" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scene 9: Finale -->
+        <div class="mg-scene" id="sc-finale">
+          <div class="mg-finale-badge">100% 투명한 집행내역서를 제공합니다</div>
+          <div class="mg-finale-text">
+            공사비용, 자재, 인건비<br /><strong>모두 공개합니다.</strong>
+          </div>
+          <div class="mg-finale-sub">토브하우스는 숨기지 않습니다.</div>
+        </div>
+
+        <!-- Timeline progress bar -->
+        <div class="mg-timeline" id="mg-timeline">
+          <div class="mg-timeline-fill" id="mg-timeline-fill"></div>
+        </div>
+      </div>
+    </section>
+
+    <style>
+      .mg-viewport {
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        height: 100%;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .mg-scene {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        padding: 2rem;
+      }
+      .mg-replay {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        z-index: 20;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.08);
+        color: rgba(255, 255, 255, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      .mg-replay:hover {
+        background: rgba(255, 255, 255, 0.15);
+        color: white;
+      }
+
+      /* Intro */
+      .mg-intro-eyebrow {
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 1rem;
+      }
+      .mg-intro-title {
+        font-size: 4.5rem;
+        font-weight: 800;
+        color: white;
+        text-align: center;
+        line-height: 1.2;
+        letter-spacing: 3px;
+      }
+      .mg-intro-line {
+        width: 60px;
+        height: 3px;
+        background: var(--gold);
+        border-radius: 2px;
+        margin-top: 1.5rem;
+      }
+
+      /* Steps */
+      .mg-step-num {
+        font-size: 5rem;
+        font-weight: 900;
+        color: rgba(255, 255, 255, 0.04);
+        position: absolute;
+        top: 2rem;
+        left: 3rem;
+        line-height: 1;
+        letter-spacing: -4px;
+      }
+      .mg-step-icon {
+        width: 140px;
+        height: 140px;
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 2rem;
+      }
+      .mg-step-icon svg {
+        width: 100%;
+        height: 100%;
+      }
+      .mg-step-icon svg path,
+      .mg-step-icon svg circle,
+      .mg-step-icon svg rect,
+      .mg-step-icon svg line {
+        stroke-dasharray: 300;
+        stroke-dashoffset: 300;
+      }
+      .mg-icon-final svg path:last-child {
+        stroke-dasharray: 50;
+        stroke-dashoffset: 50;
+      }
+      .mg-step-title {
+        font-size: 2.25rem;
+        font-weight: 700;
+        color: white;
+        text-align: center;
+        margin-bottom: 0.75rem;
+        letter-spacing: 1px;
+      }
+      .mg-step-desc {
+        font-size: 1.05rem;
+        color: rgba(255, 255, 255, 0.5);
+        text-align: center;
+        max-width: 480px;
+        line-height: 1.7;
+      }
+      .mg-step-tags {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 1rem;
+      }
+      .mg-step-tags span {
+        padding: 0.3rem 0.75rem;
+        border-radius: 100px;
+        font-size: 0.7rem;
+        font-weight: 500;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      /* Receipt (large) */
+      .mg-receipt {
+        background: white;
+        border-radius: 24px;
+        padding: 3rem;
+        width: 460px;
+        max-width: 90vw;
+        box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+        position: relative;
+      }
+      .mg-receipt-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+      }
+      .mg-receipt-logo {
+        font-weight: 800;
+        font-size: 1.1rem;
+        color: var(--green-500);
+        letter-spacing: 1px;
+      }
+      .mg-receipt-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--warm-700);
+        letter-spacing: 1px;
+      }
+      .mg-receipt-divider {
+        height: 1px;
+        background: var(--warm-200);
+        margin: 1rem 0;
+      }
+      .mg-receipt-divider-gold {
+        background: var(--gold);
+        height: 2px;
+      }
+      .mg-receipt-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.6rem 0;
+        font-size: 0.95rem;
+        color: var(--warm-500);
+      }
+      .mg-receipt-val {
+        font-weight: 600;
+        color: var(--warm-700);
+        font-variant-numeric: tabular-nums;
+      }
+      .mg-receipt-total {
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: var(--green-500);
+      }
+      .mg-receipt-total span:last-child {
+        color: var(--green-500);
+      }
+      .mg-receipt-scroll {
+        max-height: 200px;
+        overflow: hidden;
+        position: relative;
+      }
+      .mg-receipt-fade {
+        height: 50px;
+        background: linear-gradient(to top, white 20%, transparent);
+        position: relative;
+        margin-top: -50px;
+        z-index: 2;
+        pointer-events: none;
+      }
+      .mg-receipt-stamp {
+        position: absolute;
+        bottom: -24px;
+        right: -14px;
+        opacity: 0;
+        transform: scale(0) rotate(-15deg);
+      }
+
+      /* Finale */
+      .mg-finale-badge {
+        display: inline-block;
+        padding: 0.6rem 2rem;
+        background: rgba(196, 162, 101, 0.15);
+        border: 1px solid rgba(196, 162, 101, 0.3);
+        border-radius: 100px;
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--gold);
+        letter-spacing: 1px;
+        margin-bottom: 1.5rem;
+      }
+      .mg-finale-text {
+        font-size: 1.5rem;
+        color: rgba(255, 255, 255, 0.7);
+        text-align: center;
+        line-height: 1.6;
+      }
+      .mg-finale-text strong {
+        color: white;
+        font-weight: 700;
+      }
+      .mg-finale-sub {
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.3);
+        margin-top: 0.75rem;
+      }
+
+      /* Timeline */
+      .mg-timeline {
+        position: absolute;
+        bottom: 1.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 200px;
+        height: 3px;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 2px;
+        z-index: 10;
+      }
+      .mg-timeline-fill {
+        height: 100%;
+        width: 0%;
+        background: var(--gold);
+        border-radius: 2px;
+        transition: width 0.1s linear;
+      }
+
+      @media (max-width: 768px) {
+        .mg-viewport {
+          height: 70vh;
+          min-height: 420px;
+        }
+        .mg-intro-title {
+          font-size: 2rem;
+        }
+        .mg-step-num {
+          font-size: 3rem;
+          top: 1.5rem;
+          left: 1.5rem;
+        }
+        .mg-step-icon {
+          width: 72px;
+          height: 72px;
+        }
+        .mg-step-title {
+          font-size: 1.3rem;
+        }
+        .mg-receipt {
+          padding: 1.5rem;
+          width: 320px;
+        }
+      }
+    </style>
+
+    <script>
+      gsap.registerPlugin(ScrollTrigger);
+      (function () {
+        const scenes = {
+          intro: document.getElementById("sc-intro"),
+          steps: [1, 2, 3, 4, 5, 6].map((i) =>
+            document.getElementById("sc-step" + i),
+          ),
+          receipt: document.getElementById("sc-receipt"),
+          finale: document.getElementById("sc-finale"),
+        };
+        const timelineFill = document.getElementById("mg-timeline-fill");
+        let masterTL;
+
+        function buildTimeline() {
+          const tl = gsap.timeline({ paused: true, timeScale: 1.3 });
+          const dur = 0.8;
+          const gap = 0.3;
+
+          // Scene: Intro
+          tl.set(scenes.intro, { visibility: "visible" })
+            .fromTo(scenes.intro, { opacity: 0 }, { opacity: 1, duration: 0.5 })
+            .from(
+              ".mg-intro-eyebrow",
+              { y: 20, opacity: 0, duration: 0.5 },
+              "-=0.2",
+            )
+            .from(
+              ".mg-intro-title",
+              { y: 30, opacity: 0, duration: 0.6, ease: "power3.out" },
+              "-=0.3",
+            )
+            .from(
+              ".mg-intro-line",
+              { scaleX: 0, duration: 0.4, ease: "power2.out" },
+              "-=0.2",
+            )
+            .to(scenes.intro, { opacity: 0, duration: 0.4 }, "+=1")
+            .set(scenes.intro, { visibility: "hidden" });
+
+          // Scenes: 6 Steps
+          scenes.steps.forEach((sc, i) => {
+            const paths = sc.querySelectorAll(
+              ".mg-step-icon svg path, .mg-step-icon svg circle, .mg-step-icon svg rect, .mg-step-icon svg line",
+            );
+
+            tl.set(sc, { visibility: "visible" })
+              .fromTo(sc, { opacity: 0 }, { opacity: 1, duration: 0.4 })
+              .from(
+                sc.querySelector(".mg-step-num"),
+                { scale: 3, opacity: 0, duration: 0.5, ease: "power3.out" },
+                "-=0.3",
+              )
+              .to(
+                Array.from(paths),
+                {
+                  strokeDashoffset: 0,
+                  duration: 0.8,
+                  stagger: 0.1,
+                  ease: "power2.out",
+                },
+                "-=0.3",
+              )
+              .from(
+                sc.querySelector(".mg-step-title"),
+                { y: 15, opacity: 0, duration: 0.4 },
+                "-=0.4",
+              )
+              .from(
+                sc.querySelector(".mg-step-desc"),
+                { y: 10, opacity: 0, duration: 0.3 },
+                "-=0.2",
+              );
+
+            const tags = sc.querySelector(".mg-step-tags");
+            if (tags) {
+              tl.from(
+                tags.children,
+                { y: 8, opacity: 0, duration: 0.25, stagger: 0.08 },
+                "-=0.1",
+              );
+            }
+
+            tl.to(sc, { opacity: 0, duration: 0.35 }, "+=0.8").set(sc, {
+              visibility: "hidden",
+            });
+          });
+
+          // Scene: Receipt (big)
+          tl.set(scenes.receipt, { visibility: "visible" })
+            .fromTo(
+              scenes.receipt,
+              { opacity: 0 },
+              { opacity: 1, duration: 0.4 },
+            )
+            .from(".mg-receipt", {
+              y: 60,
+              scale: 0.85,
+              opacity: 0,
+              duration: 0.7,
+              ease: "back.out(1.4)",
+            })
+            .from(
+              ".mg-receipt-header",
+              { y: -10, opacity: 0, duration: 0.3 },
+              "-=0.3",
+            )
+            // Items scroll up animation (like a long receipt unrolling)
+            .fromTo(
+              "#mg-receipt-items",
+              { y: 0 },
+              { y: -280, duration: 2.5, ease: "power1.inOut" },
+              "-=0.1",
+            )
+            .from(
+              ".mg-receipt-divider-gold",
+              { scaleX: 0, duration: 0.3 },
+              "-=0.3",
+            )
+            .from(
+              ".mg-receipt-total",
+              { scale: 1.1, opacity: 0, duration: 0.5, ease: "back.out(2)" },
+              "-=0.1",
+            )
+            .to(
+              ".mg-receipt-stamp",
+              {
+                opacity: 1,
+                scale: 1,
+                rotation: 0,
+                duration: 0.6,
+                ease: "back.out(2.5)",
+              },
+              "-=0.2",
+            )
+            .to(scenes.receipt, { opacity: 0, duration: 0.4 }, "+=2")
+            .set(scenes.receipt, { visibility: "hidden" });
+
+          // Scene: Finale
+          tl.set(scenes.finale, { visibility: "visible" })
+            .fromTo(
+              scenes.finale,
+              { opacity: 0 },
+              { opacity: 1, duration: 0.5 },
+            )
+            .from(
+              ".mg-finale-badge",
+              { scale: 0.8, opacity: 0, duration: 0.5, ease: "back.out(1.5)" },
+              "-=0.3",
+            )
+            .from(
+              ".mg-finale-text",
+              { y: 20, opacity: 0, duration: 0.5 },
+              "-=0.2",
+            )
+            .from(".mg-finale-sub", { opacity: 0, duration: 0.4 }, "-=0.1")
+            .to(scenes.finale, { opacity: 0, duration: 0.6 }, "+=2");
+
+          return tl;
+        }
+
+        function play() {
+          if (masterTL) masterTL.kill();
+          // Reset all
+          gsap.set(".mg-scene", { opacity: 0, visibility: "hidden" });
+          gsap.set(
+            ".mg-step-icon svg path, .mg-step-icon svg circle, .mg-step-icon svg rect, .mg-step-icon svg line",
+            { strokeDashoffset: 300 },
+          );
+          gsap.set(".mg-receipt-stamp", {
+            opacity: 0,
+            scale: 0,
+            rotation: -15,
+          });
+          timelineFill.style.width = "0%";
+
+          masterTL = buildTimeline();
+          masterTL.timeScale(1.3);
+          masterTL.eventCallback("onUpdate", function () {
+            timelineFill.style.width = masterTL.progress() * 100 + "%";
+          });
+          masterTL.eventCallback("onComplete", function () {
+            // Loop: wait 1.5s then replay
+            setTimeout(play, 1500);
+          });
+          masterTL.play();
+        }
+
+        // Auto-play on scroll into view
+        // Sidebar is always visible, autoplay
+        play();
+
+        // Replay button
+        document.getElementById("mg-replay").addEventListener("click", play);
+      })();
+    </script>
+    </aside>
+
+
+    <!-- ===== HERO BENTO ===== -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <a
+            href="portfolio-detail.html?id=1&type=residential"
+            class="hero-image"
+            id="hero-case-link"
+          >
+            <img
+              id="hero-case-img"
+              src="assets/portfolio/thumbnails/r001.webp"
+              alt="토브하우스 시공 사례"
+              loading="eager"
+            />
+            <div class="hero-case-overlay">
+              <span class="hero-case-tag">PORTFOLIO</span>
+              <span class="hero-case-title" id="hero-case-title"
+                >서울 성북구 석관동 49평</span
+              >
+              <span class="hero-case-arrow">
+                <svg
+                  width="16"
+                  height="16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                >
+                  <path d="M5 8h6M8 5l3 3-3 3" />
+                </svg>
+              </span>
+            </div>
+          </a>
+          <div class="hero-content">
+            <div class="hero-badge">투명한 인테리어 리모델링</div>
+            <h1 class="hero-title">TOV<br />HOUSE</h1>
+            <p class="hero-title-kr">토브하우스</p>
+            <p class="hero-desc">
+              <strong>'보기 좋은 공간'</strong>이 편한 공간이 됩니다.<br />
+              더 나은 삶의 질을 위한 공간의 변화와 완성.
+            </p>
+            <a href="estimate.html" class="hero-cta">
+              무료 견적 상담
+              <svg
+                width="20"
+                height="20"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              >
+                <path d="M5 10h10M11 6l4 4-4 4" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== VALUE PROPS ===== -->
+    <section class="values">
+      <div class="container">
+        <div class="values-grid">
+          <div class="value-card fade-up">
+            <div class="value-icon">
+              <svg
+                width="24"
+                height="24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M9 12l2 2 4-4" />
+                <circle cx="12" cy="12" r="10" />
+              </svg>
+            </div>
+            <div class="value-number fade-up" data-count="1000" data-suffix="+">
+              0
+            </div>
+            <div class="value-label">시공 실적</div>
+            <div class="value-desc">주거·상업 공간 리모델링 누적 시공</div>
+          </div>
+
+          <div class="value-card fade-up" style="transition-delay: 0.1s">
+            <div class="value-icon">
+              <svg
+                width="24"
+                height="24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+              >
+                <path d="M12 2v20M2 12h20" />
+                <rect x="5" y="5" width="14" height="14" rx="2" />
+              </svg>
+            </div>
+            <div class="value-number fade-up" data-count="100" data-suffix="%">
+              0
+            </div>
+            <div class="value-label">투명 견적</div>
+            <div class="value-desc">자재 원가 공개 + 매입 영수증 제공</div>
+          </div>
+
+          <div class="value-card fade-up" style="transition-delay: 0.2s">
+            <div class="value-icon">
+              <svg
+                width="24"
+                height="24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+              >
+                <path
+                  d="M12 3l1.9 5.8H20l-4.9 3.6 1.9 5.8L12 14.6l-4.9 3.6 1.9-5.8L4 8.8h6.1z"
+                />
+              </svg>
+            </div>
+            <div class="value-number">1:1</div>
+            <div class="value-label">맞춤 디자인</div>
+
+            <div class="value-desc">취향에 맞는 자재 선택 + 디자인 제안</div>
+          </div>
+
+          <div class="recent-works fade-up" style="transition-delay: 0.3s">
+            <div class="recent-works-title">Recent Projects</div>
+            <div class="recent-works-slider">
+              <a href="portfolio-detail.html?id=1&type=residential" class="recent-work-item">
+                <div class="recent-work-thumb">
+                  <img
+                    src="assets/portfolio/thumbnails/r001.webp"
+                    alt="서울 성북구 리모델링"
+                    onerror="
+                      this.src =
+                        'https://cdn.imweb.me/thumbnail/20251219/32bd0a2fc6b8b.jpg'
+                    "
+                  />
+                </div>
+                <div class="recent-work-info">
+                  <div class="recent-work-name">서울 성북구 석관동 49평</div>
+                  <div class="recent-work-meta">두산아파트 · 주거공간</div>
+                </div>
+              </a>
+              <a href="portfolio-detail.html?id=2&type=residential" class="recent-work-item">
+                <div class="recent-work-thumb">
+                  <img
+                    src="assets/portfolio/thumbnails/r002.webp"
+                    alt="서울 동대문구 리모델링"
+                    onerror="
+                      this.src =
+                        'https://cdn.imweb.me/thumbnail/20251219/f749b57b320a9.jpg'
+                    "
+                  />
+                </div>
+                <div class="recent-work-info">
+                  <div class="recent-work-name">서울 동대문구 전농동 33평</div>
+                  <div class="recent-work-meta">SK아파트 · 주거공간</div>
+                </div>
+              </a>
+              <a href="portfolio-detail.html?id=3&type=residential" class="recent-work-item">
+                <div class="recent-work-thumb">
+                  <img
+                    src="assets/portfolio/thumbnails/r003.webp"
+                    alt="고양시 리모델링"
+                    onerror="
+                      this.src =
+                        'https://cdn.imweb.me/thumbnail/20251218/06a6d43284973.jpg'
+                    "
+                  />
+                </div>
+                <div class="recent-work-info">
+                  <div class="recent-work-name">고양시 도내동 34평</div>
+                  <div class="recent-work-meta">센트럴더힐 · 주거공간</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== THREE PILLARS ===== -->
+    <section class="pillars">
+      <div class="container">
+        <div class="section-header fade-up">
+          <div class="section-eyebrow">Why TOV House</div>
+          <h2 class="section-title">토브하우스가 특별한 이유</h2>
+          <p class="section-subtitle">
+            투명한 견적, 꼼꼼한 시공, 진심 어린 소통
+          </p>
+        </div>
+        <div class="pillars-grid">
+          <div class="pillar-card fade-up">
+            <div class="pillar-image">
+              <img
+                src="assets/site/category-furniture.webp"
+                alt="다양한 인테리어 자재 샘플"
+                onerror="
+                  this.src =
+                    'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&q=75'
+                "
+              />
+            </div>
+            <div class="pillar-body">
+              <h3 class="pillar-title">자유로운 자재 선택</h3>
+              <ul class="pillar-list">
+                <li>취향에 맞는 맞춤 디자인 제안</li>
+                <li>자재 선택이 어려울 땐 함께 선택</li>
+                <li>도매가격으로 자재 매입, 마진 없음</li>
+                <li>시공 후 매입 영수증 모두 제공</li>
+              </ul>
+            </div>
+          </div>
+          <div class="pillar-card fade-up" style="transition-delay: 0.1s">
+            <div class="pillar-image">
+              <img
+                src="assets/site/category-residential.webp"
+                alt="시공 현장 관리"
+                onerror="
+                  this.src =
+                    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=75'
+                "
+              />
+            </div>
+            <div class="pillar-body">
+              <h3 class="pillar-title">1:1 현장 맞춤 관리</h3>
+              <ul class="pillar-list">
+                <li>시공 진행 과정별 실시간 공유</li>
+                <li>완료·미비 사항 실시간 전달</li>
+                <li>시공비용 증가 예상 시 사전 안내</li>
+                <li>전화·카톡 상시 연락 운영</li>
+              </ul>
+            </div>
+          </div>
+          <div class="pillar-card fade-up" style="transition-delay: 0.2s">
+            <div class="pillar-image">
+              <img
+                src="assets/site/category-commercial.webp"
+                alt="투명한 집행내역서"
+                onerror="
+                  this.src =
+                    'https://images.unsplash.com/photo-1600607687644-aac4c3eac7f4?w=600&q=75'
+                "
+              />
+            </div>
+            <div class="pillar-body">
+              <h3 class="pillar-title">100% 집행내역 공개</h3>
+              <ul class="pillar-list">
+                <li>공사비용, 자재, 인건비 모두 공개</li>
+                <li>시공 후 매입 영수증 전부 제공</li>
+                <li>항목별 실비 내역서 전달</li>
+                <li>숨기지 않는 투명한 시공</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PORTFOLIO PREVIEW ===== -->
+    <section class="portfolio">
+      <div class="container">
+        <div class="section-header fade-up">
+          <div class="section-eyebrow">Portfolio</div>
+          <h2 class="section-title">토브하우스 리모델링 사례</h2>
+          <p class="section-subtitle">
+            주거공간, 상업공간, 건축, 맞춤가구 설계 및 디자인
+          </p>
+        </div>
+        <div class="portfolio-tabs fade-up">
+          <button class="portfolio-tab active">전체</button>
+          <button class="portfolio-tab">주거공간</button>
+          <button class="portfolio-tab">상업공간</button>
+          <button class="portfolio-tab">종합건축</button>
+          <button class="portfolio-tab">맞춤가구</button>
+        </div>
+        <div class="portfolio-grid fade-up">
+          <a href="portfolio-detail.html?id=r001" class="portfolio-card">
+            <img
+              src="assets/portfolio/thumbnails/r001.webp"
+              alt="서울 성북구 석관동 49평 리모델링"
+              onerror="
+                this.src =
+                  'https://cdn.imweb.me/thumbnail/20251219/32bd0a2fc6b8b.jpg'
+              "
+            />
+            <div class="portfolio-overlay">
+              <div class="portfolio-card-title">서울 성북구 석관동 49평</div>
+              <div class="portfolio-card-meta">
+                <span class="portfolio-tag">아파트</span>
+                <span class="portfolio-tag">주거공간</span>
+              </div>
+            </div>
+          </a>
+          <a href="portfolio-detail.html?id=r002" class="portfolio-card">
+            <img
+              src="assets/portfolio/thumbnails/r002.webp"
+              alt="서울 동대문구 전농동 33평 리모델링"
+              onerror="
+                this.src =
+                  'https://cdn.imweb.me/thumbnail/20251219/f749b57b320a9.jpg'
+              "
+            />
+            <div class="portfolio-overlay">
+              <div class="portfolio-card-title">서울 동대문구 전농동 33평</div>
+              <div class="portfolio-card-meta">
+                <span class="portfolio-tag">아파트</span>
+                <span class="portfolio-tag">주거공간</span>
+              </div>
+            </div>
+          </a>
+          <a href="portfolio-detail.html?id=r003" class="portfolio-card">
+            <img
+              src="assets/portfolio/thumbnails/r003.webp"
+              alt="경기도 고양시 도내동 34평 리모델링"
+              onerror="
+                this.src =
+                  'https://cdn.imweb.me/thumbnail/20251218/06a6d43284973.jpg'
+              "
+            />
+            <div class="portfolio-overlay">
+              <div class="portfolio-card-title">경기도 고양시 도내동 34평</div>
+              <div class="portfolio-card-meta">
+                <span class="portfolio-tag">아파트</span>
+                <span class="portfolio-tag">주거공간</span>
+              </div>
+            </div>
+          </a>
+          <a href="portfolio-detail.html?id=r004" class="portfolio-card">
+            <img
+              src="assets/portfolio/thumbnails/r004.webp"
+              alt="경기도 고양시 원흥동 34평 리모델링"
+              onerror="
+                this.src =
+                  'https://cdn.imweb.me/thumbnail/20251119/4dac1ef01c93d.jpg'
+              "
+            />
+            <div class="portfolio-overlay">
+              <div class="portfolio-card-title">경기도 고양시 원흥동 34평</div>
+              <div class="portfolio-card-meta">
+                <span class="portfolio-tag">아파트</span>
+                <span class="portfolio-tag">주거공간</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        <a href="portfolio.html" class="portfolio-more fade-up">
+          전체 시공 사례 보기
+          <svg
+            width="20"
+            height="20"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          >
+            <path d="M5 10h10M11 6l4 4-4 4" />
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- ===== PROCESS + CTA ===== -->
+    <section class="process-cta">
+      <div class="container">
+        <div class="process-grid">
+          <!-- Process -->
+          <div class="process-card fade-up">
+            <div class="section-eyebrow" style="text-align: left">Process</div>
+            <h2
+              class="section-title"
+              style="text-align: left; font-size: 1.5rem"
+            >
+              시공 프로세스
+            </h2>
+            <div class="process-steps">
+              <div class="process-step">
+                <div class="step-number">01</div>
+                <div class="step-title">상담 & 현장 방문</div>
+                <div class="step-desc">요구사항 파악 + 현장 실측</div>
+              </div>
+              <div class="process-step">
+                <div class="step-number">02</div>
+                <div class="step-title">디자인 & 견적</div>
+                <div class="step-desc">맞춤 디자인 제안 + 투명 견적</div>
+              </div>
+              <div class="process-step">
+                <div class="step-number">03</div>
+                <div class="step-title">시공 진행</div>
+                <div class="step-desc">실시간 공유 + 1:1 현장 관리</div>
+              </div>
+              <div class="process-step">
+                <div class="step-number">04</div>
+                <div class="step-title">완공 & A/S</div>
+                <div class="step-desc">꼼꼼한 마감 + 사후 관리</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CTA Form -->
+          <div class="cta-card fade-up" style="transition-delay: 0.15s">
+            <h2 class="cta-title">간편 견적 문의</h2>
+            <p class="cta-subtitle">평균 24시간 이내 회신드립니다</p>
+            <form class="cta-form" onsubmit="return false;">
+              <input
+                type="text"
+                class="cta-input"
+                placeholder="이름"
+                required
+              />
+              <input
+                type="tel"
+                class="cta-input"
+                placeholder="연락처 (010-0000-0000)"
+                required
+              />
+              <div class="cta-row">
+                <input
+                  type="text"
+                  class="cta-input"
+                  placeholder="지역 (시/구/동)"
+                />
+                <select class="cta-input" style="appearance: auto">
+                  <option value="" disabled selected>공간 종류</option>
+                  <option>주거공간</option>
+                  <option>상업공간</option>
+                  <option>종합건축</option>
+                  <option>맞춤가구</option>
+                </select>
+              </div>
+              <button type="submit" class="cta-submit">무료 견적 요청</button>
+            </form>
+            <p class="cta-note">
+              개인정보는 견적 상담 외 용도로 사용되지 않습니다
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <div class="footer-logo">TOV HOUSE</div>
+            <p class="footer-desc">
+              보기 좋은 공간이 편한 공간이 됩니다.<br />
+              토브하우스는 투명한 견적과 꼼꼼한 시공으로<br />
+              더 나은 공간을 만듭니다.
+            </p>
+          </div>
+          <div>
+            <div class="footer-heading">Contact</div>
+            <ul class="footer-info">
+              <li>
+                <a href="tel:03196822224" class="footer-phone">Tel. 031-968-2224</a>
+              </li>
+              <li style="margin-top: 0.5rem">(주)코이노니아 | 대표이사: 이재호</li>
+              <li>사업자등록번호: 198-87-01821</li>
+            </ul>
+          </div>
+          <div>
+            <div class="footer-heading">Location</div>
+            <ul class="footer-info">
+              <li>경기도 고양시 덕양구<br />삼원안길 12, 1층</li>
+              <li style="margin-top: 0.75rem">평일 09:00 - 18:00</li>
+              <li>토요일 10:00 - 15:00</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>&copy; 2026 토브하우스 All rights reserved.</span>
+          <span>청정종합건영(주) 건설업 면허 보유 기업</span>
+          <span class="footer-links"><a href="privacy.html">개인정보처리방침</a> · <a href="terms.html">이용약관</a></span>
+          <span
+            >Designed by
+            <a
+              href="https://polarad.co.kr"
+              target="_blank"
+              rel="noopener"
+              style="
+                color: rgba(255, 255, 255, 0.5);
+                transition: color 0.3s;
+                text-decoration: underline;
+              "
+              onmouseover="this.style.color = 'rgba(255,255,255,0.8)'"
+              onmouseout="this.style.color = 'rgba(255,255,255,0.5)'"
+              >POLARAD</a
+            ></span
+          >
+        </div>
+      </div>
+    </footer>
+
+    <!-- ===== MOBILE BOTTOM NAV ===== -->
+    <nav class="mobile-nav">
+      <div class="mobile-nav-inner">
+        <a href="index.html" class="mobile-nav-item active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span>홈</span>
+        </a>
+        <a href="portfolio.html" class="mobile-nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          <span>시공사례</span>
+        </a>
+        <a href="estimate.html" class="mobile-nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          <span>견적문의</span>
+        </a>
+        <a href="about.html" class="mobile-nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <span>회사소개</span>
+        </a>
+        <a href="tel:03196822224" class="mobile-nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          <span>전화</span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- ===== SCROLL ANIMATION ===== -->
+    <script>
+      // ===== SCROLL REVEAL OBSERVER =====
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              // Trigger counter if element has data-count
+              if (entry.target.dataset.count) {
+                animateCounter(entry.target);
+              }
+            }
+          });
+        },
+        { threshold: 0.15, rootMargin: "0px 0px -60px 0px" },
+      );
+
+      document
+        .querySelectorAll(".fade-up, .fade-left, .fade-right, .scale-in")
+        .forEach((el) => revealObserver.observe(el));
+
+      // ===== NUMBER COUNTER ANIMATION =====
+      function animateCounter(el) {
+        const target = el.dataset.count;
+        const suffix = el.dataset.suffix || "";
+        const prefix = el.dataset.prefix || "";
+        const isFloat = target.includes(".");
+        const endVal = parseFloat(target);
+        const duration = 1800;
+        const startTime = performance.now();
+
+        function easeOutExpo(t) {
+          return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+        }
+
+        function update(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const easedProgress = easeOutExpo(progress);
+          const currentVal = easedProgress * endVal;
+
+          const fmt = (n) => Math.floor(n).toLocaleString();
+          if (isFloat) {
+            el.textContent = prefix + currentVal.toFixed(1) + suffix;
+          } else {
+            el.textContent = prefix + fmt(currentVal) + suffix;
+          }
+
+          if (progress < 1) {
+            requestAnimationFrame(update);
+          } else {
+            el.textContent =
+              prefix +
+              (isFloat ? target : parseInt(target).toLocaleString()) +
+              suffix;
+          }
+        }
+
+        requestAnimationFrame(update);
+      }
+
+      // ===== PORTFOLIO TAB INTERACTION =====
+      document.querySelectorAll(".portfolio-tab").forEach((tab) => {
+        tab.addEventListener("click", () => {
+          document
+            .querySelectorAll(".portfolio-tab")
+            .forEach((t) => t.classList.remove("active"));
+          tab.classList.add("active");
+        });
+      });
+
+      // ===== RANDOM HERO CASE =====
+      (async function () {
+        try {
+          const res = await fetch("portfolio-data.json");
+          const data = await res.json();
+          const all = [
+            ...data.residential,
+            ...data.commercial.map((c) => ({ ...c, _type: "commercial" })),
+          ];
+          const item = all[Math.floor(Math.random() * all.length)];
+          const isCommercial = item._type === "commercial";
+          const type = isCommercial ? "commercial" : "residential";
+          // id can be number (1) or string ("r036") — normalize to thumbnail path
+          const itemId = String(item.id);
+          const thumbId = itemId.match(/^[rc]/)
+            ? itemId
+            : (isCommercial ? "c" : "r") + itemId.padStart(3, "0");
+
+          const img = document.getElementById("hero-case-img");
+          const title = document.getElementById("hero-case-title");
+          const link = document.getElementById("hero-case-link");
+
+          img.src = "assets/portfolio/thumbnails/" + thumbId + ".webp";
+          img.onerror = function () {
+            this.src = item.thumbnail;
+          };
+          img.alt = (item.region || "") + " " + (item.area || "") + " 리모델링";
+          title.textContent = (item.region || "") + " " + (item.area || "");
+          link.href = "portfolio-detail.html?id=" + item.id + "&type=" + type;
+        } catch (e) {
+          /* fallback to default r001 */
+        }
+      })();
+    </script>
+    <script>
+      /* Loading screen dismiss */
+      window.addEventListener('load', function () {
+        var ls = document.getElementById('loadingScreen');
+        if (!ls) return;
+        /* 게이지 애니메이션(2.6s) 완료 후 페이드아웃 */
+        setTimeout(function () {
+          ls.classList.add('hide');
+          setTimeout(function () { ls.remove(); }, 600);
+        }, 2800);
+      });
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": ["LocalBusiness", "HomeAndConstructionBusiness"],
+  "name": "토브하우스",
+  "alternateName": "TOV House",
+  "url": "https://tovdesign.net",
+  "logo": "https://tovdesign.net/assets/site/logo-full.webp",
+  "image": "https://tovdesign.net/assets/site/logo-full.webp",
+  "telephone": "031-968-2224",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "덕양구 삼원안길 12, 1층",
+    "addressLocality": "고양시",
+    "addressRegion": "경기도",
+    "addressCountry": "KR"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 37.6584,
+    "longitude": 126.8320
+  },
+  "openingHoursSpecification": [
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "09:00", "closes": "18:00"},
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "10:00", "closes": "15:00"}
+  ],
+  "priceRange": "₩₩",
+  "description": "투명한 견적, 맞춤형 디자인 제안. 주거·상업 공간 인테리어 리모델링 전문. 1,000건 이상의 시공 실적.",
+  "areaServed": ["서울특별시", "경기도", "인천광역시"],
+  "knowsAbout": ["인테리어 리모델링", "주거공간 인테리어", "상업공간 인테리어", "투명 견적", "맞춤가구"],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "인테리어 시공 서비스",
+    "itemListElement": [
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "주거공간 리모델링", "description": "아파트, 빌라 등 주거공간 인테리어 리모델링"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "상업공간 인테리어", "description": "사무실, 매장 등 상업공간 인테리어"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "종합건축", "description": "신축 및 리모델링 종합 건축 서비스"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "맞춤가구 제작", "description": "공간에 맞는 맞춤형 가구 설계 및 제작"}}
+    ]
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "1000"
+  }
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "토브하우스",
+  "alternateName": "TOV House",
+  "url": "https://tovdesign.net"
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "홈", "item": "https://tovdesign.net/"}
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "토브하우스 견적은 어떻게 진행되나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "토브하우스는 현장 방문 후 공간 분석을 진행하고, 자재 원가를 기반으로 투명한 견적서를 제공합니다. 자재 매입 영수증까지 모두 공개하여 100% 투명한 견적을 보장합니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "인테리어 자재는 직접 선택할 수 있나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "네, 토브하우스에서는 고객이 자유롭게 자재를 선택할 수 있습니다. 자재 선택이 어려우시면 취향에 맞는 맞춤 제안도 해드리며, 모든 자재는 도매가격으로 매입하여 마진 없이 제공합니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "시공 기간은 얼마나 걸리나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "일반적인 주거공간(20~40평) 기준 약 3~8주 소요됩니다. 공간 크기, 시공 범위에 따라 달라지며, 상담 시 정확한 일정을 안내드립니다. 시공 중 실시간 진행 상황을 공유합니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "시공 후 A/S는 어떻게 되나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "토브하우스는 시공 완료 후에도 꼼꼼한 사후 관리를 제공합니다. 하자 발생 시 신속하게 대응하며, 시공 후 매입 영수증과 전체 집행내역서를 투명하게 전달합니다."
+      }
+    }
+  ]
+}
+    </script>
+  </body>
+</html>

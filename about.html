@@ -1,0 +1,1563 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>토브하우스 소개 | TOV House</title>
+    <meta
+      name="description"
+      content="토브하우스 회사 소개 - 투명한 견적, 1:1 맞춤 관리, 자유로운 자재 선택으로 더 나은 공간을 만듭니다."
+    />
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://tovdesign.net/about" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="토브하우스" />
+    <meta property="og:title" content="토브하우스 소개 | TOV House" />
+    <meta
+      property="og:description"
+      content="토브하우스 회사 소개 - 투명한 견적, 1:1 맞춤 관리, 자유로운 자재 선택으로 더 나은 공간을 만듭니다."
+    />
+    <meta property="og:url" content="https://tovdesign.net/about" />
+    <meta
+      property="og:image"
+      content="https://tovdesign.net/assets/site/og-image.png"
+    />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="토브하우스 소개 | TOV House" />
+    <meta
+      name="twitter:description"
+      content="토브하우스 회사 소개 - 투명한 견적, 1:1 맞춤 관리, 자유로운 자재 선택으로 더 나은 공간을 만듭니다."
+    />
+    <meta
+      name="twitter:image"
+      content="https://tovdesign.net/assets/site/og-image.png"
+    />
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-DSJZMGDTB3"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-DSJZMGDTB3");
+    </script>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* ========== DESIGN TOKENS ========== */
+      :root {
+        /* Primary - Fresh Green */
+        --green-50: #f2f9f4;
+        --green-100: #e0f2e5;
+        --green-200: #b8e4c4;
+        --green-300: #7ed09a;
+        --green-400: #4cb872;
+        --green-500: #3a9d5e;
+        --green-600: #2f8550;
+
+        /* White & Light */
+        --off-white: #fafcfa;
+        --light-green: #f5faf6;
+
+        /* Gold Accent */
+        --gold: #c9a96e;
+        --gold-light: #e8d9b8;
+        --gold-hover: #b8964f;
+        --gold-bg: #faf6ee;
+
+        /* Warm Neutral */
+        --warm-50: #faf9f7;
+        --warm-100: #f3f0ea;
+        --warm-200: #e6e0d5;
+        --warm-300: #c4baa8;
+        --warm-400: #9e9484;
+        --warm-500: #6b6358;
+        --warm-700: #3c3733;
+
+        /* Dark Green (Footer only) */
+        --dark-green: #1a3324;
+        --gap: 1.5rem;
+        --section-py: 5rem;
+        --radius-card: 16px;
+        --radius-section: 24px;
+        --font-kr:
+          "Pretendard Variable", "Pretendard", -apple-system,
+          BlinkMacSystemFont, sans-serif;
+        --font-en:
+          "Pretendard Variable", "Pretendard", -apple-system,
+          BlinkMacSystemFont, sans-serif;
+      }
+
+      /* ========== RESET & BASE ========== */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: var(--font-kr);
+        color: var(--warm-500);
+        background: var(--warm-50);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+      img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      button {
+        font-family: inherit;
+        cursor: pointer;
+        border: none;
+      }
+
+      /* ========== UTILITIES ========== */
+      .container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+      }
+
+      /* ========== NAVIGATION ========== */
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--warm-200);
+        height: 64px;
+      }
+      .nav .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 100%;
+      }
+      .nav-logo {
+        display: flex;
+        align-items: center;
+      }
+      .nav-logo-img {
+        height: 36px;
+        width: auto;
+      }
+      .nav-links {
+        display: flex;
+        gap: 2.5rem;
+        list-style: none;
+      }
+      .nav-links a {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--warm-500);
+        letter-spacing: 1px;
+        transition: color 0.3s;
+        position: relative;
+      }
+      .nav-links a:hover,
+      .nav-links a.active {
+        color: var(--green-500);
+      }
+      .nav-links a.active::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--green-500);
+        border-radius: 1px;
+      }
+      .nav-cta {
+        background: var(--green-500);
+        color: white;
+        padding: 0.5rem 1.25rem;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        transition:
+          background 0.3s,
+          transform 0.2s;
+      }
+      .nav-cta:hover {
+        background: var(--green-600);
+        transform: translateY(-1px);
+      }
+      .nav-toggle {
+        display: none;
+        background: none;
+        border: none;
+        padding: 0.5rem;
+        cursor: pointer;
+      }
+      .nav-toggle span {
+        display: block;
+        width: 20px;
+        height: 2px;
+        background: var(--warm-700);
+        margin: 4px 0;
+        transition: 0.3s;
+      }
+      .nav-toggle.open span:nth-child(1) {
+        transform: rotate(45deg) translate(4px, 4px);
+      }
+      .nav-toggle.open span:nth-child(2) {
+        opacity: 0;
+      }
+      .nav-toggle.open span:nth-child(3) {
+        transform: rotate(-45deg) translate(4px, -4px);
+      }
+      .nav-mobile-menu {
+        z-index: 999;
+        display: none;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--warm-200);
+        padding: 1rem 1.5rem;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      }
+      .nav-mobile-menu.show {
+        display: block;
+      }
+      .nav-mobile-menu a {
+        display: block;
+        padding: 0.75rem 0;
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: var(--warm-500);
+        border-bottom: 1px solid var(--warm-100);
+        transition: color 0.2s;
+      }
+      .nav-mobile-menu a:last-child {
+        border-bottom: none;
+      }
+      .nav-mobile-menu a:hover,
+      .nav-mobile-menu a.active {
+        color: var(--green-500);
+      }
+
+      /* ========== PAGE HERO ========== */
+      .page-hero {
+        padding: 4rem 0 3rem;
+        background: linear-gradient(
+          135deg,
+          var(--green-600) 0%,
+          var(--green-500) 100%
+        );
+        color: white;
+        position: relative;
+        overflow: hidden;
+      }
+      .page-hero::before {
+        content: "";
+        position: absolute;
+        top: -120px;
+        right: -120px;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.06) 0%,
+          transparent 70%
+        );
+        border-radius: 50%;
+      }
+      .page-hero::after {
+        content: "";
+        position: absolute;
+        bottom: -80px;
+        left: -80px;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(
+          circle,
+          rgba(196, 162, 101, 0.12) 0%,
+          transparent 70%
+        );
+        border-radius: 50%;
+      }
+      .page-hero-inner {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 2rem;
+      }
+      .page-hero-eyebrow {
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 0.75rem;
+      }
+      .page-hero-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        line-height: 1.2;
+        margin-bottom: 0.75rem;
+      }
+      .page-hero-sub {
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.65);
+        line-height: 1.7;
+      }
+      .page-hero-breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.45);
+        align-self: flex-start;
+        padding-top: 0.25rem;
+        flex-shrink: 0;
+      }
+      .page-hero-breadcrumb a {
+        color: rgba(255, 255, 255, 0.45);
+        transition: color 0.3s;
+      }
+      .page-hero-breadcrumb a:hover {
+        color: rgba(255, 255, 255, 0.8);
+      }
+      .page-hero-breadcrumb span.sep {
+        color: rgba(255, 255, 255, 0.25);
+      }
+      .page-hero-breadcrumb span.current {
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      /* ========== SECTION COMMONS ========== */
+      .section-eyebrow {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--green-500);
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 0.75rem;
+      }
+      .section-title {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--warm-700);
+        letter-spacing: 1px;
+      }
+      .section-subtitle {
+        font-size: 0.95rem;
+        color: #8a8070;
+        margin-top: 0.5rem;
+      }
+      .section-header {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      /* ========== BRAND STORY ========== */
+      .brand-story {
+        padding: var(--section-py) 0;
+        background: white;
+      }
+      .brand-story-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+      }
+      .brand-story-image {
+        border-radius: var(--radius-section);
+        overflow: hidden;
+        aspect-ratio: 4/3;
+        background: var(--warm-200);
+      }
+      .brand-story-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .brand-story-content {
+      }
+      .brand-story-quote {
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--warm-700);
+        line-height: 1.5;
+        margin-bottom: 1.5rem;
+        padding-left: 1.25rem;
+        border-left: 4px solid var(--gold);
+      }
+      .brand-story-body {
+        font-size: 0.95rem;
+        line-height: 1.9;
+        color: var(--warm-500);
+      }
+      .brand-story-body p + p {
+        margin-top: 1rem;
+      }
+      .brand-story-body strong {
+        color: var(--green-500);
+        font-weight: 600;
+      }
+
+      /* ========== VALUE CARDS ========== */
+      .values-section {
+        padding: var(--section-py) 0;
+        background: var(--warm-100);
+      }
+      .values-grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--gap);
+      }
+      .value-card-about {
+        background: white;
+        border: 1px solid var(--warm-200);
+        border-radius: var(--radius-card);
+        padding: 2.5rem 2rem;
+        transition: all 0.3s;
+        position: relative;
+        overflow: hidden;
+      }
+      .value-card-about::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: var(--green-500);
+        transform: scaleX(0);
+        transition: transform 0.3s;
+        transform-origin: left;
+      }
+      .value-card-about:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 16px 40px rgba(76, 184, 114, 0.1);
+        border-color: var(--green-200);
+      }
+      .value-card-about:hover::before {
+        transform: scaleX(1);
+      }
+      .value-icon-wrap {
+        width: 56px;
+        height: 56px;
+        background: var(--green-50);
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+        color: var(--green-500);
+        transition: background 0.3s;
+      }
+      .value-card-about:hover .value-icon-wrap {
+        background: var(--green-500);
+        color: white;
+      }
+      .value-card-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--warm-700);
+        margin-bottom: 0.75rem;
+      }
+      .value-card-desc {
+        font-size: 0.875rem;
+        color: var(--warm-500);
+        line-height: 1.7;
+      }
+      .value-card-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-top: 1rem;
+      }
+      .value-card-list li {
+        font-size: 0.82rem;
+        color: var(--warm-500);
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        line-height: 1.5;
+      }
+      .value-card-list li::before {
+        content: "";
+        width: 5px;
+        height: 5px;
+        background: var(--green-200);
+        border-radius: 50%;
+        flex-shrink: 0;
+        margin-top: 6px;
+        transition: background 0.3s;
+      }
+      .value-card-about:hover .value-card-list li::before {
+        background: var(--green-400);
+      }
+
+      /* ========== PROCESS TIMELINE ========== */
+      .process-section {
+        padding: var(--section-py) 0;
+        background: var(--warm-700);
+        color: white;
+        position: relative;
+        overflow: hidden;
+      }
+      .process-section::before {
+        content: "";
+        position: absolute;
+        top: -160px;
+        right: -160px;
+        width: 480px;
+        height: 480px;
+        background: radial-gradient(
+          circle,
+          rgba(76, 184, 114, 0.15) 0%,
+          transparent 70%
+        );
+        border-radius: 50%;
+      }
+      .process-section .section-eyebrow {
+        color: var(--gold);
+      }
+      .process-section .section-title {
+        color: white;
+        font-size: 2rem;
+      }
+      .process-section .section-subtitle {
+        color: rgba(255, 255, 255, 0.5);
+      }
+      .process-steps-row {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--gap);
+        position: relative;
+        margin-top: 3rem;
+      }
+      /* Connector line between steps */
+      .process-steps-row::before {
+        content: "";
+        position: absolute;
+        top: 28px;
+        left: calc(12.5% + 16px);
+        right: calc(12.5% + 16px);
+        height: 2px;
+        background: linear-gradient(
+          to right,
+          rgba(196, 162, 101, 0.3),
+          rgba(196, 162, 101, 0.3)
+        );
+        z-index: 0;
+      }
+      .process-step-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+      }
+      .process-step-dot {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: var(--green-500);
+        border: 3px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-en);
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 1.25rem;
+        box-shadow: 0 0 0 6px rgba(76, 184, 114, 0.2);
+        transition: all 0.3s;
+        flex-shrink: 0;
+      }
+      .process-step-item:hover .process-step-dot {
+        background: var(--gold);
+        box-shadow: 0 0 0 8px rgba(196, 162, 101, 0.2);
+        transform: scale(1.1);
+      }
+      .process-step-label {
+        font-size: 0.65rem;
+        font-weight: 600;
+        letter-spacing: 2px;
+        color: var(--gold);
+        margin-bottom: 0.4rem;
+        opacity: 0.7;
+      }
+      .process-step-title {
+        font-size: 1rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 0.5rem;
+      }
+      .process-step-desc {
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.5);
+        line-height: 1.5;
+      }
+      .process-arrow {
+        position: absolute;
+        top: 12px;
+        right: -16px;
+        color: rgba(196, 162, 101, 0.4);
+        z-index: 2;
+      }
+
+      /* ========== STATS ========== */
+      .stats-section {
+        padding: 4rem 0;
+        background: white;
+        border-bottom: 1px solid var(--warm-200);
+      }
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2px;
+      }
+      .stat-item {
+        text-align: center;
+        padding: 2.5rem 2rem;
+        border-right: 1px solid var(--warm-200);
+        transition: background 0.3s;
+      }
+      .stat-item:last-child {
+        border-right: none;
+      }
+      .stat-item:hover {
+        background: var(--green-50);
+      }
+      .stat-number {
+        font-family: var(--font-en);
+        font-size: 3rem;
+        font-weight: 700;
+        color: var(--green-500);
+        line-height: 1;
+        margin-bottom: 0.5rem;
+        letter-spacing: -1px;
+      }
+      .stat-label {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--warm-700);
+        margin-bottom: 0.25rem;
+      }
+      .stat-desc {
+        font-size: 0.8rem;
+        color: #8a8070;
+      }
+
+      /* ========== CTA BANNER ========== */
+      .cta-banner {
+        padding: var(--section-py) 0;
+        background: var(--green-50);
+      }
+      .cta-banner-inner {
+        background: var(--green-500);
+        border-radius: var(--radius-section);
+        padding: 3.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .cta-banner-inner::before {
+        content: "";
+        position: absolute;
+        top: -100px;
+        right: -100px;
+        width: 320px;
+        height: 320px;
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 50%;
+      }
+      .cta-banner-text {
+        position: relative;
+        z-index: 1;
+      }
+      .cta-banner-eyebrow {
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 3px;
+        color: var(--gold);
+        text-transform: uppercase;
+        margin-bottom: 0.5rem;
+      }
+      .cta-banner-title {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 0.5rem;
+      }
+      .cta-banner-sub {
+        font-size: 0.95rem;
+        color: rgba(255, 255, 255, 0.6);
+      }
+      .cta-banner-action {
+        position: relative;
+        z-index: 1;
+        flex-shrink: 0;
+      }
+      .cta-btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: var(--gold);
+        color: white;
+        padding: 1rem 2.25rem;
+        border-radius: 12px;
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        transition: all 0.3s;
+      }
+      .cta-btn-primary:hover {
+        background: var(--gold-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 28px rgba(196, 162, 101, 0.35);
+      }
+      .cta-btn-primary svg {
+        transition: transform 0.3s;
+      }
+      .cta-btn-primary:hover svg {
+        transform: translateX(4px);
+      }
+
+      /* ========== FOOTER ========== */
+      .footer {
+        background: var(--warm-700);
+        color: rgba(255, 255, 255, 0.6);
+        padding: 3rem 0;
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr 1fr;
+        gap: 3rem;
+      }
+      .footer-brand {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .footer-logo {
+        font-family: var(--font-en);
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: white;
+        letter-spacing: 3px;
+      }
+      .footer-desc {
+        font-size: 0.85rem;
+        line-height: 1.7;
+        color: rgba(255, 255, 255, 0.55);
+      }
+      .footer-heading {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.7);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+      }
+      .footer-info {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        font-size: 0.85rem;
+      }
+      .footer-info a {
+        transition: color 0.3s;
+      }
+      .footer-info a:hover {
+        color: white;
+      }
+      .footer-phone {
+        font-family: var(--font-en);
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: white;
+        letter-spacing: 1px;
+      }
+      .footer-bottom {
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+        font-size: 0.75rem;
+        opacity: 0.7;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      .footer-links a {
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+      .footer-links a:hover {
+        color: rgba(255, 255, 255, 1);
+      }
+
+      /* ========== MOBILE BOTTOM NAV ========== */
+      .mobile-nav {
+        display: none;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 9990;
+        background: rgba(255, 255, 255, 0.97);
+        backdrop-filter: blur(12px);
+        border-top: 1px solid var(--warm-200);
+        padding: 0.375rem 0 calc(0.375rem + env(safe-area-inset-bottom, 0px));
+        transform: none !important;
+      }
+      .mobile-nav-inner {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        max-width: 480px;
+        margin: 0 auto;
+      }
+      .mobile-nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+        padding: 0.375rem 0.5rem;
+        color: var(--warm-500);
+        font-size: 0.625rem;
+        font-weight: 500;
+        letter-spacing: 0.3px;
+        transition: color 0.2s;
+        text-decoration: none;
+      }
+      .mobile-nav-item.active {
+        color: var(--green-500);
+      }
+      .mobile-nav-item svg {
+        width: 22px;
+        height: 22px;
+      }
+
+      /* ========== SCROLL ANIMATION ========== */
+      .fade-up {
+        opacity: 0;
+        transform: translateY(32px);
+        transition:
+          opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+          transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .fade-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .fade-left {
+        opacity: 0;
+        transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .fade-left.visible {
+        opacity: 1;
+      }
+      .fade-right {
+        opacity: 0;
+        transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .fade-right.visible {
+        opacity: 1;
+      }
+
+      /* ========== RESPONSIVE ========== */
+      @media (max-width: 1024px) {
+        .brand-story-grid {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+        .values-grid-3 {
+          grid-template-columns: 1fr 1fr;
+        }
+        .process-steps-row {
+          grid-template-columns: 1fr 1fr;
+        }
+        .process-steps-row::before {
+          display: none;
+        }
+      }
+      @media (max-width: 768px) {
+        :root {
+          --gap: 1rem;
+          --section-py: 3rem;
+        }
+        .container {
+          padding: 0 1.25rem;
+        }
+        .nav-links {
+          display: none;
+        }
+        .nav-toggle {
+          display: block;
+        }
+        .nav-cta {
+          display: none;
+        }
+        .page-hero-title {
+          font-size: 1.75rem;
+        }
+        .page-hero-inner {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .values-grid-3 {
+          grid-template-columns: 1fr;
+        }
+        .process-steps-row {
+          grid-template-columns: 1fr 1fr;
+        }
+        .stats-grid {
+          grid-template-columns: 1fr;
+        }
+        .stat-item {
+          border-right: none;
+          border-bottom: 1px solid var(--warm-200);
+        }
+        .stat-item:last-child {
+          border-bottom: none;
+        }
+        .cta-banner-inner {
+          flex-direction: column;
+          text-align: center;
+          padding: 2.5rem 1.5rem;
+        }
+        .footer-grid {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+        .footer-bottom {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+        .mobile-nav {
+          display: block;
+        }
+        body {
+          padding-bottom: 64px;
+        }
+      }
+      @media (max-width: 480px) {
+        .process-steps-row {
+          grid-template-columns: 1fr;
+        }
+        .stat-number {
+          font-size: 2.25rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ===== NAVIGATION ===== -->
+    <nav class="nav">
+      <div class="container">
+        <a href="index.html" class="nav-logo">
+          <img
+            src="assets/tov-logo.png"
+            alt="토브하우스 로고"
+            class="nav-logo-img"
+          />
+        </a>
+        <ul class="nav-links">
+          <li><a href="index.html">홈</a></li>
+          <li><a href="about.html" class="active">회사소개</a></li>
+          <li><a href="portfolio.html">시공사례</a></li>
+          <li><a href="estimate.html">견적문의</a></li>
+          <li><a href="news.html">소식</a></li>
+        </ul>
+        <a href="estimate.html" class="nav-cta">무료 견적 상담</a>
+        <button
+          class="nav-toggle"
+          aria-label="메뉴"
+          onclick="
+            this.classList.toggle('open');
+            document.getElementById('mobileMenu').classList.toggle('show');
+          "
+        >
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <div class="nav-mobile-menu" id="mobileMenu">
+        <a href="index.html">홈</a>
+        <a href="about.html" class="active">회사소개</a>
+        <a href="portfolio.html">시공사례</a>
+        <a href="estimate.html">견적문의</a>
+        <a href="news.html">소식</a>
+      </div>
+    </nav>
+
+    <!-- ===== PAGE HERO ===== -->
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero-inner">
+          <div>
+            <div class="page-hero-eyebrow">About TOV House</div>
+            <h1 class="page-hero-title">토브하우스 소개</h1>
+            <p class="page-hero-sub">
+              보기 좋은 공간이 편한 공간이 됩니다.<br />
+              투명한 견적과 꼼꼼한 시공으로 더 나은 삶을 만듭니다.
+            </p>
+          </div>
+          <nav class="page-hero-breadcrumb" aria-label="경로">
+            <a href="index.html">홈</a>
+            <span class="sep">
+              <svg
+                width="12"
+                height="12"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              >
+                <path d="M4 2l4 4-4 4" />
+              </svg>
+            </span>
+            <span class="current">ABOUT</span>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== BRAND STORY ===== -->
+    <section class="brand-story">
+      <div class="container">
+        <div class="brand-story-grid">
+          <div class="brand-story-image fade-left">
+            <img
+              src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80"
+              alt="토브하우스 시공 사례"
+            />
+          </div>
+          <div class="brand-story-content fade-right">
+            <div class="section-eyebrow">Brand Story</div>
+            <h2 class="section-title" style="margin-bottom: 1.5rem">
+              토브하우스 철학
+            </h2>
+            <blockquote class="brand-story-quote">
+              보기에 좋아! 마음이 편하다 하는 곳
+            </blockquote>
+            <div class="brand-story-body">
+              <p>
+                센스 있는 마음을 갖고 계시는 당신을 위해, 그 마음이 가리키는
+                공간을 마음으로 디자인하는 <strong>토브하우스</strong>입니다.
+              </p>
+              <p>
+                보기 좋은 공간이 편한 공간이 되어 더 나은 삶의 질을 누리는 것이
+                토브의 바램이자 목표입니다.
+              </p>
+              <p>
+                토브하우스는 <strong>신축·개축 및 내외관 리모델링</strong>을
+                통한 인테리어 디자인으로 시공 완료까지 꼼꼼히 소통하며
+                진행합니다. 고객님께서 원하시는 공간, 함께 완성해 드리겠습니다.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== STATS ===== -->
+    <section class="stats-section">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-item fade-up">
+            <div class="stat-number" data-count="1000" data-suffix="+">0</div>
+            <div class="stat-label">시공 실적</div>
+            <div class="stat-desc">주거·상업 공간 누적 시공</div>
+          </div>
+          <div class="stat-item fade-up" style="transition-delay: 0.1s">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">투명 견적</div>
+            <div class="stat-desc">자재 원가 공개 + 매입 영수증 제공</div>
+          </div>
+          <div class="stat-item fade-up" style="transition-delay: 0.2s">
+            <div class="stat-number">1:1</div>
+            <div class="stat-label">맞춤 디자인</div>
+            <div class="stat-desc">취향에 맞는 자재 선택 및 디자인 제안</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== VALUE CARDS ===== -->
+    <section class="values-section">
+      <div class="container">
+        <div class="section-header fade-up">
+          <div class="section-eyebrow">Core Values</div>
+          <h2 class="section-title">토브하우스가 특별한 이유</h2>
+          <p class="section-subtitle">
+            고객과의 약속을 지키는 세 가지 핵심 가치
+          </p>
+        </div>
+        <div class="values-grid-3">
+          <!-- 자유로운 자재선택 -->
+          <div class="value-card-about fade-up">
+            <div class="value-icon-wrap">
+              <!-- Material/palette icon -->
+              <svg
+                width="26"
+                height="26"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c1.1 0 2-.9 2-2v-.5c0-.55.22-1.05.59-1.41.36-.36.86-.59 1.41-.59H18c2.21 0 4-1.79 4-4 0-5.52-4.48-10-10-10z"
+                />
+                <circle cx="6.5" cy="11.5" r="1.5" />
+                <circle cx="9.5" cy="7.5" r="1.5" />
+                <circle cx="14.5" cy="7.5" r="1.5" />
+                <circle cx="17.5" cy="11.5" r="1.5" />
+              </svg>
+            </div>
+            <h3 class="value-card-title">자유로운 자재선택</h3>
+            <p class="value-card-desc">
+              고객이 원하는 자재를 직접 선택하고, 도매가로 투명하게 매입합니다.
+            </p>
+            <ul class="value-card-list">
+              <li>취향에 맞는 맞춤 디자인 제안</li>
+              <li>자재 선택이 어려울 땐 함께 선택</li>
+              <li>각 자재별 특장점 안내</li>
+              <li>도매가격으로 자재 매입, 마진 없음</li>
+              <li>시공 후 매입 영수증 전체 제공</li>
+            </ul>
+          </div>
+
+          <!-- 1:1 현장 맞춤관리 -->
+          <div class="value-card-about fade-up" style="transition-delay: 0.1s">
+            <div class="value-icon-wrap">
+              <!-- Person/support icon -->
+              <svg
+                width="26"
+                height="26"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 00-3-3.87" />
+                <path d="M16 3.13a4 4 0 010 7.75" />
+              </svg>
+            </div>
+            <h3 class="value-card-title">1:1 현장 맞춤관리</h3>
+            <p class="value-card-desc">
+              시공 전 과정을 실시간으로 공유하며 고객과 함께 진행합니다.
+            </p>
+            <ul class="value-card-list">
+              <li>시공 진행 과정별 실시간 공유</li>
+              <li>완료·미비 사항 실시간 전달</li>
+              <li>시공 특이사항 개별 안내</li>
+              <li>시공비용 증가 예상 시 사전 안내</li>
+              <li>전화·카톡 상시 연락 운영</li>
+            </ul>
+          </div>
+
+          <!-- 100% 집행내역 공개 -->
+          <div class="value-card-about fade-up" style="transition-delay: 0.2s">
+            <div class="value-icon-wrap">
+              <svg
+                width="26"
+                height="26"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                viewBox="0 0 24 24"
+              >
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <line x1="3" y1="9" x2="21" y2="9" />
+                <line x1="3" y1="15" x2="21" y2="15" />
+                <path d="M9 15l2 2 4-4" stroke="#c4a265" stroke-width="2" />
+              </svg>
+            </div>
+            <h3 class="value-card-title">100% 집행내역 공개</h3>
+            <p class="value-card-desc">
+              공사비용, 자재, 인건비 모든 항목을 투명하게 공개합니다.
+            </p>
+            <ul class="value-card-list">
+              <li>공사비용, 자재, 인건비 모두 공개</li>
+              <li>시공 후 매입 영수증 전부 제공</li>
+              <li>항목별 실비 내역서 전달</li>
+              <li>숨기지 않는 투명한 시공</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PROCESS TIMELINE ===== -->
+    <section class="process-section">
+      <div class="container">
+        <div class="section-header fade-up">
+          <div class="section-eyebrow">Our Process</div>
+          <h2 class="section-title">시공 프로세스</h2>
+          <p class="section-subtitle">
+            상담부터 완공까지, 모든 과정을 함께합니다
+          </p>
+        </div>
+        <div class="process-steps-row">
+          <div class="process-step-item fade-up">
+            <div class="process-step-dot">
+              <!-- Phone/consult icon -->
+              <svg
+                width="20"
+                height="20"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"
+                />
+              </svg>
+            </div>
+            <div class="process-step-label">STEP 01</div>
+            <div class="process-step-title">상담</div>
+            <div class="process-step-desc">요구사항 파악 및 현장 방문 실측</div>
+          </div>
+
+          <div class="process-step-item fade-up" style="transition-delay: 0.1s">
+            <div class="process-step-dot">
+              <!-- Ruler/design icon -->
+              <svg
+                width="20"
+                height="20"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                <line x1="8" y1="21" x2="16" y2="21" />
+                <line x1="12" y1="17" x2="12" y2="21" />
+              </svg>
+            </div>
+            <div class="process-step-label">STEP 02</div>
+            <div class="process-step-title">설계</div>
+            <div class="process-step-desc">
+              맞춤 디자인 제안 및 투명 견적 확정
+            </div>
+          </div>
+
+          <div class="process-step-item fade-up" style="transition-delay: 0.2s">
+            <div class="process-step-dot">
+              <!-- Tool/construction icon -->
+              <svg
+                width="20"
+                height="20"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"
+                />
+              </svg>
+            </div>
+            <div class="process-step-label">STEP 03</div>
+            <div class="process-step-title">시공</div>
+            <div class="process-step-desc">
+              1:1 현장 관리 및 실시간 진행 공유
+            </div>
+          </div>
+
+          <div class="process-step-item fade-up" style="transition-delay: 0.3s">
+            <div class="process-step-dot">
+              <!-- Check/complete icon -->
+              <svg
+                width="20"
+                height="20"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
+            <div class="process-step-label">STEP 04</div>
+            <div class="process-step-title">완공</div>
+            <div class="process-step-desc">꼼꼼한 마감 확인 및 사후 관리</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA BANNER ===== -->
+    <section class="cta-banner">
+      <div class="container">
+        <div class="cta-banner-inner fade-up">
+          <div class="cta-banner-text">
+            <div class="cta-banner-eyebrow">Free Estimate</div>
+            <h2 class="cta-banner-title">지금 무료 견적을 신청하세요</h2>
+            <p class="cta-banner-sub">
+              평균 24시간 이내 회신드립니다. 개인정보는 견적 상담 외 용도로
+              사용되지 않습니다.
+            </p>
+          </div>
+          <div class="cta-banner-action">
+            <a href="estimate.html" class="cta-btn-primary">
+              무료 견적 상담
+              <svg
+                width="20"
+                height="20"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                aria-hidden="true"
+              >
+                <path d="M5 10h10M11 6l4 4-4 4" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <div class="footer-logo">TOV HOUSE</div>
+            <p class="footer-desc">
+              보기 좋은 공간이 편한 공간이 됩니다.<br />
+              토브하우스는 투명한 견적과 꼼꼼한 시공으로<br />
+              더 나은 공간을 만듭니다.
+            </p>
+          </div>
+          <div>
+            <div class="footer-heading">Contact</div>
+            <ul class="footer-info">
+              <li>
+                <a href="tel:03196822224" class="footer-phone">Tel. 031-968-2224</a>
+              </li>
+              <li style="margin-top: 0.5rem">(주)코이노니아 | 대표이사: 이재호</li>
+              <li>사업자등록번호: 198-87-01821</li>
+            </ul>
+          </div>
+          <div>
+            <div class="footer-heading">Location</div>
+            <ul class="footer-info">
+              <li>경기도 고양시 덕양구<br />삼원안길 12, 1층</li>
+              <li style="margin-top: 0.75rem">평일 09:00 - 18:00</li>
+              <li>토요일 10:00 - 15:00</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>&copy; 2026 토브하우스 All rights reserved.</span>
+          <span>청정종합건영(주) 건설업 면허 보유 기업</span>
+          <span class="footer-links"
+            ><a href="privacy.html">개인정보처리방침</a> ·
+            <a href="terms.html">이용약관</a></span
+          >
+          <span
+            >Designed by
+            <a
+              href="https://polarad.co.kr"
+              target="_blank"
+              rel="noopener"
+              style="
+                color: rgba(255, 255, 255, 0.5);
+                transition: color 0.3s;
+                text-decoration: underline;
+              "
+              onmouseover="this.style.color = 'rgba(255,255,255,0.8)'"
+              onmouseout="this.style.color = 'rgba(255,255,255,0.5)'"
+              >POLARAD</a
+            >
+          </span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ===== MOBILE BOTTOM NAV ===== -->
+    <nav class="mobile-nav">
+      <div class="mobile-nav-inner">
+        <a href="index.html" class="mobile-nav-item"
+          ><svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+            <polyline points="9 22 9 12 15 12 15 22" /></svg
+          ><span>홈</span></a
+        >
+        <a href="portfolio.html" class="mobile-nav-item"
+          ><svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="3" y="3" width="7" height="7" />
+            <rect x="14" y="3" width="7" height="7" />
+            <rect x="14" y="14" width="7" height="7" />
+            <rect x="3" y="14" width="7" height="7" /></svg
+          ><span>시공사례</span></a
+        >
+        <a href="estimate.html" class="mobile-nav-item"
+          ><svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+            <polyline points="14 2 14 8 20 8" />
+            <line x1="16" y1="13" x2="8" y2="13" />
+            <line x1="16" y1="17" x2="8" y2="17" /></svg
+          ><span>견적문의</span></a
+        >
+        <a href="about.html" class="mobile-nav-item active"
+          ><svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="16" x2="12" y2="12" />
+            <line x1="12" y1="8" x2="12.01" y2="8" /></svg
+          ><span>회사소개</span></a
+        >
+        <a href="tel:03196822224" class="mobile-nav-item"
+          ><svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"
+            /></svg
+          ><span>전화</span></a
+        >
+      </div>
+    </nav>
+
+    <!-- ===== SCROLL ANIMATION ===== -->
+    <script>
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              if (entry.target.dataset.count) animateCounter(entry.target);
+              // Also trigger counters in children
+              entry.target
+                .querySelectorAll("[data-count]")
+                .forEach((el) => animateCounter(el));
+            }
+          });
+        },
+        { threshold: 0.15, rootMargin: "0px 0px -60px 0px" },
+      );
+      document
+        .querySelectorAll(".fade-up, .fade-left, .fade-right")
+        .forEach((el) => revealObserver.observe(el));
+
+      function animateCounter(el) {
+        const target = el.dataset.count;
+        const suffix = el.dataset.suffix || "";
+        const endVal = parseFloat(target);
+        const duration = 1800;
+        const startTime = performance.now();
+        function easeOutExpo(t) {
+          return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+        }
+        function update(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          el.textContent =
+            Math.floor(easeOutExpo(progress) * endVal).toLocaleString() +
+            suffix;
+          if (progress < 1) requestAnimationFrame(update);
+          else el.textContent = parseInt(target).toLocaleString() + suffix;
+        }
+        requestAnimationFrame(update);
+      }
+    </script>
+  </body>
+</html>
