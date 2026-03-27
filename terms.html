@@ -6,8 +6,9 @@
     <title>이용약관 | 토브하우스</title>
     <meta name="description" content="토브하우스 웹사이트 이용약관" />
     <meta name="robots" content="noindex, nofollow" />
-    <link rel="canonical" href="https://tovdesign.net/terms.html" />
+    <link rel="canonical" href="https://tovdesign.net/terms" />
     <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
     <link rel="preconnect" href="https://cdn.jsdelivr.net" />
     <link
       href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
@@ -74,34 +75,162 @@
         line-height: 1.8;
         -webkit-font-smoothing: antialiased;
       }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
       .container {
-        max-width: 800px;
+        max-width: 1200px;
         margin: 0 auto;
-        padding: 0 1.5rem;
+        padding: 0 2rem;
+      }
+      .content .container {
+        max-width: 800px;
       }
 
-      /* Header */
-      .page-header {
+      /* ========== NAVIGATION ========== */
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--warm-200);
+        height: 64px;
+      }
+      .nav .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 100%;
+      }
+      .nav-logo {
+        display: flex;
+        align-items: center;
+      }
+      .nav-logo-img {
+        height: 44px;
+        width: auto;
+      }
+      .nav-logo-text {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #3a9d5e;
+        margin-left: 0.5rem;
+        letter-spacing: 0.5px;
+      }
+      .nav-links {
+        display: flex;
+        gap: 2.5rem;
+        list-style: none;
+      }
+      .nav-links a {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--warm-500);
+        letter-spacing: 1px;
+        transition: color 0.3s;
+        position: relative;
+      }
+      .nav-links a:hover,
+      .nav-links a.active {
+        color: var(--green-500);
+      }
+      .nav-links a.active::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--green-500);
+        border-radius: 1px;
+      }
+      .nav-cta {
+        background: var(--green-500);
+        color: white;
+        padding: 0.5rem 1.25rem;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        transition:
+          background 0.3s,
+          transform 0.2s;
+      }
+      .nav-cta:hover {
+        background: var(--green-600);
+        transform: translateY(-1px);
+      }
+      .nav-toggle {
+        display: none;
+        background: none;
+        border: none;
+        padding: 0.5rem;
+        cursor: pointer;
+      }
+      .nav-toggle span {
+        display: block;
+        width: 20px;
+        height: 2px;
+        background: var(--warm-700);
+        margin: 4px 0;
+        transition: 0.3s;
+      }
+      .nav-toggle.open span:nth-child(1) {
+        transform: rotate(45deg) translate(4px, 4px);
+      }
+      .nav-toggle.open span:nth-child(2) {
+        opacity: 0;
+      }
+      .nav-toggle.open span:nth-child(3) {
+        transform: rotate(-45deg) translate(4px, -4px);
+      }
+      .nav-mobile-menu {
+        display: none;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        z-index: 999;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--warm-200);
+        padding: 1rem 1.5rem;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      }
+      .nav-mobile-menu.show {
+        display: block;
+      }
+      .nav-mobile-menu a {
+        display: block;
+        padding: 0.75rem 0;
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: var(--warm-500);
+        border-bottom: 1px solid var(--warm-100);
+        transition: color 0.2s;
+      }
+      .nav-mobile-menu a:last-child {
+        border-bottom: none;
+      }
+      .nav-mobile-menu a:hover,
+      .nav-mobile-menu a.active {
+        color: var(--green-500);
+      }
+
+      /* Page Title */
+      .page-title {
         background: var(--green-600);
         color: #fff;
         padding: 3rem 0 2.5rem;
       }
-      .page-header .logo {
-        font-size: 1.125rem;
-        font-weight: 700;
-        letter-spacing: 2px;
-        margin-bottom: 1.5rem;
-      }
-      .page-header .logo a {
-        color: #fff;
-        text-decoration: none;
-      }
-      .page-header h1 {
+      .page-title h1 {
         font-size: 1.75rem;
         font-weight: 700;
         letter-spacing: -0.5px;
       }
-      .page-header .updated {
+      .page-title .updated {
         margin-top: 0.5rem;
         font-size: 0.875rem;
         opacity: 0.7;
@@ -139,33 +268,101 @@
 
       /* Footer */
       .footer {
-        background: var(--green-600);
-        color: rgba(255, 255, 255, 0.75);
-        padding: 2rem 0;
-        font-size: 0.8125rem;
+        background: var(--warm-700);
+        color: rgba(255, 255, 255, 0.6);
+        padding: 3rem 0;
       }
-      .footer-inner {
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr 1fr;
+        gap: 3rem;
+      }
+      .footer-brand {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .footer-logo {
+        font-family: var(--font-en);
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: white;
+        letter-spacing: 3px;
+      }
+      .footer-desc {
+        font-size: 0.85rem;
+        line-height: 1.7;
+        color: rgba(255, 255, 255, 0.55);
+      }
+      .footer-heading {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.7);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+      }
+      .footer-info {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        font-size: 0.85rem;
+      }
+      .footer-info a {
+        transition: color 0.3s;
+      }
+      .footer-info a:hover {
+        color: white;
+      }
+      .footer-phone {
+        font-family: var(--font-en);
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: white;
+        letter-spacing: 1px;
+      }
+      .footer-bottom {
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+        font-size: 0.75rem;
+        opacity: 0.7;
         display: flex;
         justify-content: space-between;
-        align-items: center;
         flex-wrap: wrap;
-        gap: 0.75rem;
+        gap: 0.5rem;
       }
-      .footer a {
-        color: rgba(255, 255, 255, 0.6);
+      .footer-links a {
+        color: rgba(255, 255, 255, 0.7);
         text-decoration: none;
         transition: color 0.3s;
       }
-      .footer a:hover {
-        color: rgba(255, 255, 255, 0.9);
-      }
-      .footer-links {
-        display: flex;
-        gap: 1.25rem;
+      .footer-links a:hover {
+        color: rgba(255, 255, 255, 1);
       }
 
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+        .nav-toggle {
+          display: block;
+        }
+        .nav-cta {
+          display: none;
+        }
+        .footer-grid {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+        .footer-bottom {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+      }
       @media (max-width: 600px) {
-        .page-header h1 {
+        .page-title h1 {
           font-size: 1.375rem;
         }
         .content {
@@ -174,21 +371,54 @@
         .content h2 {
           font-size: 1rem;
         }
-        .footer-inner {
-          flex-direction: column;
-          align-items: flex-start;
-        }
       }
     </style>
   </head>
   <body>
-    <header class="page-header">
+    <nav class="nav">
       <div class="container">
-        <div class="logo"><a href="index.html">TOV HOUSE</a></div>
+        <a href="index.html" class="nav-logo">
+          <img
+            src="assets/tov-logo.png"
+            alt="토브하우스 로고"
+            class="nav-logo-img"
+          />
+          <span class="nav-logo-text">토브하우스</span>
+        </a>
+        <ul class="nav-links">
+          <li><a href="index.html">홈</a></li>
+          <li><a href="about.html">회사소개</a></li>
+          <li><a href="portfolio.html">시공사례</a></li>
+          <li><a href="estimate.html">견적문의</a></li>
+          <li><a href="news.html">소식</a></li>
+        </ul>
+        <a href="estimate.html" class="nav-cta">무료 견적 상담</a>
+        <button
+          class="nav-toggle"
+          aria-label="메뉴"
+          onclick="
+            this.classList.toggle('open');
+            document.getElementById('mobileMenu').classList.toggle('show');
+          "
+        >
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <div class="nav-mobile-menu" id="mobileMenu">
+        <a href="index.html">홈</a>
+        <a href="about.html">회사소개</a>
+        <a href="portfolio.html">시공사례</a>
+        <a href="estimate.html">견적문의</a>
+        <a href="news.html">소식</a>
+      </div>
+    </nav>
+
+    <section class="page-title">
+      <div class="container" style="max-width: 800px">
         <h1>이용약관</h1>
         <p class="updated">시행일: 2026년 3월 26일</p>
       </div>
-    </header>
+    </section>
 
     <main class="content">
       <div class="container">
@@ -296,12 +526,61 @@
 
     <footer class="footer">
       <div class="container">
-        <div class="footer-inner">
-          <span>&copy; 2026 토브하우스 All rights reserved.</span>
-          <div class="footer-links">
-            <a href="privacy.html">개인정보처리방침</a>
-            <a href="terms.html"><strong>이용약관</strong></a>
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <div class="footer-logo">TOV HOUSE</div>
+            <p class="footer-desc">
+              보기 좋은 공간이 편한 공간이 됩니다.<br />
+              토브하우스는 투명한 견적과 꼼꼼한 시공으로<br />
+              더 나은 공간을 만듭니다.
+            </p>
           </div>
+          <div>
+            <div class="footer-heading">Contact</div>
+            <ul class="footer-info">
+              <li>
+                <a href="tel:03196822224" class="footer-phone"
+                  >Tel. 031-968-2224</a
+                >
+              </li>
+              <li style="margin-top: 0.5rem">
+                (주)코이노니아 | 대표이사: 이재호
+              </li>
+              <li>사업자등록번호: 198-87-01821</li>
+            </ul>
+          </div>
+          <div>
+            <div class="footer-heading">Location</div>
+            <ul class="footer-info">
+              <li>경기도 고양시 덕양구<br />삼원안길 12, 1층</li>
+              <li style="margin-top: 0.75rem">평일 09:00 - 18:00</li>
+              <li>토요일 10:00 - 15:00</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>&copy; 2026 토브하우스 All rights reserved.</span>
+          <span>청정종합건영(주) 건설업 면허 보유 기업</span>
+          <span class="footer-links"
+            ><a href="privacy.html">개인정보처리방침</a> ·
+            <a href="terms.html">이용약관</a></span
+          >
+          <span
+            >Designed by
+            <a
+              href="https://polarad.co.kr"
+              target="_blank"
+              rel="noopener"
+              style="
+                color: rgba(255, 255, 255, 0.5);
+                transition: color 0.3s;
+                text-decoration: underline;
+              "
+              onmouseover="this.style.color = 'rgba(255,255,255,0.8)'"
+              onmouseout="this.style.color = 'rgba(255,255,255,0.5)'"
+              >POLARAD</a
+            >
+          </span>
         </div>
       </div>
     </footer>

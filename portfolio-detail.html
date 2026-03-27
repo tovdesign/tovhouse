@@ -8,7 +8,16 @@
       name="description"
       content="서울 성북구 석관동 49평 두산아파트 리모델링 시공사례. 토브하우스 투명 견적 인테리어."
     />
+    <meta
+      name="keywords"
+      content="인테리어 시공사례, 리모델링 시공후기, 아파트 인테리어 사진, 시공 전후"
+    />
+    <meta name="geo.region" content="KR-41" />
+    <meta name="geo.placename" content="고양시 덕양구" />
+    <meta name="geo.position" content="37.6584;126.8320" />
+    <meta name="ICBM" content="37.6584, 126.8320" />
     <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
     <meta name="robots" content="index, follow" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="토브하우스" />
@@ -128,18 +137,16 @@
 
       /* ===== NAV ===== */
       .nav {
-        position: fixed;
+        position: sticky;
         top: 0;
-        left: 0;
-        right: 0;
         z-index: 100;
-        height: 64px;
         background: rgba(255, 255, 255, 0.95);
         backdrop-filter: blur(12px);
         border-bottom: 1px solid var(--warm-200);
+        height: 64px;
       }
-      .nav-inner {
-        max-width: 1280px;
+      .nav .container {
+        max-width: 1200px;
         margin: 0 auto;
         padding: 0 2rem;
         display: flex;
@@ -147,28 +154,123 @@
         justify-content: space-between;
         height: 100%;
       }
-      .nav-logo img {
-        height: 36px;
-        width: auto;
-      }
-      .nav-back {
-        font-size: 0.85rem;
-        color: var(--warm-500);
+      .nav-logo {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
-        padding: 0.5rem 1rem;
-        border-radius: 8px;
-        transition: all 0.3s;
       }
-      .nav-back:hover {
-        background: var(--warm-100);
+      .nav-logo-img {
+        height: 44px;
+        width: auto;
+      }
+      .nav-logo-text {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #3a9d5e;
+        margin-left: 0.5rem;
+        letter-spacing: 0.5px;
+      }
+      .nav-links {
+        display: flex;
+        gap: 2.5rem;
+        list-style: none;
+      }
+      .nav-links a {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--warm-500);
+        letter-spacing: 1px;
+        transition: color 0.3s;
+        position: relative;
+      }
+      .nav-links a:hover,
+      .nav-links a.active {
+        color: var(--green-500);
+      }
+      .nav-links a.active::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--green-500);
+        border-radius: 1px;
+      }
+      .nav-cta {
+        background: var(--green-500);
+        color: white;
+        padding: 0.5rem 1.25rem;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        transition:
+          background 0.3s,
+          transform 0.2s;
+      }
+      .nav-cta:hover {
+        background: var(--green-600);
+        transform: translateY(-1px);
+      }
+      .nav-toggle {
+        display: none;
+        background: none;
+        border: none;
+        padding: 0.5rem;
+        cursor: pointer;
+      }
+      .nav-toggle span {
+        display: block;
+        width: 20px;
+        height: 2px;
+        background: var(--warm-700);
+        margin: 4px 0;
+        transition: 0.3s;
+      }
+      .nav-toggle.open span:nth-child(1) {
+        transform: rotate(45deg) translate(4px, 4px);
+      }
+      .nav-toggle.open span:nth-child(2) {
+        opacity: 0;
+      }
+      .nav-toggle.open span:nth-child(3) {
+        transform: rotate(-45deg) translate(4px, -4px);
+      }
+      .nav-mobile-menu {
+        display: none;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        z-index: 999;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--warm-200);
+        padding: 1rem 1.5rem;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      }
+      .nav-mobile-menu.show {
+        display: block;
+      }
+      .nav-mobile-menu a {
+        display: block;
+        padding: 0.75rem 0;
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: var(--warm-500);
+        border-bottom: 1px solid var(--warm-100);
+        transition: color 0.2s;
+      }
+      .nav-mobile-menu a:last-child {
+        border-bottom: none;
+      }
+      .nav-mobile-menu a:hover,
+      .nav-mobile-menu a.active {
         color: var(--green-500);
       }
 
       /* ===== HERO ===== */
       .detail-hero {
-        margin-top: 64px;
         height: 60vh;
         min-height: 400px;
         max-height: 600px;
@@ -237,7 +339,7 @@
 
       /* ===== CONTENT LAYOUT ===== */
       .detail-content {
-        max-width: 1280px;
+        max-width: 1200px;
         margin: 0 auto;
         padding: 2.5rem 2rem;
         display: grid;
@@ -448,7 +550,7 @@
         background: var(--warm-100);
       }
       .related-inner {
-        max-width: 1280px;
+        max-width: 1200px;
         margin: 0 auto;
         padding: 0 2rem;
       }
@@ -749,6 +851,15 @@
 
       /* ===== RESPONSIVE ===== */
       @media (max-width: 1024px) {
+        .nav-links {
+          display: none;
+        }
+        .nav-toggle {
+          display: block;
+        }
+        .nav-cta {
+          display: none;
+        }
         .detail-content {
           grid-template-columns: 1fr;
           gap: 1.5rem;
@@ -950,23 +1061,40 @@
 
     <!-- NAV -->
     <nav class="nav">
-      <div class="nav-inner">
-        <a href="index.html" class="nav-logo"
-          ><img src="assets/tov-logo.png" alt="토브하우스"
-        /></a>
-        <a href="portfolio.html" class="nav-back">
-          <svg
-            width="16"
-            height="16"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-          >
-            <path d="M10 4L6 8l4 4" />
-          </svg>
-          포트폴리오 목록
+      <div class="container">
+        <a href="index.html" class="nav-logo">
+          <img
+            src="assets/tov-logo.png"
+            alt="토브하우스 로고"
+            class="nav-logo-img"
+          />
+          <span class="nav-logo-text">토브하우스</span>
         </a>
+        <ul class="nav-links">
+          <li><a href="index.html">홈</a></li>
+          <li><a href="about.html">회사소개</a></li>
+          <li><a href="portfolio.html" class="active">시공사례</a></li>
+          <li><a href="estimate.html">견적문의</a></li>
+          <li><a href="news.html">소식</a></li>
+        </ul>
+        <a href="estimate.html" class="nav-cta">무료 견적 상담</a>
+        <button
+          class="nav-toggle"
+          aria-label="메뉴"
+          onclick="
+            this.classList.toggle('open');
+            document.getElementById('mobileMenu').classList.toggle('show');
+          "
+        >
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <div class="nav-mobile-menu" id="mobileMenu">
+        <a href="index.html">홈</a>
+        <a href="about.html">회사소개</a>
+        <a href="portfolio.html" class="active">시공사례</a>
+        <a href="estimate.html">견적문의</a>
+        <a href="news.html">소식</a>
       </div>
     </nav>
 
@@ -1384,6 +1512,48 @@
             " " +
             (area || "") +
             " 리모델링 | 토브하우스";
+
+          // Dynamic SEO meta update
+          document
+            .querySelector('meta[property="og:title"]')
+            .setAttribute("content", item.title + " | 토브하우스");
+          document
+            .querySelector('meta[property="og:description"]')
+            .setAttribute(
+              "content",
+              item.title + " 시공사례. 토브하우스 투명한 견적, 맞춤 인테리어.",
+            );
+          document
+            .querySelector('meta[property="og:url"]')
+            .setAttribute(
+              "content",
+              "https://tovdesign.net/portfolio-detail?id=" +
+                item.id +
+                "&type=" +
+                item.category,
+            );
+          document
+            .querySelector('meta[name="description"]')
+            .setAttribute(
+              "content",
+              item.title +
+                " 인테리어 리모델링 시공사례. 투명한 견적과 맞춤 디자인 - 토브하우스",
+            );
+          // Dynamic canonical update
+          var canonicalLink = document.querySelector('link[rel="canonical"]');
+          if (!canonicalLink) {
+            canonicalLink = document.createElement("link");
+            canonicalLink.setAttribute("rel", "canonical");
+            document.head.appendChild(canonicalLink);
+          }
+          canonicalLink.setAttribute(
+            "href",
+            "https://tovdesign.net/portfolio-detail?id=" +
+              item.id +
+              "&type=" +
+              item.category,
+          );
+
           allImages = [...document.querySelectorAll(".gallery-item img")].map(
             (i) => i.src,
           );

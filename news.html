@@ -8,7 +8,16 @@
       name="description"
       content="토브하우스 공지사항 - 시공 안내, 영업시간, 견적 문의 안내 등 최신 소식을 확인하세요."
     />
+    <meta
+      name="keywords"
+      content="토브하우스 소식, 인테리어 공지사항, 리모델링 뉴스, 시공 소식"
+    />
+    <meta name="geo.region" content="KR-41" />
+    <meta name="geo.placename" content="고양시 덕양구" />
+    <meta name="geo.position" content="37.6584;126.8320" />
+    <meta name="ICBM" content="37.6584, 126.8320" />
     <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://tovdesign.net/news" />
     <meta property="og:type" content="website" />
@@ -133,7 +142,7 @@
 
       /* ========== UTILITIES ========== */
       .container {
-        max-width: 1280px;
+        max-width: 1200px;
         margin: 0 auto;
         padding: 0 2rem;
       }
@@ -166,8 +175,15 @@
         align-items: center;
       }
       .nav-logo-img {
-        height: 36px;
+        height: 44px;
         width: auto;
+      }
+      .nav-logo-text {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #3a9d5e;
+        margin-left: 0.5rem;
+        letter-spacing: 0.5px;
       }
       .nav-links {
         display: flex;
@@ -836,6 +852,7 @@
             alt="토브하우스 로고"
             class="nav-logo-img"
           />
+          <span class="nav-logo-text">토브하우스</span>
         </a>
         <ul class="nav-links">
           <li><a href="index.html">홈</a></li>

@@ -8,7 +8,16 @@
       name="description"
       content="토브하우스 인테리어 리모델링 시공 사례. 주거공간, 상업공간 포트폴리오."
     />
+    <meta
+      name="keywords"
+      content="시공사례, 인테리어 포트폴리오, 아파트 리모델링 사례, 상업공간 시공, 주거 인테리어 시공후기"
+    />
+    <meta name="geo.region" content="KR-41" />
+    <meta name="geo.placename" content="고양시 덕양구" />
+    <meta name="geo.position" content="37.6584;126.8320" />
+    <meta name="ICBM" content="37.6584, 126.8320" />
     <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://tovdesign.net/portfolio" />
     <meta property="og:type" content="website" />
@@ -120,7 +129,7 @@
         border: none;
       }
       .container {
-        max-width: 1280px;
+        max-width: 1200px;
         margin: 0 auto;
         padding: 0 2rem;
       }
@@ -141,9 +150,20 @@
         justify-content: space-between;
         height: 100%;
       }
-      .nav-logo img {
-        height: 36px;
+      .nav-logo {
+        display: flex;
+        align-items: center;
+      }
+      .nav-logo-img {
+        height: 44px;
         width: auto;
+      }
+      .nav-logo-text {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #3a9d5e;
+        margin-left: 0.5rem;
+        letter-spacing: 0.5px;
       }
       .nav-links {
         display: flex;
@@ -179,10 +199,14 @@
         border-radius: 8px;
         font-size: 0.875rem;
         font-weight: 600;
-        transition: all 0.3s;
+        letter-spacing: 0.5px;
+        transition:
+          background 0.3s,
+          transform 0.2s;
       }
       .nav-cta:hover {
         background: var(--green-600);
+        transform: translateY(-1px);
       }
       .nav-toggle {
         display: none;
@@ -716,9 +740,14 @@
 
     <nav class="nav">
       <div class="container">
-        <a href="index.html" class="nav-logo"
-          ><img src="assets/tov-logo.png" alt="토브하우스"
-        /></a>
+        <a href="index.html" class="nav-logo">
+          <img
+            src="assets/tov-logo.png"
+            alt="토브하우스 로고"
+            class="nav-logo-img"
+          />
+          <span class="nav-logo-text">토브하우스</span>
+        </a>
         <ul class="nav-links">
           <li><a href="index.html">홈</a></li>
           <li><a href="about.html">회사소개</a></li>
@@ -3202,9 +3231,13 @@
             <div class="footer-heading">Contact</div>
             <ul class="footer-info">
               <li>
-                <a href="tel:03196822224" class="footer-phone">Tel. 031-968-2224</a>
+                <a href="tel:03196822224" class="footer-phone"
+                  >Tel. 031-968-2224</a
+                >
               </li>
-              <li style="margin-top: 0.5rem">(주)코이노니아 | 대표이사: 이재호</li>
+              <li style="margin-top: 0.5rem">
+                (주)코이노니아 | 대표이사: 이재호
+              </li>
               <li>사업자등록번호: 198-87-01821</li>
             </ul>
           </div>
@@ -3458,7 +3491,7 @@
         "mainEntity": {
           "@type": "ItemList",
           "name": "시공 사례",
-          "numberOfItems": "79"
+          "numberOfItems": "106"
         }
       }
     </script>
