@@ -2,22 +2,25 @@
 // 최종 수정: 2025-08-19 (메이크 웹앱 법인 전용 버전)
 
 // ===== 보안 설정 =====
-const SECRET_KEY = "kpolicy2025secret";  // 메이크에서 동일하게 사용할 시크릿 키
+// ⚠ 시크릿은 Script Properties에서 로드 (프로젝트 설정 → 스크립트 속성)
+//   필요 속성: WEBHOOK_SECRET, TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID
+function getProp_(key) {
+  const v = PropertiesService.getScriptProperties().getProperty(key);
+  if (!v) throw new Error("Missing script property: " + key);
+  return v;
+}
 
 // ===== 웹앱 메인 함수 (메이크에서 호출) =====
 function doPost(e) {
   try {
+    const SECRET_KEY = getProp_("WEBHOOK_SECRET");
     // Query String에서 시크릿 키 검증
     const querySecret = e.parameter ? e.parameter.secret : null;
 
     if (!querySecret || querySecret !== SECRET_KEY) {
       console.error('인증 실패: 잘못된 시크릿 키');
       return ContentService
-        .createTextOutput(JSON.stringify({
-          'status': 'error',
-          'message': '인증 실패: 유효하지 않은 요청입니다.',
-          'timestamp': new Date().toLocaleString('ko-KR')
-        }))
+        .createTextOutput(JSON.stringify({ 'status': 'error' }))
         .setMimeType(ContentService.MimeType.JSON);
     }
 
@@ -115,6 +118,7 @@ function doPost(e) {
 // ===== GET 요청 처리 (테스트용) =====
 function doGet(e) {
   // 시크릿 키가 있는 경우만 상세 정보 제공
+  const SECRET_KEY = getProp_("WEBHOOK_SECRET");
   if (e.parameter && e.parameter.secret === SECRET_KEY) {
     return ContentService
       .createTextOutput(JSON.stringify({
@@ -263,9 +267,9 @@ function sendEmail(data, sheet, row) {
 
 // ===== 텔레그램 발송 함수 =====
 function sendTelegram(data, sheet, row) {
-  // 텔레그램 설정
-  const BOT_TOKEN = "8053531001:AAHsPDUPGx0PzuqqXJMmveevEWAlVo-Bcjk";
-  const CHAT_ID = "-1003061443160";
+  // 시크릿은 Script Properties에서 로드
+  const BOT_TOKEN = getProp_("TELEGRAM_BOT_TOKEN");
+  const CHAT_ID = getProp_("TELEGRAM_CHAT_ID");
   const TELEGRAM_API_URL = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
 
   // 데이터 추출
@@ -360,7 +364,7 @@ function testWithMakeFormat() {
   // POST 요청 시뮬레이션 (Query String 포함)
   const e = {
     parameter: {
-      secret: SECRET_KEY  // Query String으로 전달
+      secret: getProp_("WEBHOOK_SECRET")  // Query String으로 전달
     },
     postData: {
       contents: JSON.stringify(testData)
@@ -383,8 +387,8 @@ function simpleTest() {
     console.log("이메일 발송 성공");
 
     // 2. 텔레그램 테스트
-    const BOT_TOKEN = "8053531001:AAHsPDUPGx0PzuqqXJMmveevEWAlVo-Bcjk";
-    const CHAT_ID = "-1003061443160";
+    const BOT_TOKEN = getProp_("TELEGRAM_BOT_TOKEN");
+    const CHAT_ID = getProp_("TELEGRAM_CHAT_ID");
     const TELEGRAM_API_URL = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
 
     const response = UrlFetchApp.fetch(TELEGRAM_API_URL, {
@@ -440,7 +444,7 @@ function testSecretValidation() {
 
   const e2 = {
     parameter: {
-      secret: SECRET_KEY  // 올바른 Query String
+      secret: getProp_("WEBHOOK_SECRET")  // 올바른 Query String
     },
     postData: {
       contents: JSON.stringify(correctData)

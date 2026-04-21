@@ -1177,6 +1177,23 @@
         return { region: title, type: "", area: "" };
       }
 
+      // XSS 방어: 외부 데이터(API/JSON) 삽입 전 이스케이프
+      function esc(v) {
+        if (v === null || v === undefined) return "";
+        return String(v)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+      function safeUrl(u) {
+        if (!u) return "";
+        const s = String(u).trim();
+        if (/^(javascript|data|vbscript|file):/i.test(s)) return "";
+        return esc(s);
+      }
+
       function buildBlocksHTML(blocks, startIdx) {
         let html = "";
         let imgIdx = startIdx;
@@ -1188,7 +1205,7 @@
           html += '<div class="fade-in">';
           html +=
             '<div class="gallery-section-title">' +
-            (block.title || "시공 사진") +
+            esc(block.title || "시공 사진") +
             " · Photos</div>";
 
           const count = block.images.length;
@@ -1202,7 +1219,7 @@
               '" onclick="openLightbox(' +
               imgIdx +
               ')"><img src="' +
-              src +
+              safeUrl(src) +
               '" alt="시공 사진" loading="' +
               (imgIdx < 3 ? "eager" : "lazy") +
               '">' +
@@ -1380,31 +1397,32 @@
           related.forEach((r, i) => {
             const rParsed = parseTitle(r.title);
             const rThumb = r.img || r.thumbnail || "";
-            const rId = r.id;
-            const rLink = String(rId).startsWith("rec")
-              ? "portfolio-detail.html?id=" + rId
-              : "portfolio-detail.html?id=" + rId + "&type=" + type;
+            const rId = String(r.id || "");
+            const rLink = rId.startsWith("rec")
+              ? "portfolio-detail.html?id=" + encodeURIComponent(rId)
+              : "portfolio-detail.html?id=" +
+                encodeURIComponent(rId) +
+                "&type=" +
+                encodeURIComponent(type);
             relatedHTML +=
               '<a href="' +
-              rLink +
+              esc(rLink) +
               '" class="related-card fade-in" style="transition-delay:' +
               i * 0.1 +
               's">' +
               '<div class="related-card-img"><img src="' +
-              rThumb +
+              safeUrl(rThumb) +
               '" alt="' +
-              (rParsed.region || "") +
+              esc(rParsed.region || "") +
               '" loading="lazy"></div>' +
               '<div class="related-card-body"><div class="related-card-title">' +
-              (rParsed.region || "") +
-              " " +
-              (rParsed.area || "") +
+              esc((rParsed.region || "") + " " + (rParsed.area || "")) +
               "</div>" +
               '<div class="related-card-meta"><span class="related-tag">' +
-              (rParsed.type || r.cat || "") +
+              esc(rParsed.type || r.cat || "") +
               "</span>" +
               (rParsed.area
-                ? '<span class="related-tag">' + rParsed.area + "</span>"
+                ? '<span class="related-tag">' + esc(rParsed.area) + "</span>"
                 : "") +
               "</div></div></a>";
           });
@@ -1422,55 +1440,51 @@
           document.getElementById("app-root").innerHTML =
             '<section class="detail-hero">' +
             '<img src="' +
-            thumbUrl +
+            safeUrl(thumbUrl) +
             '" alt="' +
-            region +
-            " " +
-            area +
+            esc(region + " " + area) +
             ' 리모델링">' +
             '<div class="hero-overlay">' +
             '<div class="hero-breadcrumb"><a href="index.html">홈</a> <span>›</span> <a href="portfolio.html">포트폴리오</a> <span>›</span> <span>' +
-            category +
+            esc(category) +
             "</span></div>" +
             '<h1 class="hero-title">' +
-            region +
-            " " +
-            area +
+            esc(region + " " + area) +
             "</h1>" +
             '<div class="hero-tags"><span class="hero-tag">' +
-            spaceType +
+            esc(spaceType) +
             '</span><span class="hero-tag">' +
-            category +
+            esc(category) +
             "</span>" +
-            (area ? '<span class="hero-tag">' + area + "</span>" : "") +
+            (area ? '<span class="hero-tag">' + esc(area) + "</span>" : "") +
             "</div>" +
             "</div>" +
             "</section>" +
             '<div class="detail-content">' +
             '<aside class="project-info fade-in">' +
             '<div class="info-header"><div class="info-header-label">Project Info</div><div class="info-header-title">' +
-            (region || "리모델링") +
+            esc(region || "리모델링") +
             "</div></div>" +
             '<div class="info-grid">' +
             '<div class="info-item"><div class="info-label">지역</div><div class="info-value">' +
-            (region || "-") +
+            esc(region || "-") +
             "</div></div>" +
             '<div class="info-item"><div class="info-label">공간 유형</div><div class="info-value">' +
-            (spaceType || "-") +
+            esc(spaceType || "-") +
             "</div></div>" +
             (area
               ? '<div class="info-item"><div class="info-label">면적</div><div class="info-value highlight">' +
-                area +
+                esc(area) +
                 "</div></div>"
               : "") +
             (duration
               ? '<div class="info-item"><div class="info-label">시공 기간</div><div class="info-value">' +
-                duration +
+                esc(duration) +
                 "</div></div>"
               : "") +
             (cost
               ? '<div class="info-item full"><div class="info-label">시공 비용</div><div class="info-value highlight" style="font-size:1.25rem">' +
-                cost +
+                esc(cost) +
                 "만원</div></div>"
               : "") +
             "</div>" +
@@ -1482,7 +1496,7 @@
             "</aside>" +
             '<div class="gallery">' +
             '<div class="project-desc fade-in"><h3>프로젝트 소개</h3><p>' +
-            descText.replace(/\n/g, "<br>") +
+            esc(descText).replace(/\n/g, "<br>") +
             "</p></div>" +
             blocksHTML +
             receiptHTML +

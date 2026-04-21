@@ -1080,6 +1080,24 @@
 
     <!-- Wizard -->
     <main class="wizard-page">
+      <!-- 봇 방어: 허니팟 (정상 사용자에게 완전 비가시 + autocomplete 차단) -->
+      <input
+        type="text"
+        name="website"
+        id="f-hp"
+        autocomplete="off"
+        tabindex="-1"
+        aria-hidden="true"
+        style="
+          position: absolute;
+          left: -9999px;
+          top: -9999px;
+          width: 0;
+          height: 0;
+          opacity: 0;
+          pointer-events: none;
+        "
+      />
       <div class="wizard-layout">
         <div class="wizard-wrapper">
           <!-- Progress -->
@@ -1992,6 +2010,9 @@
         }).open();
       }
 
+      // ===== 봇 방어: 페이지 로드 시점 기록 =====
+      window._formLoadTs = Date.now();
+
       // ===== SUBMIT =====
       async function submitForm() {
         // 개인정보 동의 확인
@@ -2032,6 +2053,9 @@
               "평)"
             : "",
           privacyConsent: true,
+          // 봇 방어 필드 (관리자 백엔드에서 미처리 시 무시됨 → 정상 접수 영향 없음)
+          _hp: document.getElementById("f-hp")?.value || "",
+          _ts: window._formLoadTs || Date.now(),
         };
 
         // 즉시 성공 화면 표시
