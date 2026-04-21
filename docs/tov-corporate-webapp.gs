@@ -1,5 +1,11 @@
 // © 2024. All Rights Reserved.
 // 최종 수정: 2025-08-19 (메이크 웹앱 법인 전용 버전)
+//
+// ⚠ LEGACY — tovhouse(35.tovhouse2026)에서는 운영 미사용.
+//    현재 접수 흐름은 Cloudflare Worker(/api/meta-webhook, /api/send-sms) +
+//    admin.tovdesign.net 으로 대체됨. 이 파일은 과거 tovdesign(34.tov2026) 프로젝트의
+//    Make.com + Google Sheets 연동 참조용으로만 보관. 재활성화 시 아래 Script Properties
+//    등록 필요: WEBHOOK_SECRET, TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID.
 
 // ===== 보안 설정 =====
 // ⚠ 시크릿은 Script Properties에서 로드 (프로젝트 설정 → 스크립트 속성)
