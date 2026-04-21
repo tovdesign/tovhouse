@@ -1555,18 +1555,27 @@
 
     <!-- ===== SCRIPTS ===== -->
     <script>
-      // Scroll reveal
-      const revealObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) entry.target.classList.add("visible");
-          });
-        },
-        { threshold: 0.15, rootMargin: "0px 0px -60px 0px" },
-      );
-      document
-        .querySelectorAll(".fade-up")
-        .forEach((el) => revealObserver.observe(el));
+      // Scroll reveal (모바일 안정성)
+      const revealTargets = document.querySelectorAll(".fade-up");
+      if ("IntersectionObserver" in window) {
+        const revealObserver = new IntersectionObserver(
+          (entries, o) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                o.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0, rootMargin: "0px 0px 150px 0px" },
+        );
+        revealTargets.forEach((el) => revealObserver.observe(el));
+        setTimeout(() => {
+          revealTargets.forEach((el) => el.classList.add("visible"));
+        }, 1500);
+      } else {
+        revealTargets.forEach((el) => el.classList.add("visible"));
+      }
 
       // Toggle notice accordion
       function toggleNotice(item) {

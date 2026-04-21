@@ -1568,17 +1568,30 @@
             (i) => i.src,
           );
 
-          const obs = new IntersectionObserver(
-            (entries) => {
-              entries.forEach((e) => {
-                if (e.isIntersecting) e.target.classList.add("visible");
-              });
-            },
-            { threshold: 0.1 },
-          );
-          document
-            .querySelectorAll(".fade-in")
-            .forEach((el) => obs.observe(el));
+          // IntersectionObserver 지원 + 일찍 발동(rootMargin) + threshold 0
+          // 추가로 200ms 안에 첫 화면 요소는 즉시 visible 처리
+          const fadeEls = document.querySelectorAll(".fade-in");
+          if ("IntersectionObserver" in window) {
+            const obs = new IntersectionObserver(
+              (entries, o) => {
+                entries.forEach((e) => {
+                  if (e.isIntersecting) {
+                    e.target.classList.add("visible");
+                    o.unobserve(e.target);
+                  }
+                });
+              },
+              { threshold: 0, rootMargin: "0px 0px 200px 0px" },
+            );
+            fadeEls.forEach((el) => obs.observe(el));
+            // 안전장치: 혹시 observer가 발동 안 하는 경우 1.5초 뒤 모두 visible 처리
+            setTimeout(() => {
+              fadeEls.forEach((el) => el.classList.add("visible"));
+            }, 1500);
+          } else {
+            // IO 미지원 환경 (구형 브라우저) → 즉시 visible
+            fadeEls.forEach((el) => el.classList.add("visible"));
+          }
         } catch (err) {
           console.error("Failed to load portfolio data:", err);
           document.getElementById("app-root").innerHTML =

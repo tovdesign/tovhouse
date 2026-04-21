@@ -1539,24 +1539,35 @@
 
     <!-- ===== SCROLL ANIMATION ===== -->
     <script>
-      const revealObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("visible");
-              if (entry.target.dataset.count) animateCounter(entry.target);
-              // Also trigger counters in children
-              entry.target
-                .querySelectorAll("[data-count]")
-                .forEach((el) => animateCounter(el));
-            }
-          });
-        },
-        { threshold: 0.15, rootMargin: "0px 0px -60px 0px" },
+      const revealTargets = document.querySelectorAll(
+        ".fade-up, .fade-left, .fade-right",
       );
-      document
-        .querySelectorAll(".fade-up, .fade-left, .fade-right")
-        .forEach((el) => revealObserver.observe(el));
+      function activateReveal(el) {
+        el.classList.add("visible");
+        if (el.dataset.count) animateCounter(el);
+        el.querySelectorAll("[data-count]").forEach((c) => animateCounter(c));
+      }
+      if ("IntersectionObserver" in window) {
+        const revealObserver = new IntersectionObserver(
+          (entries, o) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                activateReveal(entry.target);
+                o.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0, rootMargin: "0px 0px 150px 0px" },
+        );
+        revealTargets.forEach((el) => revealObserver.observe(el));
+        setTimeout(() => {
+          revealTargets.forEach((el) => {
+            if (!el.classList.contains("visible")) activateReveal(el);
+          });
+        }, 1500);
+      } else {
+        revealTargets.forEach(activateReveal);
+      }
 
       function animateCounter(el) {
         const target = el.dataset.count;

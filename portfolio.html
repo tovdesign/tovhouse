@@ -3452,16 +3452,28 @@
           const spinner = grid.querySelector('[style*="grid-column"]');
           if (spinner) spinner.remove();
         }
-        // Init observer
-        const obs = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((e) => {
-              if (e.isIntersecting) e.target.classList.add("visible");
-            });
-          },
-          { threshold: 0.1 },
-        );
-        document.querySelectorAll(".fade-up").forEach((el) => obs.observe(el));
+        // Init observer (모바일 안정성: threshold 0, rootMargin 일찍 발동, 1.5s 안전장치)
+        const fadeEls = document.querySelectorAll(".fade-up");
+        if ("IntersectionObserver" in window) {
+          const obs = new IntersectionObserver(
+            (entries, o) => {
+              entries.forEach((e) => {
+                if (e.isIntersecting) {
+                  e.target.classList.add("visible");
+                  o.unobserve(e.target);
+                }
+              });
+            },
+            { threshold: 0, rootMargin: "0px 0px 200px 0px" },
+          );
+          fadeEls.forEach((el) => obs.observe(el));
+          setTimeout(
+            () => fadeEls.forEach((el) => el.classList.add("visible")),
+            1500,
+          );
+        } else {
+          fadeEls.forEach((el) => el.classList.add("visible"));
+        }
       }
 
       document.querySelectorAll(".filter-tab").forEach((tab) => {

@@ -2963,25 +2963,39 @@
 
     <!-- ===== SCROLL ANIMATION ===== -->
     <script>
-      // ===== SCROLL REVEAL OBSERVER =====
-      const revealObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("visible");
-              // Trigger counter if element has data-count
-              if (entry.target.dataset.count) {
-                animateCounter(entry.target);
+      // ===== SCROLL REVEAL OBSERVER (모바일 안정성) =====
+      const revealTargets = document.querySelectorAll(
+        ".fade-up, .fade-left, .fade-right, .scale-in",
+      );
+      if ("IntersectionObserver" in window) {
+        const revealObserver = new IntersectionObserver(
+          (entries, o) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                if (entry.target.dataset.count) animateCounter(entry.target);
+                o.unobserve(entry.target);
               }
+            });
+          },
+          { threshold: 0, rootMargin: "0px 0px 150px 0px" },
+        );
+        revealTargets.forEach((el) => revealObserver.observe(el));
+        // 안전장치: 1.5초 내 미노출 요소 강제 visible
+        setTimeout(() => {
+          revealTargets.forEach((el) => {
+            if (!el.classList.contains("visible")) {
+              el.classList.add("visible");
+              if (el.dataset.count) animateCounter(el);
             }
           });
-        },
-        { threshold: 0.15, rootMargin: "0px 0px -60px 0px" },
-      );
-
-      document
-        .querySelectorAll(".fade-up, .fade-left, .fade-right, .scale-in")
-        .forEach((el) => revealObserver.observe(el));
+        }, 1500);
+      } else {
+        revealTargets.forEach((el) => {
+          el.classList.add("visible");
+          if (el.dataset.count) animateCounter(el);
+        });
+      }
 
       // ===== NUMBER COUNTER ANIMATION =====
       function animateCounter(el) {
