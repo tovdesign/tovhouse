@@ -33,6 +33,7 @@
       property="og:image"
       content="https://tovdesign.net/assets/site/og-image.png"
     />
+    <meta property="og:url" content="https://tovdesign.net/portfolio-detail" />
     <meta property="og:locale" content="ko_KR" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta
@@ -1502,7 +1503,7 @@
             '<div><div class="footer-heading">Contact</div><ul class="footer-info"><li><a href="tel:03196822224" class="footer-phone">Tel. 031-968-2224</a></li><li style="margin-top:0.5rem">(주)코이노니아 | 대표이사: 이재호</li><li>사업자등록번호: 198-87-01821</li></ul></div>' +
             '<div><div class="footer-heading">Location</div><ul class="footer-info"><li>경기도 고양시 덕양구<br>삼원안길 12, 1층</li><li style="margin-top:0.75rem">평일 09:00 - 18:00</li><li>토요일 10:00 - 15:00</li></ul></div>' +
             '</div><div class="footer-bottom">' +
-            "<span>&copy; 2026 토브하우스 All rights reserved.</span><span>청정종합건영(주) 건설업 면허 보유 기업</span>" +
+            "<span>&copy; 2026 토브하우스 All rights reserved.</span>" +
             '<span class="footer-links"><a href="privacy.html">개인정보처리방침</a> · <a href="terms.html">이용약관</a></span>' +
             '<span>Designed by <a href="https://polarad.co.kr" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.5);transition:color 0.3s;text-decoration:underline" onmouseover="this.style.color=\'rgba(255,255,255,0.8)\'" onmouseout="this.style.color=\'rgba(255,255,255,0.5)\'">POLARAD</a></span>' +
             "</div></div></footer>";
@@ -1513,32 +1514,41 @@
             (area || "") +
             " 리모델링 | 토브하우스";
 
-          // Dynamic SEO meta update
-          document
-            .querySelector('meta[property="og:title"]')
-            .setAttribute("content", item.title + " | 토브하우스");
-          document
-            .querySelector('meta[property="og:description"]')
-            .setAttribute(
-              "content",
-              item.title + " 시공사례. 토브하우스 투명한 견적, 맞춤 인테리어.",
-            );
-          document
-            .querySelector('meta[property="og:url"]')
-            .setAttribute(
-              "content",
-              "https://tovdesign.net/portfolio-detail?id=" +
-                item.id +
-                "&type=" +
-                item.category,
-            );
-          document
-            .querySelector('meta[name="description"]')
-            .setAttribute(
-              "content",
-              item.title +
-                " 인테리어 리모델링 시공사례. 투명한 견적과 맞춤 디자인 - 토브하우스",
-            );
+          // Dynamic SEO meta update (defensive — create if missing)
+          function setMeta(selector, attr, val) {
+            let el = document.querySelector(selector);
+            if (!el) {
+              el = document.createElement("meta");
+              const m = selector.match(/\[(property|name)="([^"]+)"\]/);
+              if (m) el.setAttribute(m[1], m[2]);
+              document.head.appendChild(el);
+            }
+            el.setAttribute(attr, val);
+          }
+          setMeta(
+            'meta[property="og:title"]',
+            "content",
+            item.title + " | 토브하우스",
+          );
+          setMeta(
+            'meta[property="og:description"]',
+            "content",
+            item.title + " 시공사례. 토브하우스 투명한 견적, 맞춤 인테리어.",
+          );
+          setMeta(
+            'meta[property="og:url"]',
+            "content",
+            "https://tovdesign.net/portfolio-detail?id=" +
+              item.id +
+              "&type=" +
+              item.category,
+          );
+          setMeta(
+            'meta[name="description"]',
+            "content",
+            item.title +
+              " 인테리어 리모델링 시공사례. 투명한 견적과 맞춤 디자인 - 토브하우스",
+          );
           // Dynamic canonical update
           var canonicalLink = document.querySelector('link[rel="canonical"]');
           if (!canonicalLink) {
