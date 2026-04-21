@@ -1364,7 +1364,7 @@
           }
           if (!blocks.length && item.images && item.images.length) {
             // Legacy: flat images → single block
-            blocks = [{ title: "시공 사진", images: item.images.slice(0, 12) }];
+            blocks = [{ title: "시공 사진", images: item.images }];
           }
 
           const { html: blocksHTML } = buildBlocksHTML(blocks, 0);
