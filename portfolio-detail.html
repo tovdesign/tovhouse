@@ -1553,9 +1553,11 @@
             'meta[property="og:url"]',
             "content",
             "https://tovdesign.net/portfolio-detail?id=" +
-              item.id +
+              encodeURIComponent(item.id) +
               "&type=" +
-              item.category,
+              encodeURIComponent(
+                item.category || item.cat || type || "residential",
+              ),
           );
           setMeta(
             'meta[name="description"]',
@@ -1573,9 +1575,11 @@
           canonicalLink.setAttribute(
             "href",
             "https://tovdesign.net/portfolio-detail?id=" +
-              item.id +
+              encodeURIComponent(item.id) +
               "&type=" +
-              item.category,
+              encodeURIComponent(
+                item.category || item.cat || type || "residential",
+              ),
           );
 
           allImages = [...document.querySelectorAll(".gallery-item img")].map(

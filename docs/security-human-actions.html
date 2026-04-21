@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>토브하우스 보안 개선 - 사용자 수동 조치 가이드</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      pre {
+        white-space: pre-wrap;
+        word-break: break-all;
+      }
+      .copy-btn {
+        transition: all 0.15s;
+      }
+      .copy-btn:active {
+        transform: scale(0.96);
+      }
+    </style>
+  </head>
+  <body class="bg-slate-50 text-slate-800 leading-relaxed">
+    <header
+      class="bg-gradient-to-r from-rose-700 to-rose-500 text-white py-8 px-6 shadow"
+    >
+      <div class="max-w-4xl mx-auto">
+        <div class="text-xs tracking-[0.3em] text-rose-100 uppercase mb-2">
+          Security Patch — Human Actions Required
+        </div>
+        <h1 class="text-3xl font-bold">
+          토브하우스 보안 개선 — 수동 조치 체크리스트
+        </h1>
+        <p class="text-rose-100 mt-3 text-sm">
+          코드는 이미 배포됨(commit 8e0e88b + Worker 6b7d8aa4). 아래 3개 항목은
+          반드시 사람이 직접 해야 함. 순서 중요.
+        </p>
+      </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-6 py-10 space-y-8">
+      <!-- 코드 변경 요약 -->
+      <section class="bg-white border border-slate-200 p-6 rounded shadow-sm">
+        <h2 class="text-lg font-bold mb-3">📦 이미 완료된 코드 변경</h2>
+        <ul class="text-sm space-y-1 list-disc list-inside">
+          <li>
+            CRIT-1 Apps Script <code>.gs</code> 평문 시크릿 제거 →
+            PropertiesService 동적 로드
+          </li>
+          <li>
+            CRIT-2/3 + HIGH-1 + MED-3 Worker 7-Layer 보안
+            (auth/rate/honeypot/timestamp/escape/err-abstraction) 적용 및 배포
+            완료
+          </li>
+          <li>
+            HIGH-2 portfolio.html / portfolio-detail.html innerHTML 영역
+            <code>esc()</code> / <code>safeUrl()</code> 이스케이프 적용
+          </li>
+          <li>MED-1 vercel.json 보안 헤더 5종 배포 (HSTS, nosniff 외)</li>
+          <li>
+            MED-2 estimate.html 허니팟(<code>#f-hp</code>) + 페이지 로드
+            타임스탬프(<code>_ts</code>) 페이로드 포함
+          </li>
+        </ul>
+        <p class="text-xs text-slate-500 mt-3">
+          정상 접수자 UX 무변경. Worker는 호환 모드로 시작 → 아래 1번 완료 후
+          강제 모드 활성화.
+        </p>
+      </section>
+
+      <!-- ACTION 1: Telegram 토큰 회전 (가장 시급) -->
+      <section
+        class="bg-white rounded shadow-sm border-l-4 border-rose-600 p-6"
+      >
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="text-lg font-bold">
+            🔴 1. Telegram Bot Token 회전 (최우선 · 즉시)
+          </h3>
+          <span class="text-xs bg-rose-600 text-white px-2 py-1 rounded"
+            >24h 안에</span
+          >
+        </div>
+        <p class="text-sm mb-3">
+          기존 토큰
+          <code class="bg-slate-100 px-1 rounded"
+            >8053531001:AAHsPDUPGx0PzuqqXJMmveevEWAlVo-Bcjk</code
+          >
+          는 공개 저장소(<a
+            href="https://github.com/tovdesign/tovhouse"
+            class="text-rose-600 underline"
+            target="_blank"
+            >github.com/tovdesign/tovhouse</a
+          >)에 노출된 이력이 있어 이미 스캐너에 인덱싱되었을 가능성 높음. 반드시
+          회전.
+        </p>
+
+        <ol class="text-sm list-decimal list-inside space-y-2 mt-2">
+          <li>
+            Telegram 앱에서 <code>@BotFather</code>에게 <code>/mybots</code> →
+            해당 봇 선택 → <code>API Token</code> →
+            <code>Revoke current token</code>
+          </li>
+          <li>새로 발급되는 토큰을 복사 (형식: <code>숫자:문자열</code>)</li>
+          <li>
+            아래 3군데에 새 토큰 등록:
+            <ul class="list-disc list-inside ml-5 mt-1 text-xs">
+              <li>
+                Cloudflare Worker —
+                <code>npx wrangler secret put TELEGRAM_BOT_TOKEN</code> (워커
+                폴더에서)
+              </li>
+              <li>
+                법인 Apps Script — 프로젝트 설정 → 스크립트 속성 →
+                <code>TELEGRAM_BOT_TOKEN</code> 항목 값 업데이트
+              </li>
+              <li>
+                개인 Apps Script — 같은 방식으로 <code>TELEGRAM_BOT_TOKEN</code>
+                업데이트
+              </li>
+            </ul>
+          </li>
+          <li>
+            기존 CHAT_ID(<code>-1003061443160</code>)는 공개돼도 큰 위험은
+            없지만, 회전 김에 같이
+            <code>TELEGRAM_CHAT_ID</code> 속성도 등록해두기
+          </li>
+        </ol>
+
+        <div
+          class="bg-slate-900 text-amber-200 text-xs rounded p-4 relative mt-3"
+        >
+          <button
+            class="copy-btn absolute right-2 top-2 bg-amber-600 text-white px-2 py-1 rounded text-[10px]"
+            onclick="copyTo(this)"
+          >
+            복사
+          </button>
+          <pre data-code><code># Worker 시크릿 등록 (워커 디렉토리에서 실행)
+cd F:\pola_homepage\35.tovhouse2026\workers\tovhouse
+npx wrangler secret put TELEGRAM_BOT_TOKEN
+# (프롬프트에 새 토큰 붙여넣기)
+npx wrangler secret put TELEGRAM_CHAT_ID
+# (-1003061443160 또는 새 채널 ID)
+npx wrangler secret put TELEGRAM_ADMIN_CHAT_ID
+# (보안 알림 받을 관리자 채널. 없으면 CHAT_ID와 동일)</code></pre>
+        </div>
+      </section>
+
+      <!-- ACTION 2: Apps Script Script Properties 등록 -->
+      <section
+        class="bg-white rounded shadow-sm border-l-4 border-rose-600 p-6"
+      >
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="text-lg font-bold">
+            🔴 2. Apps Script 스크립트 속성 등록
+          </h3>
+          <span class="text-xs bg-rose-600 text-white px-2 py-1 rounded"
+            >24h 안에</span
+          >
+        </div>
+        <p class="text-sm mb-3">
+          <code>.gs</code> 코드는 이미 <code>PropertiesService</code>로
+          전환됐지만, Script Properties에 값을 등록하지 않으면 함수 호출 시
+          <code>Missing script property</code>로 실패. 법인+개인 각각 등록 필요.
+        </p>
+
+        <div class="text-sm">
+          <div class="font-semibold mb-2">① 법인 웹앱:</div>
+          <ol class="list-decimal list-inside space-y-1 text-xs ml-2">
+            <li>
+              Apps Script 프로젝트 열기 (법인 — <em>tov-corporate-webapp</em>)
+            </li>
+            <li>좌측 톱니 아이콘(프로젝트 설정) 클릭</li>
+            <li>하단 "스크립트 속성" → "스크립트 속성 추가" 3번</li>
+            <li>
+              3개 속성 등록 (값은 BotFather에서 회전한 새 값 사용):
+              <ul class="list-disc list-inside ml-5 mt-1">
+                <li>
+                  <code>WEBHOOK_SECRET</code> = 새로 생성한 32자+ 랜덤 문자열
+                  (기존 <code>kpolicy2025secret</code> 대체)
+                </li>
+                <li><code>TELEGRAM_BOT_TOKEN</code> = 회전한 새 봇 토큰</li>
+                <li>
+                  <code>TELEGRAM_CHAT_ID</code> = <code>-1003061443160</code>
+                </li>
+              </ul>
+            </li>
+            <li>저장 → 배포 → 새 버전 배포 (기존 URL 유지)</li>
+            <li>
+              Make.com 시나리오에서 해당 웹앱 호출 시 query string의
+              <code>secret=</code> 값을 새 <code>WEBHOOK_SECRET</code>과
+              일치하도록 업데이트
+            </li>
+          </ol>
+
+          <div class="font-semibold mt-4 mb-2">② 개인 웹앱:</div>
+          <p class="text-xs ml-2">
+            동일 절차. 단
+            <code>WEBHOOK_SECRET</code>은 법인과 같거나 달라도 무방 (Make
+            시나리오별로 맞추면 됨).
+          </p>
+        </div>
+
+        <div
+          class="bg-slate-900 text-emerald-300 text-xs rounded p-4 relative mt-3"
+        >
+          <button
+            class="copy-btn absolute right-2 top-2 bg-emerald-600 text-white px-2 py-1 rounded text-[10px]"
+            onclick="copyTo(this)"
+          >
+            복사
+          </button>
+          <pre data-code><code># 안전한 WEBHOOK_SECRET 생성 (PowerShell)
+[Convert]::ToBase64String((1..32 | ForEach-Object { Get-Random -Maximum 256 }))
+
+# 또는 Node.js
+node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"</code></pre>
+        </div>
+      </section>
+
+      <!-- ACTION 3: Worker 강제 모드 승격 -->
+      <section
+        class="bg-white rounded shadow-sm border-l-4 border-orange-500 p-6"
+      >
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="text-lg font-bold">🟠 3. Worker 인증 강제 모드 승격</h3>
+          <span class="text-xs bg-orange-500 text-white px-2 py-1 rounded"
+            >7일 안에</span
+          >
+        </div>
+        <p class="text-sm mb-3">
+          현재 Worker는 <b>호환 모드</b>로 동작 —
+          <code>WORKER_SHARED_SECRET</code> 미설정 상태라 모든 요청 통과 +
+          콘솔에 경고만 출력. admin.tovdesign.net 호출부에 Bearer 토큰 붙이는
+          배포가 끝난 후 Worker에 시크릿 등록하면 강제 모드로 승격.
+        </p>
+
+        <ol class="text-sm list-decimal list-inside space-y-2">
+          <li>강한 랜덤 시크릿 생성 (위 2번의 명령 재사용)</li>
+          <li>
+            admin.tovdesign.net 측 코드(별도 저장소)에 환경변수
+            <code>TOVHOUSE_WORKER_SECRET</code> 추가 + Worker 호출 시
+            <code>Authorization: Bearer $TOVHOUSE_WORKER_SECRET</code>
+            헤더 전송하도록 수정 + 배포
+          </li>
+          <li>admin 배포 후에만 Worker에 시크릿 등록:</li>
+        </ol>
+
+        <div
+          class="bg-slate-900 text-cyan-300 text-xs rounded p-4 relative mt-3"
+        >
+          <button
+            class="copy-btn absolute right-2 top-2 bg-cyan-600 text-white px-2 py-1 rounded text-[10px]"
+            onclick="copyTo(this)"
+          >
+            복사
+          </button>
+          <pre
+            data-code
+          ><code>cd F:\pola_homepage\35.tovhouse2026\workers\tovhouse
+npx wrangler secret put WORKER_SHARED_SECRET
+# (admin과 동일한 값 붙여넣기)
+
+# Meta Instagram/Facebook 웹훅은 별도 인증이 필요하면
+# WORKER_SHARED_SECRET과 동일 값을 Meta 측에도 설정
+# (현재 /api/meta-webhook은 Meta HMAC 검증이 없는 상태이므로
+# 운영 중이면 Authorization 헤더로 보호)</code></pre>
+        </div>
+
+        <p class="text-xs text-amber-700 mt-2">
+          ⚠ 순서 역전 주의 — Worker 시크릿 먼저 등록하면 admin 호출이 즉시 401.
+          <b>반드시 admin 배포 완료 확인 후 Worker 시크릿 등록.</b>
+        </p>
+      </section>
+
+      <!-- ACTION 4: Optional 장기 조치 -->
+      <section
+        class="bg-white rounded shadow-sm border-l-4 border-amber-400 p-6"
+      >
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="text-lg font-bold">🟡 4. 장기 조치 (권장, 30일)</h3>
+          <span class="text-xs bg-amber-500 text-white px-2 py-1 rounded"
+            >30d</span
+          >
+        </div>
+        <ul class="text-sm list-disc list-inside space-y-2">
+          <li>
+            <b>GitHub Secret Scanning 활성화</b> — 저장소 Settings → Code
+            security → Secret scanning + Push protection 켜기. 앞으로 .gs/.js에
+            토큰이 실수로 커밋되면 차단됨.
+          </li>
+          <li>
+            <b>Git 이력 재작성 (선택)</b> — 기존 커밋에 평문 토큰이 남아있음.
+            토큰 회전만으로 실제 위험은 제거되지만, 완벽히 지우려면
+            <code>bfg --replace-text passwords.txt</code>로 history rewrite +
+            force push. 협업자 로컬이 망가지므로 사전 공지 필수.
+          </li>
+          <li>
+            <b>Cloudflare Bot Fight Mode</b> — CF 대시보드에서 Bots → Super Bot
+            Fight Mode ON. 초당 요청 급증 방어.
+          </li>
+          <li>
+            <b>저장소 Private 전환 검토</b> — 현재 PUBLIC. 소스 공개 의도가
+            없다면 Private로 전환하면 대부분의 자동 스캐너 시야 밖.
+          </li>
+        </ul>
+      </section>
+
+      <!-- 검증 -->
+      <section class="bg-slate-50 border border-slate-200 p-6 rounded">
+        <h2 class="text-lg font-bold mb-3">✅ 패치 후 빠른 검증</h2>
+        <div class="bg-slate-900 text-slate-100 text-xs rounded p-4 relative">
+          <button
+            class="copy-btn absolute right-2 top-2 bg-slate-600 text-white px-2 py-1 rounded text-[10px]"
+            onclick="copyTo(this)"
+          >
+            복사
+          </button>
+          <pre data-code><code># 1) 보안 헤더 전부 존재해야 함
+curl -sI https://www.tovdesign.net/ | grep -iE "strict-transport|x-content-type|referrer-policy|permissions-policy|content-security-policy"
+
+# 2) Worker 라우트별 응답 검증
+curl -s https://tovhouse.2343parksw.workers.dev/health
+# → {"status":"ok",...}
+
+curl -sX POST https://tovhouse.2343parksw.workers.dev/api/send-sms \
+  -H "Content-Type: application/json" -d '{"phone":"abc"}'
+# → {"error":"invalid_phone"} (400)
+
+# 3) 강제 모드 전환 후: 인증 없이 400 대신 401 나와야 함
+# curl -sX POST https://tovhouse.2343parksw.workers.dev/api/send-sms \
+#   -H "Content-Type: application/json" -d '{"phone":"01012345678"}'
+# → {"error":"unauthorized"} (401)
+
+# 4) 실제 접수 폼 정상 작동 확인 (테스트 발송 금지 — staging/admin만)
+# https://www.tovdesign.net/estimate.html 에서 한 번 제출 → 기존과 동일 흐름</code></pre>
+        </div>
+      </section>
+
+      <!-- 롤백 -->
+      <section class="bg-rose-50 border border-rose-200 p-6 rounded">
+        <h2 class="text-lg font-bold mb-3 text-rose-800">
+          🔄 문제 발생 시 롤백
+        </h2>
+        <ul class="text-sm list-disc list-inside space-y-1">
+          <li>
+            Vercel 롤백 — Vercel 대시보드 → Deployments → 이전 배포의 점 3개
+            메뉴 → "Promote to Production"
+          </li>
+          <li>
+            Worker 롤백 —
+            <code>npx wrangler deployments list</code> →
+            <code>npx wrangler rollback &lt;version-id&gt;</code>
+          </li>
+          <li>
+            Worker 시크릿 삭제(호환 모드 복귀) —
+            <code>npx wrangler secret delete WORKER_SHARED_SECRET</code>
+          </li>
+        </ul>
+      </section>
+
+      <footer class="text-center text-xs text-slate-400 pt-6">
+        Generated 2026-04-21 · tovhouse · 코드: commit 8e0e88b / Worker 6b7d8aa4
+      </footer>
+    </main>
+
+    <script>
+      function copyTo(btn) {
+        const pre = btn.parentElement.querySelector("pre[data-code] code");
+        if (!pre) return;
+        const text = pre.innerText;
+        navigator.clipboard.writeText(text).then(() => {
+          const orig = btn.textContent;
+          btn.textContent = "복사됨!";
+          setTimeout(() => (btn.textContent = orig), 1200);
+        });
+      }
+    </script>
+  </body>
+</html>
