@@ -33,13 +33,310 @@ export default {
       return handleLeadCorp(request, env, origin, ctx);
     }
 
+    // 폴러 수동 실행 (cron을 기다리지 않고 돌릴 때). 시크릿 필수.
+    if (url.pathname === "/api/meta-poll" && request.method === "POST") {
+      const guard = await guardCallerSecret(request, env);
+      if (guard) return guard;
+      const dryRun = url.searchParams.get("dry") === "1";
+      const report = await pollMetaLeads(env, ctx, { dryRun });
+      return json(report, 200, origin);
+    }
+
     if (url.pathname === "/" || url.pathname === "/health") {
       return json({ status: "ok", service: "tovhouse-worker" }, 200, origin);
     }
 
     return json({ error: "not_found" }, 404, origin);
   },
+
+  // 매시 정각 (wrangler.toml [triggers] crons)
+  async scheduled(event, env, ctx) {
+    ctx.waitUntil(
+      pollMetaLeads(env, ctx).catch((err) =>
+        notifyTelegramAdmin(
+          env,
+          `[tovhouse/meta-poll] 폴링 실패 ${String(err.message).slice(0, 200)}`,
+        ),
+      ),
+    );
+  },
 };
+
+// ============ META 리드 폴러 ============
+// Make 시나리오를 대체한다. 매시 정각에 페이지의 leadgen 폼을 훑어
+// 새 리드를 D1 leads에 넣고 텔레그램으로 알린다.
+//
+// 실측 전제 (2026-07-25):
+//  · 페이지 토브하우스(104761508261521), 리드 있는 폼 2개
+//  · 전화번호 52건 중 45건이 E.164(+8210…) → 정규화 없으면 대부분 조용히 스킵된다
+//  · Make 마지막 처리분 이후 유실 0건 → 컷오버 시각이 깨끗하다
+
+function metaPhone(raw) {
+  let p = String(raw || "").replace(/[^0-9]/g, "");
+  if (p.startsWith("82")) p = "0" + p.slice(2); // +8210… → 010…
+  return p.slice(0, 15);
+}
+
+const META_FIELD_MAP = {
+  full_name: "name",
+  이름: "name",
+  phone_number: "phone",
+  전화번호: "phone",
+  연락처: "phone",
+  email: "email",
+  이메일: "email",
+  공간유형: "interiorType",
+  "공간 유형": "interiorType",
+  희망예산: "budget",
+  "희망 예산": "budget",
+  지역: "address",
+  주소: "address",
+  시공예정일: "schedule",
+  "시공 예정일": "schedule",
+  평수: "area",
+  면적: "area",
+};
+
+async function metaGet(env, path, params, token) {
+  const v = env.META_GRAPH_VERSION || "v25.0";
+  const u = new URL(`https://graph.facebook.com/${v}${path}`);
+  for (const [k, val] of Object.entries(params || {}))
+    u.searchParams.set(k, val);
+  u.searchParams.set("access_token", token);
+  const r = await fetch(u);
+  const j = await r.json();
+  if (!r.ok) {
+    throw new Error(
+      `meta_${r.status}_${JSON.stringify(j.error || {}).slice(0, 160)}`,
+    );
+  }
+  return j;
+}
+
+async function getPageToken(env) {
+  // /{page-id}/leadgen_forms 는 페이지 토큰이 필수다.
+  // 시스템 사용자 토큰으로 직접 부르면 (#190)이 난다.
+  const j = await metaGet(
+    env,
+    "/me/accounts",
+    { fields: "id,name,access_token", limit: "50" },
+    env.META_SYSTEM_USER_TOKEN,
+  );
+  const want = String(env.META_LEAD_PAGE_ID || "");
+  const page = (j.data || []).find((p) => String(p.id) === want);
+  if (!page?.access_token) {
+    throw new Error(`page_token_missing_${want}`);
+  }
+  return page.access_token;
+}
+
+async function pollerState(env, key) {
+  const row = await env.DB.prepare(
+    "SELECT value FROM poller_state WHERE key = ?",
+  )
+    .bind(key)
+    .first();
+  return row?.value || null;
+}
+
+async function setPollerState(env, key, value) {
+  await env.DB.prepare(
+    `INSERT INTO poller_state (key, value, updatedAt) VALUES (?1, ?2, CURRENT_TIMESTAMP)
+     ON CONFLICT(key) DO UPDATE SET value = ?2, updatedAt = CURRENT_TIMESTAMP`,
+  )
+    .bind(key, value)
+    .run();
+}
+
+async function pollMetaLeads(env, ctx, opts = {}) {
+  const dryRun = !!opts.dryRun;
+  if (!env.META_SYSTEM_USER_TOKEN)
+    throw new Error("META_SYSTEM_USER_TOKEN 미설정");
+  if (!env.DB) throw new Error("D1 바인딩(DB) 없음");
+
+  const nowMs = Date.now();
+  const cutoverMs = Date.parse(env.META_LEAD_CUTOVER_AT || 0) || 0;
+  const overlapMs = Number(env.META_LEAD_OVERLAP_HOURS || 6) * 3600000;
+  const lookbackMs = Number(env.META_LEAD_LOOKBACK_HOURS || 48) * 3600000;
+
+  const lastSeen = Number(await pollerState(env, "meta_last_lead_ms")) || 0;
+  // 겹쳐 보기 — 폴링 경계에서 새 나가는 건을 막는다. 중복은 metaLeadId UNIQUE가 잡는다.
+  let sinceMs = lastSeen
+    ? lastSeen - overlapMs
+    : Math.max(cutoverMs, nowMs - lookbackMs);
+  if (sinceMs < cutoverMs) sinceMs = cutoverMs;
+
+  const pageToken = await getPageToken(env);
+  const formsRes = await metaGet(
+    env,
+    `/${env.META_LEAD_PAGE_ID}/leadgen_forms`,
+    { fields: "id,name,status,leads_count", limit: "100" },
+    pageToken,
+  );
+  // 신규 폼도 첫 리드가 생기는 순간 자동 편입된다.
+  const forms = (formsRes.data || []).filter(
+    (f) => f.status === "ACTIVE" && Number(f.leads_count) > 0,
+  );
+
+  const fresh = [];
+  let newestMs = lastSeen;
+
+  for (const form of forms) {
+    let url = null;
+    let guard = 0;
+    do {
+      const j = url
+        ? await (await fetch(url)).json()
+        : await metaGet(
+            env,
+            `/${form.id}/leads`,
+            { fields: "id,created_time,field_data", limit: "50" },
+            pageToken,
+          );
+      const rows = j.data || [];
+      for (const l of rows) {
+        const ms = Date.parse(l.created_time);
+        if (ms > newestMs) newestMs = ms;
+        if (ms > sinceMs) fresh.push({ form, lead: l, ms });
+      }
+      // Meta가 filtering 파라미터를 무시하는 경우가 있다. 최신순 결과에서
+      // sinceMs보다 오래된 건이 나오면 그 폼은 더 볼 필요가 없다.
+      const oldest = rows[rows.length - 1];
+      if (!oldest || Date.parse(oldest.created_time) <= sinceMs) break;
+      url = j.paging?.next || null;
+    } while (url && ++guard < 10);
+  }
+
+  fresh.sort((a, b) => a.ms - b.ms);
+
+  const report = {
+    ranAt: new Date(nowMs + 9 * 3600000).toISOString(),
+    sinceUtc: new Date(sinceMs).toISOString(),
+    forms: forms.length,
+    found: fresh.length,
+    inserted: 0,
+    duplicate: 0,
+    smsSent: 0,
+    errors: [],
+    dryRun,
+  };
+
+  for (const { form, lead, ms } of fresh) {
+    const f = {};
+    for (const fd of lead.field_data || []) {
+      const key = META_FIELD_MAP[fd.name];
+      if (key && !f[key]) f[key] = String(fd.values?.[0] ?? "").slice(0, 500);
+    }
+    const phone = metaPhone(f.phone);
+    const name = (f.name || "").slice(0, 100);
+    if (!name && !phone) continue;
+
+    const createdKst = new Date(ms + 9 * 3600000).toISOString();
+    const platform = "ig";
+    const data = {
+      name,
+      phone,
+      email: f.email || "",
+      interiorType: f.interiorType || "",
+      budget: f.budget || "",
+      area: f.area || "",
+      address: f.address || "",
+      schedule: f.schedule || "",
+      message: `[유입] ${platform}\n[폼] ${form.name}`,
+      platform,
+      source: "meta",
+      metaLeadId: String(lead.id),
+      createdAt: createdKst,
+    };
+
+    if (dryRun) {
+      report.inserted++;
+      continue;
+    }
+
+    try {
+      // 1차 중복 차단: metaLeadId UNIQUE (폴러 자기 재조회 구간 겹침)
+      // 2차: Make 전환기에 이미 들어온 행을 연락처+시각으로 흡수해 알림 재발송을 막는다
+      const claimed = phone
+        ? await env.DB.prepare(
+            `UPDATE leads SET metaLeadId = ?1
+              WHERE metaLeadId IS NULL AND phone = ?2
+                AND ABS(julianday(?3) - julianday(createdAt)) * 86400 < 600`,
+          )
+            .bind(data.metaLeadId, phone, createdKst)
+            .run()
+        : { meta: { changes: 0 } };
+
+      if (claimed.meta?.changes > 0) {
+        report.duplicate++;
+        continue;
+      }
+
+      const res = await env.DB.prepare(
+        `INSERT OR IGNORE INTO leads
+           (metaLeadId,name,phone,email,interiorType,budget,area,address,schedule,message,status,platform,source,createdAt)
+         VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,'대기',?11,?12,?13)`,
+      )
+        .bind(
+          data.metaLeadId,
+          data.name,
+          data.phone,
+          data.email,
+          data.interiorType,
+          data.budget,
+          data.area,
+          data.address,
+          data.schedule,
+          data.message,
+          data.platform,
+          data.source,
+          data.createdAt,
+        )
+        .run();
+
+      if (!res.meta?.changes) {
+        report.duplicate++;
+        continue;
+      }
+      report.inserted++;
+
+      await sendTelegram(data, env).catch((e) =>
+        report.errors.push(`tg:${String(e.message).slice(0, 80)}`),
+      );
+
+      // SMS는 건당 과금 — 기본 꺼져 있다 (META_POLL_SEND_SMS)
+      if (
+        String(env.META_POLL_SEND_SMS || "0") === "1" &&
+        /^01[016789][0-9]{7,8}$/.test(phone)
+      ) {
+        await sendSMS(data, env)
+          .then(() => report.smsSent++)
+          .catch((e) =>
+            report.errors.push(`sms:${String(e.message).slice(0, 80)}`),
+          );
+      }
+    } catch (err) {
+      report.errors.push(`${lead.id}:${String(err.message).slice(0, 120)}`);
+    }
+  }
+
+  if (!dryRun && newestMs > lastSeen) {
+    await setPollerState(env, "meta_last_lead_ms", String(newestMs));
+  }
+
+  // 인프라 채널 리포트 — 신규가 있거나 에러가 있을 때만 (조용한 실패 방지)
+  if (!dryRun && (report.inserted > 0 || report.errors.length)) {
+    const text =
+      `[tovhouse/meta-poll] 신규 ${report.inserted}건` +
+      ` (중복 ${report.duplicate}, SMS ${report.smsSent})` +
+      (report.errors.length
+        ? `\n에러: ${report.errors.slice(0, 3).join(" / ")}`
+        : "");
+    await notifyTelegramAdmin(env, text).catch(() => {});
+  }
+
+  return report;
+}
 
 // ============ META WEBHOOK ============
 async function handleMetaWebhook(request, env, origin, ctx) {

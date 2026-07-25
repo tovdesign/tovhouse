@@ -2,6 +2,15 @@ name = "tovhouse"
 main = "src/index.js"
 compatibility_date = "2024-12-01"
 
+[[d1_databases]]
+binding = "DB"
+database_name = "tovhouse-db"
+database_id = "638b1795-9293-4af3-bec6-a406913341a1"
+
+# Meta 리드 자체 폴링 — 1시간 1회 (매시 정각)
+[triggers]
+crons = ["0 * * * *"]
+
 [vars]
 AIRTABLE_BASE_ID = "appgpowtz5DSI391U"
 AIRTABLE_TABLE_ID = "tbl7PmkHDwQByqCdm"
@@ -10,3 +19,15 @@ AIRTABLE_LEADS_TABLE_ID = "tblUEW1jUQRlTzD1I"
 # 구 Google Apps Script(tov-corporate-webapp.gs)를 대체한 것으로, Make에서 해당
 # 모듈을 제거한 뒤 "on"으로 올렸다. 이중 발송이 의심되면 "off"로 즉시 되돌릴 것.
 CORP_NOTIFY = "on"
+
+# ---- Meta 리드 폴러 ----
+META_GRAPH_VERSION = "v25.0"
+META_LEAD_PAGE_ID = "104761508261521"          # 페이지: 토브하우스
+# Make 마지막 처리분(길이서, 2026-07-24T14:38:48Z) 직후.
+# 이 시각 이전 리드는 이미 D1에 있으므로 다시 넣지 않는다.
+META_LEAD_CUTOVER_AT = "2026-07-24T14:39:00.000Z"
+META_LEAD_LOOKBACK_HOURS = "48"                # 최초/공백 구간 조회 범위
+META_LEAD_OVERLAP_HOURS = "6"                  # 매 실행 시 겹쳐 보는 구간(누락 방지)
+# SMS는 건당 과금이라 기본 꺼둔다. 접수관리 + 텔레그램만 담당.
+# 발송이 필요하면 "1"로 올릴 것.
+META_POLL_SEND_SMS = "0"
