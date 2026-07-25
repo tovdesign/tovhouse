@@ -12,9 +12,9 @@ database_id = "638b1795-9293-4af3-bec6-a406913341a1"
 crons = ["0 * * * *"]
 
 [vars]
-AIRTABLE_BASE_ID = "appgpowtz5DSI391U"
-AIRTABLE_TABLE_ID = "tbl7PmkHDwQByqCdm"
-AIRTABLE_LEADS_TABLE_ID = "tblUEW1jUQRlTzD1I"
+# Airtable 변수 제거 (2026-07-25) — 데이터는 전부 D1(tovhouse-db)로 이전됨.
+# 참고: 예전 AIRTABLE_TABLE_ID(tbl7PmkHDwQByqCdm)는 필드가 'Name' 하나뿐인
+# 빈 기본 테이블이라 Meta 저장이 계속 422로 실패하고 있었다.
 # 법인 리드 알림(텔레그램+메일) 담당 주체 스위치.
 # 구 Google Apps Script(tov-corporate-webapp.gs)를 대체한 것으로, Make에서 해당
 # 모듈을 제거한 뒤 "on"으로 올렸다. 이중 발송이 의심되면 "off"로 즉시 되돌릴 것.

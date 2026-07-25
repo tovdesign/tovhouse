@@ -33,6 +33,11 @@ export default {
       return handleLeadCorp(request, env, origin, ctx);
     }
 
+    // D1 프록시 (admin Vercel → 워커 → D1)
+    if (url.pathname === "/db/query" && request.method === "POST") {
+      return handleDbQuery(request, env, ctx);
+    }
+
     // 폴러 수동 실행 (cron을 기다리지 않고 돌릴 때). 시크릿 필수.
     if (url.pathname === "/api/meta-poll" && request.method === "POST") {
       const guard = await guardCallerSecret(request, env);
@@ -61,6 +66,78 @@ export default {
     );
   },
 };
+
+// ============ D1 프록시 ============
+// admin(Vercel)에서 D1을 쓰기 위한 통로. 임의 SQL을 실행할 수 있어 폼
+// 엔드포인트보다 훨씬 강력하므로 **전용 시크릿**(D1_PROXY_TOKEN)을 쓴다.
+// WORKER_SHARED_SECRET을 재사용하지 않는 이유 — 폼용 시크릿이 유출돼도
+// DB 전체가 열리지 않게 권한을 분리한다.
+async function handleDbQuery(request, env, ctx) {
+  const ip = request.headers.get("cf-connecting-ip") || "0.0.0.0";
+
+  const expected = env.D1_PROXY_TOKEN;
+  if (!expected) {
+    console.error("[tovhouse/db-proxy] D1_PROXY_TOKEN 미설정");
+    return json({ error: "server_not_configured" }, 500, "");
+  }
+  const got = (request.headers.get("authorization") || "").replace(
+    /^Bearer\s+/i,
+    "",
+  );
+  if (!got || !timingSafeEqual(got, expected)) {
+    return json({ error: "unauthorized" }, 401, "");
+  }
+
+  if (!(request.headers.get("content-type") || "").includes("application/json"))
+    return json({ error: "unsupported_media_type" }, 415, "");
+  if (!env.DB) return json({ error: "d1_binding_missing" }, 503, "");
+
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return json({ error: "bad_json" }, 400, "");
+  }
+
+  try {
+    if (Array.isArray(body.batch) && body.batch.length) {
+      const stmts = body.batch.map((s) => {
+        const stmt = env.DB.prepare(String(s.sql || ""));
+        return Array.isArray(s.params) && s.params.length
+          ? stmt.bind(...s.params)
+          : stmt;
+      });
+      const results = await env.DB.batch(stmts);
+      return json({ results, meta: { count: results.length } }, 200, "");
+    }
+
+    const sql = String(body.sql || "");
+    if (!sql) return json({ error: "sql_required" }, 400, "");
+    const params = Array.isArray(body.params) ? body.params : [];
+
+    const stmt = params.length
+      ? env.DB.prepare(sql).bind(...params)
+      : env.DB.prepare(sql);
+    const result = await stmt.all();
+    return json(
+      { results: result.results || [], meta: result.meta || {} },
+      200,
+      "",
+    );
+  } catch (err) {
+    ctx.waitUntil(
+      notifyTelegramAdmin(
+        env,
+        `[tovhouse/db-proxy] 500 IP=${ip} ${String(err.message).slice(0, 200)}`,
+      ),
+    );
+    return json(
+      { error: "d1_error", message: String(err.message).slice(0, 200) },
+      500,
+      "",
+    );
+  }
+}
 
 // ============ META 리드 폴러 ============
 // Make 시나리오를 대체한다. 매시 정각에 페이지의 leadgen 폼을 훑어
@@ -413,7 +490,7 @@ async function handleMetaWebhook(request, env, origin, ctx) {
 
   // Layer 7: 처리 + 에러 추상화
   try {
-    await saveToAirtable(data, env);
+    await saveLead(data, env);
     await Promise.allSettled([
       sendTelegram(data, env),
       sendSMS(data, env),
@@ -700,7 +777,7 @@ async function handleLeadCorp(request, env, origin, ctx) {
     .map(([k, v]) => `${k}: ${String(v).slice(0, 200)}`)
     .join("\n");
 
-  // Airtable 저장 — 토브하우스 접수관리 테이블에 통합
+  // D1 저장 — 토브하우스 접수관리 테이블에 통합
   try {
     const composedMessage = [
       customerType ? `[구분] ${customerType}` : "",
@@ -713,8 +790,6 @@ async function handleLeadCorp(request, env, origin, ctx) {
       .join("\n")
       .slice(0, 2000);
 
-    const tableId = env.AIRTABLE_LEADS_TABLE_ID || env.AIRTABLE_TABLE_ID;
-    const url = `https://api.airtable.com/v0/${env.AIRTABLE_BASE_ID}/${tableId}`;
     const address = pick("address", "지역", "주소").slice(0, 200);
     const area = pick("area", "평수", "면적").slice(0, 50);
     const schedule = pick(
@@ -726,40 +801,30 @@ async function handleLeadCorp(request, env, origin, ctx) {
       "시공예정일",
     ).slice(0, 100);
 
-    const res = await fetch(url, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${env.AIRTABLE_TOKEN}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        typecast: true,
-        records: [
-          {
-            fields: {
-              name: name || "(이름없음)",
-              phone,
-              email,
-              address,
-              interiorType,
-              area,
-              budget,
-              schedule,
-              message: composedMessage,
-              status: "대기",
-              source: "토브법인",
-            },
-          },
-        ],
-      }),
-    });
-
-    if (!res.ok) {
-      const errText = await res.text();
-      throw new Error(`airtable_${res.status}: ${errText.slice(0, 200)}`);
-    }
-    const result = await res.json();
-    const recordId = result.records?.[0]?.id || null;
+    if (!env.DB) throw new Error("d1_binding_missing");
+    const ins = await env.DB.prepare(
+      `INSERT INTO leads
+         (name, phone, email, address, interiorType, area, budget, schedule,
+          message, status, source, platform, createdAt)
+       VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9,'대기','토브법인',?10,?11)`,
+    )
+      .bind(
+        name || "(이름없음)",
+        phone,
+        email,
+        address,
+        interiorType,
+        area,
+        budget,
+        schedule,
+        composedMessage,
+        platform || "",
+        new Date(Date.now() + 9 * 3600000).toISOString(),
+      )
+      .run();
+    const recordId = ins.meta?.last_row_id
+      ? String(ins.meta.last_row_id)
+      : null;
 
     // 저장 성공 시점에 멱등성 키를 심는다 (1시간). 저장이 실패하면 심지 않아
     // 재시도가 정상적으로 다시 저장된다.
@@ -1035,40 +1100,35 @@ async function sendCorpEmail(c, env) {
   }
 }
 
-// ============ AIRTABLE ============
-async function saveToAirtable(data, env) {
-  const url = `https://api.airtable.com/v0/${env.AIRTABLE_BASE_ID}/${env.AIRTABLE_TABLE_ID}`;
-  const res = await fetch(url, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${env.AIRTABLE_TOKEN}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      records: [
-        {
-          fields: {
-            Name: data.name,
-            phone: data.phone,
-            email: data.email,
-            interiorType: data.interiorType,
-            budget: data.budget,
-            area: data.area,
-            address: data.address,
-            schedule: data.schedule,
-            message: data.message,
-            status: "대기",
-            platform: data.platform,
-            createdAt: new Date(Date.now() + 9 * 3600000).toISOString(),
-          },
-        },
-      ],
-    }),
-  });
-  if (!res.ok) {
-    throw new Error(`airtable_${res.status}`);
-  }
-  return res.json();
+// ============ D1 저장 ============
+// 이전에는 Airtable로 넣었는데, wrangler.toml의 AIRTABLE_TABLE_ID가 필드가
+// 'Name' 하나뿐인 빈 기본 테이블("Table 1")을 가리키고 있어서 실제로는
+// UNKNOWN_FIELD_NAME(422)로 계속 실패하고 있었다. Meta 유래 레코드가 한 건도
+// 없던 이유가 이것이다. D1로 옮기면서 해소된다.
+async function saveLead(data, env) {
+  if (!env.DB) throw new Error("d1_binding_missing");
+  const res = await env.DB.prepare(
+    `INSERT INTO leads
+       (name, phone, email, interiorType, budget, area, address, schedule,
+        message, status, platform, source, createdAt)
+     VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9,'대기',?10,?11,?12)`,
+  )
+    .bind(
+      data.name || "",
+      data.phone || "",
+      data.email || "",
+      data.interiorType || "",
+      data.budget || "",
+      data.area || "",
+      data.address || "",
+      data.schedule || "",
+      data.message || "",
+      data.platform || "ig",
+      data.source || "meta",
+      new Date(Date.now() + 9 * 3600000).toISOString(),
+    )
+    .run();
+  return { id: res.meta?.last_row_id };
 }
 
 // ============ TELEGRAM (MarkdownV2 escape) ============
