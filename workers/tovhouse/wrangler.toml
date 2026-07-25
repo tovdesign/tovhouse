@@ -5,3 +5,8 @@ compatibility_date = "2024-12-01"
 [vars]
 AIRTABLE_BASE_ID = "appgpowtz5DSI391U"
 AIRTABLE_TABLE_ID = "tbl7PmkHDwQByqCdm"
+AIRTABLE_LEADS_TABLE_ID = "tblUEW1jUQRlTzD1I"
+# 법인 리드 알림(텔레그램+메일) 담당 주체 스위치.
+# 구 Google Apps Script(tov-corporate-webapp.gs)를 대체한 것으로, Make에서 해당
+# 모듈을 제거한 뒤 "on"으로 올렸다. 이중 발송이 의심되면 "off"로 즉시 되돌릴 것.
+CORP_NOTIFY = "on"
