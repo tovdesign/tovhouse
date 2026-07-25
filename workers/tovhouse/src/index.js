@@ -377,7 +377,17 @@ async function pollMetaLeads(env, ctx, opts = {}) {
       }
       report.inserted++;
 
-      await sendTelegram(data, env).catch((e) =>
+      // message는 D1 저장용 메모(`[유입]/[폼]`)라 알림 본문에 그대로 넣지 않는다.
+      // 폼 이름은 "접수 폼" 줄로, 접수일은 리드 생성 시각(KST)으로 따로 넘긴다.
+      await sendTelegram(
+        {
+          ...data,
+          message: "",
+          formName: form.name,
+          submittedAt: kstStamp(ms),
+        },
+        env,
+      ).catch((e) =>
         report.errors.push(`tg:${String(e.message).slice(0, 80)}`),
       );
 
@@ -401,7 +411,8 @@ async function pollMetaLeads(env, ctx, opts = {}) {
     await setPollerState(env, "meta_last_lead_ms", String(newestMs));
   }
 
-  // 인프라 채널 리포트 — 신규가 있거나 에러가 있을 때만 (조용한 실패 방지)
+  // 폴링 리포트는 운영 헬스 정보라 인프라봇 전용.
+  // 접수 알림 채널(notifyTelegramAdmin)에 섞이면 실제 리드 알림이 묻힌다.
   if (!dryRun && (report.inserted > 0 || report.errors.length)) {
     const text =
       `[tovhouse/meta-poll] 신규 ${report.inserted}건` +
@@ -409,7 +420,16 @@ async function pollMetaLeads(env, ctx, opts = {}) {
       (report.errors.length
         ? `\n에러: ${report.errors.slice(0, 3).join(" / ")}`
         : "");
-    await notifyTelegramAdmin(env, text).catch(() => {});
+    await sendInfraHealth(env, text).catch(() => {});
+
+    // 에러는 리드 유실 신호이므로 접수 채널로도 승격
+    if (report.errors.length) {
+      await notifyTelegramAdmin(
+        env,
+        `[tovhouse/meta-poll] 리드 처리 실패 ${report.errors.length}건\n` +
+          report.errors.slice(0, 3).join("\n"),
+      ).catch(() => {});
+    }
   }
 
   return report;
@@ -864,7 +884,7 @@ async function handleLeadCorp(request, env, origin, ctx) {
 
     const notify = [];
     if (notifyOn && body.sendTelegram !== false)
-      notify.push(sendCorpTelegram(corp, env).catch((e) => e));
+      notify.push(sendLeadTelegram(corp, env).catch((e) => e));
     if (notifyOn && body.sendEmail !== false)
       notify.push(sendCorpEmail(corp, env).catch((e) => e));
     const settled = await Promise.all(notify);
@@ -907,20 +927,35 @@ async function handleLeadCorp(request, env, origin, ctx) {
 // 구글 시트는 더 이상 쓰지 않으므로 시트 기록·시트 링크는 제거하고
 // Airtable 접수관리 링크로 대체했다.
 
-function nowKst() {
-  return new Date(Date.now() + 9 * 3600000)
+function kstStamp(ms) {
+  return new Date(ms + 9 * 3600000)
     .toISOString()
     .replace("T", " ")
     .slice(0, 16);
 }
 
-async function sendCorpTelegram(c, env) {
-  if (!env.TELEGRAM_BOT_TOKEN || !env.TELEGRAM_CHAT_ID)
-    throw new Error("telegram_not_configured");
+function nowKst() {
+  return kstStamp(Date.now());
+}
+
+// 접수 알림 본문 — 구 Apps Script(tov-corporate-webapp.gs)의 포맷 그대로다.
+// Meta 폴러 / meta-webhook / 법인 라우트가 전부 이 한 곳을 쓴다.
+// 경로마다 따로 만들면 같은 리드가 유입 경로에 따라 다른 모양으로 도착한다.
+const LEAD_NOTIFY_TITLE = "토브디자인 법인사업자 접수";
+
+function platformLabel(p) {
+  const v = String(p || "").toLowerCase();
+  if (v === "ig" || v === "instagram") return "Instagram";
+  if (v === "fb" || v === "facebook") return "Facebook";
+  if (v === "web" || v === "홈페이지") return "홈페이지";
+  return String(p || "");
+}
+
+function leadTelegramText(c) {
   const e = tgEscape;
   const line = (label, v) => (v ? `• ${e(label)}: ${e(v)}\n` : "");
-  const text =
-    `📢 *\\[토브 법인\\_신규 시공 문의\\]*\n\n` +
+  return (
+    `📢 *\\[${e(LEAD_NOTIFY_TITLE)}\\]*\n\n` +
     `🏢 *법인 고객 정보*\n` +
     line("회사명", c.company) +
     line("담당자", c.name) +
@@ -929,13 +964,23 @@ async function sendCorpTelegram(c, env) {
     `\n📋 *시공 문의 내용*\n` +
     line("공간 유형", c.interiorType) +
     line("희망 예산", c.budget) +
+    line("면적", c.area) +
     line("시공 예정일", c.schedule) +
-    (c.message ? `• ${e("문의")}: ${e(c.message.slice(0, 300))}\n` : "") +
+    (c.message
+      ? `• ${e("문의")}: ${e(String(c.message).slice(0, 300))}\n`
+      : "") +
     `\nℹ️ *접수 정보*\n` +
-    line("접수일", c.submittedAt) +
-    line("유입 플랫폼", c.platform) +
+    line("접수일", c.submittedAt || nowKst()) +
+    line("유입 플랫폼", platformLabel(c.platform)) +
+    line("접수 폼", c.formName) +
     `• ${e("구분")}: *${e(c.customerType || "법인 고객")}*\n\n` +
-    `[접수 관리 →](https://admin.tovdesign.net/#leads)`;
+    `[접수 관리 →](https://admin.tovdesign.net/#leads)`
+  );
+}
+
+async function sendLeadTelegram(c, env) {
+  if (!env.TELEGRAM_BOT_TOKEN || !env.TELEGRAM_CHAT_ID)
+    throw new Error("telegram_not_configured");
 
   const res = await fetch(
     `https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/sendMessage`,
@@ -944,7 +989,7 @@ async function sendCorpTelegram(c, env) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         chat_id: env.TELEGRAM_CHAT_ID,
-        text,
+        text: leadTelegramText(c),
         parse_mode: "MarkdownV2",
         disable_web_page_preview: true,
       }),
@@ -952,7 +997,7 @@ async function sendCorpTelegram(c, env) {
   );
   if (!res.ok) {
     throw new Error(
-      `corp_telegram_${res.status}: ${(await res.text()).slice(0, 150)}`,
+      `lead_telegram_${res.status}: ${(await res.text()).slice(0, 150)}`,
     );
   }
 }
@@ -1136,33 +1181,42 @@ function tgEscape(s) {
   return String(s || "").replace(/[_*\[\]()~`>#+\-=|{}.!\\]/g, (m) => "\\" + m);
 }
 
+// Meta 리드(폴러·webhook) 알림. 법인 접수와 같은 본문을 쓴다 — 유입이 Meta든
+// 홈페이지든 접수 알림 한 종류만 도착해야 한다.
 async function sendTelegram(data, env) {
-  const p = (data.platform || "ig").toLowerCase();
-  const srcLabel = p === "fb" ? "Meta \\(Facebook\\)" : "Meta \\(Instagram\\)";
-  const text =
-    `🔵 *${srcLabel} 새 상담 접수*\n\n` +
-    `👤 ${tgEscape(data.name || "-")}\n` +
-    `📞 ${tgEscape(data.phone || "-")}\n` +
-    `🏠 ${tgEscape(data.interiorType || "-")}\n` +
-    `💰 ${tgEscape(data.budget || "-")}\n` +
-    `📍 ${tgEscape(data.address || "-")}\n` +
-    `🗓 ${tgEscape(data.schedule || "-")}\n` +
-    `🕐 ${tgEscape(new Date().toLocaleString("ko-KR", { timeZone: "Asia/Seoul" }))}\n\n` +
-    `[접수 관리 →](https://admin.tovdesign.net/#leads)`;
+  return sendLeadTelegram({ ...data, platform: data.platform || "ig" }, env);
+}
 
-  await fetch(
-    `https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/sendMessage`,
+// 인프라봇 — 폴링 헬스/운영 리포트 전용 채널 (접수 알림과 분리)
+async function sendInfraHealth(env, text) {
+  const botToken = String(env.TELEGRAM_INFRA_BOT_TOKEN || "").trim();
+  const chatId = String(env.TELEGRAM_INFRA_CHAT_ID || "").trim();
+  if (!botToken || !chatId) {
+    console.error("[tovhouse/meta-poll] 인프라봇 설정 누락 — 리포트 생략");
+    return;
+  }
+  const res = await fetch(
+    `https://api.telegram.org/bot${botToken}/sendMessage`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        chat_id: env.TELEGRAM_CHAT_ID,
+        chat_id: chatId,
         text,
-        parse_mode: "MarkdownV2",
         disable_web_page_preview: true,
       }),
     },
   );
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok || data.ok === false) {
+    // 인프라 채널이 죽으면 폴링이 조용히 사라지므로 이때만 접수 채널로 승격
+    const why = String(data.description || `HTTP ${res.status}`).slice(0, 160);
+    console.error(`[tovhouse/meta-poll] 인프라봇 전송 실패 ${why}`);
+    await notifyTelegramAdmin(
+      env,
+      `[tovhouse/meta-poll] 인프라봇 리포트 전송 실패: ${why}`,
+    ).catch(() => {});
+  }
 }
 
 async function notifyTelegramAdmin(env, text) {
