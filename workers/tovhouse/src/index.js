@@ -294,6 +294,7 @@ async function pollMetaLeads(env, ctx, opts = {}) {
     inserted: 0,
     duplicate: 0,
     smsSent: 0,
+    mailSent: 0,
     errors: [],
     dryRun,
   };
@@ -379,17 +380,24 @@ async function pollMetaLeads(env, ctx, opts = {}) {
 
       // message는 D1 저장용 메모(`[유입]/[폼]`)라 알림 본문에 그대로 넣지 않는다.
       // 폼 이름은 "접수 폼" 줄로, 접수일은 리드 생성 시각(KST)으로 따로 넘긴다.
-      await sendTelegram(
-        {
-          ...data,
-          message: "",
-          formName: form.name,
-          submittedAt: kstStamp(ms),
-        },
-        env,
-      ).catch((e) =>
+      const notice = {
+        ...data,
+        message: "",
+        formName: form.name,
+        submittedAt: kstStamp(ms),
+      };
+
+      await sendTelegram(notice, env).catch((e) =>
         report.errors.push(`tg:${String(e.message).slice(0, 80)}`),
       );
+
+      // 메일은 개인(토브디자인)과 동일하게 접수 즉시 발송한다.
+      // 텔레그램과 같은 notice를 쓰므로 두 알림의 내용이 어긋나지 않는다.
+      await sendCorpEmail(notice, env)
+        .then(() => report.mailSent++)
+        .catch((e) =>
+          report.errors.push(`mail:${String(e.message).slice(0, 80)}`),
+        );
 
       // SMS는 건당 과금 — 기본 꺼져 있다 (META_POLL_SEND_SMS)
       if (
@@ -416,7 +424,7 @@ async function pollMetaLeads(env, ctx, opts = {}) {
   if (!dryRun && (report.inserted > 0 || report.errors.length)) {
     const text =
       `[tovhouse/meta-poll] 신규 ${report.inserted}건` +
-      ` (중복 ${report.duplicate}, SMS ${report.smsSent})` +
+      ` (중복 ${report.duplicate}, 메일 ${report.mailSent}, SMS ${report.smsSent})` +
       (report.errors.length
         ? `\n에러: ${report.errors.slice(0, 3).join(" / ")}`
         : "");
@@ -514,7 +522,7 @@ async function handleMetaWebhook(request, env, origin, ctx) {
     await Promise.allSettled([
       sendTelegram(data, env),
       sendSMS(data, env),
-      sendInternalEmail(data, env),
+      sendCorpEmail({ ...data, submittedAt: nowKst() }, env),
     ]);
     return json({ success: true }, 200, origin);
   } catch (err) {
@@ -1096,10 +1104,11 @@ function corpEmailHtml(c) {
     `<table width="100%" cellpadding="0" cellspacing="0">` +
     row("공간 유형", c.interiorType) +
     row("희망 예산", c.budget) +
+    row("면적", c.area) +
     row("지역", c.address) +
     row("시공 예정일", c.schedule) +
     row("이메일", c.email) +
-    row("유입 플랫폼", c.platform) +
+    row("유입 플랫폼", platformLabel(c.platform)) +
     row("구분", c.customerType || "법인 고객") +
     (c.message ? row("문의 내용", c.message.slice(0, 500)) : "") +
     (c.extras ? row("기타", c.extras.slice(0, 500)) : "") +
@@ -1289,22 +1298,10 @@ async function sendSMS(data, env) {
   }
 }
 
-// ============ INTERNAL EMAIL ============
-async function sendInternalEmail(data, env) {
-  const key = env.INTERNAL_NOTIFY_KEY;
-  if (!key) return;
-  const res = await fetch("https://admin.tovdesign.net/api/internal-notify", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-Notify-Key": key,
-    },
-    body: JSON.stringify(data),
-  });
-  if (!res.ok) {
-    throw new Error(`internal_email_${res.status}`);
-  }
-}
+// 메일은 sendCorpEmail(Gmail REST 직접 호출) 한 경로로 통일한다.
+// 예전엔 admin의 /api/internal-notify를 거쳤는데, 그 호출부가 쓰던
+// INTERNAL_NOTIFY_KEY가 워커에 없어 `if (!key) return`으로 조용히 빠져나가
+// 메일이 한 통도 안 나가고 있었다 (2026-08-03 확인).
 
 // ============ AUTH / CORS / HELPERS ============
 async function guardCallerSecret(request, env) {
