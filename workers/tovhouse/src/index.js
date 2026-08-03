@@ -1062,12 +1062,13 @@ function b64url(str) {
     .replace(/=+$/, "");
 }
 
+// 개인(토브디자인) 접수 메일과 동일한 수신자 — 유입이 개인이든 법인이든
+// 같은 담당자가 같은 메일함에서 받는다. BCC는 mkt@가 To에 있어 중복이라 뺐다.
 const CORP_MAIL_TO = [
   "2001p@naver.com",
+  "d13650@naver.com",
   "mkt@polarad.co.kr",
-  "nolla2694@naver.com",
 ];
-const CORP_MAIL_BCC = "mkt@polarad.co.kr";
 // 2001p@naver.com 은 2343parksw@gmail.com 계정의 검증된 send-as 별칭
 const CORP_MAIL_FROM_ADDR = "2001p@naver.com";
 const CORP_MAIL_FROM_NAME = "토브디자인";
@@ -1129,7 +1130,6 @@ async function sendCorpEmail(c, env) {
   const raw = b64url(
     `From: ${mimeWord(CORP_MAIL_FROM_NAME)} <${CORP_MAIL_FROM_ADDR}>\r\n` +
       `To: ${CORP_MAIL_TO.join(", ")}\r\n` +
-      `Bcc: ${CORP_MAIL_BCC}\r\n` +
       `Subject: ${mimeWord(subject)}\r\n` +
       `MIME-Version: 1.0\r\n` +
       `Content-Type: text/html; charset=utf-8\r\n\r\n` +
