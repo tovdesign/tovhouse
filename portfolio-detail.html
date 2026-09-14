@@ -1294,75 +1294,28 @@
         return data.item;
       }
 
-      async function loadFromJSON(rawId, type) {
-        const res = await fetch("portfolio-data.json");
-        const data = await res.json();
-        const list = data[type] || data.residential;
-        const item =
-          list.find((i) => String(i.id) === rawId) ||
-          list.find((i) => i.id === parseInt(rawId)) ||
-          list[0];
-        // Convert to API format
-        const parsed = parseTitle(
-          item.title || item.region + "|" + item.type + "|" + item.area,
-        );
-        return {
-          id: item.id,
-          title: item.title || item.region + " " + item.type + " " + item.area,
-          cat: type === "commercial" ? "상업공간" : "주거공간",
-          img:
-            item.thumbnail ||
-            "assets/portfolio/thumbnails/" + item.id + ".webp",
-          images: item.detailImages || [],
-          content: "",
-          blocks: "",
-          receipt_image: "",
-          receipt_data: "",
-          _parsed: {
-            region: item.region,
-            type: item.type,
-            area: item.area,
-            duration: item.duration,
-            cost: item.cost,
-          },
-        };
-      }
-
       async function init() {
         const params = new URLSearchParams(window.location.search);
-        const rawId = params.get("id") || "1";
-        const type = params.get("type") || "residential";
+        const rawId = params.get("id");
+        const type =
+          params.get("type") ||
+          (/^c\d+$/i.test(rawId) ? "commercial" : "residential");
 
         try {
-          let item;
-          let parsed;
+          if (!rawId) throw new Error("Portfolio item ID is required");
+
+          const item = await loadFromAPI(rawId);
+          const parsed = parseTitle(item.title);
           let allItems = [];
 
-          // Try API first (Airtable record ID starts with 'rec')
-          if (rawId.startsWith("rec")) {
-            item = await loadFromAPI(rawId);
-            parsed = parseTitle(item.title);
-            // Load all items for related section
-            try {
-              const allRes = await fetch(API_BASE + "/api/portfolio");
-              const allData = await allRes.json();
-              allItems = (allData.items || []).filter(
-                (i) => i.id !== item.id && i.visible !== false,
-              );
-            } catch (e) {}
-          } else {
-            // Fallback to JSON
-            item = await loadFromJSON(rawId, type);
-            parsed = item._parsed || parseTitle(item.title);
-            try {
-              const jsonRes = await fetch("portfolio-data.json");
-              const jsonData = await jsonRes.json();
-              allItems = [
-                ...(jsonData.residential || []),
-                ...(jsonData.commercial || []),
-              ].filter((i) => String(i.id) !== rawId);
-            } catch (e) {}
-          }
+          // Load all items for related section.
+          try {
+            const allRes = await fetch(API_BASE + "/api/portfolio");
+            const allData = await allRes.json();
+            allItems = (allData.items || []).filter(
+              (i) => i.id !== item.id && i.visible !== false,
+            );
+          } catch (e) {}
 
           const region = item.region || parsed.region || "";
           const spaceType = item.spaceType || parsed.type || "";

@@ -325,6 +325,9 @@
         gap: var(--gap);
         margin-bottom: 3rem;
       }
+      #portfolio-grid[data-loading="true"] > .p-card {
+        display: none !important;
+      }
       .p-card {
         border-radius: var(--radius);
         overflow: hidden;
@@ -819,7 +822,7 @@
       </div>
 
       <!-- Grid -->
-      <div class="portfolio-grid" id="portfolio-grid">
+      <div class="portfolio-grid" id="portfolio-grid" data-loading="true">
         <div
           style="
             grid-column: 1/-1;
@@ -3465,13 +3468,12 @@
             }
           });
           grid.innerHTML = items.map(renderCard).join("");
+          grid.removeAttribute("data-loading");
         } catch (e) {
-          console.error("API failed, showing static:", e);
-          document
-            .querySelectorAll(".p-static-card")
-            .forEach((c) => (c.style.display = ""));
-          const spinner = grid.querySelector('[style*="grid-column"]');
-          if (spinner) spinner.remove();
+          console.error("API failed:", e);
+          grid.innerHTML =
+            '<div style="grid-column:1/-1;text-align:center;padding:5rem 2rem;color:var(--warm-600)"><strong style="display:block;margin-bottom:0.75rem;color:var(--warm-800);font-size:1.1rem">시공사례를 불러올 수 없습니다</strong><span>잠시 후 다시 시도해 주세요.</span></div>';
+          grid.removeAttribute("data-loading");
         }
         // Init observer (모바일 안정성: threshold 0, rootMargin 일찍 발동, 1.5s 안전장치)
         const fadeEls = document.querySelectorAll(".fade-up");
