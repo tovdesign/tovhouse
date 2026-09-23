@@ -27,7 +27,7 @@ META_LEAD_PAGE_ID = "104761508261521"          # 페이지: 토브하우스
 # 이 시각 이전 리드는 이미 D1에 있으므로 다시 넣지 않는다.
 META_LEAD_CUTOVER_AT = "2026-07-24T14:39:00.000Z"
 META_LEAD_LOOKBACK_HOURS = "48"                # 최초/공백 구간 조회 범위
-META_LEAD_OVERLAP_HOURS = "6"                  # 매 실행 시 겹쳐 보는 구간(누락 방지)
+META_LEAD_OVERLAP_HOURS = "24"                 # D1 일일 한도 복구 후에도 실패 리드를 재조회
 # SMS는 건당 과금이라 기본 꺼둔다. 접수관리 + 텔레그램만 담당.
 # 발송이 필요하면 "1"로 올릴 것.
 META_POLL_SEND_SMS = "0"

@@ -298,6 +298,7 @@ async function pollMetaLeads(env, ctx, opts = {}) {
     errors: [],
     dryRun,
   };
+  let dbErrors = 0;
 
   for (const { form, lead, ms } of fresh) {
     const f = {};
@@ -335,6 +336,13 @@ async function pollMetaLeads(env, ctx, opts = {}) {
     try {
       // 1차 중복 차단: metaLeadId UNIQUE (폴러 자기 재조회 구간 겹침)
       // 2차: Make 전환기에 이미 들어온 행을 연락처+시각으로 흡수해 알림 재발송을 막는다
+      const alreadyStored = await env.DB.prepare(
+        "SELECT id FROM leads WHERE metaLeadId = ? LIMIT 1",
+      ).bind(data.metaLeadId).first();
+      if (alreadyStored) {
+        report.duplicate++;
+        continue;
+      }
       const claimed = phone
         ? await env.DB.prepare(
             `UPDATE leads SET metaLeadId = ?1
@@ -411,11 +419,14 @@ async function pollMetaLeads(env, ctx, opts = {}) {
           );
       }
     } catch (err) {
+      dbErrors++;
       report.errors.push(`${lead.id}:${String(err.message).slice(0, 120)}`);
+      if (/daily row read limit/i.test(String(err.message))) break;
     }
   }
 
-  if (!dryRun && newestMs > lastSeen) {
+  // D1 저장 실패가 있으면 새 리드를 봤더라도 워터마크를 전진시키지 않는다.
+  if (!dryRun && dbErrors === 0 && newestMs > lastSeen) {
     await setPollerState(env, "meta_last_lead_ms", String(newestMs));
   }
 
