@@ -58,7 +58,7 @@ export default {
   async scheduled(event, env, ctx) {
     ctx.waitUntil(
       pollMetaLeads(env, ctx).catch((err) =>
-        notifyTelegramAdmin(
+        sendInfraNotification(
           env,
           `[tovhouse/meta-poll] 폴링 실패 ${String(err.message).slice(0, 200)}`,
         ),
@@ -126,7 +126,7 @@ async function handleDbQuery(request, env, ctx) {
     );
   } catch (err) {
     ctx.waitUntil(
-      notifyTelegramAdmin(
+      sendInfraNotification(
         env,
         `[tovhouse/db-proxy] 500 IP=${ip} ${String(err.message).slice(0, 200)}`,
       ),
@@ -430,8 +430,7 @@ async function pollMetaLeads(env, ctx, opts = {}) {
     await setPollerState(env, "meta_last_lead_ms", String(newestMs));
   }
 
-  // 폴링 리포트는 운영 헬스 정보라 인프라봇 전용.
-  // 접수 알림 채널(notifyTelegramAdmin)에 섞이면 실제 리드 알림이 묻힌다.
+  // 폴링 결과와 실패 경보는 인프라봇 전용.
   if (!dryRun && (report.inserted > 0 || report.errors.length)) {
     const text =
       `[tovhouse/meta-poll] 신규 ${report.inserted}건` +
@@ -439,16 +438,8 @@ async function pollMetaLeads(env, ctx, opts = {}) {
       (report.errors.length
         ? `\n에러: ${report.errors.slice(0, 3).join(" / ")}`
         : "");
-    await sendInfraHealth(env, text).catch(() => {});
+    await sendInfraNotification(env, text).catch(() => {});
 
-    // 에러는 리드 유실 신호이므로 접수 채널로도 승격
-    if (report.errors.length) {
-      await notifyTelegramAdmin(
-        env,
-        `[tovhouse/meta-poll] 리드 처리 실패 ${report.errors.length}건\n` +
-          report.errors.slice(0, 3).join("\n"),
-      ).catch(() => {});
-    }
   }
 
   return report;
@@ -514,7 +505,7 @@ async function handleMetaWebhook(request, env, origin, ctx) {
   const count = prev ? Number(await prev.text()) : 0;
   if (count >= RATE_LIMIT_PER_HOUR) {
     ctx.waitUntil(
-      notifyTelegramAdmin(env, `[tovhouse/meta-webhook] rate limit IP=${ip}`),
+      sendInfraNotification(env, `[tovhouse/meta-webhook] rate limit IP=${ip}`),
     );
     return json({ error: "rate_limited" }, 429, origin);
   }
@@ -538,7 +529,7 @@ async function handleMetaWebhook(request, env, origin, ctx) {
     return json({ success: true }, 200, origin);
   } catch (err) {
     ctx.waitUntil(
-      notifyTelegramAdmin(
+      sendInfraNotification(
         env,
         `[tovhouse/meta-webhook] 500 IP=${ip} ${String(err.message).slice(0, 200)}`,
       ),
@@ -591,7 +582,7 @@ async function handleSendSMS(request, env, origin, ctx) {
   const count = prev ? Number(await prev.text()) : 0;
   if (count >= RATE_LIMIT_PER_HOUR) {
     ctx.waitUntil(
-      notifyTelegramAdmin(env, `[tovhouse/send-sms] rate limit IP=${ip}`),
+      sendInfraNotification(env, `[tovhouse/send-sms] rate limit IP=${ip}`),
     );
     return json({ error: "rate_limited" }, 429, origin);
   }
@@ -609,7 +600,7 @@ async function handleSendSMS(request, env, origin, ctx) {
     return json({ success: true }, 200, origin);
   } catch (err) {
     ctx.waitUntil(
-      notifyTelegramAdmin(
+      sendInfraNotification(
         env,
         `[tovhouse/send-sms] 500 IP=${ip} ${String(err.message).slice(0, 200)}`,
       ),
@@ -628,7 +619,7 @@ async function handleLeadCorp(request, env, origin, ctx) {
   const expected = env.LEAD_CORP_SECRET;
   if (!expected) {
     ctx.waitUntil(
-      notifyTelegramAdmin(env, "[tovhouse/lead-corp] LEAD_CORP_SECRET 미설정"),
+      sendInfraNotification(env, "[tovhouse/lead-corp] LEAD_CORP_SECRET 미설정"),
     );
     return json({ error: "server_misconfigured" }, 500, origin);
   }
@@ -659,7 +650,7 @@ async function handleLeadCorp(request, env, origin, ctx) {
   const count = prev ? Number(await prev.text()) : 0;
   if (count >= 30) {
     ctx.waitUntil(
-      notifyTelegramAdmin(env, `[tovhouse/lead-corp] rate limit IP=${ip}`),
+      sendInfraNotification(env, `[tovhouse/lead-corp] rate limit IP=${ip}`),
     );
     return json({ error: "rate_limited" }, 429, origin);
   }
@@ -911,7 +902,7 @@ async function handleLeadCorp(request, env, origin, ctx) {
     if (failed.length) {
       // 저장은 끝났으므로 200을 유지하되 실패는 반드시 드러낸다.
       ctx.waitUntil(
-        notifyTelegramAdmin(
+        sendInfraNotification(
           env,
           `[tovhouse/lead-corp] 알림 일부 실패 record=${recordId}\n` +
             failed.map((e) => String(e.message).slice(0, 150)).join("\n"),
@@ -932,7 +923,7 @@ async function handleLeadCorp(request, env, origin, ctx) {
     );
   } catch (err) {
     ctx.waitUntil(
-      notifyTelegramAdmin(
+      sendInfraNotification(
         env,
         `[tovhouse/lead-corp] 500 IP=${ip} ${String(err.message).slice(0, 200)}`,
       ),
@@ -1207,52 +1198,37 @@ async function sendTelegram(data, env) {
   return sendLeadTelegram({ ...data, platform: data.platform || "ig" }, env);
 }
 
-// 인프라봇 — 폴링 헬스/운영 리포트 전용 채널 (접수 알림과 분리)
-async function sendInfraHealth(env, text) {
+// 인프라봇 — 실패 경보와 폴링 리포트 전용 채널
+async function sendInfraNotification(env, text) {
   const botToken = String(env.TELEGRAM_INFRA_BOT_TOKEN || "").trim();
   const chatId = String(env.TELEGRAM_INFRA_CHAT_ID || "").trim();
   if (!botToken || !chatId) {
     console.error("[tovhouse/meta-poll] 인프라봇 설정 누락 — 리포트 생략");
     return;
   }
-  const res = await fetch(
-    `https://api.telegram.org/bot${botToken}/sendMessage`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        chat_id: chatId,
-        text,
-        disable_web_page_preview: true,
-      }),
-    },
-  );
-  const data = await res.json().catch(() => ({}));
-  if (!res.ok || data.ok === false) {
-    // 인프라 채널이 죽으면 폴링이 조용히 사라지므로 이때만 접수 채널로 승격
-    const why = String(data.description || `HTTP ${res.status}`).slice(0, 160);
-    console.error(`[tovhouse/meta-poll] 인프라봇 전송 실패 ${why}`);
-    await notifyTelegramAdmin(
-      env,
-      `[tovhouse/meta-poll] 인프라봇 리포트 전송 실패: ${why}`,
-    ).catch(() => {});
+  try {
+    const res = await fetch(
+      `https://api.telegram.org/bot${botToken}/sendMessage`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text,
+          disable_web_page_preview: true,
+        }),
+      },
+    );
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || data.ok === false) {
+      const why = String(data.description || `HTTP ${res.status}`).slice(0, 160);
+      console.error(`[tovhouse/meta-poll] 인프라봇 전송 실패 ${why}`);
+    }
+  } catch (err) {
+    console.error(
+      `[tovhouse/meta-poll] 인프라봇 전송 예외 ${String(err.message).slice(0, 160)}`,
+    );
   }
-}
-
-async function notifyTelegramAdmin(env, text) {
-  if (!env.TELEGRAM_BOT_TOKEN) return;
-  await fetch(
-    `https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/sendMessage`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        chat_id: env.TELEGRAM_ADMIN_CHAT_ID || env.TELEGRAM_CHAT_ID,
-        text, // plain text — parse_mode 없음
-        disable_web_page_preview: true,
-      }),
-    },
-  );
 }
 
 // ============ NCP SMS ============

@@ -8,6 +8,7 @@ let quotaExceeded = true;
 let stored = false;
 let watermark = null;
 let alerts = 0;
+const telegramMessages = [];
 const leadTime = new Date(Date.now() - 3600000).toISOString();
 
 function reply(value) {
@@ -17,7 +18,7 @@ function reply(value) {
   });
 }
 
-globalThis.fetch = async (input) => {
+globalThis.fetch = async (input, options) => {
   const url = String(input);
   if (url.includes("/me/accounts")) return reply({ data: [{ id: "page", access_token: "page-token" }] });
   if (url.includes("/leadgen_forms")) return reply({ data: [{ id: "form", name: "fixture", status: "ACTIVE", leads_count: 1 }] });
@@ -29,7 +30,11 @@ globalThis.fetch = async (input) => {
     ],
   }] });
   if (url.includes("oauth2.googleapis.com/token")) return reply({ access_token: "synthetic" });
-  if (url.includes("api.telegram.org")) { alerts++; return reply({ ok: true }); }
+  if (url.includes("api.telegram.org")) {
+    alerts++;
+    telegramMessages.push({ url, body: JSON.parse(options.body) });
+    return reply({ ok: true });
+  }
   if (url.includes("gmail.googleapis.com")) return reply({ id: "synthetic" });
   throw new Error(`Unexpected fetch ${url}`);
 };
@@ -70,10 +75,11 @@ const env = {
   META_LEAD_OVERLAP_HOURS: "24",
   META_LEAD_LOOKBACK_HOURS: "48",
   META_POLL_SEND_SMS: "0",
-  TELEGRAM_BOT_TOKEN: "synthetic",
-  TELEGRAM_CHAT_ID: "synthetic",
-  TELEGRAM_INFRA_BOT_TOKEN: "synthetic",
-  TELEGRAM_INFRA_CHAT_ID: "synthetic",
+  TELEGRAM_BOT_TOKEN: "reception-token",
+  TELEGRAM_CHAT_ID: "reception-chat",
+  TELEGRAM_ADMIN_CHAT_ID: "reception-admin-chat",
+  TELEGRAM_INFRA_BOT_TOKEN: "infra-token",
+  TELEGRAM_INFRA_CHAT_ID: "infra-chat",
   GMAIL_CLIENT_ID: "synthetic",
   GMAIL_CLIENT_SECRET: "synthetic",
   GMAIL_REFRESH_TOKEN: "synthetic",
@@ -94,12 +100,19 @@ try {
   assert.equal(failed.errors.length, 1);
   assert.equal(failed.inserted, 0);
   assert.equal(watermark, null, "quota failure must retain the watermark");
+  assert.ok(telegramMessages.length > 0);
+  assert.ok(telegramMessages.every(({ url, body }) =>
+    url.includes("/botinfra-token/") && body.chat_id === "infra-chat"),
+    "quota failure must notify only the infra bot");
   quotaExceeded = false;
   const recovered = await run();
   assert.equal(recovered.inserted, 1);
   assert.equal(recovered.errors.length, 0);
   assert.equal(stored, true);
   assert.ok(Number(watermark) > 0);
+  assert.ok(telegramMessages.some(({ url, body }) =>
+    url.includes("/botreception-token/") && body.chat_id === "reception-chat"),
+    "a successful new lead still reaches the reception channel");
   const alertsAfterRecovery = alerts;
   const repeated = await run();
   assert.equal(repeated.inserted, 0);
