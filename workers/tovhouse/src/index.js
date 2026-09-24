@@ -262,14 +262,20 @@ async function pollMetaLeads(env, ctx, opts = {}) {
     let url = null;
     let guard = 0;
     do {
-      const j = url
-        ? await (await fetch(url)).json()
-        : await metaGet(
+      let j;
+      if (url) {
+        const pageRes = await fetch(url);
+        if (!pageRes.ok) throw new Error(`meta_page_${pageRes.status}`);
+        j = await pageRes.json();
+        if (j.error) throw new Error(`meta_page_error_${String(j.error.code || "unknown")}`);
+      } else {
+        j = await metaGet(
             env,
             `/${form.id}/leads`,
             { fields: "id,created_time,field_data", limit: "50" },
             pageToken,
           );
+      }
       const rows = j.data || [];
       for (const l of rows) {
         const ms = Date.parse(l.created_time);
@@ -282,6 +288,9 @@ async function pollMetaLeads(env, ctx, opts = {}) {
       if (!oldest || Date.parse(oldest.created_time) <= sinceMs) break;
       url = j.paging?.next || null;
     } while (url && ++guard < 10);
+    if (url && guard >= 10) {
+      throw new Error(`form=${form.id} page_limit_reached`);
+    }
   }
 
   fresh.sort((a, b) => a.ms - b.ms);
@@ -295,6 +304,7 @@ async function pollMetaLeads(env, ctx, opts = {}) {
     duplicate: 0,
     smsSent: 0,
     mailSent: 0,
+    needsReview: [],
     errors: [],
     dryRun,
   };
@@ -308,12 +318,12 @@ async function pollMetaLeads(env, ctx, opts = {}) {
     }
     const phone = metaPhone(f.phone);
     const name = (f.name || "").slice(0, 100);
-    if (!name && !phone) continue;
+    const needsReview = !name && !phone;
 
     const createdKst = new Date(ms + 9 * 3600000).toISOString();
     const platform = "ig";
     const data = {
-      name,
+      name: needsReview ? "(필드 확인 필요)" : name,
       phone,
       email: f.email || "",
       interiorType: f.interiorType || "",
@@ -321,7 +331,9 @@ async function pollMetaLeads(env, ctx, opts = {}) {
       area: f.area || "",
       address: f.address || "",
       schedule: f.schedule || "",
-      message: `[유입] ${platform}\n[폼] ${form.name}`,
+      message: needsReview
+        ? `[Meta 필드 인식 실패]\n[폼] ${form.name}\n원본 필드: ${JSON.stringify(lead.field_data || [])}`
+        : `[유입] ${platform}\n[폼] ${form.name}`,
       platform,
       source: "meta",
       metaLeadId: String(lead.id),
@@ -330,6 +342,7 @@ async function pollMetaLeads(env, ctx, opts = {}) {
 
     if (dryRun) {
       report.inserted++;
+      if (needsReview) report.needsReview.push(data.metaLeadId);
       continue;
     }
 
@@ -361,7 +374,7 @@ async function pollMetaLeads(env, ctx, opts = {}) {
       const res = await env.DB.prepare(
         `INSERT OR IGNORE INTO leads
            (metaLeadId,name,phone,email,interiorType,budget,area,address,schedule,message,status,platform,source,createdAt)
-         VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,'대기',?11,?12,?13)`,
+         VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,?11,?12,?13,?14)`,
       )
         .bind(
           data.metaLeadId,
@@ -374,6 +387,7 @@ async function pollMetaLeads(env, ctx, opts = {}) {
           data.address,
           data.schedule,
           data.message,
+          "대기",
           data.platform,
           data.source,
           data.createdAt,
@@ -381,10 +395,20 @@ async function pollMetaLeads(env, ctx, opts = {}) {
         .run();
 
       if (!res.meta?.changes) {
+        const existing = await env.DB.prepare(
+          "SELECT id FROM leads WHERE metaLeadId = ? LIMIT 1",
+        ).bind(data.metaLeadId).first();
+        if (!existing) throw new Error("meta_lead_insert_ignored_without_existing_record");
         report.duplicate++;
         continue;
       }
       report.inserted++;
+      if (needsReview) {
+        // 폼 질문 변경으로 필드 매핑이 실패해도 원본을 D1에 보존한다.
+        // 이 건은 접수 알림을 보내지 않고 아래 인프라봇 보고로만 알린다.
+        report.needsReview.push(data.metaLeadId);
+        continue;
+      }
 
       // message는 D1 저장용 메모(`[유입]/[폼]`)라 알림 본문에 그대로 넣지 않는다.
       // 폼 이름은 "접수 폼" 줄로, 접수일은 리드 생성 시각(KST)으로 따로 넘긴다.
@@ -435,6 +459,9 @@ async function pollMetaLeads(env, ctx, opts = {}) {
     const text =
       `[tovhouse/meta-poll] 신규 ${report.inserted}건` +
       ` (중복 ${report.duplicate}, 메일 ${report.mailSent}, SMS ${report.smsSent})` +
+      (report.needsReview.length
+        ? `\n필드 확인 필요 ${report.needsReview.length}건: ${report.needsReview.slice(0, 3).join(", ")}`
+        : "") +
       (report.errors.length
         ? `\n에러: ${report.errors.slice(0, 3).join(" / ")}`
         : "");
